@@ -22,43 +22,43 @@ class CategoriesPage: UIViewController {
             image: UIImage(named: "home"),
             title: "Недвижимость",
             result: "28341 результатов",
-            backgroundColor: .init(r: 235, g: 250, b: 240),
+            backgroundColor: ColorResourceManager.shared.color(r: 235, g: 250, b: 240),
         ),
         
         Category (
             image: UIImage(named: "stroller"),
             title: "Детский мир",
             result: "44123 результатов",
-            backgroundColor: .init(r: 253, g: 246, b: 222),
-            imageBackgroundColor: .init(r: 255, g: 206, b: 50)
+            backgroundColor: ColorResourceManager.shared.color(r: 253, g: 246, b: 222),
+            imageBackgroundColor: ColorResourceManager.shared.color(r: 255, g: 206, b: 50)
         ),
         
         Category(
             image: UIImage(named: "dress"),
             title: "Одежда и обувь",
             result: "18934 результатов",
-            backgroundColor: .init(r: 240, g: 247, b: 247),
+            backgroundColor: ColorResourceManager.shared.color(r: 240, g: 247, b: 247),
         ),
         
         Category (
             image: UIImage(named: "car"),
             title: "Автомобили",
             result: "7123 результатов",
-            backgroundColor: .init(r: 225, g: 240, b: 255),
+            backgroundColor: ColorResourceManager.shared.color(r: 225, g: 240, b: 255),
         ),
         
         Category (
             image: UIImage(named: "cat"),
             title: "Животные",
             result: "5473 результатов",
-            backgroundColor: .init(r: 255, g: 243, b: 230),
+            backgroundColor: ColorResourceManager.shared.color(r: 255, g: 243, b: 230),
         ),
         
         Category (
             image: UIImage(named: "phone"),
             title: "Электроника",
             result: "3573 результатов",
-            backgroundColor: .init(r: 243, g: 235, b: 255),
+            backgroundColor: ColorResourceManager.shared.color(r: 243, g: 235, b: 255),
         ),
     ]
     
