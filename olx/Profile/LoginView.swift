@@ -1,5 +1,3 @@
-
-
 import UIKit
 
 final class LoginView: UIView {
@@ -22,7 +20,6 @@ final class LoginView: UIView {
     
     private var isSecuretyEntry = true
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -31,7 +28,6 @@ final class LoginView: UIView {
         setupAction()
         
     }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -51,21 +47,16 @@ private extension LoginView {
         emailLabel.textColor = mainColor
         emailLabel.font = UIFont.systemFont(ofSize: 12)
         
-        
-        
         addSubview(emailTextField)
         emailTextField.backgroundColor = .systemGray6
         emailTextField.layer.cornerRadius = 5
         emailTextField.placeholder = "Введите свой электронной почты..."
-        
-        
-        
+
         addSubview(passwordLabel)
         passwordLabel.text = "Пароль"
         passwordLabel.textColor = mainColor
         passwordLabel.font = UIFont.systemFont(ofSize: 12)
-        
-        
+
         addSubview(passwordTextField)
         passwordTextField.backgroundColor = .systemGray6
         passwordTextField.placeholder = "Введите свой пароль..."
@@ -80,12 +71,10 @@ private extension LoginView {
         passwordTextField.rightView = container
         passwordTextField.rightViewMode = .always
         
-        
         addSubview(forgetPassword)
         forgetPassword.text = "Забыли пароль"
         forgetPassword.textColor = mainColor
         forgetPassword.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        
         
         addSubview(loginButton)
         loginButton.backgroundColor = .systemGray6
@@ -94,19 +83,15 @@ private extension LoginView {
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         loginButton.backgroundColor = mainColor
         loginButton.layer.cornerRadius = 5
-        
-        
+ 
         addSubview(line1)
         line1.backgroundColor = .systemGray3
-        
-        
+
         addSubview(or)
         or.text = "или"
         or.textColor = mainColor
         or.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        
-        
-        
+
         addSubview(line2)
         line2.backgroundColor = .systemGray3
         
@@ -122,18 +107,14 @@ private extension LoginView {
         appleButton.backgroundColor = .white
         appleButton.layer.borderWidth = 1
         appleButton.layer.borderColor = UIColor.black.cgColor
-        
-        
+
         addSubview(text)
         text.text = "При входе вы соглашаетесь с нашими"
         text.font = UIFont.systemFont(ofSize: 12, weight: .medium)
-        
-        
-        
+  
         addSubview(text2)
         text2.text = "Условиями использования"
         text2.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        
     }
     
     func setupConstraints() {
@@ -150,7 +131,6 @@ private extension LoginView {
         appleButton.translatesAutoresizingMaskIntoConstraints = false
         text.translatesAutoresizingMaskIntoConstraints = false
         text2.translatesAutoresizingMaskIntoConstraints = false
-        
         
         NSLayoutConstraint.activate([
             emailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
