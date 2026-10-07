@@ -17,12 +17,6 @@ final class SystemSettingsInjector: SystemModeSetable {
     }
 }
 
-enum SystemSettingsThemeMode {
-    case light
-    case dark
-    case system
-}
-
 class Kachokbek {
     let sharedInstance = SystemSettingsInjector.shared
     
