@@ -1,13 +1,22 @@
-
-
-
 import UIKit
 
 class MessageCell: UITableViewCell {
     static let reuseID = "MessageCell"
     
-    private let bubbleView = UIView()
-    private let messageLabel = UILabel()
+    private lazy var bubbleView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 16
+        return view
+    }()
+    
+    private lazy var messageLabel: UILabel = {
+        let message = UILabel()
+        message.translatesAutoresizingMaskIntoConstraints = false
+        message.font = .systemFont(ofSize: 16)
+        message.numberOfLines = 0
+        return message
+    }()
 
     private var leadingConstraint: NSLayoutConstraint!
     private var trailingConstraint: NSLayoutConstraint!
@@ -16,7 +25,8 @@ class MessageCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupViews()
-        setupconstraints()
+        addSubviews()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -25,45 +35,38 @@ class MessageCell: UITableViewCell {
 }
 
 extension MessageCell {
-    private func setupViews() {
-        backgroundColor = .clear
-        selectionStyle = .none
-        
-        contentView.addSubview(bubbleView)
-        
-        bubbleView.layer.cornerRadius =  16
-        
-        contentView.addSubview(messageLabel)
-        
-        messageLabel.numberOfLines = 0
-        messageLabel.font = .systemFont(ofSize: 16)
-        
-        leadingConstraint = bubbleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12)
-        trailingConstraint = bubbleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12)
-    }
-    
     func configure(with message: ChatMessage) {
         messageLabel.text = message.text
         
-        if message.isFromCurrentUser {
-            bubbleView.backgroundColor = .systemBlue
-            messageLabel.textColor = .white
-            leadingConstraint.isActive = false
-            trailingConstraint.isActive = true
-        } else {
-            bubbleView.backgroundColor = .systemGray5
-            messageLabel.textColor = .label
-            leadingConstraint.isActive = true
-            trailingConstraint.isActive = false
-        }
+        bubbleView.backgroundColor = message.isFromCurrentUser ? .systemBlue : .systemGray5
+        messageLabel.textColor = message.isFromCurrentUser ? .white : .label
+        leadingConstraint.isActive = !message.isFromCurrentUser
+        trailingConstraint.isActive = message.isFromCurrentUser
     }
 }
 
-extension MessageCell {
-    private func setupconstraints() {
-        bubbleView.translatesAutoresizingMaskIntoConstraints = false
-        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+private extension MessageCell {
+    func setupViews() {
+        backgroundColor = .clear
+        selectionStyle = .none
         
+        leadingConstraint = bubbleView.leadingAnchor.constraint(
+            equalTo: contentView.leadingAnchor,
+            constant: 12
+        )
+        
+        trailingConstraint = bubbleView.trailingAnchor.constraint(
+            equalTo: contentView.trailingAnchor,
+            constant: -12
+        )
+    }
+
+    func addSubviews() {
+        contentView.addSubview(bubbleView)
+        contentView.addSubview(messageLabel)
+    }
+    
+    func setupConstraints() {
         NSLayoutConstraint.activate([
             bubbleView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
             bubbleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
