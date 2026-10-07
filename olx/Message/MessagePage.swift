@@ -6,49 +6,39 @@ class Message: UIViewController {
     
     private var inputBarButtomConstraint: NSLayoutConstraint!
     
-    private lazy var image: UIImageView = {
-        let imageView = UIImageView(image: UIImage( named: "chatWallpaper"))
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private lazy var image = UIImageView(image: UIImage( named: "chatWallpaper")).then {
+        $0.contentMode = .scaleAspectFill
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
-    private lazy var tableView: UITableView = {
-        let tv = UITableView()
-        tv.separatorStyle = .none
-        tv.keyboardDismissMode = .interactive
-        tv.backgroundColor = .clear
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        return tv
-    }()
+    private lazy var tableView = UITableView().then {
+        $0.separatorStyle = .none
+        $0.keyboardDismissMode = .interactive
+        $0.backgroundColor = .clear
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
-    private lazy var inputBar: UIView = {
-        let input = UIView()
-        input.translatesAutoresizingMaskIntoConstraints = false
-        return input
-    }()
+    private lazy var inputBar = UIView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
-    private lazy var textField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "Сообщения..."
-        tf.backgroundColor = .systemGray6
-        tf.borderStyle = .roundedRect
-        tf.layer.cornerRadius = 15
-        tf.clipsToBounds = true
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        return tf
-    }()
+    private lazy var textField = UITextField().then {
+        $0.placeholder = "Сообщения..."
+        $0.backgroundColor = .systemGray6
+        $0.borderStyle = .roundedRect
+        $0.layer.cornerRadius = 15
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
-    private let sendButton: UIButton = {
-        let button = UIButton(type: .system)
+    private lazy var sendButton = UIButton(type: .system).then {
         let config = UIImage.SymbolConfiguration(pointSize: 23, weight: .semibold)
         let sendImage = UIImage(systemName: "paperplane.circle.fill", withConfiguration: config)
         
-        button.setImage(sendImage, for: .normal)
-        button.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        button.addTarget(self, action: #selector(sendTapped), for: .touchUpInside)
-        return button
-    }()
+        $0.setImage(sendImage, for: .normal)
+        $0.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        $0.addTarget(self, action: #selector(sendTapped), for: .touchUpInside)
+    }
         
     private var messages: [ChatMessage] = [
         ChatMessage(text: "Привет брат.", isFromCurrentUser: false),

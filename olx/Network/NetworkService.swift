@@ -1,10 +1,3 @@
-//
-//  NetworkService.swift
-//  olx
-//
-//  Created by Eshqulov Xudoyorbek  on 06/10/26.
-//
-
 import Foundation
 
 protocol NetworkServiceProvider {

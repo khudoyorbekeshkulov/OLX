@@ -1,10 +1,3 @@
-//
-//  CategoryItem.swift
-//  olx
-//
-//  Created by Eshqulov Xudoyorbek  on 06/10/26.
-//
-
 import UIKit
 
 struct CategoryItem {

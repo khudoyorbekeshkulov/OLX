@@ -3,24 +3,20 @@ import UIKit
 class MessageCell: UITableViewCell {
     static let reuseID = "MessageCell"
     
-    private lazy var bubbleView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 16
-        return view
-    }()
-    
-    private lazy var messageLabel: UILabel = {
-        let message = UILabel()
-        message.translatesAutoresizingMaskIntoConstraints = false
-        message.font = .systemFont(ofSize: 16)
-        message.numberOfLines = 0
-        return message
-    }()
-
     private var leadingConstraint: NSLayoutConstraint!
     private var trailingConstraint: NSLayoutConstraint!
     
+    private lazy var bubbleView = UIView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.layer.cornerRadius = 16
+    }
+    
+    private lazy var messageLabel = UILabel().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = .systemFont(ofSize: 16)
+        $0.numberOfLines = 0
+    }
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -63,7 +59,7 @@ private extension MessageCell {
 
     func addSubviews() {
         contentView.addSubview(bubbleView)
-        contentView.addSubview(messageLabel)
+        bubbleView.addSubview(messageLabel)
     }
     
     func setupConstraints() {

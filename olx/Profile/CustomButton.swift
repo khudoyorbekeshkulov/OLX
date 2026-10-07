@@ -2,17 +2,13 @@ import UIKit
 
 class CustomButton: UIControl {
     
-    let label: UILabel = {
-        let lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        return lbl
-    }()
+    let label = UILabel().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
-    let imageView: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
+    let imageView = UIImageView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     init(image: UIImage?, text: String) {
         super.init(frame: .zero)
