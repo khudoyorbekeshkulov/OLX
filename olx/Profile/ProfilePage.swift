@@ -18,20 +18,20 @@ class ProfilePage: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let stackView = UIStackView().then {
+    private lazy var stackView = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let segmentedControl = UIView().then {
+    private lazy var segmentedControl = UIView().then {
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 5
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let loginButton = UIButton(type: .system).then {
+    private lazy var loginButton = UIButton(type: .system).then {
         $0.setTitle( "Войти", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
@@ -39,7 +39,7 @@ class ProfilePage: UIViewController {
         $0.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
     }
     
-    let registerButton = UIButton(type: .system).then {
+    private lazy var registerButton = UIButton(type: .system).then {
         $0.setTitle( "Зарегистрироваться", for: .normal)
         $0.setTitleColor(.gray, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
