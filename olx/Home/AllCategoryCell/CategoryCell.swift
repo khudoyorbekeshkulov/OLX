@@ -1,27 +1,37 @@
-
-
 import UIKit
 
 final class CategoryCell: UITableViewCell {
     
-    let cellView = UIView()
-    let image = UIImageView()
-    let titleLabel = UILabel()
-    let numberOfResults = UILabel()
-    let nextImage = UIImageView()
-
+    let cellView = UIView().then {
+        $0.layer.cornerRadius = 5
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let image = UIImageView().then {
+        $0.layer.cornerRadius = 30
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let titleLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 14, weight: .bold)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let numberOfResults = UILabel().then {
+        $0.font = .systemFont(ofSize: 11, weight: .regular)
+        $0.textColor = ColorResourceManager.shared.color(r: 79, g: 79, b: 79)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let nextImage = UIImageView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.addSubview(cellView)
-        
-        cellView.addSubview(titleLabel)
-        cellView.addSubview(image)
-        cellView.addSubview(numberOfResults)
-        cellView.addSubview(nextImage)
-        
-        setupCardView()
+        addSubviews()
         setupTableViewconstraint()
     }
     
@@ -30,31 +40,17 @@ final class CategoryCell: UITableViewCell {
     }
 }
 
-extension CategoryCell {
+private extension CategoryCell {
     
-    func setupCardView() {
-        
-        cellView.layer.cornerRadius = 5
-        
-        image.layer.cornerRadius = 30
-        image.clipsToBounds = true
-        
-        titleLabel.font = .systemFont(ofSize: 14, weight: .bold)
-        
-        numberOfResults.font = .systemFont(ofSize: 11, weight: .regular)
-        numberOfResults.textColor = .init(r: 79, g: 79, b: 79)
-       
-        
-
+    func addSubviews() {
+        contentView.addSubview(cellView)
+        cellView.addSubview(titleLabel)
+        cellView.addSubview(image)
+        cellView.addSubview(numberOfResults)
+        cellView.addSubview(nextImage)
     }
     
     func setupTableViewconstraint() {
-        cellView.translatesAutoresizingMaskIntoConstraints = false
-        image.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        numberOfResults.translatesAutoresizingMaskIntoConstraints = false
-        nextImage.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             
             cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
@@ -77,13 +73,5 @@ extension CategoryCell {
             nextImage.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -15),
             
         ])
-            
-    }
-    
-}
-
-extension UIColor {
-    convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
-        self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
 }
