@@ -19,7 +19,7 @@ struct CategoryItem {
 
 extension [CategoryItem] {
     var toCategories: [Category] {
-        self.map { product in
+        map { product in
             Category(
                 image: UIImage(named: product.image),
                 title: product.title,

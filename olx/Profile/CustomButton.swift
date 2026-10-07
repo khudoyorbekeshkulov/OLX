@@ -21,7 +21,6 @@ class CustomButton: UIControl {
             imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 20),
             imageView.heightAnchor.constraint(equalToConstant: 20),
-        
         ])
     }
     
