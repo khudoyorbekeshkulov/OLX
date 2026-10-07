@@ -61,8 +61,6 @@ class ProfilePage: UIViewController {
         addSubviews()
         setupConstraints()
     }
-    
-
 }
 
 private extension ProfilePage {
