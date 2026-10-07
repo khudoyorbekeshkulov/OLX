@@ -3,13 +3,53 @@ import UIKit
 class Message: UIViewController {
     
     var chatPartnerName = "Сообщения"
-    private let image = UIImageView(image: UIImage(named: "chatWallpaper"))
-    private let tableView = UITableView()
-    private let inputBar = UIView()
-    private let tf = UITextField()
-    private let sendButton = UIButton(type: .system)
+    
     private var inputBarButtomConstraint: NSLayoutConstraint!
     
+    private lazy var image: UIImageView = {
+        let imageView = UIImageView(image: UIImage( named: "chatWallpaper"))
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private lazy var tableView: UITableView = {
+        let tv = UITableView()
+        tv.separatorStyle = .none
+        tv.keyboardDismissMode = .interactive
+        tv.backgroundColor = .clear
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        return tv
+    }()
+    
+    private lazy var inputBar: UIView = {
+        let input = UIView()
+        input.translatesAutoresizingMaskIntoConstraints = false
+        return input
+    }()
+    
+    private lazy var textField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Сообщения..."
+        tf.backgroundColor = .systemGray6
+        tf.borderStyle = .roundedRect
+        tf.layer.cornerRadius = 15
+        tf.clipsToBounds = true
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        return tf
+    }()
+    
+    private let sendButton: UIButton = {
+        let button = UIButton(type: .system)
+        let config = UIImage.SymbolConfiguration(pointSize: 23, weight: .semibold)
+        let sendImage = UIImage(systemName: "paperplane.circle.fill", withConfiguration: config)
+        
+        button.setImage(sendImage, for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        button.addTarget(self, action: #selector(sendTapped), for: .touchUpInside)
+        return button
+    }()
+        
     private var messages: [ChatMessage] = [
         ChatMessage(text: "Привет брат.", isFromCurrentUser: false),
         ChatMessage(text: "Привет.", isFromCurrentUser: true),
@@ -20,7 +60,6 @@ class Message: UIViewController {
         super.viewDidLoad()
         
         view.insertSubview(image, at: 0)
-        image.contentMode = .scaleAspectFill
         
         let phone = UIBarButtonItem(image: UIImage(systemName: "phone.fill"),style: .plain, target: self, action: #selector(phoneTapped))
         
@@ -30,6 +69,7 @@ class Message: UIViewController {
         navigationItem.rightBarButtonItems = [ellipses, phone]
         
         setupTableView()
+        addSubviews()
         setupInputBar()
         setupConstraints()
         setupKeyboardObservers()
@@ -37,66 +77,38 @@ class Message: UIViewController {
 }
 
 extension Message: UITableViewDataSource, UITableViewDelegate{
-    
-    // MARK: - UITableViewDataSource / Delegate
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MessageCell.reuseID, for: indexPath) as! MessageCell
-        
         cell.configure(with: messages[indexPath.row])
         return cell
     }
-    
-    // MARK: - Table view
-    
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseID)
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorStyle = .none
-        tableView.keyboardDismissMode = .interactive
-        tableView.backgroundColor = .clear
-    }
-    
-    // MARK: - Input bar
-    
-    private func setupInputBar() {
-        view.addSubview(inputBar)
-        inputBar.addSubview(tf)
-        
-        tf.placeholder = "Сообщения..."
-        tf.backgroundColor = .systemGray6
-        tf.borderStyle = .roundedRect
-        tf.layer.cornerRadius = 15
-        tf.clipsToBounds = true
-        
-        // send button controller
-        let config = UIImage.SymbolConfiguration(pointSize: 23, weight: .semibold)
-        let sendImage = UIImage(systemName: "paperplane.circle.fill", withConfiguration: config)
-        
-        sendButton.setImage(sendImage, for: .normal)
-        sendButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        sendButton.addTarget(self, action: #selector(sendTapped), for: .touchUpInside)
-        
-        tf.rightView = sendButton
-        tf.rightViewMode = .always
-        
-        inputBarButtomConstraint = inputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-    }
 }
 
-extension Message {
-    private func setupConstraints() {
-        image.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        inputBar.translatesAutoresizingMaskIntoConstraints = false
-        tf.translatesAutoresizingMaskIntoConstraints = false
+private extension Message {
+    func setupTableView() {
+       tableView.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseID)
+       tableView.dataSource = self
+       tableView.delegate = self
+   }
+       
+    func setupInputBar() {
+       textField.rightView = sendButton
+       textField.rightViewMode = .always
         
+       inputBarButtomConstraint = inputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+   }
+    
+    func addSubviews() {
+        view.addSubview(tableView)
+        view.addSubview(inputBar)
+        inputBar.addSubview(textField)
+    }
+    
+     func setupConstraints() {
         NSLayoutConstraint.activate([
             image.topAnchor.constraint(equalTo: view.topAnchor),
             image.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -113,15 +125,14 @@ extension Message {
             inputBarButtomConstraint,
             inputBar.heightAnchor.constraint(equalToConstant: 56),
             
-            tf.leadingAnchor.constraint(equalTo: inputBar.leadingAnchor, constant: 12),
-            tf.trailingAnchor.constraint(equalTo: inputBar.trailingAnchor, constant: -12),
-            tf.centerYAnchor.constraint(equalTo: inputBar.centerYAnchor),
+            textField.leadingAnchor.constraint(equalTo: inputBar.leadingAnchor, constant: 12),
+            textField.trailingAnchor.constraint(equalTo: inputBar.trailingAnchor, constant: -12),
+            textField.centerYAnchor.constraint(equalTo: inputBar.centerYAnchor),
         ])
     }
 }
 
 extension Message {
-    
     @objc func phoneTapped() {
         print("Phone tapped")
     }
@@ -131,20 +142,13 @@ extension Message {
     }
     
     @objc func sendTapped() {
-        guard let text = tf.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else {return}
+        guard let text = textField.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else {return}
         
         messages.append(ChatMessage(text: text, isFromCurrentUser: true))
-        tf.text = ""
+        textField.text = ""
         
         tableView.reloadData()
         scrollToBottom()
-    }
-    
-    private func scrollToBottom() {
-        guard !messages.isEmpty else {return}
-        
-        let lastRow = IndexPath(row: messages.count - 1, section: 0)
-        tableView.scrollToRow(at: lastRow, at: .bottom, animated: true)
     }
 }
 
@@ -165,5 +169,12 @@ extension Message {
         UIView.animate(withDuration: duration) {
             self.view.layoutIfNeeded()
         }
+    }
+    
+    func scrollToBottom() {
+        guard !messages.isEmpty else {return}
+        
+        let lastRow = IndexPath(row: messages.count - 1, section: 0)
+        tableView.scrollToRow(at: lastRow, at: .bottom, animated: true)
     }
 }
