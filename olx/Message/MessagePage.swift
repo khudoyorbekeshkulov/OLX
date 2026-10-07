@@ -1,5 +1,3 @@
-
-
 import UIKit
 
 class Message: UIViewController {
@@ -10,7 +8,6 @@ class Message: UIViewController {
     private let inputBar = UIView()
     private let tf = UITextField()
     private let sendButton = UIButton(type: .system)
-    
     private var inputBarButtomConstraint: NSLayoutConstraint!
     
     private var messages: [ChatMessage] = [
@@ -18,6 +15,7 @@ class Message: UIViewController {
         ChatMessage(text: "Привет.", isFromCurrentUser: true),
         ChatMessage(text: "Сколько, по-твоему, стоит?", isFromCurrentUser: false),
     ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +50,6 @@ extension Message: UITableViewDataSource, UITableViewDelegate{
         cell.configure(with: messages[indexPath.row])
         return cell
     }
-    
     
     // MARK: - Table view
     
@@ -91,9 +88,7 @@ extension Message: UITableViewDataSource, UITableViewDelegate{
         
         inputBarButtomConstraint = inputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     }
-    
 }
-
 
 extension Message {
     private func setupConstraints() {
@@ -151,7 +146,6 @@ extension Message {
         let lastRow = IndexPath(row: messages.count - 1, section: 0)
         tableView.scrollToRow(at: lastRow, at: .bottom, animated: true)
     }
-    
 }
 
 extension Message {
