@@ -2,28 +2,112 @@ import UIKit
 
 final class LoginView: UIView {
     
-    private let mainColor = UIColor(red: 0/255, green: 47/255, blue: 52/255, alpha: 1.0)
-    private let emailLabel = UILabel()
-    private let emailTextField = UITextField()
-    private let passwordLabel = UILabel()
-    private let passwordTextField = UITextField()
+    private lazy var emailLabel = UILabel().then {
+        $0.text = "Электронная почта или телефон"
+        $0.textColor = ColorResourceManager.shared.mainColor
+        $0.font = UIFont.systemFont(ofSize: 12)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var emailTextField = UITextField().then {
+        $0.backgroundColor = .systemGray6
+        $0.layer.cornerRadius = 5
+        $0.placeholder = "Введите свой электронной почты..."
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var passwordLabel = UILabel().then {
+        $0.text = "Пароль"
+        $0.textColor = ColorResourceManager.shared.mainColor
+        $0.font = UIFont.systemFont(ofSize: 12)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var passwordTextField = UITextField().then {
+        $0.backgroundColor = .systemGray6
+        $0.placeholder = "Введите свой пароль..."
+        $0.layer.cornerRadius = 5
+        $0.isSecureTextEntry = true
+        $0.rightView = container
+        $0.rightViewMode = .always
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     private let container = UIView()
-    private let showButton = UIButton(type: .system)
-    private let forgetPassword = UILabel()
-    private let loginButton = UIButton(type: .system)
-    private let line1 = UIView()
-    private let or = UILabel()
-    private let line2 = UIView()
-    private let appleButton = UIButton()
-    private let text = UILabel()
-    private let text2 = UILabel()
+    
+    private lazy var showButton = UIButton(type: .system).then {
+        $0.setTitle("Показать", for: .normal)
+        $0.setTitleColor(ColorResourceManager.shared.mainColor, for: .normal)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var forgetPassword = UILabel().then {
+        $0.text = "Забыли пароль"
+        $0.textColor = ColorResourceManager.shared.mainColor
+        $0.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var loginButton = UIButton(type: .system).then {
+        $0.backgroundColor = .systemGray6
+        $0.setTitle("Войти", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        $0.backgroundColor = ColorResourceManager.shared.mainColor
+        $0.layer.cornerRadius = 5
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var line1 = UIView().then {
+        $0.backgroundColor = .systemGray3
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var or = UILabel().then {
+        $0.text = "или"
+        $0.textColor = ColorResourceManager.shared.mainColor
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var line2 = UIView().then {
+        $0.backgroundColor = .systemGray3
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var appleButton = UIButton().then {
+        var config = UIButton.Configuration.plain()
+        config.title = "Продолжить с Apple"
+        config.image = UIImage(systemName: "applelogo")
+        config.imagePadding = 50
+        config.baseForegroundColor = .black
+        config.background.cornerRadius = 5
+        config.attributedTitle = AttributedString("Продолжить с Apple", attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 18, weight: .bold)]))
+        $0.configuration = config
+        $0.backgroundColor = .white
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.black.cgColor
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var text = UILabel().then {
+        $0.text = "При входе вы соглашаетесь с нашими"
+        $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var text2 = UILabel().then {
+        $0.text = "Условиями использования"
+        $0.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     private var isSecuretyEntry = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupUI()
+        addSubviews()
         setupConstraints()
         setupAction()
         
@@ -40,98 +124,23 @@ final class LoginView: UIView {
 }
 
 private extension LoginView {
-    func setupUI() {
-        
+    func addSubviews() {
         addSubview(emailLabel)
-        emailLabel.text = "Электронная почта или телефон"
-        emailLabel.textColor = mainColor
-        emailLabel.font = UIFont.systemFont(ofSize: 12)
-        
         addSubview(emailTextField)
-        emailTextField.backgroundColor = .systemGray6
-        emailTextField.layer.cornerRadius = 5
-        emailTextField.placeholder = "Введите свой электронной почты..."
-
         addSubview(passwordLabel)
-        passwordLabel.text = "Пароль"
-        passwordLabel.textColor = mainColor
-        passwordLabel.font = UIFont.systemFont(ofSize: 12)
-
         addSubview(passwordTextField)
-        passwordTextField.backgroundColor = .systemGray6
-        passwordTextField.placeholder = "Введите свой пароль..."
-        
         container.addSubview(showButton)
-        
-        showButton.setTitle("Показать", for: .normal)
-        showButton.setTitleColor(mainColor, for: .normal)
-        
-        passwordTextField.layer.cornerRadius = 5
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.rightView = container
-        passwordTextField.rightViewMode = .always
-        
         addSubview(forgetPassword)
-        forgetPassword.text = "Забыли пароль"
-        forgetPassword.textColor = mainColor
-        forgetPassword.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        
         addSubview(loginButton)
-        loginButton.backgroundColor = .systemGray6
-        loginButton.setTitle("Войти", for: .normal)
-        loginButton.setTitleColor(.white, for: .normal)
-        loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        loginButton.backgroundColor = mainColor
-        loginButton.layer.cornerRadius = 5
- 
         addSubview(line1)
-        line1.backgroundColor = .systemGray3
-
         addSubview(or)
-        or.text = "или"
-        or.textColor = mainColor
-        or.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-
         addSubview(line2)
-        line2.backgroundColor = .systemGray3
-        
-        var config = UIButton.Configuration.plain()
-        config.title = "Продолжить с Apple"
-        config.image = UIImage(systemName: "applelogo")
-        config.imagePadding = 50
-        config.baseForegroundColor = .black
-        config.background.cornerRadius = 5
-        config.attributedTitle = AttributedString("Продолжить с Apple", attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 18, weight: .bold)]))
-        appleButton.configuration = config
         addSubview(appleButton)
-        appleButton.backgroundColor = .white
-        appleButton.layer.borderWidth = 1
-        appleButton.layer.borderColor = UIColor.black.cgColor
-
         addSubview(text)
-        text.text = "При входе вы соглашаетесь с нашими"
-        text.font = UIFont.systemFont(ofSize: 12, weight: .medium)
-  
         addSubview(text2)
-        text2.text = "Условиями использования"
-        text2.font = UIFont.systemFont(ofSize: 12, weight: .bold)
     }
     
     func setupConstraints() {
-        emailLabel.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordLabel.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        showButton.translatesAutoresizingMaskIntoConstraints = false
-        forgetPassword.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
-        line1.translatesAutoresizingMaskIntoConstraints = false
-        or.translatesAutoresizingMaskIntoConstraints = false
-        line2.translatesAutoresizingMaskIntoConstraints = false
-        appleButton.translatesAutoresizingMaskIntoConstraints = false
-        text.translatesAutoresizingMaskIntoConstraints = false
-        text2.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             emailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             emailLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
