@@ -1,10 +1,14 @@
-
-
 import UIKit
 
 class CategoriesPage: UIViewController {
-    private let buttonBack = UIButton(type: .system)
-    private let tableView = UITableView()
+    
+    private lazy var buttonBack = UIButton(type: .system).then {
+        $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
+    
+    private lazy var tableView = UITableView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     private let categories: [Category] = [
         Category (
@@ -58,16 +62,11 @@ class CategoriesPage: UIViewController {
         ),
     ]
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: - Navigation
         navigationItem.title = "Категории"
         
-        buttonBack.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        
-        // MARK: - TableView
         view.addSubview(tableView)
         
         tableView.register(CategoryCell.self, forCellReuseIdentifier: "cell")
@@ -75,14 +74,9 @@ class CategoriesPage: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         
-        // MARK: Functions
         setupConstraints()
-        
     }
-    
-    
 }
-
 
 extension CategoriesPage: UITableViewDelegate, UITableViewDataSource {
     
@@ -108,7 +102,6 @@ extension CategoriesPage: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.selectionStyle = .none
-        
         return cell
     }
     
@@ -122,17 +115,11 @@ extension CategoriesPage: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(selectedCategoryCell, animated: true)
         }
     }
-    
-    
-    
-    
 }
 
 extension CategoriesPage {
     
     func setupConstraints() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -140,7 +127,6 @@ extension CategoriesPage {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
-    
     
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
