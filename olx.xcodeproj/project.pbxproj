@@ -14,7 +14,7 @@
 		240B22A43007984E00EF9250 /* Exceptions for "olx" folder in "olx" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/MainResources/Info.plist,
 			);
 			target = 240B22913007984C00EF9250 /* olx */;
 		};

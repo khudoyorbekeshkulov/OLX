@@ -1,5 +1,3 @@
-
-
 import UIKit
 
 final class RegisterView: UIView {
@@ -19,7 +17,6 @@ final class RegisterView: UIView {
     private let checkBox = UIButton(type: .system)
     private var isChecked = false
     private let registerButton = UIButton(type: .system)
-    
     private var isSecuretyEntry = true
     
     override init(frame: CGRect) {
@@ -27,8 +24,6 @@ final class RegisterView: UIView {
         
         setupUI()
         setupConstraints()
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -63,38 +58,31 @@ private extension RegisterView {
         appleButton.layer.borderWidth = 1
         appleButton.layer.borderColor = UIColor.black.cgColor
         
-        
         addSubview(line1)
         line1.backgroundColor = .systemGray3
-        
         
         addSubview(or)
         or.text = "или"
         or.textColor = mainColor
         or.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         
-        
         addSubview(line2)
         line2.backgroundColor = .systemGray3
-        
         
         addSubview(emailLabel)
         emailLabel.text = "Электронная почта или телефон"
         emailLabel.textColor = mainColor
         emailLabel.font = UIFont.systemFont(ofSize: 12)
         
-        
         addSubview(emailTextField)
         emailTextField.backgroundColor = .systemGray6
         emailTextField.layer.cornerRadius = 5
         emailTextField.placeholder = "Введите свой электронной почты..."
         
-        
         addSubview(passwordLabel)
         passwordLabel.text = "Пароль"
         passwordLabel.textColor = mainColor
         passwordLabel.font = UIFont.systemFont(ofSize: 12)
-        
         
         addSubview(passwordTextField)
         passwordTextField.backgroundColor = .systemGray6
@@ -110,13 +98,11 @@ private extension RegisterView {
         passwordTextField.rightView = container
         passwordTextField.rightViewMode = .always
         
-        
         addSubview(text)
         text.text = "Пароль дольжен содержать минимум 6 симболов. Чтобы пароль получился супернадежными, добавьте заглавные и строчные буквы, цыфры и специальные символы"
         text.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         text.numberOfLines = 0
         text.lineBreakMode = .byWordWrapping
-        
         
         addSubview(checkBox)
         checkBox.setImage(UIImage(systemName: "square"), for: .normal)
@@ -128,7 +114,6 @@ private extension RegisterView {
         text2.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         text2.numberOfLines = 0
         text2.lineBreakMode = .byWordWrapping
-        
         
         addSubview(registerButton)
         registerButton.backgroundColor = .systemGray6
@@ -154,7 +139,6 @@ private extension RegisterView {
         checkBox.translatesAutoresizingMaskIntoConstraints = false
         text2.translatesAutoresizingMaskIntoConstraints = false
         registerButton.translatesAutoresizingMaskIntoConstraints = false
-        
         
         NSLayoutConstraint.activate([
             appleButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
@@ -218,8 +202,4 @@ private extension RegisterView {
             registerButton.heightAnchor.constraint(equalToConstant: 45)
         ])
     }
-    
-    
-    
-    
 }
