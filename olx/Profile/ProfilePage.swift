@@ -2,16 +2,55 @@ import UIKit
 
 class ProfilePage: UIViewController {
     
-    private let loginView = LoginView()
-    private let registerView = RegisterView()
-    private let stackView = UIStackView()
-    let mainColor = UIColor(red: 0/255, green: 47/255, blue: 52/255, alpha: 1.0)
-    let segmentedControl = UIView()
-    let loginButton = UIButton(type: .system)
-    let registerButton = UIButton(type: .system)
+    private let loginView = LoginView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let registerView = RegisterView().then {
+        $0.isHidden = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var titleLabel = UILabel().then {
+        $0.text = "Создать"
+        $0.textColor = ColorResourceManager.shared.mainColor
+        $0.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let stackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let segmentedControl = UIView().then {
+        $0.backgroundColor = .systemGray6
+        $0.layer.cornerRadius = 5
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let loginButton = UIButton(type: .system).then {
+        $0.setTitle( "Войти", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
+    }
+    
+    let registerButton = UIButton(type: .system).then {
+        $0.setTitle( "Зарегистрироваться", for: .normal)
+        $0.setTitleColor(.gray, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        $0.addTarget(self, action: #selector(registerTapped), for: .touchUpInside)
+    }
+    
     var indicatorLeadingConstraint: NSLayoutConstraint!
-    let titleLabel = UILabel()
-    let indicatorView = UIView()
+    
+    private lazy var indicatorView = UIView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,67 +58,31 @@ class ProfilePage: UIViewController {
         view.backgroundColor = .white
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedToView)))
         
-        setupUI()
+        addSubviews()
         setupConstraints()
     }
     
-    @objc func tappedToView() {
-        view.endEditing(true)
-    }
+
 }
 
 private extension ProfilePage {
-    func setupUI() {
+    func addSubviews() {
         view.addSubview(titleLabel)
-        
-        titleLabel.text = "Создать"
-        titleLabel.textColor = mainColor
-        titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        
         view.addSubview(segmentedControl)
-        segmentedControl.backgroundColor = .systemGray6
-        segmentedControl.layer.cornerRadius = 5
-        segmentedControl.clipsToBounds = true
-        
-        registerView.isHidden = true
-        
         view.addSubview(loginView)
         view.addSubview(registerView)
-        
-        loginButton.setTitle( "Войти", for: .normal)
-        loginButton.setTitleColor(.black, for: .normal)
-        loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        
-        registerButton.setTitle( "Зарегистрироваться", for: .normal)
-        registerButton.setTitleColor(.gray, for: .normal)
-        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        
         segmentedControl.addSubview(stackView)
         stackView.addArrangedSubview(loginButton)
-        loginButton.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
-
         stackView.addArrangedSubview(registerButton)
-        registerButton.addTarget(self, action: #selector(registerTapped), for: .touchUpInside)
-
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        
         segmentedControl.addSubview(indicatorView)
         indicatorView.backgroundColor = .white
         indicatorView.layer.cornerRadius = 5
         
-        indicatorLeadingConstraint = indicatorView.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor)
-        
-        segmentedControl.sendSubviewToBack(indicatorView)
     }
     
     func setupConstraints() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        loginView.translatesAutoresizingMaskIntoConstraints = false
-        registerView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorLeadingConstraint = indicatorView.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor)
+        segmentedControl.sendSubviewToBack(indicatorView)
         
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
@@ -110,6 +113,10 @@ private extension ProfilePage {
             indicatorView.bottomAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: -2),
             indicatorView.widthAnchor.constraint(equalTo: segmentedControl.widthAnchor, multiplier: 0.5, constant: -2)
         ])
+    }
+    
+    @objc func tappedToView() {
+        view.endEditing(true)
     }
     
     @objc func segmentUpdated(isLogin: Bool) {

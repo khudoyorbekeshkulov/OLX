@@ -110,16 +110,10 @@ final class LoginView: UIView {
         addSubviews()
         setupConstraints()
         setupAction()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc func showTapped() {
-        isSecuretyEntry.toggle()
-        passwordTextField.isSecureTextEntry = isSecuretyEntry
     }
 }
 
@@ -198,6 +192,11 @@ private extension LoginView {
             text2.centerXAnchor.constraint(equalTo: centerXAnchor),
             text2.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 5)
         ])
+    }
+    
+    @objc func showTapped() {
+        isSecuretyEntry.toggle()
+        passwordTextField.isSecureTextEntry = isSecuretyEntry
     }
     
     func setupAction() {
