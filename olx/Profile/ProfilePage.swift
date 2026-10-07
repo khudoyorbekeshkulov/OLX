@@ -1,5 +1,3 @@
-
-
 import UIKit
 
 class ProfilePage: UIViewController {
@@ -15,8 +13,6 @@ class ProfilePage: UIViewController {
     let titleLabel = UILabel()
     let indicatorView = UIView()
 
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +61,6 @@ private extension ProfilePage {
         stackView.addArrangedSubview(registerButton)
         registerButton.addTarget(self, action: #selector(registerTapped), for: .touchUpInside)
 
-        
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         
@@ -76,7 +71,6 @@ private extension ProfilePage {
         indicatorLeadingConstraint = indicatorView.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor)
         
         segmentedControl.sendSubviewToBack(indicatorView)
-        
     }
     
     func setupConstraints() {
@@ -86,7 +80,6 @@ private extension ProfilePage {
         registerView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         indicatorView.translatesAutoresizingMaskIntoConstraints = false
-        
         
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
@@ -119,11 +112,6 @@ private extension ProfilePage {
         ])
     }
     
-
-    
-    
-    
-    
     @objc func segmentUpdated(isLogin: Bool) {
         
         indicatorLeadingConstraint.constant = isLogin ? 0: segmentedControl.frame.width/2
@@ -132,19 +120,16 @@ private extension ProfilePage {
             self.view.layoutIfNeeded()
         }
         
-        
         loginButton.setTitleColor(isLogin ? .black: .gray, for: .normal)
         registerButton.setTitleColor(isLogin ? .gray: .black, for: .normal)
         
         loginView.isHidden = !isLogin
         registerView.isHidden = isLogin
-        
     }
     
     @objc func loginTapped() {
         segmentUpdated(isLogin: true)
     }
-    
     
     @objc func registerTapped() {
         segmentUpdated(isLogin: false)
