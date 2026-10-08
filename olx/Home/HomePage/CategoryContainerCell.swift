@@ -8,10 +8,29 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
     
     weak var delegate: CategoryContainerCellDelegate?
     
-    private let headerView = UIView()
-    private let mainCategoryLabel = UILabel()
-    private let showAllButton = UIButton(type: .system)
-    private let lineView = UIView()
+    private lazy var headerView = UIView().then {
+        $0.backgroundColor = .white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var mainCategoryLabel = UILabel().then {
+        $0.text = "Категории"
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var showAllButton = UIButton(type: .system).then {
+        $0.setTitle("Смотреть все", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        $0.setTitleColor(.gray, for: .normal)
+        $0.addTarget(self, action: #selector(showAllTapped), for: .touchUpInside)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var lineView = UIView().then {
+        $0.backgroundColor = .systemGray6
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     private let categories: [Category] = [
         Category(
@@ -49,6 +68,7 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
             collectionViewLayout: layout
         )
         
+        collectionView.translatesAutoresizingMaskIntoConstraints = false  
         collectionView.showsHorizontalScrollIndicator = false
         
         collectionView.register(
@@ -66,7 +86,6 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
         super.init(frame: frame)
         
         addSubviews()
-        setupHeader()
         setupConstraints()
     }
     
@@ -127,30 +146,8 @@ private extension CategoryContainerCell {
         headerView.addSubview(showAllButton)
         headerView.addSubview(lineView)
     }
-    
-    func setupHeader() {
 
-        headerView.backgroundColor = .white
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        mainCategoryLabel.text = "Категории"
-        mainCategoryLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-
-        showAllButton.setTitle("Смотреть все", for: .normal)
-        showAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        showAllButton.setTitleColor(.gray, for: .normal)
-        showAllButton.addTarget(self, action: #selector(showAllTapped), for: .touchUpInside)
-
-        lineView.backgroundColor = .systemGray6
-
-    }
-    
     func setupConstraints() {
-        categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        mainCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
-        showAllButton.translatesAutoresizingMaskIntoConstraints = false
-        lineView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             headerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
