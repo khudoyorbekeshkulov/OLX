@@ -1,14 +1,43 @@
-
 import UIKit
 
 class RecommendedCell: UICollectionViewCell {
+    
     private var isTapped = false
-     let cellView = UIView()
-     let profileImage = UIImageView()
-     let additionalLabel = UILabel()
-     private let heartButton = UIButton()
-     let timeLabel = UILabel()
-     let saleLabel = UILabel()
+    
+    let cellView = UIView().then {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 15
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let profileImage = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let additionalLabel = UILabel().then {
+        $0.numberOfLines = 2
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var heartButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "heart"), for: .normal)
+        $0.tintColor = .black
+        $0.addTarget(self, action: #selector(heartTapped), for: .touchUpInside)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let timeLabel = UILabel().then {
+        $0.textColor = .gray
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let saleLabel = UILabel().then {
+        $0.text = "от 100 000 сум"
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     var isImpact = false {
         didSet{updateCellSize()}
@@ -17,52 +46,28 @@ class RecommendedCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.addSubview(cellView)
-        
-        cellView.addSubview(profileImage)
-        cellView.addSubview(additionalLabel)
-        cellView.addSubview(heartButton)
-        cellView.addSubview(timeLabel)
-        cellView.addSubview(saleLabel)
-        
-        setupRecommendedView()
+        addSubviews()
         setupRecommendedViewConstraints()
         updateCellSize()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    @objc func heartTapped() {
-        isTapped.toggle()
-        let heartChange = isTapped ?  "heart.fill" :  "heart"
-        heartButton.setImage(UIImage(systemName: heartChange), for: .normal)
-    }
 }
 
 private extension RecommendedCell {
-    func setupRecommendedView() {
-        cellView.backgroundColor = .white
-        cellView.layer.cornerRadius = 15
-        cellView.clipsToBounds = true
-        
-        profileImage.contentMode = .scaleAspectFill
-        profileImage.clipsToBounds = true
-        
-        additionalLabel.numberOfLines = 2
-        
-        heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        heartButton.tintColor = .black
-        heartButton.addTarget(self, action: #selector(heartTapped), for: .touchUpInside)
-        
-        timeLabel.textColor = .gray
-        
-        saleLabel.text = "от 100 000 сум"
+    
+    func addSubviews() {
+        contentView.addSubview(cellView)
+        cellView.addSubview(profileImage)
+        cellView.addSubview(additionalLabel)
+        cellView.addSubview(heartButton)
+        cellView.addSubview(timeLabel)
+        cellView.addSubview(saleLabel)
     }
     
-    private func updateCellSize() {
+    func updateCellSize() {
         if isImpact {
             additionalLabel.font = UIFont.systemFont(ofSize: 11)
             timeLabel.font = UIFont.systemFont(ofSize: 10)
@@ -75,13 +80,6 @@ private extension RecommendedCell {
     }
     
     func setupRecommendedViewConstraints() {
-        cellView.translatesAutoresizingMaskIntoConstraints = false
-        profileImage.translatesAutoresizingMaskIntoConstraints = false
-        additionalLabel.translatesAutoresizingMaskIntoConstraints = false
-        heartButton.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        saleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             cellView.topAnchor.constraint(equalTo: contentView.topAnchor),
             cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -109,5 +107,11 @@ private extension RecommendedCell {
             saleLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 10),
             saleLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -10),
         ])
+    }
+    
+    @objc func heartTapped() {
+        isTapped.toggle()
+        let heartChange = isTapped ?  "heart.fill" :  "heart"
+        heartButton.setImage(UIImage(systemName: heartChange), for: .normal)
     }
 }
