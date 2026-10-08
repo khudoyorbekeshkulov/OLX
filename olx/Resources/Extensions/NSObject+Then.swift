@@ -1,15 +1,13 @@
-//
-//  NSObject+Then.swift
-//  olx
-//
-//  Created by Eshqulov Xudoyorbek  on 07/10/26.
-//
+import UIKit
 
-import Foundation
+protocol Then {}
 
-extension NSObject {
-    func then(_ configure: (Self) -> Void) -> Self {
-        configure(self)
+extension Then where Self: AnyObject {
+    @discardableResult
+    func then(_ block: (Self) -> Void) -> Self {
+        block(self)
         return self
     }
 }
+
+extension NSObject: Then {}

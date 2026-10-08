@@ -1,5 +1,3 @@
-
-
 import UIKit
 
 protocol CategoryContainerCellDelegate: AnyObject {
@@ -63,57 +61,23 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
         
         return collectionView
     }()
-    
-    
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.addSubview(headerView)
-        contentView.addSubview(categoryCollectionView)
-        
-        headerView.addSubview(mainCategoryLabel)
-        headerView.addSubview(showAllButton)
-        headerView.addSubview(lineView)
-        
-        
+        addSubviews()
         setupHeader()
         setupConstraints()
-    }
-    
-    @objc private func showAllTapped() {
-        delegate?.didTapShowAllCategories()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
-        func setupHeader() {
-    
-            headerView.backgroundColor = .white
-            
-            mainCategoryLabel.text = "Категории"
-            mainCategoryLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-    
-            showAllButton.setTitle("Смотреть все", for: .normal)
-            showAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-            showAllButton.setTitleColor(.gray, for: .normal)
-            showAllButton.addTarget(self, action: #selector(showAllTapped), for: .touchUpInside)
-    
-            lineView.backgroundColor = .systemGray6
-    
-        }
-    
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == categoryCollectionView {
             return categories.count
         }
-        
-        
         return 0
     }
     
@@ -139,9 +103,6 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
             
             return cell
         }
-        
-    
-        
         return UICollectionViewCell()
     }
     
@@ -153,21 +114,44 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
         if collectionView == categoryCollectionView {
             return CGSize(width: 80, height: 115)
         }
-        
-        
         return .zero
     }
+}
+
+private extension CategoryContainerCell {
     
+    func addSubviews() {
+        contentView.addSubview(headerView)
+        contentView.addSubview(categoryCollectionView)
+        headerView.addSubview(mainCategoryLabel)
+        headerView.addSubview(showAllButton)
+        headerView.addSubview(lineView)
+    }
     
-    private func setupConstraints() {
-        categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
+    func setupHeader() {
+
+        headerView.backgroundColor = .white
         headerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        mainCategoryLabel.text = "Категории"
+        mainCategoryLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+
+        showAllButton.setTitle("Смотреть все", for: .normal)
+        showAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        showAllButton.setTitleColor(.gray, for: .normal)
+        showAllButton.addTarget(self, action: #selector(showAllTapped), for: .touchUpInside)
+
+        lineView.backgroundColor = .systemGray6
+
+    }
+    
+    func setupConstraints() {
+        categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
         mainCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
         showAllButton.translatesAutoresizingMaskIntoConstraints = false
         lineView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            
             headerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             headerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -188,7 +172,10 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
             categoryCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             categoryCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             categoryCollectionView.heightAnchor.constraint(equalToConstant: 140),
-
         ])
+    }
+    
+    @objc private func showAllTapped() {
+        delegate?.didTapShowAllCategories()
     }
 }
