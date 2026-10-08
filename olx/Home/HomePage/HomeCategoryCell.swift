@@ -1,50 +1,46 @@
-
-
 import UIKit
 
 class HomeCategoryCell: UICollectionViewCell {
     
-    let cellView = UIView()
-    let image = UIImageView()
-    let titleLabel = UILabel()
-    let numberOfResults = UILabel()
-    let nextImage = UIImageView()
-    let numberOfSales = UILabel()
+    let cellView = UIView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let image = UIImageView().then {
+        $0.layer.cornerRadius = 35
+        $0.clipsToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let titleLabel = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 10)
+        $0.textAlignment = .center
+        $0.numberOfLines = 0
+        $0.lineBreakMode = .byWordWrapping
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.addSubview(cellView)
-        cellView.addSubview(titleLabel)
-        cellView.addSubview(image)
-        
-        setupCollectionView()
+        addSubviews()
         setupConstraints()
     }
-    
-    
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 private extension HomeCategoryCell {
-    func setupCollectionView() {
-        image.layer.cornerRadius = 35
-        image.clipsToBounds = true
-        
-        titleLabel.font = UIFont.systemFont(ofSize: 10)
-        titleLabel.textAlignment = .center
-        titleLabel.numberOfLines = 0
-        titleLabel.lineBreakMode = .byWordWrapping
-    }
     
+    func addSubviews() {
+        contentView.addSubview(cellView)
+        cellView.addSubview(titleLabel)
+        cellView.addSubview(image)
+    }
+
     func setupConstraints() {
-        cellView.translatesAutoresizingMaskIntoConstraints = false
-        image.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             cellView.topAnchor.constraint(equalTo: contentView.topAnchor),
             cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -61,5 +57,4 @@ private extension HomeCategoryCell {
             titleLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor),
         ])
     }
-    
 }
