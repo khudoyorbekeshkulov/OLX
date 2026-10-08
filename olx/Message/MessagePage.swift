@@ -80,17 +80,17 @@ extension Message: UITableViewDataSource, UITableViewDelegate{
 
 private extension Message {
     func setupTableView() {
-       tableView.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseID)
-       tableView.dataSource = self
-       tableView.delegate = self
-   }
-       
+        tableView.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseID)
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+    
     func setupInputBar() {
-       textField.rightView = sendButton
-       textField.rightViewMode = .always
+        textField.rightView = sendButton
+        textField.rightViewMode = .always
         
-       inputBarButtomConstraint = inputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-   }
+        inputBarButtomConstraint = inputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+    }
     
     func addSubviews() {
         view.addSubview(tableView)
@@ -98,7 +98,7 @@ private extension Message {
         inputBar.addSubview(textField)
     }
     
-     func setupConstraints() {
+    func setupConstraints() {
         NSLayoutConstraint.activate([
             image.topAnchor.constraint(equalTo: view.topAnchor),
             image.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -120,9 +120,7 @@ private extension Message {
             textField.centerYAnchor.constraint(equalTo: inputBar.centerYAnchor),
         ])
     }
-}
-
-extension Message {
+    
     @objc func phoneTapped() {
         print("Phone tapped")
     }
@@ -140,10 +138,8 @@ extension Message {
         tableView.reloadData()
         scrollToBottom()
     }
-}
 
-extension Message {
-    private func setupKeyboardObservers() {
+    func setupKeyboardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
