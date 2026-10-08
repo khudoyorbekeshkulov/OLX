@@ -6,41 +6,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
-        let profile = ProfilePage()
-        let profileNav = UINavigationController(rootViewController: profile)
-        profileNav.tabBarItem.title = "Профиль"
-        profileNav.tabBarItem.image = UIImage(systemName: "person")
-        profileNav.tabBarItem.selectedImage = UIImage(systemName: "person.crop.circle")
+       
+        let profileNav = UINavigationController(rootViewController: ProfilePage()).then {
+            $0.tabBarItem.title = "Профиль"
+            $0.tabBarItem.image = UIImage(systemName: "person")
+            $0.tabBarItem.selectedImage = UIImage(systemName: "person.crop.circle")
+        }
         
-        let message = Message()
-        let messageNav = UINavigationController(rootViewController: message)
-        messageNav.tabBarItem.title = "Сообщения"
-        messageNav.tabBarItem.image = UIImage(systemName: "ellipsis.message")
-        messageNav.tabBarItem.selectedImage = UIImage(systemName: "ellipsis.message.fill")
+        let messageNav = UINavigationController(rootViewController: Message()).then {
+            $0.tabBarItem.title = "Сообщения"
+            $0.tabBarItem.image = UIImage(systemName: "ellipsis.message")
+            $0.tabBarItem.selectedImage = UIImage(systemName: "ellipsis.message.fill")
+        }
         
-        let add = Add()
-        let addNav = UINavigationController(rootViewController: add)
-        addNav.tabBarItem.title = "Создать"
-        addNav.tabBarItem.image = UIImage(systemName: "plus.circle")
-        addNav.tabBarItem.selectedImage = UIImage(systemName: "plus.circle.fill")
+        let addNav = UINavigationController(rootViewController: Add()).then {
+            $0.tabBarItem.title = "Создать"
+            $0.tabBarItem.image = UIImage(systemName: "plus.circle")
+            $0.tabBarItem.selectedImage = UIImage(systemName: "plus.circle.fill")
+        }
         
-        let favourites = Favourites()
-        let favouritesNav = UINavigationController(rootViewController: favourites)
-        favouritesNav.tabBarItem.title = "Избранное"
-        favouritesNav.tabBarItem.image = UIImage(systemName: "star")
-        favouritesNav.tabBarItem.selectedImage = UIImage(systemName: "star.fill")
+        let favouritesNav = UINavigationController(rootViewController: Favourites()).then {
+            $0.tabBarItem.title = "Избранное"
+            $0.tabBarItem.image = UIImage(systemName: "star")
+            $0.tabBarItem.selectedImage = UIImage(systemName: "star.fill")
+        }
         
-        // MARK: - Home page controller system
-        let homePage = HomePage()
-        let homeNav = UINavigationController(rootViewController: homePage)
-        homeNav.tabBarItem.title = "Главная"
-        homeNav.tabBarItem.image = UIImage(systemName: "house")
-        homeNav.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
+        let homeNav = UINavigationController(rootViewController: HomePage()).then {
+            $0.tabBarItem.title = "Главная"
+            $0.tabBarItem.image = UIImage(systemName: "house")
+            $0.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
+        }
         
-        // MARK: - Main tabbar controller system
         let tabBar = UITabBarController()
-        // Tabbardagi selected iconni rangini uzgartirayapmiz
         tabBar.tabBar.tintColor = ColorResourceManager.shared.mainColor
         tabBar.viewControllers = [homeNav,favouritesNav, addNav, messageNav, profileNav]
         
