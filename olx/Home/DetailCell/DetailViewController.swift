@@ -3,10 +3,10 @@ import UIKit
 class DetailViewController: UIViewController {
     
     private let mainColor = ColorResourceManager.shared.mainColor
-
+    
     var categories: [Category] = []
     var category: Category?
-
+    
     private lazy var image = UIImageView().then {
         $0.image = .cobalt
         $0.clipsToBounds = true
@@ -129,9 +129,9 @@ class DetailViewController: UIViewController {
 /// Elementlar tab bar dan boshlanish uchun code
 extension UIViewController {
     var topbarHeight: CGFloat {
-            return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
-                (self.navigationController?.navigationBar.frame.height ?? 0.0)
-        }
+        return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
+        (self.navigationController?.navigationBar.frame.height ?? 0.0)
+    }
 }
 
 extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -155,7 +155,7 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 private extension DetailViewController {
-     func addSubviews() {
+    func addSubviews() {
         view.addSubview(image)
         view.addSubview(infoFrame)
         infoFrame.addSubview(postedTime)
@@ -176,7 +176,7 @@ private extension DetailViewController {
     func setupNavBar() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-
+        
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.isTranslucent = true
@@ -190,7 +190,7 @@ private extension DetailViewController {
         navigationItem.rightBarButtonItem = heartButton
     }
     
-     func configure() {
+    func configure() {
         guard let category = category else { return }
         image.image = category.image
         postedTime.text = category.locationAndTime
