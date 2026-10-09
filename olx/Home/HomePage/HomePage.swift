@@ -1,16 +1,18 @@
-
-
 import UIKit
 
 class HomePage: UIViewController, UITextFieldDelegate {
-    private var searchResults: [Category] = []
+    private var searchResults: [CategoryItem] = []
     private let searchContainer = UIView()
-    private let searchingTextField = UITextField()
+    
+    private let searchingTextField = UITextField().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     private let searchTableView = UITableView()
     
     let mockNetworkServiceInstance = NetworkServiceImplementation.shared
     
-    private lazy var categories: [Category] = mockNetworkServiceInstance.getCategories().toCategories
+    private lazy var categories: [CategoryItem] = mockNetworkServiceInstance.getCategories().toCategories  [CategoryItem]
 
     private lazy var mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -29,14 +31,12 @@ class HomePage: UIViewController, UITextFieldDelegate {
         
         collectionView.register(RecommendedHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "recommendedHeader")
         
-            
         collectionView.delegate = self
         collectionView.dataSource = self
 
         return collectionView
     }()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,7 +50,6 @@ class HomePage: UIViewController, UITextFieldDelegate {
             $0.title.lowercased().contains("nexia")
         }
     }
-    
 }
 
 extension HomePage: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -90,10 +89,8 @@ extension HomePage: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.timeLabel.text = category.locationAndTime
         cell.isImpact = false
         
-       
         return cell
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "recommendedHeader", for: indexPath) as? RecommendedHeaderView else {
@@ -104,7 +101,6 @@ extension HomePage: UICollectionViewDelegate, UICollectionViewDataSource {
     /// Bu yerda recommendedCell ni ustiga bosganda yangi list ochilish uchun function qildik
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            
             let category = categories[indexPath.row]
             
             let detailVC = DetailViewController()
@@ -115,10 +111,7 @@ extension HomePage: UICollectionViewDelegate, UICollectionViewDataSource {
             navigationController?.pushViewController(detailVC, animated: true)
         }
     }
-    
-    
 }
-
 
 extension HomePage: CategoryContainerCellDelegate {
     func didTapShowAllCategories() {
@@ -126,7 +119,6 @@ extension HomePage: CategoryContainerCellDelegate {
         navigationController?.pushViewController(categoriesPage, animated: true)
     }
 }
-
 
 extension HomePage: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -147,7 +139,6 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
         return .zero
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if section == 0 {
             return UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0)
@@ -162,12 +153,10 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
         if section == 0 {
             return 20
         }
-        
         return 15
     }
 }
     
-
 private extension HomePage {
     
     func setupSearchBar() {
@@ -187,12 +176,8 @@ private extension HomePage {
         searchingTextField.leftViewMode = .always
         navigationItem.titleView = searchContainer
     }
-    
-    
-
-    
+ 
     func setupConstraints() {
-        searchingTextField.translatesAutoresizingMaskIntoConstraints = false
         mainCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -208,8 +193,6 @@ private extension HomePage {
             mainCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mainCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mainCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
         ])
     }
 }
-
