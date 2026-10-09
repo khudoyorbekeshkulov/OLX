@@ -1,20 +1,20 @@
 import UIKit
 
-struct CategoryAllProductInfo {
+struct CategoryMainProductsChapter {
     let image: String
     let title: String
     let result: String
     let backgroundColor: String
 }
 
-extension [CategoryAllProductInfo] {
-    var toCategoryAllProductInfo: [Category] {
+extension [CategoryMainProductsChapter] {
+    var toCategoryMainProductsChapter: [Category] {
         map { product in
             Category(
                 image: UIImage(named: product.image),
                 title: product.title,
                 result: product.result,
-                backgroundColor: UIColor(named: product.backgroundColor)
+                backgroundColor: UIColor(named: product.backgroundColor),
             )
         }
     }

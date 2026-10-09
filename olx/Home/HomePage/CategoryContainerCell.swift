@@ -44,7 +44,7 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
         Category(
             image: UIImage(named: "stroller"),
             title: "Детский мир",
-            imageBackgroundColor: ColorResourceManager.shared.color(r: 255, g: 206, b: 50)
+            imageBackgroundColor: .yellow
         ),
         Category(
             image: UIImage(named: "dress"),

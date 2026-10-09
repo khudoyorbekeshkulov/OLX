@@ -20,7 +20,7 @@ final class CategoryCell: UITableViewCell {
     
     let numberOfResults = UILabel().then {
         $0.font = .systemFont(ofSize: 11, weight: .regular)
-        $0.textColor = ColorResourceManager.shared.color(r: 79, g: 79, b: 79)
+        $0.textColor = .darkGray
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     

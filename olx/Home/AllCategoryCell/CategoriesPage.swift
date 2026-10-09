@@ -10,57 +10,8 @@ class CategoriesPage: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private let categories: [Category] = [
-        Category (
-            image: UIImage(named: "olxImage"),
-            title: "Все обявления",
-            result: "634123 результатов",
-            backgroundColor: .white,
-        ),
-        
-        Category (
-            image: UIImage(named: "home"),
-            title: "Недвижимость",
-            result: "28341 результатов",
-            backgroundColor: ColorResourceManager.shared.color(r: 235, g: 250, b: 240),
-        ),
-        
-        Category (
-            image: UIImage(named: "stroller"),
-            title: "Детский мир",
-            result: "44123 результатов",
-            backgroundColor: ColorResourceManager.shared.color(r: 253, g: 246, b: 222),
-            imageBackgroundColor: ColorResourceManager.shared.color(r: 255, g: 206, b: 50)
-        ),
-        
-        Category(
-            image: UIImage(named: "dress"),
-            title: "Одежда и обувь",
-            result: "18934 результатов",
-            backgroundColor: ColorResourceManager.shared.color(r: 240, g: 247, b: 247),
-        ),
-        
-        Category (
-            image: UIImage(named: "car"),
-            title: "Автомобили",
-            result: "7123 результатов",
-            backgroundColor: ColorResourceManager.shared.color(r: 225, g: 240, b: 255),
-        ),
-        
-        Category (
-            image: UIImage(named: "cat"),
-            title: "Животные",
-            result: "5473 результатов",
-            backgroundColor: ColorResourceManager.shared.color(r: 255, g: 243, b: 230),
-        ),
-        
-        Category (
-            image: UIImage(named: "phone"),
-            title: "Электроника",
-            result: "3573 результатов",
-            backgroundColor: ColorResourceManager.shared.color(r: 243, g: 235, b: 255),
-        ),
-    ]
+    let mockNetworkServiceProviderAllInfo = NetworkServiceMainProductChapterImplementation.shared
+    private lazy var categories: [Category] = mockNetworkServiceProviderAllInfo.getCategoriesAllInfo().toCategoryMainProductsChapter  //MARK: - Contuning
     
     override func viewDidLoad() {
         super.viewDidLoad()
