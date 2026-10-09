@@ -119,10 +119,10 @@ class DetailViewController: UIViewController {
         
         view.backgroundColor = .systemGray6
         
-        setupNavBar()
         addSubviews()
-        setupConstraints()
+        setupNavBar()
         configure()
+        setupConstraints()
     }
 }
 
@@ -132,25 +132,6 @@ extension UIViewController {
             return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
                 (self.navigationController?.navigationBar.frame.height ?? 0.0)
         }
-}
-
-extension DetailViewController {
-    func setupNavBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.isTranslucent = true
-        
-        let heartButton = UIBarButtonItem(
-            image: UIImage(systemName: "heart"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapHeartButton)
-        )
-        navigationItem.rightBarButtonItem = heartButton
-    }
 }
 
 extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -192,6 +173,23 @@ private extension DetailViewController {
         view.addSubview(detailCollectionView)
     }
     
+    func setupNavBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.isTranslucent = true
+        
+        let heartButton = UIBarButtonItem(
+            image: UIImage(systemName: "heart"),
+            style: .plain,
+            target: self,
+            action: #selector(didTapHeartButton)
+        )
+        navigationItem.rightBarButtonItem = heartButton
+    }
+    
      func configure() {
         guard let category = category else { return }
         image.image = category.image
@@ -203,7 +201,7 @@ private extension DetailViewController {
         infoProduct.text = category.infoProduct
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         detailCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
