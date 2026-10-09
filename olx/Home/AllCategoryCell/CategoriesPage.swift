@@ -110,9 +110,11 @@ extension CategoriesPage: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCategoryCell = SelectedCategoryCell()
+        guard indexPath.row == 0 else { return }
+        navigationController?.pushViewController(SelectedCategoryCell(), animated: true)
+        
         if indexPath.row != 0 {
-            navigationController?.pushViewController(selectedCategoryCell, animated: true)
+            navigationController?.pushViewController(SelectedCategoryCell(), animated: true)
         }
     }
 }

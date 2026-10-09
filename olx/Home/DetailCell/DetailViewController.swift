@@ -4,8 +4,8 @@ class DetailViewController: UIViewController {
     
     private let mainColor = ColorResourceManager.shared.mainColor
 
-    var categories: [Category] = []
-    var category: Category?
+    var categories: [CategoryItem] = []
+    var category: CategoryItem?
 
     private lazy var image = UIImageView().then {
         $0.image = .cobalt
