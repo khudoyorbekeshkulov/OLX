@@ -11,7 +11,7 @@ class CategoriesPage: UIViewController {
     }
     
     let mockNetworkServiceProviderAllInfo = NetworkServiceMainProductChapterImplementation.shared
-    private lazy var categories: [Category] = mockNetworkServiceProviderAllInfo.getCategoriesAllInfo().toCategoryMainProductsChapter  //MARK: - Contuning
+    private lazy var categories: [Category] = mockNetworkServiceProviderAllInfo.getCategoriesAllInfo().toCategoryMainProductsChapter 
     
     override func viewDidLoad() {
         super.viewDidLoad()
