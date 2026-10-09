@@ -14,7 +14,7 @@ extension [CategoryMainProductsChapter] {
                 image: UIImage(named: product.image),
                 title: product.title,
                 result: product.result,
-                backgroundColor: UIColor(named: product.backgroundColor),
+                backgroundColor: UIColor.named(product.backgroundColor) ?? .white
             )
         }
     }

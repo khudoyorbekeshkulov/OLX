@@ -21,42 +21,42 @@ final class NetworkServiceMainProductChapterImplementation: NetworkServiceProvid
                 image: "home",
                 title: "Недвижимость",
                 result: "28341 результатов",
-                backgroundColor: "white",
+                backgroundColor: "lightGreen",
             ),
             
             CategoryMainProductsChapter (
                 image: "stroller",
                 title: "Детский мир",
                 result: "44123 результатов",
-                backgroundColor: "lightGreen",
+                backgroundColor: "lightYellow",
             ),
             
             CategoryMainProductsChapter(
                 image: "dress",
                 title: "Одежда и обувь",
                 result: "18934 результатов",
-                backgroundColor: "yellow",
+                backgroundColor: "lightGray",
             ),
             
             CategoryMainProductsChapter (
                 image: "car",
                 title: "Автомобили",
                 result: "7123 результатов",
-                backgroundColor: "lightGray",
+                backgroundColor: "lightBlue",
             ),
             
             CategoryMainProductsChapter (
                 image: "cat",
                 title: "Животные",
                 result: "5473 результатов",
-                backgroundColor: "lightBlue",
+                backgroundColor: "lightOrange",
             ),
             
             CategoryMainProductsChapter (
                 image: "phone",
                 title: "Электроника",
                 result: "3573 результатов",
-                backgroundColor: "lightOrange",
+                backgroundColor: "lightPurple",
             ),
         ]
     }
