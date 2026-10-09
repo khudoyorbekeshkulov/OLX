@@ -1,7 +1,7 @@
 import UIKit
 
 class HomePage: UIViewController, UITextFieldDelegate {
-    private var searchResults: [CategoryItem] = []
+    private var searchResults: [Category] = []
     private let searchContainer = UIView()
     
     private let searchingTextField = UITextField().then {
@@ -12,7 +12,7 @@ class HomePage: UIViewController, UITextFieldDelegate {
     
     let mockNetworkServiceInstance = NetworkServiceImplementation.shared
     
-    private lazy var categories: [CategoryItem] = mockNetworkServiceInstance.getCategories().toCategories  [CategoryItem]
+    private lazy var categories: [Category] = mockNetworkServiceInstance.getCategories().toCategories
 
     private lazy var mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
