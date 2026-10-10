@@ -70,7 +70,7 @@ extension CategoriesPage: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension CategoriesPage {
+private extension CategoriesPage {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
