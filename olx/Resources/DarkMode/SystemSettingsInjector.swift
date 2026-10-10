@@ -16,11 +16,3 @@ final class SystemSettingsInjector: SystemModeSetable {
         self.mode = mode
     }
 }
-
-class Kachokbek {
-    let sharedInstance = SystemSettingsInjector.shared
-    
-    func hello() {
-        
-    }
-}
