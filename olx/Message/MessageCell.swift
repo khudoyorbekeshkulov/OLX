@@ -32,10 +32,9 @@ class MessageCell: UITableViewCell {
 
 extension MessageCell {
     func configure(with message: ChatMessage) {
-        messageLabel.text = message.text
-        
-        bubbleView.backgroundColor = message.isFromCurrentUser ? .systemBlue : .systemGray5
+        messageLabel.text = message.text        
         messageLabel.textColor = message.isFromCurrentUser ? .white : .label
+        bubbleView.backgroundColor = message.isFromCurrentUser ? .systemBlue : .systemGray5
         leadingConstraint.isActive = !message.isFromCurrentUser
         trailingConstraint.isActive = message.isFromCurrentUser
     }
