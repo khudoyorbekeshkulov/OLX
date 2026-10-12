@@ -6,44 +6,72 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-       
-        let profileNav = UINavigationController(rootViewController: ProfilePage()).then {
-            $0.tabBarItem.title = "Профиль"
-            $0.tabBarItem.image = UIImage(systemName: "person")
-            $0.tabBarItem.selectedImage = UIImage(systemName: "person.crop.circle")
+        
+        let profileNav = toTabItem(
+            rootViewController: ProfilePage(),
+            title: "Профиль",
+            image: "person",
+            selectedImage: "person.crop.circle"
+        )
+
+        let messageNav = toTabItem(
+            rootViewController: Message(),
+            title: "Сообщения",
+            image: "ellipsis.message",
+            selectedImage: "ellipsis.message.fill"
+        )
+        
+        let addNav = toTabItem(
+            rootViewController: Add(),
+            title: "Создать",
+            image: "plus.circle",
+            selectedImage: "plus.circle.fill"
+        )
+
+        let favouritesNav = toTabItem(
+            rootViewController: Favourites(),
+            title: "Избранное",
+            image: "star",
+            selectedImage: "star.fill"
+        )
+        
+        let homeNav = toTabItem(
+            rootViewController: HomePage(),
+            title: "Главная",
+            image: "house",
+            selectedImage: "house.fill"
+        )
+        
+        let tabBar = UITabBarController().then {
+            $0.tabBar.tintColor = ColorResourceManager.shared.mainColor
+            $0.viewControllers = [homeNav,favouritesNav, addNav, messageNav, profileNav]
         }
         
-        let messageNav = UINavigationController(rootViewController: Message()).then {
-            $0.tabBarItem.title = "Сообщения"
-            $0.tabBarItem.image = UIImage(systemName: "ellipsis.message")
-            $0.tabBarItem.selectedImage = UIImage(systemName: "ellipsis.message.fill")
+        window = UIWindow(windowScene: UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first!).then {
+            $0.rootViewController = tabBar
+            $0.makeKeyAndVisible()
         }
         
-        let addNav = UINavigationController(rootViewController: Add()).then {
-            $0.tabBarItem.title = "Создать"
-            $0.tabBarItem.image = UIImage(systemName: "plus.circle")
-            $0.tabBarItem.selectedImage = UIImage(systemName: "plus.circle.fill")
-        }
-        
-        let favouritesNav = UINavigationController(rootViewController: Favourites()).then {
-            $0.tabBarItem.title = "Избранное"
-            $0.tabBarItem.image = UIImage(systemName: "star")
-            $0.tabBarItem.selectedImage = UIImage(systemName: "star.fill")
-        }
-        
-        let homeNav = UINavigationController(rootViewController: HomePage()).then {
-            $0.tabBarItem.title = "Главная"
-            $0.tabBarItem.image = UIImage(systemName: "house")
-            $0.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
-        }
-        
-        let tabBar = UITabBarController()
-        tabBar.tabBar.tintColor = ColorResourceManager.shared.mainColor
-        tabBar.viewControllers = [homeNav,favouritesNav, addNav, messageNav, profileNav]
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = tabBar
-        window?.makeKeyAndVisible()
         return true
+    }
+}
+
+private extension AppDelegate {
+    func toTabItem(
+        rootViewController: UIViewController,
+        title: String,
+        image: String,
+        selectedImage: String
+    ) -> UINavigationController {
+        
+        let navigationController = UINavigationController(rootViewController: rootViewController).then {
+            $0.tabBarItem.title = title
+            $0.tabBarItem.image = UIImage(systemName: image)
+            $0.tabBarItem.selectedImage = UIImage(systemName: selectedImage)
+        }
+        
+        return navigationController
     }
 }
