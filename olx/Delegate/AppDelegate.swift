@@ -54,9 +54,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         window = UIWindow(windowScene: windowScene).then {
-                $0.rootViewController = tabBar
-                $0.makeKeyAndVisible()
-            }
+            $0.rootViewController = tabBar
+            $0.makeKeyAndVisible()
+        }
         
         return true
     }
