@@ -15,19 +15,18 @@ class DetailViewController: UIViewController {
 
     private lazy var image = UIImageView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.image = UIImage(named: "cobalt")
         $0.clipsToBounds = true
     }
     
     private lazy var infoFrame = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .white
+        $0.backgroundColor = UIColor(named: "white")
     }
     
     private lazy var postedTime = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 10)
-        $0.textColor = .gray
+        $0.textColor = UIColor(named: "gray")
     }
     
     private lazy var nameProduct = UILabel().then {
@@ -66,14 +65,14 @@ class DetailViewController: UIViewController {
     private lazy var onlineTime = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 10)
-        $0.textColor = .gray
+        $0.textColor = UIColor(named: "gray")
     }
     
     private lazy var feedbackButton = UIButton(type: .system).then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("Оставить отзыв", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 13, weight: .medium)
-        $0.setTitleColor(ColorResourceManager.shared.mainColor, for: .normal)
+        $0.setTitleColor(mainColor, for: .normal)
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 10
     }
@@ -91,7 +90,7 @@ class DetailViewController: UIViewController {
     
     private lazy var lineView = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = ColorResourceManager.shared.mainColor
+        $0.backgroundColor = mainColor
     }
     
     private lazy var headerLabel = UILabel().then {
@@ -138,13 +137,13 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         let category = categories[indexPath.item]
         
-        cell.profileImage.image = category.image
-        cell.additionalLabel.text = category.title
-        cell.timeLabel.text = category.locationAndTime
-        cell.saleLabel.text = category.numberOfSales
-        cell.isImpact = true
-        
-        return cell
+        return cell.then {
+            $0.profileImage.image = category.image
+            $0.additionalLabel.text = category.title
+            $0.timeLabel.text = category.locationAndTime
+            $0.saleLabel.text = category.numberOfSales
+            $0.isImpact = true
+        }
     }
 }
 
@@ -176,8 +175,9 @@ private extension DetailViewController {
     }
     
     func setupNavBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
+        let appearance = UINavigationBarAppearance().then {
+            $0.configureWithTransparentBackground()
+        }
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
