@@ -4,7 +4,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let profileNav = toTabItem(
@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             image: "person",
             selectedImage: "person.crop.circle"
         )
-
+        
         let messageNav = toTabItem(
             rootViewController: Message(),
             title: "Сообщения",
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             image: "plus.circle",
             selectedImage: "plus.circle.fill"
         )
-
+        
         let favouritesNav = toTabItem(
             rootViewController: Favourites(),
             title: "Избранное",
@@ -50,9 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(windowScene: UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .first!).then {
-            $0.rootViewController = tabBar
-            $0.makeKeyAndVisible()
-        }
+                $0.rootViewController = tabBar
+                $0.makeKeyAndVisible()
+            }
         
         return true
     }
@@ -66,12 +66,10 @@ private extension AppDelegate {
         selectedImage: String
     ) -> UINavigationController {
         
-        let navigationController = UINavigationController(rootViewController: rootViewController).then {
+        UINavigationController(rootViewController: rootViewController).then {
             $0.tabBarItem.title = title
             $0.tabBarItem.image = UIImage(systemName: image)
             $0.tabBarItem.selectedImage = UIImage(systemName: selectedImage)
         }
-        
-        return navigationController
     }
 }
