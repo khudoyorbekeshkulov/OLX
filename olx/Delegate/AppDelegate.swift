@@ -47,9 +47,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             $0.viewControllers = [homeNav,favouritesNav, addNav, messageNav, profileNav]
         }
         
-        window = UIWindow(windowScene: UIApplication.shared.connectedScenes
-            .compactMap { $0 as? UIWindowScene }
-            .first!).then {
+        guard let windowScene = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene})
+            .first else {
+            return true
+        }
+        
+        window = UIWindow(windowScene: windowScene).then {
                 $0.rootViewController = tabBar
                 $0.makeKeyAndVisible()
             }
