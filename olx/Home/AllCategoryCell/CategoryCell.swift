@@ -32,7 +32,7 @@ final class CategoryCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         addSubviews()
-        setupTableViewconstraint()
+        setupUIConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -44,15 +44,17 @@ private extension CategoryCell {
     
     func addSubviews() {
         contentView.addSubview(cellView)
-        cellView.addSubview(titleLabel)
-        cellView.addSubview(image)
-        cellView.addSubview(numberOfResults)
-        cellView.addSubview(nextImage)
+        
+        cellView.addarrangedSubviews([
+            titleLabel,
+            image,
+            numberOfResults,
+            nextImage
+        ])
     }
     
-    func setupTableViewconstraint() {
+    func setupUIConstraints() {
         NSLayoutConstraint.activate([
-            
             cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
             cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
