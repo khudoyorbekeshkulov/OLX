@@ -7,112 +7,114 @@ class DetailViewController: UIViewController {
     var categories: [Category] = []
     var category: Category?
     
+    private var isCheckedHeart: Bool = false {
+        didSet {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: isCheckedHeart ? "heart.fill" : "heart")
+        }
+    }
+
     private lazy var image = UIImageView().then {
-        $0.image = .cobalt
-        $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.image = UIImage(named: "cobalt")
+        $0.clipsToBounds = true
     }
     
-    private var isCheckedHeart = false
-    
     private lazy var infoFrame = UIView().then {
-        $0.backgroundColor = .white
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .white
     }
     
     private lazy var postedTime = UILabel().then {
-        $0.textColor = .gray
-        $0.font = UIFont.systemFont(ofSize: 10)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.systemFont(ofSize: 10)
+        $0.textColor = .gray
     }
     
     private lazy var nameProduct = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        $0.numberOfLines = 2
-        $0.lineBreakMode = .byWordWrapping
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        $0.lineBreakMode = .byWordWrapping
+        $0.numberOfLines = 2
     }
     
     private lazy var saleProduct = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.systemFont(ofSize: 22, weight: .bold)
     }
     
     private lazy var infoLabel = UILabel().then {
-        $0.text = "Описание"
-        $0.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        $0.text = "Описание"
     }
     
     private lazy var infoProduct = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 12)
-        $0.numberOfLines = 3
-        $0.lineBreakMode = .byWordWrapping
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.systemFont(ofSize: 12)
+        $0.lineBreakMode = .byWordWrapping
+        $0.numberOfLines = 3
     }
     
     private lazy var productOwner = UILabel().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(messageOwnerTapped)))
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.text = category?.productOwner
         $0.isUserInteractionEnabled = true
-        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(messageOwnerTapped)))
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var onlineTime = UILabel().then {
-        $0.textColor = .gray
-        $0.font = UIFont.systemFont(ofSize: 10)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.systemFont(ofSize: 10)
+        $0.textColor = .gray
     }
     
     private lazy var feedbackButton = UIButton(type: .system).then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("Оставить отзыв", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 13, weight: .medium)
         $0.setTitleColor(ColorResourceManager.shared.mainColor, for: .normal)
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 10
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var adsLabelFrame = UILabel().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         $0.text = "Все объявления автора"
         $0.textColor = mainColor
-        $0.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    
     private lazy var adsLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var lineView = UIView().then {
-        $0.backgroundColor = ColorResourceManager.shared.mainColor
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = ColorResourceManager.shared.mainColor
     }
     
     private lazy var headerLabel = UILabel().then {
-        $0.text = "Похожие объявления"
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.text = "Похожие объявления"
     }
     
-    private lazy var detailCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 15
-        layout.itemSize = CGSize(width: 155, height: 175)
-        layout.sectionInset = .init(top: 0, left: 15, bottom: 0, right: 0)
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = .systemGray6
-        
-        collectionView.register(RecommendedCell.self, forCellWithReuseIdentifier: "cell")
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        return collectionView
-    }()
+    private lazy var layout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = 15
+        $0.itemSize = CGSize(width: 155, height: 175)
+        $0.sectionInset = .init(top: 0, left: 15, bottom: 0, right: 0)
+    }
+    
+    private lazy var detailCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.showsHorizontalScrollIndicator = false
+        $0.backgroundColor = .systemGray6
+        $0.register(RecommendedCell.self, forCellWithReuseIdentifier: "cell")
+        $0.delegate = self
+        $0.dataSource = self
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,14 +125,6 @@ class DetailViewController: UIViewController {
         setupNavBar()
         configure()
         setupConstraints()
-    }
-}
-
-/// Elementlar tab bar dan boshlanish uchun code
-extension UIViewController {
-    var topbarHeight: CGFloat {
-        return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
-        (self.navigationController?.navigationBar.frame.height ?? 0.0)
     }
 }
 
@@ -156,21 +150,29 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 private extension DetailViewController {
     func addSubviews() {
-        view.addSubview(image)
-        view.addSubview(infoFrame)
-        infoFrame.addSubview(postedTime)
-        infoFrame.addSubview(nameProduct)
-        infoFrame.addSubview(saleProduct)
-        infoFrame.addSubview(infoLabel)
-        infoFrame.addSubview(infoProduct)
-        infoFrame.addSubview(productOwner)
-        infoFrame.addSubview(onlineTime)
-        infoFrame.addSubview(feedbackButton)
-        infoFrame.addSubview(adsLabelFrame)
-        adsLabelFrame.addSubview(adsLabel)
-        adsLabelFrame.addSubview(lineView)
-        view.addSubview(headerLabel)
-        view.addSubview(detailCollectionView)
+        view.addarrangedSubviews([
+            image,
+            infoFrame,
+            headerLabel,
+            detailCollectionView
+        ])
+        
+        infoFrame.addarrangedSubviews([
+            postedTime,
+            nameProduct,
+            saleProduct,
+            infoLabel,
+            infoProduct,
+            productOwner,
+            onlineTime,
+            feedbackButton,
+            adsLabelFrame
+        ])
+        
+        adsLabelFrame.addarrangedSubviews([
+            adsLabel,
+            lineView
+        ])
     }
     
     func setupNavBar() {
@@ -202,8 +204,6 @@ private extension DetailViewController {
     }
     
     func setupConstraints() {
-        detailCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             image.topAnchor.constraint(equalTo: view.topAnchor),
             image.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -270,10 +270,6 @@ private extension DetailViewController {
     
     @objc func didTapHeartButton() {
         isCheckedHeart.toggle()
-        
-        let selectedHeart = isCheckedHeart ? "heart.fill" : "heart"
-        
-        navigationItem.rightBarButtonItem?.image = UIImage(systemName: selectedHeart)
     }
     
     @objc func messageOwnerTapped() {
