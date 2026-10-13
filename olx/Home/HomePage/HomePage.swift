@@ -134,7 +134,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if indexPath.section == 0 {
-            return CGSize(width: collectionView.bounds.width, height: 190)
+            return CGSize(width: collectionView.bounds.width, height: 200)
         }
         
         return CGSize(width: 180, height: 180)
@@ -158,7 +158,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
         return .zero
     }
     
-    //MARK: Ikkita section orasidagi masofani control qilish
+    //MARK: Bitta section ichidagi qatorlar orasidagi minimal masofani belgilaydi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if section == 0 {
             return 20
