@@ -42,7 +42,7 @@ class RecommendedCell: UICollectionViewCell {
         $0.text = "от 100 000 сум"
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
