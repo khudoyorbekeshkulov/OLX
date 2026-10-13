@@ -90,10 +90,7 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == categoryCollectionView {
-            return categories.count
-        }
-        return 0
+        return categories.count
     }
     
     func collectionView(
@@ -102,7 +99,6 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
     ) -> UICollectionViewCell {
         
         if collectionView == categoryCollectionView {
-            
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "categoryCell",
                 for: indexPath
@@ -112,11 +108,11 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
             
             let category = categories[indexPath.item]
             
-            cell.image.image = category.image
-            cell.image.backgroundColor = category.imageBackgroundColor
-            cell.titleLabel.text = category.title
-            
-            return cell
+            return cell.then {
+                $0.image.image = category.image
+                $0.image.backgroundColor = category.imageBackgroundColor
+                $0.titleLabel.text = category.title
+            }
         }
         return UICollectionViewCell()
     }
