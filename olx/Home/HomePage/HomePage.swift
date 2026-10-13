@@ -13,30 +13,36 @@ class HomePage: UIViewController, UITextFieldDelegate {
     let mockNetworkServiceInstance = NetworkServiceImplementation.shared
     
     private lazy var categories: [Category] = mockNetworkServiceInstance.getCategories().toCategories
-
-    private lazy var mainCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 0
-
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.showsVerticalScrollIndicator = false
+    
+    private lazy var mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .vertical
+        $0.minimumLineSpacing = 0
+    }
+    ).then{
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.showsVerticalScrollIndicator = false
+        $0.backgroundColor = .systemGray6
         
-        collectionView.backgroundColor = .systemGray6
+        $0.register(
+            CategoryContainerCell.self,
+            forCellWithReuseIdentifier: "categoryContainerCell"
+        )
         
-        collectionView.register(CategoryContainerCell.self, forCellWithReuseIdentifier: "categoryContainerCell")
+        $0.register(
+            RecommendedCell.self,
+            forCellWithReuseIdentifier: "recommendedCategoryCell"
+        )
         
-        collectionView.register(RecommendedCell.self, forCellWithReuseIdentifier: "recommendedCategoryCell")
+        $0.register(
+            RecommendedHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: "recommendedHeader"
+        )
         
-        collectionView.register(RecommendedHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "recommendedHeader")
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-
-        return collectionView
-    }()
-
+        $0.delegate = self
+        $0.dataSource = self
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,12 +74,12 @@ extension HomePage: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-           guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryContainerCell", for: indexPath) as? CategoryContainerCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryContainerCell", for: indexPath) as? CategoryContainerCell else {
                 return UICollectionViewCell()
             }
-                        
+            
             cell.delegate = self
-                
+            
             return cell
         }
         
@@ -82,7 +88,7 @@ extension HomePage: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         /// Category dagi o'zgaruvchilarni recommendedCategoryCell dagi o'zgaruvchilarga tengladik.
         let category = categories[indexPath.row]
-
+        
         cell.profileImage.image = category.image
         cell.additionalLabel.text = category.title
         cell.saleLabel.text = category.numberOfSales
@@ -124,7 +130,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if indexPath.section == 0 {
-        return CGSize(width: collectionView.bounds.width, height: 190)
+            return CGSize(width: collectionView.bounds.width, height: 190)
         }
         
         return CGSize(width: 180, height: 180)
@@ -156,7 +162,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
         return 15
     }
 }
-    
+
 private extension HomePage {
     
     func setupSearchBar() {
@@ -176,10 +182,8 @@ private extension HomePage {
         searchingTextField.leftViewMode = .always
         navigationItem.titleView = searchContainer
     }
- 
+    
     func setupConstraints() {
-        mainCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             searchContainer.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 30),
             searchContainer.heightAnchor.constraint(equalToConstant: 36),
