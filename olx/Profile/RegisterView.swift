@@ -1,67 +1,71 @@
 import UIKit
 
 final class RegisterView: UIView {
+    let mainColor = ColorResourceManager.shared.mainColor
+    
+    private var isChecked = false
+    private var isSecuretyEntry = true
     
     private lazy var appleButton = UIButton().then {
         var config = UIButton.Configuration.plain()
         config.title = "Продолжить с Apple"
         config.image = UIImage(systemName: "applelogo")
         config.imagePadding = 50
-        config.baseForegroundColor = .black
+        config.baseForegroundColor = UIColor(hex: "#000000")
         config.background.cornerRadius = 5
         config.attributedTitle = AttributedString("Продолжить с Apple", attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 18, weight: .bold)]))
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.configuration = config
-        $0.backgroundColor = .white
+        $0.backgroundColor = UIColor(hex: "#FFFFFF")
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.black.cgColor
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var line1 = UIView().then {
-        $0.backgroundColor = .systemGray3
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = UIColor(hex: "#C7C7CC")
     }
     
     private lazy var or = UILabel().then {
-        $0.text = "или"
-        $0.textColor = ColorResourceManager.shared.mainColor
-        $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.text = "или"
+        $0.textColor = mainColor
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
     
     private lazy var line2 = UIView().then {
-        $0.backgroundColor = .systemGray3
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = UIColor(hex: "#C7C7CC")
     }
     
     private lazy var emailLabel = UILabel().then {
-        $0.text = "Электронная почта или телефон"
-        $0.textColor = ColorResourceManager.shared.mainColor
-        $0.font = UIFont.systemFont(ofSize: 12)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.text = "Электронная почта или телефон"
+        $0.textColor = mainColor
+        $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     private lazy var emailTextField = UITextField().then {
-        $0.backgroundColor = .systemGray6
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = UIColor(hex: "#F2F2F7")
         $0.layer.cornerRadius = 5
         $0.placeholder = "Введите свой электронной почты..."
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var passwordLabel = UILabel().then {
-        $0.text = "Пароль"
-        $0.textColor = ColorResourceManager.shared.mainColor
-        $0.font = UIFont.systemFont(ofSize: 12)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.text = "Пароль"
+        $0.textColor = mainColor
+        $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     private lazy var passwordTextField = UITextField().then {
-        $0.backgroundColor = .systemGray6
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = UIColor(hex: "#F2F2F7")
         $0.layer.cornerRadius = 5
         $0.placeholder = "Введите свой пароль..."
         $0.rightView = container
         $0.rightViewMode = .always
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var container = UIView().then {
@@ -69,47 +73,44 @@ final class RegisterView: UIView {
     }
     
     private lazy var showButton = UIButton(type: .system).then {
-        $0.setTitle("Показать", for: .normal)
-        $0.setTitleColor(ColorResourceManager.shared.mainColor, for: .normal)
-        $0.addTarget(self, action: #selector(showTapped), for: .touchUpInside)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.setTitle("Показать", for: .normal)
+        $0.setTitleColor(mainColor, for: .normal)
+        $0.addTarget(self, action: #selector(showTapped), for: .touchUpInside)
     }
     
     private lazy var text = UILabel().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "Пароль дольжен содержать минимум 6 симболов. Чтобы пароль получился супернадежными, добавьте заглавные и строчные буквы, цыфры и специальные символы"
         $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var text2 = UILabel().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "Я соглащаюсь с правилами использования сервиса, а также с передачей и обработкой моих данных в OLX. Я подверждаю свое совершеннолетие и отвественность за размещение объявления "
         $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var checkBox = UIButton(type: .system).then {
-        $0.setImage(UIImage(systemName: "square"), for: .normal)
-        $0.tintColor = ColorResourceManager.shared.mainColor
-        $0.addTarget(self, action: #selector(checkBoxTapped), for: .touchUpInside)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.setImage(UIImage(systemName: "square"), for: .normal)
+        $0.tintColor = mainColor
+        $0.addTarget(self, action: #selector(checkBoxTapped), for: .touchUpInside)
     }
     
     private lazy var registerButton = UIButton(type: .system).then {
-        $0.backgroundColor = .systemGray6
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = UIColor(hex: "#F2F2F7")
         $0.setTitle("Зарегистроваться", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        $0.backgroundColor = ColorResourceManager.shared.mainColor
+        $0.backgroundColor = mainColor
         $0.layer.cornerRadius = 5
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
-    private var isChecked = false
-    private var isSecuretyEntry = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -126,19 +127,22 @@ final class RegisterView: UIView {
 private extension RegisterView {
     
     func addSubviews() {
-        addSubview(appleButton)
-        addSubview(line1)
-        addSubview(or)
-        addSubview(line2)
-        addSubview(emailLabel)
-        addSubview(emailTextField)
-        addSubview(passwordLabel)
-        addSubview(passwordTextField)
+        addarrangedSubviews([
+            appleButton,
+            line1,
+            or,
+            line2,
+            emailLabel,
+            emailTextField,
+            passwordLabel,
+            passwordTextField,
+            text,
+            checkBox,
+            text2,
+            registerButton
+        ])
+
         container.addSubview(showButton)
-        addSubview(text)
-        addSubview(checkBox)
-        addSubview(text2)
-        addSubview(registerButton)
     }
     
     func setupConstraints() {
