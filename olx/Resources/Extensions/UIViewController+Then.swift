@@ -1,10 +1,3 @@
-//
-//  UIViewController+Then.swift
-//  olx
-//
-//  Created by Eshqulov Xudoyorbek  on 12/10/26.
-//
-
 import UIKit
 
 /// Elementlar tab bar dan boshlanish uchun code

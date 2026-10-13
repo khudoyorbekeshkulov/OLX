@@ -141,7 +141,7 @@ private extension RegisterView {
             text2,
             registerButton
         ])
-
+        
         container.addSubview(showButton)
     }
     

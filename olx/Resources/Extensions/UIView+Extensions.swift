@@ -1,10 +1,3 @@
-//
-//  UIView+Extensions.swift
-//  olx
-//
-//  Created by Eshqulov Xudoyorbek  on 12/10/26.
-//
-
 import UIKit
 
 extension UIView {

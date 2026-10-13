@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		24C163B9307E4B7800B49003 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 24C163B8307E4B7800B49003 /* SnapKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		240B22923007984C00EF9250 /* olx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = olx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24C163B9307E4B7800B49003 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = olx;
 			packageProductDependencies = (
+				24C163B8307E4B7800B49003 /* SnapKit */,
 			);
 			productName = olx;
 			productReference = 240B22923007984C00EF9250 /* olx.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 240B22893007984C00EF9250;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				24C163B7307E4B7800B49003 /* XCRemoteSwiftPackageReference "snapkit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 240B22933007984C00EF9250 /* Products */;
 			projectDirPath = "";
@@ -343,6 +352,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		24C163B7307E4B7800B49003 /* XCRemoteSwiftPackageReference "snapkit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/snapkit/snapkit";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		24C163B8307E4B7800B49003 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 24C163B7307E4B7800B49003 /* XCRemoteSwiftPackageReference "snapkit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 240B228A3007984C00EF9250 /* Project object */;
 }
