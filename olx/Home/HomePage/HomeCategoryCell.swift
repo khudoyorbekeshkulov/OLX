@@ -26,7 +26,7 @@ class HomeCategoryCell: UICollectionViewCell {
         addSubviews()
         setupConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -36,10 +36,13 @@ private extension HomeCategoryCell {
     
     func addSubviews() {
         contentView.addSubview(cellView)
-        cellView.addSubview(titleLabel)
-        cellView.addSubview(image)
+        
+        cellView.addarrangedSubviews([
+            titleLabel,
+            image
+        ])
     }
-
+    
     func setupConstraints() {
         NSLayoutConstraint.activate([
             cellView.topAnchor.constraint(equalTo: contentView.topAnchor),
