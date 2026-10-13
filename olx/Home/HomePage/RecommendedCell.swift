@@ -4,6 +4,10 @@ class RecommendedCell: UICollectionViewCell {
     
     private var isTapped = false
     
+    var isImpact = false {
+        didSet{updateCellSize()}
+    }
+    
     let cellView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 15
@@ -38,11 +42,7 @@ class RecommendedCell: UICollectionViewCell {
         $0.text = "от 100 000 сум"
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
-    var isImpact = false {
-        didSet{updateCellSize()}
-    }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -60,23 +60,20 @@ private extension RecommendedCell {
     
     func addSubviews() {
         contentView.addSubview(cellView)
-        cellView.addSubview(profileImage)
-        cellView.addSubview(additionalLabel)
-        cellView.addSubview(heartButton)
-        cellView.addSubview(timeLabel)
-        cellView.addSubview(saleLabel)
+        
+        cellView.addarrangedSubviews([
+            profileImage,
+            additionalLabel,
+            heartButton,
+            timeLabel,
+            saleLabel
+        ])
     }
     
     func updateCellSize() {
-        if isImpact {
-            additionalLabel.font = UIFont.systemFont(ofSize: 11)
-            timeLabel.font = UIFont.systemFont(ofSize: 10)
-            saleLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
-        } else {
-            additionalLabel.font = UIFont.systemFont(ofSize: 12)
-            timeLabel.font = UIFont.systemFont(ofSize: 11)
-            saleLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        }
+        additionalLabel.font = UIFont.systemFont(ofSize: isImpact ? 11 : 12)
+        timeLabel.font = UIFont.systemFont(ofSize: isImpact ? 10 : 11)
+        saleLabel.font = UIFont.systemFont(ofSize: isImpact ? 13 : 14, weight: .bold)
     }
     
     func setupRecommendedViewConstraints() {
