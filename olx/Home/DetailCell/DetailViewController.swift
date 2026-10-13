@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 class DetailViewController: UIViewController {
     
@@ -12,7 +13,7 @@ class DetailViewController: UIViewController {
             navigationItem.rightBarButtonItem?.image = UIImage(systemName: isCheckedHeart ? "heart.fill" : "heart")
         }
     }
-
+    
     private lazy var image = UIImageView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.clipsToBounds = true
@@ -204,68 +205,90 @@ private extension DetailViewController {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: view.topAnchor),
-            image.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            image.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            image.heightAnchor.constraint(equalToConstant: 280),
-            
-            infoFrame.topAnchor.constraint(equalTo: image.bottomAnchor),
-            infoFrame.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            infoFrame.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            infoFrame.heightAnchor.constraint(equalToConstant: 280),
-            
-            postedTime.topAnchor.constraint(equalTo: infoFrame.topAnchor, constant: 10),
-            postedTime.leadingAnchor.constraint(equalTo: infoFrame.leadingAnchor, constant: 15),
-            
-            nameProduct.topAnchor.constraint(equalTo: postedTime.bottomAnchor, constant: 15),
-            nameProduct.leadingAnchor.constraint(equalTo: infoFrame.leadingAnchor, constant: 15),
-            nameProduct.trailingAnchor.constraint(equalTo: infoFrame.trailingAnchor, constant: -15),
-            
-            saleProduct.topAnchor.constraint(equalTo: nameProduct.bottomAnchor, constant: 5),
-            saleProduct.leadingAnchor.constraint(equalTo: infoFrame.leadingAnchor, constant: 15),
-            saleProduct.trailingAnchor.constraint(equalTo: infoFrame.trailingAnchor, constant: -15),
-            
-            infoLabel.topAnchor.constraint(equalTo: saleProduct.bottomAnchor, constant: 10),
-            infoLabel.leadingAnchor.constraint(equalTo: infoFrame.leadingAnchor, constant: 15),
-            
-            infoProduct.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 5),
-            infoProduct.leadingAnchor.constraint(equalTo: infoFrame.leadingAnchor, constant: 15),
-            infoProduct.trailingAnchor.constraint(equalTo: infoFrame.trailingAnchor, constant: -15),
-            
-            productOwner.topAnchor.constraint(equalTo: infoProduct.bottomAnchor, constant: 20),
-            productOwner.leadingAnchor.constraint(equalTo: infoFrame.leadingAnchor, constant: 15),
-            productOwner.trailingAnchor.constraint(equalTo: infoFrame.trailingAnchor, constant: -15),
-            
-            onlineTime.topAnchor.constraint(equalTo: productOwner.bottomAnchor, constant: 5),
-            onlineTime.leadingAnchor.constraint(equalTo: infoFrame.leadingAnchor, constant: 15),
-            
-            feedbackButton.topAnchor.constraint(equalTo: onlineTime.bottomAnchor, constant: 15),
-            feedbackButton.leadingAnchor.constraint(equalTo: infoFrame.leadingAnchor, constant: 15),
-            feedbackButton.widthAnchor.constraint(equalToConstant: 160),
-            feedbackButton.heightAnchor.constraint(equalToConstant: 40),
-            
-            adsLabelFrame.topAnchor.constraint(equalTo: onlineTime.bottomAnchor, constant: 15),
-            adsLabelFrame.leadingAnchor.constraint(equalTo: feedbackButton.trailingAnchor, constant: 10),
-            adsLabelFrame.widthAnchor.constraint(equalToConstant: 160),
-            adsLabelFrame.heightAnchor.constraint(equalToConstant: 40),
-            
-            adsLabel.centerXAnchor.constraint(equalTo: adsLabelFrame.centerXAnchor),
-            adsLabel.centerYAnchor.constraint(equalTo: adsLabelFrame.centerYAnchor),
-            
-            lineView.topAnchor.constraint(equalTo: adsLabel.bottomAnchor, constant: 2),
-            lineView.leadingAnchor.constraint(equalTo: adsLabelFrame.leadingAnchor, constant: 5),
-            lineView.trailingAnchor.constraint(equalTo: adsLabelFrame.trailingAnchor, constant: -5),
-            lineView.heightAnchor.constraint(equalToConstant: 2),
-            
-            headerLabel.topAnchor.constraint(equalTo: infoFrame.bottomAnchor, constant: 20),
-            headerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            
-            detailCollectionView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 15),
-            detailCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            detailCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            detailCollectionView.heightAnchor.constraint(equalToConstant: 175),
-        ])
+        image.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(280)
+        }
+        
+        infoFrame.snp.makeConstraints {
+            $0.top.equalTo(image.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(280)
+        }
+        
+        headerLabel.snp.makeConstraints {
+            $0.top.equalTo(infoFrame.snp.bottom).offset(20)
+            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+        }
+        
+        detailCollectionView.snp.makeConstraints {
+            $0.top.equalTo(headerLabel.snp.bottom).offset(15)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalToSuperview().offset(175)
+        }
+        
+        postedTime.snp.makeConstraints {
+            $0.top.equalTo(infoFrame.snp.top).offset(10)
+            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+        }
+        
+        nameProduct.snp.makeConstraints {
+            $0.top.equalTo(postedTime.snp.bottom).offset(15)
+            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+            $0.trailing.equalTo(infoFrame.snp.trailing).offset(-15)
+        }
+        
+        saleProduct.snp.makeConstraints {
+            $0.top.equalTo(nameProduct.snp.bottom).offset(5)
+            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+            $0.trailing.equalTo(infoFrame.snp.trailing).offset(-15)
+        }
+        
+        infoLabel.snp.makeConstraints {
+            $0.top.equalTo(saleProduct.snp.bottom).offset(10)
+            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+        }
+        
+        infoProduct.snp.makeConstraints {
+            $0.top.equalTo(infoLabel.snp.bottom).offset(5)
+            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+            $0.trailing.equalTo(infoFrame.snp.trailing).offset(-15)
+        }
+        
+        productOwner.snp.makeConstraints {
+            $0.top.equalTo(infoProduct.snp.bottom).offset(20)
+            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+            $0.trailing.equalTo(infoFrame.snp.trailing).offset(-15)
+        }
+        
+        onlineTime.snp.makeConstraints {
+            $0.top.equalTo(productOwner.snp.bottom).offset(5)
+            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+        }
+        
+        feedbackButton.snp.makeConstraints {
+            $0.top.equalTo(onlineTime.snp.bottom).offset(15)
+            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+            $0.size.equalTo(CGSize(width: 160, height: 40))
+        }
+        
+        adsLabelFrame.snp.makeConstraints {
+            $0.top.equalTo(onlineTime.snp.bottom).offset(15)
+            $0.leading.equalTo(feedbackButton.snp.trailing).offset(10)
+            $0.size.equalTo(CGSize(width: 160, height: 40))
+        }
+        
+        adsLabel.snp.makeConstraints {
+            $0.centerY.equalTo(adsLabelFrame.snp.centerY)
+            $0.centerX.equalTo(adsLabelFrame.snp.centerX)
+        }
+        
+        lineView.snp.makeConstraints {
+            $0.top.equalTo(adsLabel.snp.bottom).offset(2)
+            $0.leading.equalTo(adsLabelFrame.snp.leading).offset(5)
+            $0.trailing.equalTo(adsLabelFrame.snp.trailing).offset(-5)
+        }
     }
     
     @objc func didTapHeartButton() {
