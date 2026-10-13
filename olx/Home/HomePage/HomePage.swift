@@ -2,7 +2,11 @@ import UIKit
 
 class HomePage: UIViewController, UITextFieldDelegate {
     private var searchResults: [Category] = []
-    private let searchContainer = UIView()
+    
+    private let searchContainer = UIView().then {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 8
+    }
     
     private let searchingTextField = UITextField().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -179,8 +183,6 @@ private extension HomePage {
         icon.tintColor = .systemGray
         icon.frame = CGRect(x: 12, y: 8, width: 23, height: 20)
         
-        searchContainer.backgroundColor = .white
-        searchContainer.layer.cornerRadius = 8
         searchingTextField.placeholder = "Поиск"
         searchingTextField.leftView = leftContainer
         searchingTextField.leftViewMode = .always
