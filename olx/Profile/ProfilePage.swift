@@ -1,34 +1,35 @@
 import UIKit
 
 class ProfilePage: UIViewController {
+    var indicatorLeadingConstraint: NSLayoutConstraint!
     
     private let loginView = LoginView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let registerView = RegisterView().then {
-        $0.isHidden = true
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.isHidden = true
     }
     
     private lazy var titleLabel = UILabel().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "Создать"
         $0.textColor = ColorResourceManager.shared.mainColor
         $0.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var stackView = UIStackView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.axis = .horizontal
         $0.distribution = .fillEqually
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var segmentedControl = UIView().then {
-        $0.backgroundColor = .systemGray6
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = UIColor(hex: "#F2F2F7")
         $0.layer.cornerRadius = 5
         $0.clipsToBounds = true
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var loginButton = UIButton(type: .system).then {
@@ -46,36 +47,45 @@ class ProfilePage: UIViewController {
         $0.addTarget(self, action: #selector(registerTapped), for: .touchUpInside)
     }
     
-    var indicatorLeadingConstraint: NSLayoutConstraint!
-    
     private lazy var indicatorView = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = UIColor(hex: "#FFFFFF")
+        $0.layer.cornerRadius = 5
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedToView)))
-        
+        setupView()
         addSubviews()
         setupConstraints()
     }
 }
 
 private extension ProfilePage {
+    
+    func setupView() {
+        view.backgroundColor = UIColor(hex: "#FFFFFF")
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedToView)))
+    }
+    
     func addSubviews() {
-        view.addSubview(titleLabel)
-        view.addSubview(segmentedControl)
-        view.addSubview(loginView)
-        view.addSubview(registerView)
-        segmentedControl.addSubview(stackView)
-        stackView.addArrangedSubview(loginButton)
-        stackView.addArrangedSubview(registerButton)
-        segmentedControl.addSubview(indicatorView)
-        indicatorView.backgroundColor = .white
-        indicatorView.layer.cornerRadius = 5
+        view.addarrangedSubviews([
+            titleLabel,
+            segmentedControl,
+            loginView,
+            registerView
+        ])
         
+        segmentedControl.addarrangedSubviews([
+            stackView,
+            indicatorView
+        ])
+        
+        stackView.addarrangedSubviews([
+            loginButton,
+            registerButton
+        ])
     }
     
     func setupConstraints() {
@@ -125,8 +135,8 @@ private extension ProfilePage {
             self.view.layoutIfNeeded()
         }
         
-        loginButton.setTitleColor(isLogin ? .black: .gray, for: .normal)
-        registerButton.setTitleColor(isLogin ? .gray: .black, for: .normal)
+        loginButton.setTitleColor(isLogin ? UIColor(hex: "#000000"): UIColor(hex: "#808080"), for: .normal)
+        registerButton.setTitleColor(isLogin ? UIColor(hex: "#808080"): UIColor(hex: "#000000"), for: .normal)
         
         loginView.isHidden = !isLogin
         registerView.isHidden = isLogin
