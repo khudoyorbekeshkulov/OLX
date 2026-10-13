@@ -20,13 +20,13 @@ class DetailViewController: UIViewController {
     
     private lazy var infoFrame = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor(named: "white")
+        $0.backgroundColor = UIColor(hex: "#FFFFFF")
     }
     
     private lazy var postedTime = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 10)
-        $0.textColor = UIColor(named: "gray")
+        $0.textColor = UIColor(hex: "#808080")
     }
     
     private lazy var nameProduct = UILabel().then {
@@ -65,7 +65,7 @@ class DetailViewController: UIViewController {
     private lazy var onlineTime = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 10)
-        $0.textColor = UIColor(named: "gray")
+        $0.textColor = UIColor(hex: "#808080")
     }
     
     private lazy var feedbackButton = UIButton(type: .system).then {

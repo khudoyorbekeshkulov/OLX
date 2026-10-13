@@ -44,7 +44,7 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
         Category(
             image: UIImage(named: "stroller"),
             title: "Детский мир",
-            imageBackgroundColor: .yellow
+            imageBackgroundColor: UIColor(hex: "#FFCC00")
         ),
         Category(
             image: UIImage(named: "dress"),
@@ -56,32 +56,28 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
         )
     ]
     
-    private lazy var categoryCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = .init(top: 15, left: 10, bottom: 15, right: 0)
-        
-        let collectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: layout
+    private lazy var categoryLayout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = 10
+        $0.sectionInset = .init(
+            top: 15,
+            left: 10,
+            bottom: 15,
+            right: 0
         )
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false  
-        collectionView.showsHorizontalScrollIndicator = false
-        
-        collectionView.register(
+    }
+    
+    private lazy var categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: categoryLayout).then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.showsHorizontalScrollIndicator = false
+        $0.register(
             HomeCategoryCell.self,
             forCellWithReuseIdentifier: "categoryCell"
         )
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        
-        return collectionView
-    }()
-
+        $0.dataSource = self
+        $0.delegate = self
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -133,6 +129,7 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
         if collectionView == categoryCollectionView {
             return CGSize(width: 80, height: 115)
         }
+        
         return .zero
     }
 }
@@ -140,13 +137,18 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
 private extension CategoryContainerCell {
     
     func addSubviews() {
-        contentView.addSubview(headerView)
-        contentView.addSubview(categoryCollectionView)
-        headerView.addSubview(mainCategoryLabel)
-        headerView.addSubview(showAllButton)
-        headerView.addSubview(lineView)
+        contentView.addarrangedSubviews([
+            headerView,
+            categoryCollectionView
+        ])
+        
+        headerView.addarrangedSubviews([
+            mainCategoryLabel,
+            showAllButton,
+            lineView
+        ])
     }
-
+    
     func setupConstraints() {
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
