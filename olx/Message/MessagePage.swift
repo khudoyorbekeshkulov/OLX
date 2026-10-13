@@ -1,21 +1,23 @@
 import UIKit
 
 class Message: UIViewController {
-    
     var chatPartnerName = "Сообщения"
     
     private var inputBarButtomConstraint: NSLayoutConstraint!
     
     private lazy var image = UIImageView(image: UIImage( named: "chatWallpaper")).then {
-        $0.contentMode = .scaleAspectFill
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.contentMode = .scaleAspectFill
     }
     
     private lazy var tableView = UITableView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.keyboardDismissMode = .interactive
-        $0.backgroundColor = .clear
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseID)
+        $0.dataSource = self
+        $0.delegate = self
     }
     
     private lazy var inputBar = UIView().then {
@@ -23,12 +25,14 @@ class Message: UIViewController {
     }
     
     private lazy var textField = UITextField().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.placeholder = "Сообщения..."
         $0.backgroundColor = .systemGray6
         $0.borderStyle = .roundedRect
         $0.layer.cornerRadius = 15
         $0.clipsToBounds = true
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.rightView = sendButton
+        $0.rightViewMode = .always
     }
     
     private lazy var sendButton = UIButton(type: .system).then {
@@ -48,9 +52,7 @@ class Message: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.insertSubview(image, at: 0)
-        
+                
         let phone = UIBarButtonItem(image: UIImage(systemName: "phone.fill"),style: .plain, target: self, action: #selector(phoneTapped))
         
         let ellipses = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),style: .plain, target: self, action: #selector(ellipsisTapped))
@@ -58,9 +60,8 @@ class Message: UIViewController {
         navigationItem.title = chatPartnerName
         navigationItem.rightBarButtonItems = [ellipses, phone]
         
-        setupTableView()
+        insertSubviews()
         addSubviews()
-        setupInputBar()
         setupConstraints()
         setupKeyboardObservers()
     }
@@ -79,26 +80,23 @@ extension Message: UITableViewDataSource, UITableViewDelegate{
 }
 
 private extension Message {
-    func setupTableView() {
-        tableView.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseID)
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
-    
-    func setupInputBar() {
-        textField.rightView = sendButton
-        textField.rightViewMode = .always
-        
-        inputBarButtomConstraint = inputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+
+    func insertSubviews() {
+        view.insertSubview(image, at: 0)
     }
     
     func addSubviews() {
-        view.addSubview(tableView)
-        view.addSubview(inputBar)
+        view.addarrangedSubviews([
+            tableView,
+            inputBar
+        ])
+        
         inputBar.addSubview(textField)
     }
     
     func setupConstraints() {
+        inputBarButtomConstraint = inputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+
         NSLayoutConstraint.activate([
             image.topAnchor.constraint(equalTo: view.topAnchor),
             image.leadingAnchor.constraint(equalTo: view.leadingAnchor),
