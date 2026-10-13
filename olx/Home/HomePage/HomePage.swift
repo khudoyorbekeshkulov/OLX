@@ -68,12 +68,13 @@ extension HomePage: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
+        switch section {
+        case 0:
             /// bu yerda categoryContainerCell ni qaytarayapti
             return 1
+        default:
+           return categories.count
         }
-        /// bu yerda recommendedCell dagi elementlar sonini qaytaradi
-        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -83,15 +84,16 @@ extension HomePage: UICollectionViewDelegate, UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
-            cell.delegate = self
-            return cell
+            return cell.then {
+                $0.delegate = self
+            }
             
         case 1:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recommendedCategoryCell", for: indexPath) as? RecommendedCell else {
                 return UICollectionViewCell()
             }
             /// Category dagi o'zgaruvchilarni recommendedCategoryCell dagi o'zgaruvchilarga tengladik.
-            let category = categories[indexPath.row]
+            let category = categories[indexPath.item]
             
             return cell.then {
                 $0.profileImage.image = category.image
@@ -114,16 +116,13 @@ extension HomePage: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     /// Bu yerda recommendedCell ni ustiga bosganda yangi list ochilish uchun function qildik
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
             let category = categories[indexPath.row]
             
-            let detailVC = DetailViewController()
-            
-            detailVC.category = category
-            detailVC.categories = categories
-            
+            let detailVC = DetailViewController().then{
+                $0.category = category
+                $0.categories = categories
+            }
             navigationController?.pushViewController(detailVC, animated: true)
-        }
     }
 }
 
@@ -137,59 +136,56 @@ extension HomePage: CategoryContainerCellDelegate {
 extension HomePage: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if indexPath.section == 0 {
-            return CGSize(width: collectionView.bounds.width, height: 200)
+        switch indexPath.section {
+        case 0:
+            return .init(width: collectionView.bounds.width, height: 200)
+        default:
+            return .init(width: 180, height: 180)
         }
-        
-        return CGSize(width: 180, height: 180)
     }
     
     //MARK: Header bilan recommendedCell orasidagi spacing ni control qilish
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if section == 1 {
-            return CGSize(width: collectionView.bounds.width, height: 60)
-        }
-        
-        return .zero
+        section == 1 ? .init(width: collectionView.bounds.width, height: 60) : .zero
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if section == 0 {
-            return UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0)
-        } else if section == 1 {
-            return UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 13)
+        switch section {
+        case 0: .init(top: 0, left: 0, bottom: 5, right: 0)
+        case 1: .init(top: 0, left: 13, bottom: 0, right: 13)
+        default: .zero
         }
-        return .zero
     }
     
     //MARK: Bitta section ichidagi qatorlar orasidagi minimal masofani belgilaydi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if section == 0 {
-            return 20
-        }
-        return 15
+        section == 0 ? 20 : 15
     }
 }
 
 private extension HomePage {
     
     func setupSearchBar() {
-        let leftContainer = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 36))
-        let icon = UIImageView(image: UIImage(systemName: "magnifyingglass"))
+        let icon = UIImageView(image: UIImage(systemName: "magnifyingglass")).then {
+            $0.tintColor = .systemGray
+            $0.frame = CGRect(x: 12, y: 8, width: 23, height: 20)
+        }
+
+        let leftContainer = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 36)).then {
+            $0.addSubview(icon)
+        }
+
+        searchingTextField.then {
+            $0.placeholder = "Поиск"
+            $0.leftView = leftContainer
+            $0.leftViewMode = .always
+        }
         
-        searchContainer.addSubview(searchingTextField)
-        leftContainer.addSubview(icon)
-        
-        icon.tintColor = .systemGray
-        icon.frame = CGRect(x: 12, y: 8, width: 23, height: 20)
-        
-        searchingTextField.placeholder = "Поиск"
-        searchingTextField.leftView = leftContainer
-        searchingTextField.leftViewMode = .always
         navigationItem.titleView = searchContainer
     }
     
     func addSubviews() {
+        searchContainer.addSubview(searchingTextField)
         view.addSubview(mainCollectionView)
     }
     
