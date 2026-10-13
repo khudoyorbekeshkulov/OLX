@@ -48,8 +48,8 @@ class HomePage: UIViewController, UITextFieldDelegate {
         
         view.backgroundColor = .systemGray6
         
-        view.addSubview(mainCollectionView)
         setupSearchBar()
+        addSubviews()
         setupConstraints()
         
         searchResults = categories.filter {
@@ -73,29 +73,33 @@ extension HomePage: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryContainerCell", for: indexPath) as? CategoryContainerCell else {
                 return UICollectionViewCell()
             }
             
             cell.delegate = self
-            
             return cell
-        }
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recommendedCategoryCell", for: indexPath) as? RecommendedCell else {
+            
+        case 1:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recommendedCategoryCell", for: indexPath) as? RecommendedCell else {
+                return UICollectionViewCell()
+            }
+            /// Category dagi o'zgaruvchilarni recommendedCategoryCell dagi o'zgaruvchilarga tengladik.
+            let category = categories[indexPath.row]
+            
+            return cell.then {
+                $0.profileImage.image = category.image
+                $0.additionalLabel.text = category.title
+                $0.saleLabel.text = category.numberOfSales
+                $0.timeLabel.text = category.locationAndTime
+                $0.isImpact = false
+            }
+            
+        default:
             return UICollectionViewCell()
         }
-        /// Category dagi o'zgaruvchilarni recommendedCategoryCell dagi o'zgaruvchilarga tengladik.
-        let category = categories[indexPath.row]
-        
-        cell.profileImage.image = category.image
-        cell.additionalLabel.text = category.title
-        cell.saleLabel.text = category.numberOfSales
-        cell.timeLabel.text = category.locationAndTime
-        cell.isImpact = false
-        
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -181,6 +185,10 @@ private extension HomePage {
         searchingTextField.leftView = leftContainer
         searchingTextField.leftViewMode = .always
         navigationItem.titleView = searchContainer
+    }
+    
+    func addSubviews() {
+        view.addSubview(mainCollectionView)
     }
     
     func setupConstraints() {
