@@ -1,27 +1,28 @@
 import UIKit
+import SnapKit
 
 final class CategoryCell: UITableViewCell {
     
     let cellView = UIView().then {
-        $0.layer.cornerRadius = 5
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.layer.cornerRadius = 5
     }
     
     let image = UIImageView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = 30
         $0.clipsToBounds = true
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let titleLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 14, weight: .bold)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = .systemFont(ofSize: 14, weight: .bold)
     }
     
     let numberOfResults = UILabel().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .systemFont(ofSize: 11, weight: .regular)
         $0.textColor = .darkGray
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let nextImage = UIImageView().then {
@@ -54,26 +55,31 @@ private extension CategoryCell {
     }
     
     func setupUIConstraints() {
-        NSLayoutConstraint.activate([
-            cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            
-            image.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 10),
-            image.centerYAnchor.constraint(equalTo: cellView.centerYAnchor),
-            image.widthAnchor.constraint(equalToConstant: 60),
-            image.heightAnchor.constraint(equalToConstant: 60),
-            
-            titleLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 15),
-            titleLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 10),
-            
-            numberOfResults.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
-            numberOfResults.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 10),
-            
-            nextImage.centerYAnchor.constraint(equalTo: cellView.centerYAnchor),
-            nextImage.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -15),
-            
-        ])
+        cellView.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(
+                UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
+            )
+        }
+        
+        image.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(10)
+            $0.centerY.equalToSuperview()
+            $0.size.equalTo(60)
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(15)
+            $0.leading.equalTo(image.snp.trailing).offset(10)
+        }
+        
+        numberOfResults.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(5)
+            $0.leading.equalTo(image.snp.trailing).offset(10)
+        }
+        
+        nextImage.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-15)
+        }
     }
 }
