@@ -1,11 +1,11 @@
 import UIKit
+import SnapKit
 
 final class RecommendedHeaderView: UICollectionReusableView {
     
     private lazy var titleLabel = UILabel().then {
         $0.text = "Рекомендованное вам"
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     override init(frame: CGRect) {
@@ -27,10 +27,10 @@ private extension RecommendedHeaderView {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
-        ])
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.bottom.equalToSuperview().offset(-5)
+            $0.leading.equalToSuperview().offset(15)
+        }
     }
 }
