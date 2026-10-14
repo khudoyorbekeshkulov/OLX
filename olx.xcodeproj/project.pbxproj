@@ -15,10 +15,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		24C163973076582700B49003 /* Exceptions for "olx" folder in "olx" target */ = {
+		24758FFB307FBBDA007DAE2D /* Exceptions for "olx" folder in "olx" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/MainResources/Info.plist,
 			);
 			target = 240B22913007984C00EF9250 /* olx */;
 		};
@@ -28,7 +28,7 @@
 		240B22943007984C00EF9250 /* olx */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				24C163973076582700B49003 /* Exceptions for "olx" folder in "olx" target */,
+				24758FFB307FBBDA007DAE2D /* Exceptions for "olx" folder in "olx" target */,
 			);
 			path = olx;
 			sourceTree = "<group>";
@@ -155,7 +155,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = olx/Info.plist;
+				INFOPLIST_FILE = olx/Resources/MainResources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -187,7 +187,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = olx/Info.plist;
+				INFOPLIST_FILE = olx/Resources/MainResources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
