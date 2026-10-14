@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 class CustomButton: UIControl {
     
@@ -6,9 +7,7 @@ class CustomButton: UIControl {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let imageView = UIImageView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    let imageView = UIImageView()
     
     init(image: UIImage?, text: String) {
         super.init(frame: .zero)
@@ -32,11 +31,10 @@ private extension CustomButton {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 20),
-            imageView.heightAnchor.constraint(equalToConstant: 20),
-        ])
+        imageView.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(10)
+            $0.centerY.equalToSuperview()
+            $0.size.equalTo(CGSize(width: 20, height: 20))
+        }
     }
 }
