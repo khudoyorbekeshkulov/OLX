@@ -209,7 +209,7 @@ private extension DetailViewController {
         detailCollectionView.snp.makeConstraints {
             $0.top.equalTo(headerLabel.snp.bottom).offset(15)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalToSuperview().offset(175)
+            $0.height.equalTo(175)
         }
         
         postedTime.snp.makeConstraints {
