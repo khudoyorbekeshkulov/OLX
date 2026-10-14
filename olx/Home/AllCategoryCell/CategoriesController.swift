@@ -51,7 +51,9 @@ extension CategoriesPage: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.row == 0 else { return }
+        if indexPath.row == 0 {
+            return
+        }
         navigationController?.pushViewController(SelectedCategoryCell(), animated: true)
     }
 }
