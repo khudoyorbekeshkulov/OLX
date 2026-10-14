@@ -12,17 +12,17 @@ final class RegisterView: UIView {
         config.title = "Продолжить с Apple"
         config.image = UIImage(systemName: "applelogo")
         config.imagePadding = 50
-        config.baseForegroundColor = UIColor(hex: "#000000")
+        config.baseForegroundColor = .black
         config.background.cornerRadius = 5
         config.attributedTitle = AttributedString("Продолжить с Apple", attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 18, weight: .bold)]))
         $0.configuration = config
-        $0.backgroundColor = UIColor(hex: "#FFFFFF")
+        $0.backgroundColor = .white
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.black.cgColor
     }
     
     private lazy var line1 = UIView().then {
-        $0.backgroundColor = UIColor(hex: "#C7C7CC")
+        $0.backgroundColor = .systemGray3
     }
     
     private lazy var or = UILabel().then {
@@ -32,7 +32,7 @@ final class RegisterView: UIView {
     }
     
     private lazy var line2 = UIView().then {
-        $0.backgroundColor = UIColor(hex: "#C7C7CC")
+        $0.backgroundColor = .systemGray3
     }
     
     private lazy var emailLabel = UILabel().then {
@@ -42,9 +42,11 @@ final class RegisterView: UIView {
     }
     
     private lazy var emailTextField = UITextField().then {
-        $0.backgroundColor = UIColor(hex: "#F2F2F7")
-        $0.layer.cornerRadius = 5
         $0.placeholder = "Введите свой электронной почты..."
+        $0.backgroundColor = .systemGray6
+        $0.layer.cornerRadius = 5
+        $0.leftViewMode = .always
+        $0.setLeftPadding(12)
     }
     
     private lazy var passwordLabel = UILabel().then {
@@ -54,11 +56,13 @@ final class RegisterView: UIView {
     }
     
     private lazy var passwordTextField = UITextField().then {
-        $0.backgroundColor = UIColor(hex: "#F2F2F7")
-        $0.layer.cornerRadius = 5
         $0.placeholder = "Введите свой пароль..."
+        $0.backgroundColor = .systemGray6
+        $0.layer.cornerRadius = 5
         $0.rightView = container
         $0.rightViewMode = .always
+        $0.leftViewMode = .always
+        $0.setLeftPadding(12)
     }
     
     private lazy var container = UIView()
@@ -90,7 +94,7 @@ final class RegisterView: UIView {
     }
     
     private lazy var registerButton = UIButton(type: .system).then {
-        $0.backgroundColor = UIColor(hex: "#F2F2F7")
+        $0.backgroundColor = .systemGray6
         $0.setTitle("Зарегистроваться", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)

@@ -11,9 +11,11 @@ final class LoginView: UIView {
     }
     
     private lazy var emailTextField = UITextField().then {
+        $0.placeholder = "Введите свой электронной почты..."
         $0.backgroundColor = UIColor(hex: "#E5E5EA")
         $0.layer.cornerRadius = 5
-        $0.placeholder = "Введите свой электронной почты..."
+        $0.leftViewMode = .always
+        $0.setLeftPadding(12)
     }
     
     private lazy var passwordLabel = UILabel().then {
@@ -28,7 +30,8 @@ final class LoginView: UIView {
         $0.layer.cornerRadius = 5
         $0.isSecureTextEntry = true
         $0.rightView = container
-        $0.rightViewMode = .always
+        $0.leftViewMode = .always
+        $0.setLeftPadding(12)
     }
     
     private let container = UIView()
