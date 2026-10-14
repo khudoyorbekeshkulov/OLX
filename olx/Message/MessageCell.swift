@@ -1,18 +1,17 @@
 import UIKit
+import SnapKit
 
 class MessageCell: UITableViewCell {
     static let reuseID = "MessageCell"
     
-    private var leadingConstraint: NSLayoutConstraint!
-    private var trailingConstraint: NSLayoutConstraint!
+    private var leadingConstraint: Constraint!
+    private var trailingConstraint: Constraint!
     
     private lazy var bubbleView = UIView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = 16
     }
     
     private lazy var messageLabel = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .systemFont(ofSize: 16)
         $0.numberOfLines = 0
     }
@@ -44,16 +43,6 @@ private extension MessageCell {
     func setupViews() {
         backgroundColor = .clear
         selectionStyle = .none
-        
-        leadingConstraint = bubbleView.leadingAnchor.constraint(
-            equalTo: contentView.leadingAnchor,
-            constant: 12
-        )
-        
-        trailingConstraint = bubbleView.trailingAnchor.constraint(
-            equalTo: contentView.trailingAnchor,
-            constant: -12
-        )
     }
 
     func addSubviews() {
@@ -62,15 +51,23 @@ private extension MessageCell {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            bubbleView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
-            bubbleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
-            bubbleView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.75),
+        bubbleView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(4)
+            $0.bottom.equalToSuperview().offset(-4)
+            $0.width.lessThanOrEqualTo(contentView.snp.width).multipliedBy(0.75)
             
-            messageLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 8),
-            messageLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 12),
-            messageLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -12),
-            messageLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -8),
-        ])
+            leadingConstraint = $0.leading.equalToSuperview().offset(12).constraint
+            trailingConstraint = $0.trailing.equalToSuperview().offset(-12).constraint
+            
+            leadingConstraint.deactivate()
+            trailingConstraint.deactivate()
+        }
+        
+        messageLabel.snp.makeConstraints {
+            $0.top.equalTo(bubbleView.snp.top).offset(8)
+            $0.leading.equalTo(bubbleView.snp.leading).offset(12)
+            $0.trailing.equalTo(bubbleView.snp.trailing).offset(-12)
+            $0.bottom.equalTo(bubbleView.snp.bottom).offset(-8)
+        }
     }
 }
