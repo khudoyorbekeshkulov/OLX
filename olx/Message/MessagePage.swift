@@ -87,7 +87,7 @@ private extension Message {
     }
     
     func addSubviews() {
-        view.addarrangedSubviews([
+        view.addSubviews([
             tableView,
             inputBar
         ])

@@ -113,7 +113,7 @@ final class RegisterView: UIView {
 private extension RegisterView {
     
     func addSubviews() {
-        addarrangedSubviews([
+        addSubviews([
             appleButton,
             line1,
             or,

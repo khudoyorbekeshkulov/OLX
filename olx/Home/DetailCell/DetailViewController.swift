@@ -134,14 +134,14 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 private extension DetailViewController {
     func addSubviews() {
-        view.addarrangedSubviews([
+        view.addSubviews([
             image,
             infoFrame,
             headerLabel,
             detailCollectionView
         ])
         
-        infoFrame.addarrangedSubviews([
+        infoFrame.addSubviews([
             postedTime,
             nameProduct,
             saleProduct,
@@ -153,7 +153,7 @@ private extension DetailViewController {
             adsLabelFrame
         ])
         
-        adsLabelFrame.addarrangedSubviews([
+        adsLabelFrame.addSubviews([
             adsLabel,
             lineView
         ])

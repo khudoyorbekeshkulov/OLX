@@ -46,7 +46,7 @@ private extension CategoryCell {
     func addSubviews() {
         contentView.addSubview(cellView)
         
-        cellView.addarrangedSubviews([
+        cellView.addSubviews([
             titleLabel,
             image,
             numberOfResults,

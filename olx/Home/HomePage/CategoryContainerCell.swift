@@ -129,12 +129,12 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
 private extension CategoryContainerCell {
     
     func addSubviews() {
-        contentView.addarrangedSubviews([
+        contentView.addSubviews([
             headerView,
             categoryCollectionView
         ])
         
-        headerView.addarrangedSubviews([
+        headerView.addSubviews([
             mainCategoryLabel,
             showAllButton,
             lineView

@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let profileNav = toTabItem(
-            rootViewController: ProfilePage(),
+            rootViewController: ProfilePageController(),
             title: "Профиль",
             image: "person",
             selectedImage: "person.crop.circle"

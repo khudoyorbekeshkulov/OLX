@@ -1,7 +1,7 @@
 import UIKit
 
 extension UIView {
-    func addarrangedSubviews(_ views: [UIView]) {
+    func addSubviews(_ views: [UIView]) {
         views.forEach {
             addSubview($0)
         }

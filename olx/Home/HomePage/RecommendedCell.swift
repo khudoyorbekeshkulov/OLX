@@ -56,7 +56,7 @@ private extension RecommendedCell {
     func addSubviews() {
         contentView.addSubview(cellView)
         
-        cellView.addarrangedSubviews([
+        cellView.addSubviews([
             profileImage,
             additionalLabel,
             heartButton,

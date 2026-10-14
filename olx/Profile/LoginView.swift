@@ -108,7 +108,7 @@ final class LoginView: UIView {
 
 private extension LoginView {
     func addSubviews() {
-        addarrangedSubviews([
+        addSubviews([
             emailLabel,
             emailTextField,
             passwordLabel,
