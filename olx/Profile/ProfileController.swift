@@ -22,7 +22,7 @@ class ProfilePage: UIViewController {
     }
     
     private lazy var segmentedControl = UIView().then {
-        $0.backgroundColor = UIColor(hex: "#F2F2F7")
+        $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 5
         $0.clipsToBounds = true
     }
@@ -42,7 +42,7 @@ class ProfilePage: UIViewController {
     }
     
     private lazy var indicatorView = UIView().then {
-        $0.backgroundColor = UIColor(hex: "#FFFFFF")
+        $0.backgroundColor = .white
         $0.layer.cornerRadius = 5
     }
     
@@ -58,7 +58,7 @@ class ProfilePage: UIViewController {
 private extension ProfilePage {
     
     func setupView() {
-        view.backgroundColor = UIColor(hex: "#FFFFFF")
+        view.backgroundColor = .white
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedToView)))
     }
     
@@ -130,8 +130,8 @@ private extension ProfilePage {
         
         indicatorLeadingConstraint.update(offset: offset)
         
-        loginButton.setTitleColor(isLogin ? UIColor(hex: "#000000"): UIColor(hex: "#808080"), for: .normal)
-        registerButton.setTitleColor(isLogin ? UIColor(hex: "#808080"): UIColor(hex: "#000000"), for: .normal)
+        loginButton.setTitleColor(isLogin ? .black : .gray, for: .normal)
+        registerButton.setTitleColor(isLogin ? .gray : .black, for: .normal)
         
         loginView.isHidden = !isLogin
         registerView.isHidden = isLogin
