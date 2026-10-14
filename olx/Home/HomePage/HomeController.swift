@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 class HomePage: UIViewController, UITextFieldDelegate {
     private var searchResults: [Category] = []
@@ -8,9 +9,7 @@ class HomePage: UIViewController, UITextFieldDelegate {
         $0.layer.cornerRadius = 8
     }
     
-    private let searchingTextField = UITextField().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    private let searchingTextField = UITextField()
     
     private let searchTableView = UITableView()
     
@@ -23,7 +22,6 @@ class HomePage: UIViewController, UITextFieldDelegate {
         $0.minimumLineSpacing = 0
     }
     ).then{
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.showsVerticalScrollIndicator = false
         $0.backgroundColor = .systemGray6
         
@@ -190,19 +188,20 @@ private extension HomePage {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            searchContainer.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 30),
-            searchContainer.heightAnchor.constraint(equalToConstant: 36),
-            
-            searchingTextField.leadingAnchor.constraint(equalTo: searchContainer.leadingAnchor, constant: 10),
-            searchingTextField.trailingAnchor.constraint(equalTo: searchContainer.trailingAnchor, constant: -10),
-            searchingTextField.topAnchor.constraint(equalTo: searchContainer.topAnchor),
-            searchingTextField.bottomAnchor.constraint(equalTo: searchContainer.bottomAnchor),
-            
-            mainCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mainCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mainCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mainCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
+        searchContainer.snp.makeConstraints {
+            $0.width.equalTo(UIScreen.main.bounds.width - 30)
+            $0.height.equalTo(36)
+        }
+
+        searchingTextField.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.top.bottom.equalToSuperview()
+        }
+
+        mainCollectionView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
     }
 }
