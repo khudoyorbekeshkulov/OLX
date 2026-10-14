@@ -101,7 +101,7 @@ private extension RecommendedCell {
         
         saleLabel.snp.makeConstraints {
             $0.top.equalTo(timeLabel.snp.bottom).offset(5)
-            $0.horizontalEdges.equalToSuperview().inset(10)
+            $0.leading.trailing.equalToSuperview().inset(10)
         }
     }
     

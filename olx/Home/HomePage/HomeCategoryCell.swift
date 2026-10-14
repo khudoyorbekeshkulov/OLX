@@ -52,7 +52,7 @@ private extension HomeCategoryCell {
 
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(image.snp.bottom).offset(10)
-            $0.horizontalEdges.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
         }
     }
 }
