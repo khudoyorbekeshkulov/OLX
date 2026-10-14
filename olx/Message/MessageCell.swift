@@ -64,10 +64,10 @@ private extension MessageCell {
         }
         
         messageLabel.snp.makeConstraints {
-            $0.top.equalTo(bubbleView.snp.top).offset(8)
-            $0.leading.equalTo(bubbleView.snp.leading).offset(12)
-            $0.trailing.equalTo(bubbleView.snp.trailing).offset(-12)
-            $0.bottom.equalTo(bubbleView.snp.bottom).offset(-8)
+            $0.top.equalToSuperview().offset(8)
+            $0.leading.equalToSuperview().offset(12)
+            $0.trailing.equalToSuperview().offset(-12)
+            $0.bottom.equalToSuperview().offset(-8)
         }
     }
 }

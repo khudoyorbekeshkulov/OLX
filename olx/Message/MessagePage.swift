@@ -1,9 +1,10 @@
 import UIKit
+import SnapKit
 
 class Message: UIViewController {
     var chatPartnerName = "Сообщения"
     
-    private var inputBarButtomConstraint: NSLayoutConstraint!
+    private var inputBarButtomConstraint: Constraint!
     
     private lazy var image = UIImageView(image: UIImage( named: "chatWallpaper")).then {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +44,7 @@ class Message: UIViewController {
         $0.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         $0.addTarget(self, action: #selector(sendTapped), for: .touchUpInside)
     }
-        
+    
     private var messages: [ChatMessage] = [
         ChatMessage(text: "Привет брат.", isFromCurrentUser: false),
         ChatMessage(text: "Привет.", isFromCurrentUser: true),
@@ -52,7 +53,7 @@ class Message: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         let phone = UIBarButtonItem(image: UIImage(systemName: "phone.fill"),style: .plain, target: self, action: #selector(phoneTapped))
         
         let ellipses = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),style: .plain, target: self, action: #selector(ellipsisTapped))
@@ -80,7 +81,7 @@ extension Message: UITableViewDataSource, UITableViewDelegate{
 }
 
 private extension Message {
-
+    
     func insertSubviews() {
         view.insertSubview(image, at: 0)
     }
@@ -95,28 +96,47 @@ private extension Message {
     }
     
     func setupConstraints() {
-        inputBarButtomConstraint = inputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-
-        NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: view.topAnchor),
-            image.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            image.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            image.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-            inputBar.topAnchor.constraint(equalTo: tableView.bottomAnchor),
-            inputBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            inputBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            inputBarButtomConstraint,
-            inputBar.heightAnchor.constraint(equalToConstant: 56),
-            
-            textField.leadingAnchor.constraint(equalTo: inputBar.leadingAnchor, constant: 12),
-            textField.trailingAnchor.constraint(equalTo: inputBar.trailingAnchor, constant: -12),
-            textField.centerYAnchor.constraint(equalTo: inputBar.centerYAnchor),
-        ])
+        image.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        inputBar.snp.makeConstraints {
+            $0.top.equalTo(tableView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            inputBarButtomConstraint = $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).constraint
+            $0.height.equalTo(56)
+        }
+        
+        textField.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(12)
+            $0.trailing.equalToSuperview().offset(-12)
+            $0.centerY.equalToSuperview()
+        }
+        //        NSLayoutConstraint.activate([
+        //            image.topAnchor.constraint(equalTo: view.topAnchor),
+        //            image.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        //            image.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        //            image.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        //
+        //            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        //            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        //            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        //
+        //            inputBar.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+        //            inputBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        //            inputBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        //            inputBarButtomConstraint,
+        //            inputBar.heightAnchor.constraint(equalToConstant: 56),
+        //
+        //            textField.leadingAnchor.constraint(equalTo: inputBar.leadingAnchor, constant: 12),
+        //            textField.trailingAnchor.constraint(equalTo: inputBar.trailingAnchor, constant: -12),
+        //            textField.centerYAnchor.constraint(equalTo: inputBar.centerYAnchor),
+        //        ])
     }
     
     @objc func phoneTapped() {
@@ -136,7 +156,7 @@ private extension Message {
         tableView.reloadData()
         scrollToBottom()
     }
-
+    
     func setupKeyboardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -148,7 +168,16 @@ private extension Message {
               let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
         
         let keyboardHeight = view.frame.height - endFrame.origin.y
-        inputBarButtomConstraint.constant = notification.name == UIResponder.keyboardWillHideNotification ? 0 : -keyboardHeight + view.safeAreaInsets.bottom
+        
+        let offset = notification.name == UIResponder.keyboardWillHideNotification
+        ? 0
+        : -keyboardHeight + view.safeAreaInsets.bottom
+        
+        inputBarButtomConstraint.update(offset: offset)
+        
+        UIView.animate(withDuration: duration) {
+            self.view.layoutIfNeeded()
+        }
         
         UIView.animate(withDuration: duration) {
             self.view.layoutIfNeeded()
