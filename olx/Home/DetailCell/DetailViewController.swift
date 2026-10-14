@@ -207,13 +207,13 @@ private extension DetailViewController {
     func setupConstraints() {
         image.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(280)
         }
         
         infoFrame.snp.makeConstraints {
             $0.top.equalTo(image.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(280)
         }
         
@@ -229,47 +229,43 @@ private extension DetailViewController {
         }
         
         postedTime.snp.makeConstraints {
-            $0.top.equalTo(infoFrame.snp.top).offset(10)
-            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+            $0.top.equalToSuperview().offset(10)
+            $0.leading.equalToSuperview().offset(15)
         }
         
         nameProduct.snp.makeConstraints {
             $0.top.equalTo(postedTime.snp.bottom).offset(15)
-            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
-            $0.trailing.equalTo(infoFrame.snp.trailing).offset(-15)
+            $0.horizontalEdges.equalToSuperview().offset(15)
         }
         
         saleProduct.snp.makeConstraints {
             $0.top.equalTo(nameProduct.snp.bottom).offset(5)
-            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
-            $0.trailing.equalTo(infoFrame.snp.trailing).offset(-15)
+            $0.horizontalEdges.equalToSuperview().offset(15)
         }
         
         infoLabel.snp.makeConstraints {
             $0.top.equalTo(saleProduct.snp.bottom).offset(10)
-            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+            $0.leading.equalToSuperview().offset(15)
         }
         
         infoProduct.snp.makeConstraints {
             $0.top.equalTo(infoLabel.snp.bottom).offset(5)
-            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
-            $0.trailing.equalTo(infoFrame.snp.trailing).offset(-15)
+            $0.horizontalEdges.equalToSuperview().offset(15)
         }
         
         productOwner.snp.makeConstraints {
             $0.top.equalTo(infoProduct.snp.bottom).offset(20)
-            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
-            $0.trailing.equalTo(infoFrame.snp.trailing).offset(-15)
+            $0.horizontalEdges.equalToSuperview().offset(15)
         }
         
         onlineTime.snp.makeConstraints {
             $0.top.equalTo(productOwner.snp.bottom).offset(5)
-            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+            $0.leading.equalToSuperview().offset(15)
         }
         
         feedbackButton.snp.makeConstraints {
             $0.top.equalTo(onlineTime.snp.bottom).offset(15)
-            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+            $0.leading.equalToSuperview().offset(15)
             $0.size.equalTo(CGSize(width: 160, height: 40))
         }
         
@@ -285,9 +281,10 @@ private extension DetailViewController {
         }
         
         lineView.snp.makeConstraints {
-            $0.top.equalTo(adsLabel.snp.bottom).offset(2)
-            $0.leading.equalTo(adsLabelFrame.snp.leading).offset(5)
-            $0.trailing.equalTo(adsLabelFrame.snp.trailing).offset(-5)
+            $0.top.equalTo(adsLabel.snp.bottom).offset(8)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(8)
+            $0.height.equalTo(1)
         }
     }
     
