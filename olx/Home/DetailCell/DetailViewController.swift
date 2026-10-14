@@ -15,48 +15,40 @@ class DetailViewController: UIViewController {
     }
     
     private lazy var image = UIImageView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.clipsToBounds = true
     }
     
     private lazy var infoFrame = UIView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = UIColor(hex: "#FFFFFF")
     }
     
     private lazy var postedTime = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 10)
         $0.textColor = UIColor(hex: "#808080")
     }
     
     private lazy var nameProduct = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         $0.lineBreakMode = .byWordWrapping
         $0.numberOfLines = 2
     }
     
     private lazy var saleProduct = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 22, weight: .bold)
     }
     
     private lazy var infoLabel = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         $0.text = "Описание"
     }
     
     private lazy var infoProduct = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 12)
         $0.lineBreakMode = .byWordWrapping
         $0.numberOfLines = 3
     }
     
     private lazy var productOwner = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(messageOwnerTapped)))
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.text = category?.productOwner
@@ -64,13 +56,11 @@ class DetailViewController: UIViewController {
     }
     
     private lazy var onlineTime = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 10)
         $0.textColor = UIColor(hex: "#808080")
     }
     
     private lazy var feedbackButton = UIButton(type: .system).then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("Оставить отзыв", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 13, weight: .medium)
         $0.setTitleColor(mainColor, for: .normal)
@@ -79,23 +69,18 @@ class DetailViewController: UIViewController {
     }
     
     private lazy var adsLabelFrame = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         $0.text = "Все объявления автора"
         $0.textColor = mainColor
     }
     
-    private lazy var adsLabel = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    private lazy var adsLabel = UILabel()
     
     private lazy var lineView = UIView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = mainColor
     }
     
     private lazy var headerLabel = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         $0.text = "Похожие объявления"
     }
@@ -108,7 +93,6 @@ class DetailViewController: UIViewController {
     }
     
     private lazy var detailCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .systemGray6
         $0.register(RecommendedCell.self, forCellWithReuseIdentifier: "cell")
