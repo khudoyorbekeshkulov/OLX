@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 class RecommendedCell: UICollectionViewCell {
     
@@ -12,35 +13,29 @@ class RecommendedCell: UICollectionViewCell {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 15
         $0.clipsToBounds = true
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let profileImage = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let additionalLabel = UILabel().then {
         $0.numberOfLines = 2
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var heartButton = UIButton().then {
         $0.setImage(UIImage(systemName: "heart"), for: .normal)
         $0.tintColor = .black
         $0.addTarget(self, action: #selector(heartTapped), for: .touchUpInside)
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let timeLabel = UILabel().then {
         $0.textColor = .gray
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let saleLabel = UILabel().then {
         $0.text = "от 100 000 сум"
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     override init(frame: CGRect) {
@@ -77,33 +72,37 @@ private extension RecommendedCell {
     }
     
     func setupRecommendedViewConstraints() {
-        NSLayoutConstraint.activate([
-            cellView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
-            profileImage.topAnchor.constraint(equalTo: cellView.topAnchor),
-            profileImage.leadingAnchor.constraint(equalTo: cellView.leadingAnchor),
-            profileImage.trailingAnchor.constraint(equalTo: cellView.trailingAnchor),
-            profileImage.heightAnchor.constraint(equalToConstant: 100),
-            
-            heartButton.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 10),
-            heartButton.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -10),
-            heartButton.widthAnchor.constraint(equalToConstant: 20),
-            heartButton.heightAnchor.constraint(equalToConstant: 17),
-            
-            additionalLabel.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 10),
-            additionalLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 10),
-            additionalLabel.trailingAnchor.constraint(equalTo: heartButton.leadingAnchor, constant: -10),
-            
-            timeLabel.topAnchor.constraint(equalTo: additionalLabel.bottomAnchor, constant: 5),
-            timeLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 10),
-            
-            saleLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 5),
-            saleLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 10),
-            saleLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -10),
-        ])
+        cellView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        profileImage.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(100)
+        }
+        
+        heartButton.snp.makeConstraints {
+            $0.top.equalTo(profileImage.snp.bottom).offset(10)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.width.equalTo(20)
+            $0.height.equalTo(17)
+        }
+        
+        additionalLabel.snp.makeConstraints {
+            $0.top.equalTo(profileImage.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(10)
+            $0.trailing.equalTo(heartButton.snp.leading).offset(-10)
+        }
+        
+        timeLabel.snp.makeConstraints {
+            $0.top.equalTo(additionalLabel.snp.bottom).offset(5)
+            $0.leading.equalToSuperview().offset(10)
+        }
+        
+        saleLabel.snp.makeConstraints {
+            $0.top.equalTo(timeLabel.snp.bottom).offset(5)
+            $0.horizontalEdges.equalToSuperview().inset(10)
+        }
     }
     
     @objc func heartTapped() {
