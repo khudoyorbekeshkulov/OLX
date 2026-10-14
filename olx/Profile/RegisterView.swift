@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 final class RegisterView: UIView {
     let mainColor = ColorResourceManager.shared.mainColor
@@ -14,7 +15,6 @@ final class RegisterView: UIView {
         config.baseForegroundColor = UIColor(hex: "#000000")
         config.background.cornerRadius = 5
         config.attributedTitle = AttributedString("Продолжить с Apple", attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 18, weight: .bold)]))
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.configuration = config
         $0.backgroundColor = UIColor(hex: "#FFFFFF")
         $0.layer.borderWidth = 1
@@ -22,45 +22,38 @@ final class RegisterView: UIView {
     }
     
     private lazy var line1 = UIView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = UIColor(hex: "#C7C7CC")
     }
     
     private lazy var or = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "или"
         $0.textColor = mainColor
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
     
     private lazy var line2 = UIView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = UIColor(hex: "#C7C7CC")
     }
     
     private lazy var emailLabel = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "Электронная почта или телефон"
         $0.textColor = mainColor
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     private lazy var emailTextField = UITextField().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = UIColor(hex: "#F2F2F7")
         $0.layer.cornerRadius = 5
         $0.placeholder = "Введите свой электронной почты..."
     }
     
     private lazy var passwordLabel = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "Пароль"
         $0.textColor = mainColor
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     private lazy var passwordTextField = UITextField().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = UIColor(hex: "#F2F2F7")
         $0.layer.cornerRadius = 5
         $0.placeholder = "Введите свой пароль..."
@@ -68,19 +61,15 @@ final class RegisterView: UIView {
         $0.rightViewMode = .always
     }
     
-    private lazy var container = UIView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    private lazy var container = UIView()
     
     private lazy var showButton = UIButton(type: .system).then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("Показать", for: .normal)
         $0.setTitleColor(mainColor, for: .normal)
         $0.addTarget(self, action: #selector(showTapped), for: .touchUpInside)
     }
     
     private lazy var text = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "Пароль дольжен содержать минимум 6 симболов. Чтобы пароль получился супернадежными, добавьте заглавные и строчные буквы, цыфры и специальные символы"
         $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         $0.numberOfLines = 0
@@ -88,7 +77,6 @@ final class RegisterView: UIView {
     }
     
     private lazy var text2 = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "Я соглащаюсь с правилами использования сервиса, а также с передачей и обработкой моих данных в OLX. Я подверждаю свое совершеннолетие и отвественность за размещение объявления "
         $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         $0.numberOfLines = 0
@@ -96,14 +84,12 @@ final class RegisterView: UIView {
     }
     
     private lazy var checkBox = UIButton(type: .system).then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setImage(UIImage(systemName: "square"), for: .normal)
         $0.tintColor = mainColor
         $0.addTarget(self, action: #selector(checkBoxTapped), for: .touchUpInside)
     }
     
     private lazy var registerButton = UIButton(type: .system).then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = UIColor(hex: "#F2F2F7")
         $0.setTitle("Зарегистроваться", for: .normal)
         $0.setTitleColor(.white, for: .normal)
@@ -146,67 +132,93 @@ private extension RegisterView {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            appleButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            appleButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            appleButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            appleButton.heightAnchor.constraint(equalToConstant: 45),
-            
-            or.centerXAnchor.constraint(equalTo: centerXAnchor),
-            or.topAnchor.constraint(equalTo: appleButton.bottomAnchor, constant: 25),
-            
-            line1.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            line1.topAnchor.constraint(equalTo: appleButton.bottomAnchor, constant: 35),
-            line1.trailingAnchor.constraint(equalTo: or.leadingAnchor, constant: -15),
-            line1.heightAnchor.constraint(equalToConstant: 1),
-            
-            line2.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            line2.topAnchor.constraint(equalTo: appleButton.bottomAnchor, constant: 35),
-            line2.leadingAnchor.constraint(equalTo: or.trailingAnchor, constant: 15),
-            line2.heightAnchor.constraint(equalToConstant: 1),
-            
-            emailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            emailLabel.topAnchor.constraint(equalTo: line1.bottomAnchor, constant: 35),
-            
-            emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 10),
-            emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            emailTextField.heightAnchor.constraint(equalToConstant: 45),
-            
-            passwordLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20),
-            passwordLabel.widthAnchor.constraint(equalToConstant: 70),
-            passwordLabel.heightAnchor.constraint(equalToConstant: 14),
-            
-            passwordTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 10),
-            passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 45),
-            
-            container.heightAnchor.constraint(equalToConstant: 45),
-            container.widthAnchor.constraint(equalToConstant: 80),
-            
-            showButton.centerYAnchor.constraint(equalTo: container.centerYAnchor),
-            showButton.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -10),
-            
-            text.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            text.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            text.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
-            
-            checkBox.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            checkBox.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 20),
-            checkBox.widthAnchor.constraint(equalToConstant: 24),
-            checkBox.heightAnchor.constraint(equalToConstant: 24),
-            
-            text2.leadingAnchor.constraint(equalTo: checkBox.trailingAnchor, constant: 15),
-            text2.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 20),
-            text2.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            
-            registerButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            registerButton.topAnchor.constraint(equalTo: text2.bottomAnchor, constant: 20),
-            registerButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            registerButton.heightAnchor.constraint(equalToConstant: 45)
-        ])
+        appleButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(15)
+            $0.top.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.height.equalTo(45)
+        }
+
+        or.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(appleButton.snp.bottom).offset(25)
+        }
+
+        line1.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(15)
+            $0.top.equalTo(appleButton.snp.bottom).offset(35)
+            $0.trailing.equalTo(or.snp.leading).offset(-15)
+            $0.height.equalTo(1)
+        }
+
+        line2.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.top.equalTo(appleButton.snp.bottom).offset(35)
+            $0.leading.equalTo(or.snp.trailing).offset(15)
+            $0.height.equalTo(1)
+        }
+
+        emailLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(15)
+            $0.top.equalTo(line1.snp.bottom).offset(35)
+        }
+
+        emailTextField.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(15)
+            $0.top.equalTo(emailLabel.snp.bottom).offset(10)
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.height.equalTo(45)
+        }
+
+        passwordLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(15)
+            $0.top.equalTo(emailTextField.snp.bottom).offset(20)
+            $0.width.equalTo(70)
+            $0.height.equalTo(14)
+        }
+
+        passwordTextField.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(15)
+            $0.top.equalTo(passwordLabel.snp.bottom).offset(10)
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.height.equalTo(45)
+        }
+
+        container.snp.makeConstraints {
+            $0.height.equalTo(45)
+            $0.width.equalTo(80)
+        }
+
+        showButton.snp.makeConstraints {
+            $0.centerY.equalTo(container.snp.centerY)
+            $0.trailing.equalTo(container.snp.trailing).offset(-10)
+        }
+
+        text.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(15)
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(20)
+        }
+
+        checkBox.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(15)
+            $0.top.equalTo(text.snp.bottom).offset(20)
+            $0.width.equalTo(24)
+            $0.height.equalTo(24)
+        }
+
+        text2.snp.makeConstraints {
+            $0.leading.equalTo(checkBox.snp.trailing).offset(15)
+            $0.top.equalTo(text.snp.bottom).offset(20)
+            $0.trailing.equalToSuperview().offset(-15)
+        }
+
+        registerButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(15)
+            $0.top.equalTo(text2.snp.bottom).offset(20)
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.height.equalTo(45)
+        }
     }
     
     @objc func showTapped() {
