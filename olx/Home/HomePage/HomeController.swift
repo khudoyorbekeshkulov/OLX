@@ -55,7 +55,7 @@ class HomePage: UIViewController, UITextFieldDelegate {
         setupConstraints()
         
         searchResults = categories.filter {
-            $0.title.lowercased().contains("nexia")
+            $0.title.lowercased().contains("img_nexia2")
         }
     }
 }

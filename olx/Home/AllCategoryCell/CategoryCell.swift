@@ -4,30 +4,24 @@ import SnapKit
 final class CategoryCell: UITableViewCell {
     
     let cellView = UIView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = 5
     }
     
     let image = UIImageView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = 30
         $0.clipsToBounds = true
     }
     
     let titleLabel = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .systemFont(ofSize: 14, weight: .bold)
     }
     
     let numberOfResults = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .systemFont(ofSize: 11, weight: .regular)
         $0.textColor = .darkGray
     }
     
-    let nextImage = UIImageView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    let nextImage = UIImageView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

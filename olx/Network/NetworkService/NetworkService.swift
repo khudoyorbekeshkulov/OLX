@@ -11,7 +11,7 @@ final class NetworkServiceImplementation: NetworkServiceProvider {
     func getCategories() -> [CategoryItem] {
         [
             CategoryItem(
-                image: "cobalt",
+                image: "img_cobalt",
                 title: "Cobalt sotiladi",
                 numberOfSales: "150 million so'm",
                 locationAndTime: "Бухара. Сегодня 12:01",
@@ -21,7 +21,7 @@ final class NetworkServiceImplementation: NetworkServiceProvider {
             ),
             
             CategoryItem(
-                image: "salenHome",
+                image: "img_salen_home",
                 title: "Дом на продажу",
                 numberOfSales: "2 миллиард 240 миллиона сумов",
                 locationAndTime: "Ташкент. Вчера 18:12",
@@ -31,7 +31,7 @@ final class NetworkServiceImplementation: NetworkServiceProvider {
             ),
             
             CategoryItem(
-                image: "gentra",
+                image: "img_gentra",
                 title: "Гентра на продажу",
                 numberOfSales: "164 миллиона сумов",
                 locationAndTime: "Ташкент. Вчера 23:59",
@@ -41,7 +41,7 @@ final class NetworkServiceImplementation: NetworkServiceProvider {
             ),
             
             CategoryItem(
-                image: "nexia2",
+                image: "img_nexia2",
                 title: "Нексия 2 на продажу",
                 numberOfSales: "70 миллиона сумов",
                 locationAndTime: "Самарканд. 14 августа 12:01",
@@ -51,7 +51,7 @@ final class NetworkServiceImplementation: NetworkServiceProvider {
             ),
             
             CategoryItem(
-                image: "spark",
+                image: "img_spark",
                 title: "Spark sotiladi",
                 numberOfSales: "96 million so'm",
                 locationAndTime: "Ташкент. Сегодня 9:06",
@@ -61,7 +61,7 @@ final class NetworkServiceImplementation: NetworkServiceProvider {
             ),
             
             CategoryItem(
-                image: "nexia3",
+                image: "img_nexia3",
                 title: "Nexia 3 sotiladi",
                 numberOfSales: "126 million so'm",
                 locationAndTime: "Ташкент. Сегодня 11:56",

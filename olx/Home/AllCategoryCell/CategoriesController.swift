@@ -40,7 +40,7 @@ extension CategoriesPage: UITableViewDelegate, UITableViewDataSource {
             $0.image.backgroundColor = category.imageBackgroundColor
             $0.titleLabel.text = category.title
             $0.numberOfResults.text = category.result
-            $0.nextImage.image = indexPath.row == 0 ? nil : UIImage(named: "next")
+            $0.nextImage.image = indexPath.row == 0 ? nil : UIImage(named: "img_next")
             $0.selectionStyle = .none
         }
     }
