@@ -4,7 +4,6 @@ import SnapKit
 class CategoriesPage: UIViewController {
     
     private lazy var tableView = UITableView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.register(CategoryCell.self, forCellReuseIdentifier: "cell")
         $0.delegate = self
         $0.dataSource = self
