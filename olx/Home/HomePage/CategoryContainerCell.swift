@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 protocol CategoryContainerCellDelegate: AnyObject {
     func didTapShowAllCategories()
@@ -10,13 +11,11 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
     
     private lazy var headerView = UIView().then {
         $0.backgroundColor = .white
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var mainCategoryLabel = UILabel().then {
         $0.text = "Категории"
         $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var showAllButton = UIButton(type: .system).then {
@@ -24,12 +23,10 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         $0.setTitleColor(.gray, for: .normal)
         $0.addTarget(self, action: #selector(showAllTapped), for: .touchUpInside)
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var lineView = UIView().then {
         $0.backgroundColor = .systemGray6
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private let categories: [Category] = [
@@ -68,7 +65,6 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
     }
     
     private lazy var categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: categoryLayout).then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.showsHorizontalScrollIndicator = false
         $0.register(
             HomeCategoryCell.self,
@@ -146,28 +142,33 @@ private extension CategoryContainerCell {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            headerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 50),
-            
-            mainCategoryLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            mainCategoryLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 15),
-            
-            showAllButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            showAllButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -15),
-            
-            lineView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 15),
-            lineView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -15),
-            lineView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 0),
-            lineView.heightAnchor.constraint(equalToConstant: 1),
-            
-            categoryCollectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-            categoryCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            categoryCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            categoryCollectionView.heightAnchor.constraint(equalToConstant: 140),
-        ])
+        headerView.snp.makeConstraints {
+            $0.top.equalTo(contentView.snp.top).offset(10)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(50)
+        }
+        
+        mainCategoryLabel.snp.makeConstraints {
+            $0.centerY.equalTo(headerView.snp.centerY)
+            $0.leading.equalTo(headerView.snp.leading).offset(15)
+        }
+        
+        showAllButton.snp.makeConstraints {
+            $0.centerY.equalTo(headerView.snp.centerY)
+            $0.trailing.equalTo(headerView.snp.trailing).offset(-15)
+        }
+        
+        lineView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.bottom.equalTo(headerView.snp.bottom)
+            $0.height.equalTo(1)
+        }
+        
+        categoryCollectionView.snp.makeConstraints {
+            $0.top.equalTo(headerView.snp.bottom)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(140)
+        }
     }
     
     @objc private func showAllTapped() {
