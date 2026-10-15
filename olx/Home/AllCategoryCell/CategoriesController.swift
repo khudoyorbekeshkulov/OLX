@@ -1,75 +1,51 @@
 import UIKit
 import SnapKit
 
-class CategoriesPage: UIViewController {
+class CategoriesPageController: UIViewController {
+    let rootView = CategoriesView()
     
-    private lazy var tableView = UITableView().then {
-        $0.register(CategoryCell.self, forCellReuseIdentifier: "cell")
-        $0.delegate = self
-        $0.dataSource = self
-        $0.separatorStyle = .none
+    private lazy var categories = [Category]() {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                rootView.setupCategories(categories: categories)
+            }
+        }
     }
     
-    let mockNetworkServiceProviderAllInfo = NetworkServiceMainProductChapterImplementation.shared
-    private lazy var categories: [Category] = mockNetworkServiceProviderAllInfo.getCategoriesAllInfo().toCategoryMainProductsChapter
+    override func loadView() {
+        view = rootView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavigationBar()
-        addSubviews()
-        setupConstraints()
+        setupViewController()
+        setupNetworkCalls()
+        setupViewBinders()
     }
 }
 
-extension CategoriesPage: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        categories.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CategoryCell else { return UITableViewCell()
-        }
-        
-        let category = categories[indexPath.row]
-        
-        return cell.then {
-            $0.cellView.backgroundColor = category.backgroundColor
-            $0.image.image = category.image
-            $0.image.backgroundColor = category.imageBackgroundColor
-            $0.titleLabel.text = category.title
-            $0.numberOfResults.text = category.result
-            $0.nextImage.image = indexPath.row == 0 ? nil : UIImage(named: "img_next")
-            $0.selectionStyle = .none
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        80
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            return
-        }
-        navigationController?.pushViewController(SelectedCategoryCell(), animated: true)
-    }
-}
-
-private extension CategoriesPage {
-    
-    func setupNavigationBar() {
+private extension CategoriesPageController {
+    func setupViewController() {
         navigationItem.title = "Категории"
     }
     
-    func addSubviews() {
-        view.addSubview(tableView)
+    func setupNetworkCalls() {
+        categories = NetworkServiceMainProductChapterImplementation
+            .shared
+            .getCategoriesAllInfo()
+            .toCategoryMainProductsChapter
     }
     
-    func setupConstraints() {
-        tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+    func setupViewBinders() {
+        rootView.onSectionTapped = { [weak self] in
+            guard let self else { return }
+            
+            navigationController?.pushViewController(
+                SelectedCategoryController(),
+                animated: true
+            )
         }
     }
 }

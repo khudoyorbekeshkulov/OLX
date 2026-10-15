@@ -1,6 +1,6 @@
 import UIKit
 
-class SelectedCategoryCell: UIViewController {
+class SelectedCategoryController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

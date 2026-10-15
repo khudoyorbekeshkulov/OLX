@@ -128,7 +128,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension HomeViewController: CategoryContainerCellDelegate {
     func didTapShowAllCategories() {
-        let categoriesPage = CategoriesPage()
+        let categoriesPage = CategoriesPageController()
         navigationController?.pushViewController(categoriesPage, animated: true)
     }
 }
