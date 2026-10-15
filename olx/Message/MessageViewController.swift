@@ -6,12 +6,8 @@ class MessageViewController: UIViewController {
     
     private var inputBarButtomConstraint: Constraint!
     
-    private lazy var image = UIImageView(image: UIImage( named: "img_chat_wallpaper")).then {
-        $0.contentMode = .scaleAspectFill
-    }
-    
     private lazy var tableView = UITableView().then {
-        $0.backgroundColor = .clear
+        $0.backgroundColor = UIColor(named: "chat_background_color")
         $0.separatorStyle = .none
         $0.keyboardDismissMode = .interactive
         $0.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseID)
@@ -78,7 +74,7 @@ extension MessageViewController: UITableViewDataSource, UITableViewDelegate{
 private extension MessageViewController {
     
     func insertSubviews() {
-        view.insertSubview(image, at: 0)
+        view.insertSubview(tableView, at: 0)
     }
     
     func addSubviews() {
@@ -91,12 +87,8 @@ private extension MessageViewController {
     }
     
     func setupConstraints() {
-        image.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
         tableView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(view.snp.top)
             $0.leading.trailing.equalToSuperview()
         }
         
@@ -112,26 +104,6 @@ private extension MessageViewController {
             $0.trailing.equalToSuperview().offset(-12)
             $0.centerY.equalToSuperview()
         }
-        //        NSLayoutConstraint.activate([
-        //            image.topAnchor.constraint(equalTo: view.topAnchor),
-        //            image.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        //            image.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        //            image.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        //
-        //            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-        //            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        //            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        //
-        //            inputBar.topAnchor.constraint(equalTo: tableView.bottomAnchor),
-        //            inputBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        //            inputBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        //            inputBarButtomConstraint,
-        //            inputBar.heightAnchor.constraint(equalToConstant: 56),
-        //
-        //            textField.leadingAnchor.constraint(equalTo: inputBar.leadingAnchor, constant: 12),
-        //            textField.trailingAnchor.constraint(equalTo: inputBar.trailingAnchor, constant: -12),
-        //            textField.centerYAnchor.constraint(equalTo: inputBar.centerYAnchor),
-        //        ])
     }
     
     @objc func phoneTapped() {
