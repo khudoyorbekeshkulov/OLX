@@ -19,7 +19,7 @@ class DetailViewController: UIViewController {
     }
     
     private lazy var infoFrame = UIView().then {
-        $0.backgroundColor = UIColor(hex: "#FFFFFF")
+        $0.backgroundColor = UIColor(named: "card_background_color")
     }
     
     private lazy var postedTime = UILabel().then {
@@ -63,7 +63,7 @@ class DetailViewController: UIViewController {
     private lazy var feedbackButton = UIButton(type: .system).then {
         $0.setTitle("Оставить отзыв", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 13, weight: .medium)
-        $0.setTitleColor(mainColor, for: .normal)
+        $0.setTitleColor(UIColor(named: "main_manager_color"), for: .normal)
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 10
     }
@@ -71,13 +71,13 @@ class DetailViewController: UIViewController {
     private lazy var adsLabelFrame = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         $0.text = "Все объявления автора"
-        $0.textColor = mainColor
+        $0.textColor = UIColor(named: "main_manager_color")
     }
     
     private lazy var adsLabel = UILabel()
     
     private lazy var lineView = UIView().then {
-        $0.backgroundColor = mainColor
+        $0.backgroundColor = UIColor(named: "main_manager_color")
     }
     
     private lazy var headerLabel = UILabel().then {
