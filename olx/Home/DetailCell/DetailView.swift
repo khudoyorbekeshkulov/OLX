@@ -1,18 +1,16 @@
+//
+//  DetailView.swift
+//  olx
+//
+//  Created by Eshqulov Xudoyorbek  on 15/10/26.
+//
+
 import UIKit
 import SnapKit
 
-class DetailViewController: UIViewController {
-    
-    private let mainColor = ColorResourceManager.shared.mainColor
-    
-    var categories: [Category] = []
-    var category: Category?
-    
-    private var isCheckedHeart: Bool = false {
-        didSet {
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: isCheckedHeart ? "heart.fill" : "heart")
-        }
-    }
+class DetailView: UIView {
+
+    private var categories: [Category] = []
     
     private lazy var image = UIImageView().then {
         $0.clipsToBounds = true
@@ -48,10 +46,11 @@ class DetailViewController: UIViewController {
         $0.numberOfLines = 3
     }
     
+    var onProductOwnerTapped: (() -> Void)?
+    
     private lazy var productOwner = UILabel().then {
-        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(messageOwnerTapped)))
+        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleProductOwnerTap)))
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        $0.text = category?.productOwner
         $0.isUserInteractionEnabled = true
     }
     
@@ -93,26 +92,43 @@ class DetailViewController: UIViewController {
     }
     
     private lazy var detailCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
-        $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .systemGray6
         $0.register(RecommendedCell.self, forCellWithReuseIdentifier: "cell")
         $0.delegate = self
         $0.dataSource = self
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        view.backgroundColor = .systemGray6
-        
+        setupUI()
         addSubviews()
-        setupNavBar()
-        configure()
         setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension DetailView {
+    func configure(category: Category) {
+        image.image = category.image
+        postedTime.text = category.locationAndTime
+        nameProduct.text = category.title
+        saleProduct.text = category.numberOfSales
+        infoProduct.text = category.infoProduct
+        productOwner.text = category.productOwner
+        onlineTime.text = category.online
+    }
+    
+    func configureCategories(categories: [Category]) {
+        self.categories = categories
+    }
+}
+
+extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         categories.count
     }
@@ -132,9 +148,14 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
-private extension DetailViewController {
+private extension DetailView {
+    
+    func setupUI() {
+        backgroundColor = .systemGray6
+    }
+    
     func addSubviews() {
-        view.addSubviews([
+        addSubviews([
             image,
             infoFrame,
             headerLabel,
@@ -159,35 +180,6 @@ private extension DetailViewController {
         ])
     }
     
-    func setupNavBar() {
-        let appearance = UINavigationBarAppearance().then {
-            $0.configureWithTransparentBackground()
-        }
-        
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.isTranslucent = true
-        
-        let heartButton = UIBarButtonItem(
-            image: UIImage(systemName: "heart"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapHeartButton)
-        )
-        navigationItem.rightBarButtonItem = heartButton
-    }
-    
-    func configure() {
-        guard let category = category else { return }
-        image.image = category.image
-        postedTime.text = category.locationAndTime
-        nameProduct.text = category.title
-        saleProduct.text = category.numberOfSales
-        onlineTime.text = category.online
-        productOwner.text = category.productOwner
-        infoProduct.text = category.infoProduct
-    }
-    
     func setupConstraints() {
         image.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -199,17 +191,6 @@ private extension DetailViewController {
             $0.top.equalTo(image.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(280)
-        }
-        
-        headerLabel.snp.makeConstraints {
-            $0.top.equalTo(infoFrame.snp.bottom).offset(20)
-            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
-        }
-        
-        detailCollectionView.snp.makeConstraints {
-            $0.top.equalTo(headerLabel.snp.bottom).offset(15)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(175)
         }
         
         postedTime.snp.makeConstraints {
@@ -259,6 +240,11 @@ private extension DetailViewController {
             $0.size.equalTo(CGSize(width: 160, height: 40))
         }
         
+        headerLabel.snp.makeConstraints {
+            $0.top.equalTo(infoFrame.snp.bottom).offset(20)
+            $0.leading.equalTo(infoFrame.snp.leading).offset(15)
+        }
+        
         adsLabel.snp.makeConstraints {
             $0.centerY.equalTo(adsLabelFrame.snp.centerY)
             $0.centerX.equalTo(adsLabelFrame.snp.centerX)
@@ -270,16 +256,15 @@ private extension DetailViewController {
             $0.trailing.equalToSuperview().inset(8)
             $0.height.equalTo(1)
         }
-    }
-    
-    @objc func didTapHeartButton() {
-        isCheckedHeart.toggle()
-    }
-    
-    @objc func messageOwnerTapped() {
-        let messageVC = MessageViewController()
-        messageVC.chatPartnerName = category?.productOwner ?? messageVC.chatPartnerName
         
-        navigationController?.pushViewController(messageVC, animated: true)
+        detailCollectionView.snp.makeConstraints {
+            $0.top.equalTo(headerLabel.snp.bottom).offset(15)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(175)
+        }
+    }
+    
+    @objc func handleProductOwnerTap() {
+        onProductOwnerTapped?()
     }
 }

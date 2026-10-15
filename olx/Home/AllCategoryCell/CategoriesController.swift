@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class CategoriesPageController: UIViewController {
+class CategoriesViewController: UIViewController {
     let rootView = CategoriesView()
     
     private lazy var categories = [Category]() {
@@ -26,7 +26,7 @@ class CategoriesPageController: UIViewController {
     }
 }
 
-private extension CategoriesPageController {
+private extension CategoriesViewController {
     func setupViewController() {
         navigationItem.title = "Категории"
     }
