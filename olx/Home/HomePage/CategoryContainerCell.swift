@@ -10,16 +10,18 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
     weak var delegate: CategoryContainerCellDelegate?
     
     private lazy var headerView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = UIColor(named: "card_background_color")
     }
     
     private lazy var mainCategoryLabel = UILabel().then {
         $0.text = "Категории"
+        $0.textColor = UIColor(named: "primary_text_color")
         $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     }
     
     private lazy var showAllButton = UIButton(type: .system).then {
         $0.setTitle("Смотреть все", for: .normal)
+        $0.tintColor = UIColor(named: "secondary_text_color")
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         $0.setTitleColor(.gray, for: .normal)
         $0.addTarget(self, action: #selector(showAllTapped), for: .touchUpInside)
@@ -66,6 +68,7 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
     
     private lazy var categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: categoryLayout).then {
         $0.showsHorizontalScrollIndicator = false
+        $0.backgroundColor = UIColor(named: "card_background_color")
         $0.register(
             HomeCategoryCell.self,
             forCellWithReuseIdentifier: "categoryCell"

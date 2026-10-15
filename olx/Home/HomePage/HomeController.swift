@@ -5,11 +5,13 @@ class HomePage: UIViewController, UITextFieldDelegate {
     private var searchResults: [Category] = []
     
     private let searchContainer = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = UIColor(named: "search_background_color")
         $0.layer.cornerRadius = 8
     }
     
-    private let searchingTextField = UITextField()
+    private let searchingTextField = UITextField().then {
+        $0.backgroundColor = UIColor(named: "search_background_color")
+    }
     
     private let searchTableView = UITableView()
     

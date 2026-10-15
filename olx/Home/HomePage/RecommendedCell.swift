@@ -10,7 +10,7 @@ class RecommendedCell: UICollectionViewCell {
     }
     
     let cellView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = UIColor(named: "card_background_color")
         $0.layer.cornerRadius = 15
         $0.clipsToBounds = true
     }
@@ -26,12 +26,12 @@ class RecommendedCell: UICollectionViewCell {
     
     private lazy var heartButton = UIButton().then {
         $0.setImage(UIImage(systemName: "heart"), for: .normal)
-        $0.tintColor = .black
+        $0.tintColor = UIColor(named: "heart_color")
         $0.addTarget(self, action: #selector(heartTapped), for: .touchUpInside)
     }
     
     let timeLabel = UILabel().then {
-        $0.textColor = .gray
+        $0.textColor = UIColor(named: "secondary_color")
     }
     
     let saleLabel = UILabel().then {
