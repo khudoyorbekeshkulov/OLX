@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         let favouritesNav = toTabItem(
-            rootViewController: Favourites(),
+            rootViewController: FavouritesViewController(),
             title: "Избранное",
             image: "star",
             selectedImage: "star.fill"
