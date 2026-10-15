@@ -3,9 +3,7 @@ import SnapKit
 
 class CustomButton: UIControl {
     
-    let label = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    let label = UILabel()
     
     let imageView = UIImageView()
     
