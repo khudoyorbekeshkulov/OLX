@@ -98,7 +98,6 @@ class DetailView: UIView {
         $0.dataSource = self
     }
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

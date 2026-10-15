@@ -21,9 +21,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .systemGray6
-        
+            
         setupNavBar()
         
         rootView.onProductOwnerTapped = { [weak self ] in
