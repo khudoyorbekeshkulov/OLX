@@ -10,7 +10,7 @@ final class ProfilePageController: UIViewController {
 
     private lazy var titleLabel = UILabel().then {
         $0.text = "Создать"
-        $0.textColor = ColorResourceManager.shared.mainColor
+        $0.textColor = UIColor(named: "main_manager_color")
         $0.font = .systemFont(ofSize: 28, weight: .bold)
     }
 
@@ -56,7 +56,7 @@ final class ProfilePageController: UIViewController {
 
 private extension ProfilePageController {
     func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "app_background_color")
         view.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(tappedToView))
         )
