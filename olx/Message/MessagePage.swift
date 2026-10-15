@@ -6,7 +6,7 @@ class Message: UIViewController {
     
     private var inputBarButtomConstraint: Constraint!
     
-    private lazy var image = UIImageView(image: UIImage( named: "chatWallpaper")).then {
+    private lazy var image = UIImageView(image: UIImage( named: "img_chat_wallpaper")).then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
     }
