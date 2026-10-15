@@ -15,7 +15,7 @@ final class ProfilePageController: UIViewController {
     }
 
     private lazy var segmentedControl = UIView().then {
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = UIColor(named: "separator_color")
         $0.layer.cornerRadius = 5
         $0.clipsToBounds = true
     }
@@ -56,7 +56,7 @@ final class ProfilePageController: UIViewController {
 
 private extension ProfilePageController {
     func setupView() {
-        view.backgroundColor = UIColor(named: "app_background_color")
+        view.backgroundColor = UIColor(named: "profile_background_color")
         view.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(tappedToView))
         )
@@ -116,12 +116,12 @@ private extension ProfilePageController {
             guard let self else { return }
             
             loginButton.then {
-                $0.backgroundColor = isLogin ? .white : .clear
+                $0.backgroundColor = isLogin ? UIColor(named: "segmented_control_color") : .clear
                 $0.setTitleColor(isLogin ? .black : .gray, for: .normal)
             }
             
             registerButton.then {
-                $0.backgroundColor = isLogin ? .clear : .white
+                $0.backgroundColor = isLogin ? .clear : UIColor(named: "segmented_control_color")
                 $0.setTitleColor(isLogin ? .gray : .black, for: .normal)
             }
         }
