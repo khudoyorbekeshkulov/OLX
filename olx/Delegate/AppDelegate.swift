@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let profileNav = toTabItem(
-            rootViewController: ProfilePageController(),
+            rootViewController: ProfileViewController(),
             title: "Профиль",
             image: "person",
             selectedImage: "person.crop.circle"
@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         let addNav = toTabItem(
-            rootViewController: Add(),
+            rootViewController: AddViewController(),
             title: "Создать",
             image: "plus.circle",
             selectedImage: "plus.circle.fill"
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         let homeNav = toTabItem(
-            rootViewController: HomePage(),
+            rootViewController: HomeViewController(),
             title: "Главная",
             image: "house",
             selectedImage: "house.fill"

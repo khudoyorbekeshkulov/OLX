@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-final class ProfilePageController: UIViewController {
+final class ProfileViewController: UIViewController {
     private let loginView = LoginView()
 
     private let registerView = RegisterView().then {
@@ -54,7 +54,7 @@ final class ProfilePageController: UIViewController {
     }
 }
 
-private extension ProfilePageController {
+private extension ProfileViewController {
     func setupView() {
         view.backgroundColor = UIColor(named: "profile_background_color")
         view.addGestureRecognizer(

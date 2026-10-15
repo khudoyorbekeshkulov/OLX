@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class HomePage: UIViewController, UITextFieldDelegate {
+class HomeViewController: UIViewController, UITextFieldDelegate {
     private var searchResults: [Category] = []
     
     private let searchContainer = UIView().then {
@@ -62,7 +62,7 @@ class HomePage: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension HomePage: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         2
     }
@@ -126,14 +126,14 @@ extension HomePage: UICollectionViewDelegate, UICollectionViewDataSource {
     }
 }
 
-extension HomePage: CategoryContainerCellDelegate {
+extension HomeViewController: CategoryContainerCellDelegate {
     func didTapShowAllCategories() {
         let categoriesPage = CategoriesPage()
         navigationController?.pushViewController(categoriesPage, animated: true)
     }
 }
 
-extension HomePage: UICollectionViewDelegateFlowLayout {
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         switch indexPath.section {
@@ -163,7 +163,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     }
 }
 
-private extension HomePage {
+private extension HomeViewController {
     
     func setupSearchBar() {
         let icon = UIImageView(image: UIImage(systemName: "magnifyingglass")).then {

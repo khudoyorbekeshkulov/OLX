@@ -1,6 +1,6 @@
 import UIKit
 
-class Add: UIViewController {
+class AddViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -10,7 +10,7 @@ class Add: UIViewController {
     }
 }
 
-private extension Add {
+private extension AddViewController {
     
     func setupUI () {
         view.backgroundColor = UIColor(named: "app_background_color")
