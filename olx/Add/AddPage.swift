@@ -9,6 +9,7 @@ class Add: UIViewController {
     }
     
     private func setupNav() {
+        view.backgroundColor = UIColor(named: "app_background_color")
         navigationItem.title = "Создать"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
     }
