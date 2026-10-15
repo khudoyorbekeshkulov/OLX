@@ -277,7 +277,7 @@ private extension DetailViewController {
     }
     
     @objc func messageOwnerTapped() {
-        let messageVC = Message()
+        let messageVC = MessageViewController()
         messageVC.chatPartnerName = category?.productOwner ?? messageVC.chatPartnerName
         
         navigationController?.pushViewController(messageVC, animated: true)

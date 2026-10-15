@@ -1,18 +1,16 @@
 import UIKit
 import SnapKit
 
-class Message: UIViewController {
+class MessageViewController: UIViewController {
     var chatPartnerName = "Сообщения"
     
     private var inputBarButtomConstraint: Constraint!
     
     private lazy var image = UIImageView(image: UIImage( named: "img_chat_wallpaper")).then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
     }
     
     private lazy var tableView = UITableView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.keyboardDismissMode = .interactive
@@ -21,12 +19,9 @@ class Message: UIViewController {
         $0.delegate = self
     }
     
-    private lazy var inputBar = UIView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    private lazy var inputBar = UIView()
     
     private lazy var textField = UITextField().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.placeholder = "Сообщения..."
         $0.backgroundColor = .systemGray6
         $0.borderStyle = .roundedRect
@@ -68,7 +63,7 @@ class Message: UIViewController {
     }
 }
 
-extension Message: UITableViewDataSource, UITableViewDelegate{
+extension MessageViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         messages.count
     }
@@ -80,7 +75,7 @@ extension Message: UITableViewDataSource, UITableViewDelegate{
     }
 }
 
-private extension Message {
+private extension MessageViewController {
     
     func insertSubviews() {
         view.insertSubview(image, at: 0)
