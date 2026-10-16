@@ -14,7 +14,7 @@ final class CategoryCell: UITableViewCell {
     
     let titleLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 14, weight: .bold)
-        $0.textColor = .red
+        $0.textColor = .darkGray
     }
     
     let numberOfResults = UILabel().then {
