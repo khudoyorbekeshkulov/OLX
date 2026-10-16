@@ -58,12 +58,12 @@ private extension ProfileViewController {
             guard let self else { return }
             
             loginButton.then {
-                $0.backgroundColor = isLogin ? UIColor(named: "segmented_control_color") : .clear
+                $0.backgroundColor = isLogin ? .white : .clear
                 $0.setTitleColor(isLogin ? .black : .gray, for: .normal)
             }
             
             registerButton.then {
-                $0.backgroundColor = isLogin ? .clear : UIColor(named: "segmented_control_color")
+                $0.backgroundColor = isLogin ? .clear : .white
                 $0.setTitleColor(isLogin ? .gray : .black, for: .normal)
             }
         }
