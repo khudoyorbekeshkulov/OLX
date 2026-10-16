@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class DetailView: UIView {
+final class DetailView: UIView {
 
     private var categories: [Category] = []
     
