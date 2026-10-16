@@ -31,29 +31,7 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
         $0.backgroundColor = .systemGray6
     }
     
-    private let categories: [Category] = [
-        Category(
-            image: UIImage(named: "img_olx"),
-            title: "Все объявления"
-        ),
-        Category(
-            image: UIImage(named: "img_home"),
-            title: "Недвижимость"
-        ),
-        Category(
-            image: UIImage(named: "img_stroller"),
-            title: "Детский мир",
-            imageBackgroundColor: UIColor(hex: "#FFCC00")
-        ),
-        Category(
-            image: UIImage(named: "img_dress"),
-            title: "Одежда и обувь"
-        ),
-        Category(
-            image: UIImage(named: "img_car_chapter"),
-            title: "Автомобили"
-        )
-    ]
+    let categories = CategoriesData.categories
     
     private lazy var categoryLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
