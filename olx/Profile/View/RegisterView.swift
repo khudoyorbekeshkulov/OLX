@@ -85,6 +85,7 @@ final class RegisterView: UIView {
         $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
+        $0.isUserInteractionEnabled = true
     }
     
     private lazy var checkBox = UIButton(type: .system).then {
@@ -107,6 +108,7 @@ final class RegisterView: UIView {
         
         addSubviews()
         setupConstraints()
+        setupAction()
     }
     
     required init?(coder: NSCoder) {
@@ -235,5 +237,10 @@ private extension RegisterView {
         
         let imageName = isChecked ? "checkmark.square.fill" : "square"
         checkBox.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
+    func setupAction() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(checkBoxTapped))
+        text2.addGestureRecognizer(tap)
     }
 }
