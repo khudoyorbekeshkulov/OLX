@@ -31,7 +31,7 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
         $0.backgroundColor = .systemGray6
     }
     
-    let categories = CategoriesData.categories
+    let categories = CategoriesDataHomePage.categories
     
     private lazy var categoryLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal

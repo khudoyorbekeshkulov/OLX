@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum CategoriesData {
+enum CategoriesDataHomePage {
     static let categories: [Category] = [
         Category(
             image: UIImage(named: "img_olx"),

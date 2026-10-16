@@ -2,16 +2,9 @@ import UIKit
 import SnapKit
 
 class HomeViewController: UIViewController, UITextFieldDelegate {
+    let rootView = HomeView()
+    
     private var searchResults: [Category] = []
-    
-    private let searchContainer = UIView().then {
-        $0.backgroundColor = UIColor(named: "search_background_color")
-        $0.layer.cornerRadius = 8
-    }
-    
-    private let searchingTextField = UITextField().then {
-        $0.backgroundColor = UIColor(named: "search_background_color")
-    }
     
     private let searchTableView = UITableView()
     
@@ -19,46 +12,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var categories: [Category] = mockNetworkServiceInstance.getCategories().toCategories
     
-    private lazy var mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
-        $0.scrollDirection = .vertical
-        $0.minimumLineSpacing = 0
-    }
-    ).then{
-        $0.showsVerticalScrollIndicator = false
-        $0.backgroundColor = .systemGray6
-        
-        $0.register(
-            CategoryContainerCell.self,
-            forCellWithReuseIdentifier: "categoryContainerCell"
-        )
-        
-        $0.register(
-            RecommendedCell.self,
-            forCellWithReuseIdentifier: "recommendedCategoryCell"
-        )
-        
-        $0.register(
-            RecommendedHeaderView.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: "recommendedHeader"
-        )
-        
-        $0.delegate = self
-        $0.dataSource = self
+    override func loadView() {
+        view = rootView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemGray6
-        
-        setupSearchBar()
-        addSubviews()
-        setupConstraints()
-        
-        searchResults = categories.filter {
-            $0.title.lowercased().contains("img_nexia2")
-        }
+        setupNavigation()
+        setupDelegates()
     }
 }
 
@@ -73,7 +35,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             /// bu yerda categoryContainerCell ni qaytarayapti
             return 1
         default:
-           return categories.count
+            return categories.count
         }
     }
     
@@ -116,13 +78,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     /// Bu yerda recommendedCell ni ustiga bosganda yangi list ochilish uchun function qildik
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let category = categories[indexPath.row]
-            
-            let detailVC = DetailViewController().then{
-                $0.category = category
-                $0.categories = categories
-            }
-            navigationController?.pushViewController(detailVC, animated: true)
+        let category = categories[indexPath.row]
+        
+        let detailVC = DetailViewController().then{
+            $0.category = category
+            $0.categories = categories
+        }
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
@@ -165,45 +127,12 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 private extension HomeViewController {
     
-    func setupSearchBar() {
-        let icon = UIImageView(image: UIImage(systemName: "magnifyingglass")).then {
-            $0.tintColor = .systemGray
-            $0.frame = CGRect(x: 12, y: 8, width: 23, height: 20)
-        }
-
-        let leftContainer = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 36)).then {
-            $0.addSubview(icon)
-        }
-
-        searchingTextField.then {
-            $0.placeholder = "Поиск"
-            $0.leftView = leftContainer
-            $0.leftViewMode = .always
-        }
-        
-        navigationItem.titleView = searchContainer
+    func setupNavigation() {
+        navigationItem.titleView = rootView.searchContainer
     }
     
-    func addSubviews() {
-        searchContainer.addSubview(searchingTextField)
-        view.addSubview(mainCollectionView)
-    }
-    
-    func setupConstraints() {
-        searchContainer.snp.makeConstraints {
-            $0.width.equalTo(UIScreen.main.bounds.width - 30)
-            $0.height.equalTo(36)
-        }
-
-        searchingTextField.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(10)
-            $0.top.bottom.equalToSuperview()
-        }
-
-        mainCollectionView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
+    func setupDelegates() {
+        rootView.mainCollectionView.delegate = self
+        rootView.mainCollectionView.dataSource = self
     }
 }
