@@ -30,6 +30,7 @@ final class LoginView: UIView {
         $0.layer.cornerRadius = 5
         $0.isSecureTextEntry = true
         $0.rightView = container
+        $0.rightViewMode = .always
         $0.leftViewMode = .always
         $0.setLeftPadding(12)
     }
@@ -39,6 +40,7 @@ final class LoginView: UIView {
     private lazy var showButton = UIButton(type: .system).then {
         $0.setTitle("Показать", for: .normal)
         $0.setTitleColor(UIColor(named: "main_manager_color"), for: .normal)
+        $0.addTarget(self, action: #selector(showTapped), for: .touchUpInside)
     }
     
     private lazy var forgetPassword = UILabel().then {
