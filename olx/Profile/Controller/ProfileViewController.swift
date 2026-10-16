@@ -2,29 +2,7 @@ import UIKit
 import SnapKit
 
 final class ProfileViewController: UIViewController {
-    private let loginView = LoginView()
-
-    private let registerView = RegisterView().then {
-        $0.isHidden = true
-    }
-
-    private lazy var titleLabel = UILabel().then {
-        $0.text = "Создать"
-        $0.textColor = UIColor(named: "main_manager_color")
-        $0.font = .systemFont(ofSize: 28, weight: .bold)
-    }
-
-    private lazy var segmentedControl = UIView().then {
-        $0.backgroundColor = UIColor(named: "separator_color")
-        $0.layer.cornerRadius = 5
-        $0.clipsToBounds = true
-    }
-
-    private lazy var authStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.distribution = .fillEqually
-        $0.alignment = .fill
-    }
+    let rootView = ProfileView()
 
     private lazy var loginButton = UIButton(type: .system).then {
         $0.setTitle("Войти", for: .normal)
@@ -43,68 +21,32 @@ final class ProfileViewController: UIViewController {
         $0.backgroundColor = .clear
         $0.layer.cornerRadius = 5
     }
-
+    
+    override func loadView() {
+        view = rootView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         addSubviews()
-        setupConstraints()
         segmentUpdated(isLogin: true)
     }
 }
 
 private extension ProfileViewController {
     func setupView() {
-        view.backgroundColor = UIColor(named: "profile_background_color")
         view.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(tappedToView))
         )
     }
 
     func addSubviews() {
-        view.addSubviews([
-            titleLabel,
-            segmentedControl,
-            loginView,
-            registerView
-        ])
-
-        segmentedControl.addSubview(authStackView)
-
-        authStackView.addArrangedSubviews([
+        rootView.authStackView.addArrangedSubviews([
             loginButton,
             registerButton
         ])
-    }
-
-    func setupConstraints() {
-        titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(15)
-            $0.top.equalToSuperview().offset(70)
-        }
-
-        segmentedControl.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(15)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(28)
-            $0.height.equalTo(32)
-        }
-
-        loginView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(segmentedControl.snp.bottom).offset(20)
-            $0.bottom.equalToSuperview()
-        }
-
-        registerView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(segmentedControl.snp.bottom).offset(20)
-            $0.bottom.equalToSuperview()
-        }
-
-        authStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(2)
-        }
     }
 
     @objc func tappedToView() {
@@ -126,8 +68,8 @@ private extension ProfileViewController {
             }
         }
 
-        loginView.isHidden = !isLogin
-        registerView.isHidden = isLogin
+        rootView.loginView.isHidden = !isLogin
+        rootView.registerView.isHidden = isLogin
     }
 
     @objc func loginTapped() {
