@@ -1,5 +1,4 @@
 import UIKit
-import SnapKit
 
 class CategoriesViewController: UIViewController {
     let rootView = CategoriesView()
