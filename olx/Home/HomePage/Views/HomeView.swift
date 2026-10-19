@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class HomeView: UIView {
-    
+        
     let searchContainer = UIView().then {
         $0.backgroundColor = UIColor(named: "search_background_color")
         $0.layer.cornerRadius = 8
@@ -74,7 +74,7 @@ private extension HomeView {
             $0.tintColor = .systemGray
             $0.frame = CGRect(x: 12, y: 8, width: 23, height: 20)
         }
-        
+
         let leftContainer = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 36)).then {
             $0.addSubview(icon)
         }
@@ -91,12 +91,12 @@ private extension HomeView {
             $0.width.equalTo(UIScreen.main.bounds.width - 30)
             $0.height.equalTo(36)
         }
-        
+
         searchingTextField.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(10)
             $0.top.bottom.equalToSuperview()
         }
-        
+
         mainCollectionView.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide.snp.top)
             $0.leading.trailing.equalToSuperview()

@@ -31,7 +31,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            /// bu yerda categoryContainerCell ni qaytarayapti
             return 1
         default:
             return categories.count
