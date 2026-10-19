@@ -9,9 +9,14 @@ import UIKit
 import SnapKit
 
 class MessageView: UIView {
+    var onSendTapped: (() -> Void)?
+    var inputBarBottomConstraint: Constraint!
     
-    var onSendTappet: (() -> Void)?
-    var inputBarButtomConstraint: Constraint!
+    private var messages = [ChatMessage]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
         
     var tableView = UITableView().then {
         $0.backgroundColor = UIColor(named: "chat_background_color")
@@ -44,7 +49,7 @@ class MessageView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        insertSubviews()
+        setupView()
         addSubviews()
         setupConstraints()
     }
@@ -52,15 +57,21 @@ class MessageView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setupMessages(messages: [ChatMessage]) {
+        self.messages = messages
+    }
 }
 
 private extension MessageView {
-    
-    func insertSubviews() {
-        insertSubview(tableView, at: 0)
+    func setupView() {
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     func addSubviews() {
+        insertSubview(tableView, at: 0)
+    
         addSubviews([
             tableView,
             inputBar
@@ -78,7 +89,7 @@ private extension MessageView {
         inputBar.snp.makeConstraints {
             $0.top.equalTo(tableView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            inputBarButtomConstraint = $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).constraint
+            inputBarBottomConstraint = $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).constraint
             $0.height.equalTo(56)
         }
         
@@ -90,10 +101,21 @@ private extension MessageView {
     }
 }
 
-extension MessageView {
+extension MessageView: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        messages.count
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MessageCell.reuseID, for: indexPath) as? MessageCell else { return UITableViewCell() }
+        cell.configure(with: messages[indexPath.row])
+        return cell
+    }
+}
+
+extension MessageView {
     @objc func sendTapped() {
-        onSendTappet?()
+        onSendTapped?()
     }
 
     func scrollToBottom(rowCount: Int) {
