@@ -6,7 +6,7 @@ class MessageViewController: UIViewController {
     
     private let navigationTitle: String
     
-    private var messages: [ChatMessage] = []
+    var messages: [ChatMessage] = []
     
     init(navigationTitle: String) {
         self.navigationTitle = navigationTitle
@@ -49,16 +49,6 @@ private extension MessageViewController {
                 action: #selector(phoneTapped)
             )
         ]
-    }
-    
-    func setupNetworkCalls() {
-        messages = [
-            ChatMessage(text: "Привет брат.", isFromCurrentUser: false),
-            ChatMessage(text: "Привет.", isFromCurrentUser: true),
-            ChatMessage(text: "Сколько, по-твоему, стоит?", isFromCurrentUser: false),
-        ]
-        
-        rootView.setupMessages(messages: messages)
     }
     
     func setupViewBinders() {

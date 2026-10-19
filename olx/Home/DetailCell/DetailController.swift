@@ -46,7 +46,7 @@ private extension DetailViewController {
     }
     
     func setupViewBinders() {
-        rootView.onProductOwnerTapped = { [ weak self ] in
+        rootView.onProductOwnerTapped = { [weak self] in
             self?.messageOwnerTapped()
         }
         

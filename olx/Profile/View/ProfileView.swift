@@ -11,23 +11,23 @@ import SnapKit
 class ProfileView: UIView {
     
     let loginView = LoginView()
-
+    
     let registerView = RegisterView().then {
         $0.isHidden = true
     }
-
+    
     let titleLabel = UILabel().then {
         $0.text = "Создать"
         $0.textColor = UIColor(named: "main_manager_color")
         $0.font = .systemFont(ofSize: 28, weight: .bold)
     }
-
+    
     var segmentedControl = UIView().then {
         $0.backgroundColor = UIColor(named: "separator_color")
         $0.layer.cornerRadius = 5
         $0.clipsToBounds = true
     }
-
+    
     var authStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
@@ -62,8 +62,6 @@ private extension ProfileView {
         ])
         
         segmentedControl.addSubview(authStackView)
-
-
     }
     
     func setupConstraints() {
@@ -71,25 +69,25 @@ private extension ProfileView {
             $0.leading.equalToSuperview().offset(15)
             $0.top.equalToSuperview().offset(70)
         }
-
+        
         segmentedControl.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(15)
             $0.top.equalTo(titleLabel.snp.bottom).offset(28)
             $0.height.equalTo(32)
         }
-
+        
         loginView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(segmentedControl.snp.bottom).offset(20)
             $0.bottom.equalToSuperview()
         }
-
+        
         registerView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(segmentedControl.snp.bottom).offset(20)
             $0.bottom.equalToSuperview()
         }
-
+        
         authStackView.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(2)
         }
