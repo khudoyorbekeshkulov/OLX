@@ -2,48 +2,26 @@ import UIKit
 import SnapKit
 
 class MessageViewController: UIViewController {
+    let rootView = MessageView()
+    
     var chatPartnerName = "Сообщения"
-    
-    private var inputBarButtomConstraint: Constraint!
-    
-    private lazy var tableView = UITableView().then {
-        $0.backgroundColor = UIColor(named: "chat_background_color")
-        $0.separatorStyle = .none
-        $0.keyboardDismissMode = .interactive
-        $0.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseID)
-        $0.dataSource = self
-        $0.delegate = self
-    }
-    
-    private lazy var inputBar = UIView()
-    
-    private lazy var textField = UITextField().then {
-        $0.placeholder = "Сообщения..."
-        $0.backgroundColor = .systemGray6
-        $0.borderStyle = .roundedRect
-        $0.layer.cornerRadius = 15
-        $0.clipsToBounds = true
-        $0.rightView = sendButton
-        $0.rightViewMode = .always
-    }
-    
-    private lazy var sendButton = UIButton(type: .system).then {
-        let config = UIImage.SymbolConfiguration(pointSize: 23, weight: .semibold)
-        let sendImage = UIImage(systemName: "paperplane.circle.fill", withConfiguration: config)
-        
-        $0.setImage(sendImage, for: .normal)
-        $0.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        $0.addTarget(self, action: #selector(sendTapped), for: .touchUpInside)
-    }
-    
+
     private var messages: [ChatMessage] = [
         ChatMessage(text: "Привет брат.", isFromCurrentUser: false),
         ChatMessage(text: "Привет.", isFromCurrentUser: true),
         ChatMessage(text: "Сколько, по-твоему, стоит?", isFromCurrentUser: false),
     ]
     
+    override func loadView() {
+        view = rootView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        rootView.tableView.dataSource = self
+        rootView.tableView.delegate = self
+        rootView.onSendTappet = { [weak self] in self?.sendTapped() }
         
         let phone = UIBarButtonItem(image: UIImage(systemName: "phone.fill"),style: .plain, target: self, action: #selector(phoneTapped))
         
@@ -52,9 +30,6 @@ class MessageViewController: UIViewController {
         navigationItem.title = chatPartnerName
         navigationItem.rightBarButtonItems = [ellipses, phone]
         
-        insertSubviews()
-        addSubviews()
-        setupConstraints()
         setupKeyboardObservers()
     }
 }
@@ -73,55 +48,22 @@ extension MessageViewController: UITableViewDataSource, UITableViewDelegate{
 
 private extension MessageViewController {
     
-    func insertSubviews() {
-        view.insertSubview(tableView, at: 0)
-    }
-    
-    func addSubviews() {
-        view.addSubviews([
-            tableView,
-            inputBar
-        ])
-        
-        inputBar.addSubview(textField)
-    }
-    
-    func setupConstraints() {
-        tableView.snp.makeConstraints {
-            $0.top.equalTo(view.snp.top)
-            $0.leading.trailing.equalToSuperview()
-        }
-        
-        inputBar.snp.makeConstraints {
-            $0.top.equalTo(tableView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            inputBarButtomConstraint = $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).constraint
-            $0.height.equalTo(56)
-        }
-        
-        textField.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(12)
-            $0.trailing.equalToSuperview().offset(-12)
-            $0.centerY.equalToSuperview()
-        }
-    }
-    
     @objc func phoneTapped() {
-        print("Phone tapped")
+        print("phone tapped")
     }
     
     @objc func ellipsisTapped() {
-        print("Ellipses tapped")
+        print("ellipsis tapped")
     }
     
-    @objc func sendTapped() {
-        guard let text = textField.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else {return}
+    func sendTapped() {
+        guard let text = rootView.textField.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else {return}
         
         messages.append(ChatMessage(text: text, isFromCurrentUser: true))
-        textField.text = ""
+        rootView.textField.text = ""
         
-        tableView.reloadData()
-        scrollToBottom()
+        rootView.tableView.reloadData()
+        rootView.scrollToBottom(rowCount: messages.count)
     }
     
     func setupKeyboardObservers() {
@@ -134,27 +76,16 @@ private extension MessageViewController {
               let endFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
               let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
         
-        let keyboardHeight = view.frame.height - endFrame.origin.y
+        let keyboardHeight = rootView.frame.height - endFrame.origin.y
         
         let offset = notification.name == UIResponder.keyboardWillHideNotification
         ? 0
-        : -keyboardHeight + view.safeAreaInsets.bottom
+        : -keyboardHeight + rootView.safeAreaInsets.bottom
         
-        inputBarButtomConstraint.update(offset: offset)
-        
-        UIView.animate(withDuration: duration) {
-            self.view.layoutIfNeeded()
-        }
+        rootView.inputBarButtomConstraint.update(offset: offset)
         
         UIView.animate(withDuration: duration) {
-            self.view.layoutIfNeeded()
+            self.rootView.layoutIfNeeded()
         }
-    }
-    
-    func scrollToBottom() {
-        guard !messages.isEmpty else {return}
-        
-        let lastRow = IndexPath(row: messages.count - 1, section: 0)
-        tableView.scrollToRow(at: lastRow, at: .bottom, animated: true)
     }
 }
