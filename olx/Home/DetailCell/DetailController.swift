@@ -20,23 +20,13 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        
         setupNavBar()
-        
-        rootView.onProductOwnerTapped = { [weak self ] in
-            self?.messageOwnerTapped()
-        }
-        
-        if let category = category {
-            rootView.configure(category: category)
-        }
-        
-        rootView.configureCategories(categories: categories)
+        setupViewBinders()
     }
 }
 
 private extension DetailViewController {
-    
     func setupNavBar() {
         let appearance = UINavigationBarAppearance().then {
             $0.configureWithTransparentBackground()
@@ -55,14 +45,24 @@ private extension DetailViewController {
         navigationItem.rightBarButtonItem = heartButton
     }
     
+    func setupViewBinders() {
+        rootView.onProductOwnerTapped = { [ weak self ] in
+            self?.messageOwnerTapped()
+        }
+        
+        if let category = category {
+            rootView.configure(category: category)
+        }
+        
+        rootView.configureCategories(categories: categories)
+    }
+    
     @objc func didTapHeartButton() {
         isCheckedHeart.toggle()
     }
     
     @objc func messageOwnerTapped() {
-        let messageVC = MessageViewController()
-        messageVC.chatPartnerName = category?.productOwner ?? messageVC.chatPartnerName
-        
+        let messageVC = MessageViewController(navigationTitle: category?.productOwner ?? "Сообщения")
         navigationController?.pushViewController(messageVC, animated: true)
     }
 }

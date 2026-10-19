@@ -91,7 +91,10 @@ final class DetailView: UIView {
         $0.sectionInset = .init(top: 0, left: 15, bottom: 0, right: 0)
     }
     
-    private lazy var detailCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
+    private lazy var detailCollectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: layout
+    ).then {
         $0.backgroundColor = .systemGray6
         $0.register(RecommendedCell.self, forCellWithReuseIdentifier: "cell")
         $0.delegate = self
@@ -133,7 +136,7 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? RecommendedCell else {return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? RecommendedCell else { return UICollectionViewCell() }
         
         let category = categories[indexPath.item]
         
@@ -148,7 +151,6 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 
 private extension DetailView {
-    
     func setupUI() {
         backgroundColor = .systemGray6
     }
