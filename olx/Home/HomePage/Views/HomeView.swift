@@ -8,6 +8,11 @@
 import UIKit
 import SnapKit
 
+private enum HomeSection: Int, CaseIterable {
+    case categories
+    case products
+}
+
 final class HomeView: UIView {
     
     private var categories = [Category]() {
@@ -73,12 +78,12 @@ final class HomeView: UIView {
 
 extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        2
+        HomeSection.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
+        switch HomeSection(rawValue: section) {
+        case .categories:
             return 1
         default:
             return categories.count
@@ -86,8 +91,8 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.section {
-        case 0:
+        switch HomeSection(rawValue: indexPath.section) {
+        case .categories:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryContainerCell", for: indexPath) as? CategoryContainerCell else {
                 return UICollectionViewCell()
             }
@@ -96,7 +101,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
                 $0.delegate = self
             }
             
-        case 1:
+        case .products:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recommendedCategoryCell", for: indexPath) as? RecommendedCell else {
                 return UICollectionViewCell()
             }
@@ -124,7 +129,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     /// Bu yerda recommendedCell ni ustiga bosganda yangi list ochilish uchun function qildik
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard indexPath.section == 1 else { return }
+        guard indexPath.section == HomeSection.products.rawValue else { return }
             onCategorySelected?(categories[indexPath.item])
     }
 }
@@ -138,8 +143,8 @@ extension HomeView: CategoryContainerCellDelegate {
 extension HomeView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        switch indexPath.section {
-        case 0:
+        switch HomeSection(rawValue: indexPath.section) {
+        case .categories:
             return .init(width: collectionView.bounds.width, height: 200)
         default:
             return .init(width: 180, height: 180)
@@ -148,13 +153,13 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
     
     //MARK: Header bilan recommendedCell orasidagi spacing ni control qilish
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        section == 1 ? .init(width: collectionView.bounds.width, height: 60) : .zero
+        section == HomeSection.products.rawValue ? .init(width: collectionView.bounds.width, height: 60) : .zero
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        switch section {
-        case 0: .init(top: 0, left: 0, bottom: 5, right: 0)
-        case 1: .init(top: 0, left: 13, bottom: 0, right: 13)
+        switch HomeSection(rawValue: section) {
+        case .categories: .init(top: 0, left: 0, bottom: 5, right: 0)
+        case .products: .init(top: 0, left: 13, bottom: 0, right: 13)
         default: .zero
         }
     }
