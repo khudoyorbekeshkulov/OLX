@@ -10,7 +10,9 @@ class DetailViewController: UIViewController {
     
     private var isCheckedHeart: Bool = false {
         didSet {
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: isCheckedHeart ? "heart.fill" : "heart")
+            DispatchQueue.main.async {
+                self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: self.isCheckedHeart ? "heart.fill" : "heart")
+            }
         }
     }
     

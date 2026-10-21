@@ -14,7 +14,7 @@ private enum Constants {
 
 final class CategoriesView: UIView {
     private let tableView = UITableView().then {
-        $0.register(CategoryCell.self, forCellReuseIdentifier: "cell")
+        $0.register(cellType: CategoryCell.self)
         $0.separatorStyle = .none
     }
     
@@ -66,9 +66,7 @@ extension CategoriesView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CategoryCell else { return UITableViewCell()
-        }
-        
+        let cell = tableView.dequeueCell(CategoryCell.self, for: indexPath)
         let category = categories[indexPath.row]
         
         return cell.then {

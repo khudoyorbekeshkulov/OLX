@@ -14,7 +14,9 @@ class MessageView: UIView {
     
     private var messages = [ChatMessage]() {
         didSet {
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()                
+            }
         }
     }
     
