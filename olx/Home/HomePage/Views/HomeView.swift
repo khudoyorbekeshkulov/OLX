@@ -47,21 +47,11 @@ final class HomeView: UIView {
         $0.showsVerticalScrollIndicator = false
         $0.backgroundColor = .systemGray6
         
-        $0.register(
-            CategoryContainerCell.self,
-            forCellWithReuseIdentifier: "categoryContainerCell"
-        )
+        $0.register(cellType: CategoryContainerCell.self)
         
-        $0.register(
-            RecommendedCell.self,
-            forCellWithReuseIdentifier: "recommendedCategoryCell"
-        )
-        
-        $0.register(
-            RecommendedHeaderView.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: "recommendedHeader"
-        )
+        $0.register(cellType: RecommendedCell.self)
+ 
+        $0.register(supplementaryViewType: RecommendedHeaderView.self, ofKind: UICollectionView.elementKindSectionHeader)
     }
     
     override init(frame: CGRect) {

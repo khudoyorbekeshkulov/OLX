@@ -11,7 +11,7 @@ public extension UICollectionView {
     func register(cellType: (some UICollectionViewCell).Type) {
         register(cellType, forCellWithReuseIdentifier: String(describing: cellType))
     }
-
+    
     func cellForItem<Cell: UICollectionViewCell>(_ cell: Cell.Type, for indexPath: IndexPath) -> Cell {
         let cellAt = self.cellForItem(at: indexPath)
         guard let typedCell = cellAt as? Cell else {
@@ -20,5 +20,16 @@ public extension UICollectionView {
             )
         }
         return typedCell
+    }
+    
+    func register(
+        supplementaryViewType: (some UICollectionReusableView).Type,
+        ofKind kind: String
+    ) {
+        register(
+            supplementaryViewType,
+            forSupplementaryViewOfKind: kind,
+            withReuseIdentifier: String(describing: supplementaryViewType)
+        )
     }
 }

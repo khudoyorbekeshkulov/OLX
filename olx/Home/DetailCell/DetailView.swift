@@ -97,7 +97,7 @@ final class DetailView: UIView {
         collectionViewLayout: layout
     ).then {
         $0.backgroundColor = .systemGray6
-        $0.register(RecommendedCell.self, forCellWithReuseIdentifier: "cell")
+        $0.register(cellType: RecommendedCell.self)
         $0.delegate = self
         $0.dataSource = self
     }
