@@ -44,12 +44,12 @@ private extension HomeCategoryCell {
         cellView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-
+        
         image.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
             $0.size.equalTo(70)
         }
-
+        
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(image.snp.bottom).offset(10)
             $0.leading.trailing.equalToSuperview()

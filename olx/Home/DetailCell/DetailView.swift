@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class DetailView: UIView {
-
+    
     private var categories: [Category] = []
     
     private lazy var image = UIImageView().then {

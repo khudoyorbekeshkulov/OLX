@@ -17,7 +17,7 @@ class MessageView: UIView {
             tableView.reloadData()
         }
     }
-        
+    
     var tableView = UITableView().then {
         $0.backgroundColor = UIColor(named: "chat_background_color")
         $0.separatorStyle = .none
@@ -71,7 +71,7 @@ private extension MessageView {
     
     func addSubviews() {
         insertSubview(tableView, at: 0)
-    
+        
         addSubviews([
             tableView,
             inputBar
@@ -117,7 +117,7 @@ extension MessageView {
     @objc func sendTapped() {
         onSendTapped?()
     }
-
+    
     func scrollToBottom(rowCount: Int) {
         guard rowCount > 0 else {return}
         

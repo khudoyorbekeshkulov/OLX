@@ -15,7 +15,7 @@ class MessageCell: UITableViewCell {
         $0.font = .systemFont(ofSize: 16)
         $0.numberOfLines = 0
     }
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -44,7 +44,7 @@ private extension MessageCell {
         backgroundColor = .clear
         selectionStyle = .none
     }
-
+    
     func addSubviews() {
         contentView.addSubview(bubbleView)
         bubbleView.addSubview(messageLabel)
