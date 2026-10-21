@@ -11,6 +11,7 @@ struct Category {
     let productOwner: String?
     let infoProduct: String?
     let online: String?
+    let id = UUID()
     
     init(
         image: UIImage?,

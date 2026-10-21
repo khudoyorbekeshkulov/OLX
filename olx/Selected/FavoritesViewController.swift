@@ -1,6 +1,6 @@
 import UIKit
 
-class FavouritesViewController: UIViewController {
+class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -9,7 +9,7 @@ class FavouritesViewController: UIViewController {
     }
 }
 
-private extension FavouritesViewController {
+private extension FavoritesViewController {
     func setupUI() {
         view.backgroundColor = UIColor(named: "app_background_color")
         
