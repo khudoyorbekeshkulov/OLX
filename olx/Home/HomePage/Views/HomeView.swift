@@ -17,7 +17,9 @@ final class HomeView: UIView {
     
     private var categories = [Category]() {
         didSet {
-            mainCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.mainCollectionView.reloadData()
+            }
         }
     }
     
@@ -33,11 +35,15 @@ final class HomeView: UIView {
         $0.backgroundColor = UIColor(named: "search_background_color")
     }
     
-    private let mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    private lazy var collectionViewLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .vertical
         $0.minimumLineSpacing = 0
     }
-    ).then{
+    
+    private lazy var mainCollectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: collectionViewLayout
+    ).then {
         $0.showsVerticalScrollIndicator = false
         $0.backgroundColor = .systemGray6
         
@@ -105,7 +111,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recommendedCategoryCell", for: indexPath) as? RecommendedCell else {
                 return UICollectionViewCell()
             }
-            /// Category dagi o'zgaruvchilarni recommendedCategoryCell dagi o'zgaruvchilarga tengladik.
+            
             let category = categories[indexPath.item]
             
             return cell.then {
@@ -127,7 +133,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         return cell
     }
-    /// Bu yerda recommendedCell ni ustiga bosganda yangi list ochilish uchun function qildik
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section == HomeSection.products.rawValue else { return }
         onCategorySelected?(categories[indexPath.item])
@@ -151,7 +157,6 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    //MARK: Header bilan recommendedCell orasidagi spacing ni control qilish
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         section == HomeSection.products.rawValue ? .init(width: collectionView.bounds.width, height: 60) : .zero
     }
@@ -164,7 +169,6 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    //MARK: Bitta section ichidagi qatorlar orasidagi minimal masofani belgilaydi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         section == 0 ? 20 : 15
     }
