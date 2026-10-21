@@ -7,7 +7,10 @@
 
 import UIKit
 
-enum CategoriesDataHomePage {
+class CategoriesDataHomePage {
+    static let shared = CategoriesDataHomePage()
+    private init() {}
+    
     static let categories: [Category] = [
         Category(
             image: UIImage(named: "img_olx"),

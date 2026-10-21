@@ -5,7 +5,7 @@ protocol CategoryContainerCellDelegate: AnyObject {
     func didTapShowAllCategories()
 }
 
-final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+final class CategoryContainerCell: UICollectionViewCell {
     
     weak var delegate: CategoryContainerCellDelegate?
     
@@ -62,7 +62,9 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+extension CategoryContainerCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
@@ -71,24 +73,18 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        
-        if collectionView == categoryCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "categoryCell",
-                for: indexPath
-            ) as? HomeCategoryCell else {
-                return UICollectionViewCell()
-            }
-            
-            let category = categories[indexPath.item]
-            
-            return cell.then {
-                $0.image.image = category.image
-                $0.image.backgroundColor = category.imageBackgroundColor
-                $0.titleLabel.text = category.title
-            }
+        guard collectionView == categoryCollectionView else {
+            return UICollectionViewCell()
         }
-        return UICollectionViewCell()
+        
+        let cell = collectionView.dequeueCell(HomeCategoryCell.self, for: indexPath)
+        guard let category = categories[safe: indexPath.item] else { return cell }
+
+        return cell.then {
+            $0.image.image = category.image
+            $0.image.backgroundColor = category.imageBackgroundColor
+            $0.titleLabel.text = category.title
+        }
     }
     
     func collectionView(
@@ -96,16 +92,11 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        if collectionView == categoryCollectionView {
-            return CGSize(width: 80, height: 115)
-        }
-        
-        return .zero
+        collectionView == categoryCollectionView ? CGSize(width: 80, height: 115) : .zero
     }
 }
 
 private extension CategoryContainerCell {
-    
     func addSubviews() {
         contentView.addSubviews([
             headerView,

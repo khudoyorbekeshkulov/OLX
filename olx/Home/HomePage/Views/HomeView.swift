@@ -48,10 +48,12 @@ final class HomeView: UIView {
         $0.backgroundColor = .systemGray6
         
         $0.register(cellType: CategoryContainerCell.self)
-        
         $0.register(cellType: RecommendedCell.self)
- 
-        $0.register(supplementaryViewType: RecommendedHeaderView.self, ofKind: UICollectionView.elementKindSectionHeader)
+        
+        $0.register(
+            supplementaryViewType: RecommendedHeaderView.self,
+            ofKind: UICollectionView.elementKindSectionHeader
+        )
     }
     
     override init(frame: CGRect) {
@@ -89,18 +91,20 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch HomeSection(rawValue: indexPath.section) {
         case .categories:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryContainerCell", for: indexPath) as? CategoryContainerCell else {
-                return UICollectionViewCell()
-            }
+            let cell = collectionView.dequeueCell(
+                CategoryContainerCell.self,
+                for: indexPath
+            )
             
             return cell.then {
                 $0.delegate = self
             }
             
         case .products:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recommendedCategoryCell", for: indexPath) as? RecommendedCell else {
-                return UICollectionViewCell()
-            }
+            let cell = collectionView.dequeueCell(
+                RecommendedCell.self,
+                for: indexPath
+            )
             
             let category = categories[indexPath.item]
             
@@ -117,11 +121,17 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "recommendedHeader", for: indexPath) as? RecommendedHeaderView else {
-            return UICollectionReusableView()
-        }
-        return cell
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        let header = collectionView.dequeueSupplementaryView(
+            RecommendedHeaderView.self,
+            ofKind: kind,
+            for: indexPath
+        )
+        return header
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
