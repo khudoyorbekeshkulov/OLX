@@ -47,10 +47,7 @@ final class CategoryContainerCell: UICollectionViewCell, UICollectionViewDataSou
     private lazy var categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: categoryLayout).then {
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = UIColor(named: "card_background_color")
-        $0.register(
-            HomeCategoryCell.self,
-            forCellWithReuseIdentifier: "categoryCell"
-        )
+        $0.register(cellType: HomeCategoryCell.self)
         $0.dataSource = self
         $0.delegate = self
     }
