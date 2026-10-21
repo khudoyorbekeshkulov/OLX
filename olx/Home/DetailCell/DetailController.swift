@@ -50,6 +50,16 @@ private extension DetailViewController {
             self?.messageOwnerTapped()
         }
         
+        rootView.onCategorySelected = { [weak self] selectedCategory in
+            guard let self else { return }
+            
+            let detailVC = DetailViewController().then {
+                $0.category = selectedCategory
+                $0.categories = self.categories
+            }
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
+        
         if let category = category {
             rootView.configure(category: category)
         }

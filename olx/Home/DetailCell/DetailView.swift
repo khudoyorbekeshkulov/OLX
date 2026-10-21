@@ -12,6 +12,9 @@ final class DetailView: UIView {
     
     private var categories: [Category] = []
     
+    var onProductOwnerTapped: (() -> Void)?
+    var onCategorySelected: ((Category) -> Void)?
+    
     private lazy var image = UIImageView().then {
         $0.clipsToBounds = true
     }
@@ -45,8 +48,6 @@ final class DetailView: UIView {
         $0.lineBreakMode = .byWordWrapping
         $0.numberOfLines = 3
     }
-    
-    var onProductOwnerTapped: (() -> Void)?
     
     private lazy var productOwner = UILabel().then {
         $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleProductOwnerTap)))
@@ -147,6 +148,10 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
             $0.saleLabel.text = category.numberOfSales
             $0.isImpact = true
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        onCategorySelected?(categories[indexPath.item])
     }
 }
 

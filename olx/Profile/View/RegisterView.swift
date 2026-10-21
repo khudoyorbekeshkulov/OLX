@@ -144,81 +144,81 @@ private extension RegisterView {
             $0.trailing.equalToSuperview().offset(-15)
             $0.height.equalTo(45)
         }
-
+        
         or.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(appleButton.snp.bottom).offset(25)
         }
-
+        
         line1.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(15)
             $0.top.equalTo(appleButton.snp.bottom).offset(35)
             $0.trailing.equalTo(or.snp.leading).offset(-15)
             $0.height.equalTo(1)
         }
-
+        
         line2.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-15)
             $0.top.equalTo(appleButton.snp.bottom).offset(35)
             $0.leading.equalTo(or.snp.trailing).offset(15)
             $0.height.equalTo(1)
         }
-
+        
         emailLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(15)
             $0.top.equalTo(line1.snp.bottom).offset(35)
         }
-
+        
         emailTextField.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(15)
             $0.top.equalTo(emailLabel.snp.bottom).offset(10)
             $0.trailing.equalToSuperview().offset(-15)
             $0.height.equalTo(45)
         }
-
+        
         passwordLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(15)
             $0.top.equalTo(emailTextField.snp.bottom).offset(20)
             $0.width.equalTo(70)
             $0.height.equalTo(14)
         }
-
+        
         passwordTextField.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(15)
             $0.top.equalTo(passwordLabel.snp.bottom).offset(10)
             $0.trailing.equalToSuperview().offset(-15)
             $0.height.equalTo(45)
         }
-
+        
         container.snp.makeConstraints {
             $0.height.equalTo(45)
             $0.width.equalTo(80)
         }
-
+        
         showButton.snp.makeConstraints {
             $0.centerY.equalTo(container.snp.centerY)
             $0.trailing.equalTo(container.snp.trailing).offset(-10)
         }
-
+        
         text.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
             $0.top.equalTo(passwordTextField.snp.bottom).offset(20)
         }
-
+        
         checkBox.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(15)
             $0.top.equalTo(text.snp.bottom).offset(20)
             $0.width.equalTo(24)
             $0.height.equalTo(24)
         }
-
+        
         text2.snp.makeConstraints {
             $0.leading.equalTo(checkBox.snp.trailing).offset(15)
             $0.top.equalTo(text.snp.bottom).offset(20)
             $0.trailing.equalToSuperview().offset(-15)
         }
-
+        
         registerButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(15)
             $0.top.equalTo(text2.snp.bottom).offset(20)
