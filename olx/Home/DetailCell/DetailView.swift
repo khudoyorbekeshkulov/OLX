@@ -137,7 +137,8 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? RecommendedCell else { return UICollectionViewCell() }
+        
+        guard let cell = collectionView.dequeueCell(RecommendedCell.self, for: indexPath) as? RecommendedCell else { return UICollectionViewCell() }
         
         let category = categories[indexPath.item]
         
