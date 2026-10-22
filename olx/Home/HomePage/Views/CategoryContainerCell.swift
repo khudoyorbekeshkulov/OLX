@@ -28,7 +28,7 @@ final class CategoryContainerCell: UICollectionViewCell {
     }
     
     private lazy var lineView = UIView().then {
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = UIColor(hex: "#F2F2F7")
     }
     
     let categories = CategoriesDataHomePage.categories
