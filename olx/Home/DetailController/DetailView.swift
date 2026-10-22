@@ -20,7 +20,7 @@ final class DetailView: UIView {
     }
     
     private lazy var infoFrame = UIView().then {
-        $0.backgroundColor = UIColor(named: "card_background_color")
+        $0.backgroundColor = ColorResourceManager.shared.cardBackground
     }
     
     private lazy var postedTime = UILabel().then {
@@ -57,13 +57,13 @@ final class DetailView: UIView {
     
     private lazy var onlineTime = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 10)
-        $0.textColor = UIColor(hex: "#808080")
+        $0.textColor = ColorResourceManager.shared.secondaryText
     }
     
     private lazy var feedbackButton = UIButton(type: .system).then {
         $0.setTitle("Оставить отзыв", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 13, weight: .medium)
-        $0.setTitleColor(UIColor(named: "main_manager_color"), for: .normal)
+        $0.setTitleColor(ColorResourceManager.shared.mainManager, for: .normal)
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 10
     }
@@ -71,13 +71,13 @@ final class DetailView: UIView {
     private lazy var adsLabelFrame = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         $0.text = "Все объявления автора"
-        $0.textColor = UIColor(named: "main_manager_color")
+        $0.textColor = ColorResourceManager.shared.mainManager
     }
     
     private lazy var adsLabel = UILabel()
     
     private lazy var lineView = UIView().then {
-        $0.backgroundColor = UIColor(named: "main_manager_color")
+        $0.backgroundColor = ColorResourceManager.shared.secondaryText
     }
     
     private lazy var headerLabel = UILabel().then {
@@ -96,7 +96,7 @@ final class DetailView: UIView {
         frame: .zero,
         collectionViewLayout: layout
     ).then {
-        $0.backgroundColor = UIColor(hex: "#F2F2F7")
+        $0.backgroundColor = .clear
         $0.register(cellType: RecommendedCell.self)
         $0.delegate = self
         $0.dataSource = self
@@ -166,7 +166,7 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
 
 private extension DetailView {
     func setupUI() {
-        backgroundColor = UIColor(hex: "#F2F2F7")
+        backgroundColor = ColorResourceManager.shared.appBackground
     }
     
     func addSubviews() {
