@@ -52,7 +52,7 @@ final class HomeView: UIView {
         collectionViewLayout: collectionViewLayout
     ).then {
         $0.showsVerticalScrollIndicator = false
-        $0.backgroundColor = UIColor(hex: "#F2F2F7")
+        $0.backgroundColor = .clear
         
         $0.register(cellType: CategoryContainerCell.self)
         $0.register(cellType: RecommendedCell.self)
@@ -199,7 +199,7 @@ private extension HomeView {
     }
     
     func setupView() {
-        backgroundColor = UIColor(hex: "#F2F2F7")
+        backgroundColor = UIColor(named: "app_background_color")
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
     }
@@ -228,6 +228,7 @@ private extension HomeView {
     
     func setupConstraints() {
         searchContainer.snp.makeConstraints {
+            $0.width.equalTo(UIScreen.main.bounds.width - 30)
             $0.height.equalTo(36)
         }
         
