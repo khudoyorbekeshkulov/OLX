@@ -33,6 +33,20 @@ final class CategoryContainerCell: UICollectionViewCell {
     
     let categories = CategoriesDataHomePage.categories
     
+    // MARK: - Adaptive sizing
+    
+    private static let headerHeight: CGFloat = 60
+    private static let sectionVerticalInset: CGFloat = 30
+    
+    static func itemSize(for width: CGFloat) -> CGSize {
+        let itemWidth = min(width / 4.5, 120)
+        return CGSize(width: itemWidth, height: itemWidth * 115 / 80)
+    }
+    
+    static func height(for width: CGFloat) -> CGFloat {
+        headerHeight + sectionVerticalInset + ceil(itemSize(for: width).height)
+    }
+    
     private lazy var categoryLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
@@ -92,7 +106,7 @@ extension CategoryContainerCell: UICollectionViewDataSource, UICollectionViewDel
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        collectionView == categoryCollectionView ? CGSize(width: 80, height: 115) : .zero
+        CategoryContainerCell.itemSize(for: collectionView.bounds.width)
     }
 }
 
@@ -136,7 +150,7 @@ private extension CategoryContainerCell {
         categoryCollectionView.snp.makeConstraints {
             $0.top.equalTo(headerView.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(140)
+            $0.bottom.equalToSuperview()
         }
     }
     

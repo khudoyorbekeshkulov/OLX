@@ -3,6 +3,13 @@ import SnapKit
 
 class RecommendedCell: UICollectionViewCell {
     
+    static let imageAspectRatio: CGFloat = 0.57
+    private static let textBlockHeight: CGFloat = 90
+    
+    static func height(forWidth width: CGFloat) -> CGFloat {
+        ceil(width * imageAspectRatio) + textBlockHeight
+    }
+    
     private var isTapped = false
     
     var isImpact = false {
@@ -78,7 +85,7 @@ private extension RecommendedCell {
         
         profileImage.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(100)
+            $0.height.equalTo(profileImage.snp.width).multipliedBy(RecommendedCell.imageAspectRatio)
         }
         
         heartButton.snp.makeConstraints {
