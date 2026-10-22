@@ -21,7 +21,7 @@ class MessageView: UIView {
     }
     
     var tableView = UITableView().then {
-        $0.backgroundColor = UIColor(named: "chat_background_color")
+        $0.backgroundColor = ColorResourceManager.shared.chatBackground
         $0.separatorStyle = .none
         $0.keyboardDismissMode = .interactive
         $0.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseID)
@@ -40,7 +40,7 @@ class MessageView: UIView {
     
     lazy var textField = UITextField().then {
         $0.placeholder = "Сообщения..."
-        $0.backgroundColor = UIColor(hex: "#F2F2F7")
+        $0.backgroundColor = ColorResourceManager.shared.keyboardAreaColor
         $0.borderStyle = .roundedRect
         $0.layer.cornerRadius = 15
         $0.clipsToBounds = true

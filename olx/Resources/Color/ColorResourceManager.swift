@@ -13,7 +13,9 @@ final class ColorResourceManager {
 
     // MARK: - Chat
     var currentUserMessage: UIColor { color(.currentUserMessage) }
+    var permanentCurrentUserMessage: UIColor { color(.permanentCurrentUserMessage) }
     var secondUserMessage: UIColor { color(.secondUserMessage) }
+    var keyboardAreaColor: UIColor { color(.keyboardAreaColor) }
 
     // MARK: - Text
     var primaryText: UIColor { color(.primaryText) }
@@ -39,8 +41,10 @@ private extension ColorResourceManager {
         case appBackground      = "app_background_color"
         case cardBackground     = "card_background_color"
         case chatBackground     = "chat_background_color"
-        case currentUserMessage = "current_user_message_color"   // verify full name in assets
-        case darkMainManager    = "dark_main_manager_color"      // verify full name in assets
+        case currentUserMessage = "current_user_message_color"
+        case permanentCurrentUserMessage = "permanent_current_user_color"
+        case keyboardAreaColor  = "keyboard_area_color"
+        case darkMainManager    = "dark_main_manager_color"
         case heart              = "heart_color"
         case magnifyingGlass    = "magnifying_glass_color"
         case mainManager        = "main_manager_color"

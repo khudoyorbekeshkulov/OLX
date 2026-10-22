@@ -32,12 +32,11 @@ class MessageCell: UITableViewCell {
 extension MessageCell {
     func configure(with message: ChatMessage) {
         messageLabel.text = message.text
-        messageLabel.textColor = message.isFromCurrentUser ? UIColor(
-            named: "second_user_message_color"
-        ) : .label
-        bubbleView.backgroundColor = message.isFromCurrentUser ? UIColor(
-            hex: "#007AFF"
-        ) : UIColor(named: "current_user_message_color")
+        
+        messageLabel.textColor = message.isFromCurrentUser ? ColorResourceManager.shared.secondUserMessage: .label
+        
+        bubbleView.backgroundColor = message.isFromCurrentUser ? ColorResourceManager.shared.permanentCurrentUserMessage : ColorResourceManager.shared.currentUserMessage
+        
         leadingConstraint.isActive = !message.isFromCurrentUser
         trailingConstraint.isActive = message.isFromCurrentUser
     }
