@@ -5,9 +5,7 @@ final class ProfileViewController: UIViewController {
     
     private lazy var loginButton = UIButton(type: .system).then {
         $0.setTitle("Войти", for: .normal)
-        $0.setTitleColor(UIColor(hex: "#000000"), for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
-        $0.backgroundColor = UIColor(hex: "#FFFFFF")
         $0.layer.cornerRadius = 5
         $0.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
     }
@@ -16,7 +14,6 @@ final class ProfileViewController: UIViewController {
         $0.setTitle("Зарегистрироваться", for: .normal)
         $0.addTarget(self, action: #selector(registerTapped), for: .touchUpInside)
         $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
-        $0.setTitleColor(UIColor(hex: "#8E8E93"), for: .normal)
         $0.backgroundColor = .clear
         $0.layer.cornerRadius = 5
     }
@@ -60,13 +57,13 @@ private extension ProfileViewController {
             guard let self else { return }
             
             loginButton.then {
-                $0.backgroundColor = isLogin ? UIColor(hex: "#FFFFFF") : .clear
-                $0.setTitleColor(isLogin ? UIColor(hex: "#000000") : UIColor(hex: "#8E8E93"), for: .normal)
+                $0.backgroundColor = isLogin ? ColorResourceManager.shared.white : .clear
+                $0.setTitleColor(isLogin ? ColorResourceManager.shared.black : ColorResourceManager.shared.secondaryText, for: .normal)
             }
             
             registerButton.then {
-                $0.backgroundColor = isLogin ? .clear : UIColor(hex: "#FFFFFF")
-                $0.setTitleColor(isLogin ? UIColor(hex: "#8E8E93") : UIColor(hex: "#000000"), for: .normal)
+                $0.backgroundColor = isLogin ? .clear : ColorResourceManager.shared.white
+                $0.setTitleColor(isLogin ? ColorResourceManager.shared.secondaryText : ColorResourceManager.shared.black, for: .normal)
             }
         }
         

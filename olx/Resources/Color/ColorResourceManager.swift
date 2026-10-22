@@ -27,6 +27,9 @@ final class ColorResourceManager {
     var darkMainManager: UIColor { color(.darkMainManager) }
     var heart: UIColor { color(.heart) }
     var magnifyingGlass: UIColor { color(.magnifyingGlass) }
+    var white: UIColor { color(.white) }
+    var black: UIColor { color(.black) }
+    var lineProfile: UIColor { color(.lineProfile) }
 
     // MARK: - Controls
     var segmentedControl: UIColor { color(.segmentedControl) }
@@ -51,6 +54,9 @@ private extension ColorResourceManager {
         case primaryText        = "primary_text_color"
         case textBlack          = "primary_text_black_color"
         case profileBackground  = "profile_background_color"
+        case white              = "white_color"
+        case black              = "black_color"
+        case lineProfile        = "line_profile_color"
         case searchBackground   = "search_background_color"      // verify full name in assets
         case secondUserMessage  = "second_user_message_color"    // verify full name in assets
         case secondaryText      = "secondary_text_color"

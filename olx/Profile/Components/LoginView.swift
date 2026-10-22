@@ -4,13 +4,13 @@ import SnapKit
 final class LoginView: UIView {
     private lazy var emailLabel = UILabel().then {
         $0.text = "Электронная почта или телефон"
-        $0.textColor = UIColor(named: "main_manager_color")
+        $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     private lazy var emailTextField = UITextField().then {
         $0.placeholder = "Введите свой электронной почты..."
-        $0.backgroundColor = UIColor(named: "separator_color")
+        $0.backgroundColor = ColorResourceManager.shared.separator
         $0.layer.cornerRadius = 5
         $0.leftViewMode = .always
         $0.setLeftPadding(12)
@@ -18,12 +18,12 @@ final class LoginView: UIView {
     
     private lazy var passwordLabel = UILabel().then {
         $0.text = "Пароль"
-        $0.textColor = UIColor(named: "main_manager_color")
+        $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     private lazy var passwordTextField = UITextField().then {
-        $0.backgroundColor = UIColor(named: "separator_color")
+        $0.backgroundColor = ColorResourceManager.shared.separator
         $0.placeholder = "Введите свой пароль..."
         $0.layer.cornerRadius = 5
         $0.isSecureTextEntry = true
@@ -37,36 +37,36 @@ final class LoginView: UIView {
     
     private lazy var showButton = UIButton(type: .system).then {
         $0.setTitle("Показать", for: .normal)
-        $0.setTitleColor(UIColor(named: "main_manager_color"), for: .normal)
+        $0.setTitleColor(ColorResourceManager.shared.mainManager, for: .normal)
         $0.addTarget(self, action: #selector(showTapped), for: .touchUpInside)
     }
     
     private lazy var forgetPassword = UILabel().then {
         $0.text = "Забыли пароль"
-        $0.textColor = UIColor(named: "main_manager_color")
+        $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 12, weight: .bold)
     }
     
     private lazy var loginButton = UIButton(type: .system).then {
-        $0.backgroundColor = UIColor(named: "dark_main_manager_color")
+        $0.backgroundColor = ColorResourceManager.shared.darkMainManager
         $0.setTitle("Войти", for: .normal)
-        $0.setTitleColor(UIColor(hex: "#FFFFFF"), for: .normal)
+        $0.setTitleColor(ColorResourceManager.shared.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.layer.cornerRadius = 5
     }
     
     private lazy var line1 = UIView().then {
-        $0.backgroundColor = UIColor(hex: "#C7C7CC")
+        $0.backgroundColor = ColorResourceManager.shared.lineProfile
     }
     
-    private lazy var or = UILabel().then {
+    private lazy var textBetweenLines = UILabel().then {
         $0.text = "или"
-        $0.textColor = UIColor(named: "main_manager_color")
+        $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
     
     private lazy var line2 = UIView().then {
-        $0.backgroundColor = UIColor(hex: "#C7C7CC")
+        $0.backgroundColor = ColorResourceManager.shared.lineProfile
     }
     
     private lazy var appleButton = UIButton().then {
@@ -74,11 +74,11 @@ final class LoginView: UIView {
         config.title = "Продолжить с Apple"
         config.image = UIImage(systemName: "applelogo")
         config.imagePadding = 50
-        config.baseForegroundColor = UIColor(named: "primary_text_color")
+        config.baseForegroundColor = ColorResourceManager.shared.primaryText
         config.background.cornerRadius = 5
         config.attributedTitle = AttributedString("Продолжить с Apple", attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 18, weight: .bold)]))
         $0.configuration = config
-        $0.backgroundColor = UIColor(named: "search_background_color")
+        $0.backgroundColor = ColorResourceManager.shared.searchBackground
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.black.cgColor
     }
@@ -118,7 +118,7 @@ private extension LoginView {
             forgetPassword,
             loginButton,
             line1,
-            or,
+            textBetweenLines,
             line2,
             appleButton,
             text,
@@ -175,7 +175,7 @@ private extension LoginView {
             $0.height.equalTo(45)
         }
         
-        or.snp.makeConstraints {
+        textBetweenLines.snp.makeConstraints {
             $0.top.equalTo(loginButton.snp.bottom).offset(25)
             $0.centerX.equalToSuperview()
         }
@@ -183,19 +183,19 @@ private extension LoginView {
         line1.snp.makeConstraints {
             $0.top.equalTo(loginButton.snp.bottom).offset(35)
             $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalTo(or.snp.leading).offset(-15)
+            $0.trailing.equalTo(textBetweenLines.snp.leading).offset(-15)
             $0.height.equalTo(1)
         }
         
         line2.snp.makeConstraints {
             $0.top.equalTo(loginButton.snp.bottom).offset(35)
-            $0.leading.equalTo(or.snp.trailing).offset(15)
+            $0.leading.equalTo(textBetweenLines.snp.trailing).offset(15)
             $0.trailing.equalToSuperview().offset(-15)
             $0.height.equalTo(1)
         }
         
         appleButton.snp.makeConstraints {
-            $0.top.equalTo(or.snp.bottom).offset(30)
+            $0.top.equalTo(textBetweenLines.snp.bottom).offset(30)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
             $0.height.equalTo(45)

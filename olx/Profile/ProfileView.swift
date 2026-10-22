@@ -18,12 +18,12 @@ class ProfileView: UIView {
     
     let titleLabel = UILabel().then {
         $0.text = "Создать"
-        $0.textColor = UIColor(named: "main_manager_color")
+        $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = .systemFont(ofSize: 28, weight: .bold)
     }
     
     var segmentedControl = UIView().then {
-        $0.backgroundColor = UIColor(named: "separator_color")
+        $0.backgroundColor = ColorResourceManager.shared.separator
         $0.layer.cornerRadius = 5
         $0.clipsToBounds = true
     }
@@ -50,7 +50,7 @@ class ProfileView: UIView {
 private extension ProfileView {
     
     func setupUIViews() {
-        backgroundColor = UIColor(named: "profile_background_color")
+        backgroundColor = ColorResourceManager.shared.profileBackground
     }
     
     func addSubviews() {

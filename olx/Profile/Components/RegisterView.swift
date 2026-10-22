@@ -10,38 +10,38 @@ final class RegisterView: UIView {
         config.title = "Продолжить с Apple"
         config.image = UIImage(systemName: "applelogo")
         config.imagePadding = 50
-        config.baseForegroundColor = UIColor(named: "primary_text_color")
+        config.baseForegroundColor = ColorResourceManager.shared.primaryText
         config.background.cornerRadius = 5
         config.attributedTitle = AttributedString("Продолжить с Apple", attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 18, weight: .bold)]))
         $0.configuration = config
-        $0.backgroundColor = UIColor(named: "search_background_color")
+        $0.backgroundColor = ColorResourceManager.shared.searchBackground
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.black.cgColor
     }
     
     private lazy var line1 = UIView().then {
-        $0.backgroundColor = UIColor(hex: "#C7C7CC")
+        $0.backgroundColor = ColorResourceManager.shared.lineProfile
     }
     
     private lazy var or = UILabel().then {
         $0.text = "или"
-        $0.textColor = UIColor(named: "main_manager_color")
+        $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
     
     private lazy var line2 = UIView().then {
-        $0.backgroundColor = UIColor(hex: "#C7C7CC")
+        $0.backgroundColor = ColorResourceManager.shared.lineProfile
     }
     
     private lazy var emailLabel = UILabel().then {
         $0.text = "Электронная почта или телефон"
-        $0.textColor = UIColor(named: "main_manager_color")
+        $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     private lazy var emailTextField = UITextField().then {
         $0.placeholder = "Введите свой электронной почты..."
-        $0.backgroundColor = UIColor(named: "separator_color")
+        $0.backgroundColor = ColorResourceManager.shared.separator
         $0.layer.cornerRadius = 5
         $0.leftViewMode = .always
         $0.setLeftPadding(12)
@@ -49,13 +49,13 @@ final class RegisterView: UIView {
     
     private lazy var passwordLabel = UILabel().then {
         $0.text = "Пароль"
-        $0.textColor = UIColor(named: "main_manager_color")
+        $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     private lazy var passwordTextField = UITextField().then {
         $0.placeholder = "Введите свой пароль..."
-        $0.backgroundColor = UIColor(named: "separator_color")
+        $0.backgroundColor = ColorResourceManager.shared.separator
         $0.layer.cornerRadius = 5
         $0.rightView = container
         $0.rightViewMode = .always
@@ -67,7 +67,7 @@ final class RegisterView: UIView {
     
     private lazy var showButton = UIButton(type: .system).then {
         $0.setTitle("Показать", for: .normal)
-        $0.setTitleColor(UIColor(named: "main_manager_color"), for: .normal)
+        $0.setTitleColor(ColorResourceManager.shared.mainManager, for: .normal)
         $0.addTarget(self, action: #selector(showTapped), for: .touchUpInside)
     }
     
@@ -88,16 +88,15 @@ final class RegisterView: UIView {
     
     private lazy var checkBox = UIButton(type: .system).then {
         $0.setImage(UIImage(systemName: "square"), for: .normal)
-        $0.tintColor = UIColor(named: "main_manager_color")
+        $0.tintColor = ColorResourceManager.shared.mainManager
         $0.addTarget(self, action: #selector(checkBoxTapped), for: .touchUpInside)
     }
     
     private lazy var registerButton = UIButton(type: .system).then {
-        $0.backgroundColor = UIColor(hex: "#F2F2F7")
+        $0.backgroundColor = ColorResourceManager.shared.darkMainManager
         $0.setTitle("Зарегистроваться", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        $0.backgroundColor = UIColor(named: "dark_main_manager_color")
         $0.layer.cornerRadius = 5
     }
     
