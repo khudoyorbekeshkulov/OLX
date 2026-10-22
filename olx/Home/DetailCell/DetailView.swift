@@ -96,7 +96,7 @@ final class DetailView: UIView {
         frame: .zero,
         collectionViewLayout: layout
     ).then {
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = UIColor(hex: "#F2F2F7")
         $0.register(cellType: RecommendedCell.self)
         $0.delegate = self
         $0.dataSource = self
@@ -158,7 +158,7 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
 
 private extension DetailView {
     func setupUI() {
-        backgroundColor = .systemGray6
+        backgroundColor = UIColor(hex: "#F2F2F7")
     }
     
     func addSubviews() {

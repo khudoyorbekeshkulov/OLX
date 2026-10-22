@@ -1,6 +1,6 @@
 import UIKit
 
-/// Elementlar tab bar dan boshlanish uchun code
+// MARK: - To start the elements from tabbar
 extension UIViewController {
     var topbarHeight: CGFloat {
         (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
