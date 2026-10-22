@@ -25,7 +25,7 @@ final class DetailView: UIView {
     
     private lazy var postedTime = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 10)
-        $0.textColor = UIColor(hex: "#808080")
+        $0.textColor = ColorResourceManager.shared.secondaryText
     }
     
     private lazy var nameProduct = UILabel().then {
@@ -77,7 +77,7 @@ final class DetailView: UIView {
     private lazy var adsLabel = UILabel()
     
     private lazy var lineView = UIView().then {
-        $0.backgroundColor = ColorResourceManager.shared.secondaryText
+        $0.backgroundColor = ColorResourceManager.shared.mainManager
     }
     
     private lazy var headerLabel = UILabel().then {
