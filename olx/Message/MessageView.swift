@@ -40,7 +40,7 @@ class MessageView: UIView {
     
     lazy var textField = UITextField().then {
         $0.placeholder = "Сообщения..."
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = UIColor(hex: "#F2F2F7")
         $0.borderStyle = .roundedRect
         $0.layer.cornerRadius = 15
         $0.clipsToBounds = true

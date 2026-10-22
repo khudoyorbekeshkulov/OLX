@@ -22,7 +22,7 @@ final class RegisterView: UIView {
     }
     
     private lazy var line1 = UIView().then {
-        $0.backgroundColor = .systemGray3
+        $0.backgroundColor = UIColor(hex: "#C7C7CC")
     }
     
     private lazy var or = UILabel().then {
@@ -32,7 +32,7 @@ final class RegisterView: UIView {
     }
     
     private lazy var line2 = UIView().then {
-        $0.backgroundColor = .systemGray3
+        $0.backgroundColor = UIColor(hex: "#C7C7CC")
     }
     
     private lazy var emailLabel = UILabel().then {
@@ -95,7 +95,7 @@ final class RegisterView: UIView {
     }
     
     private lazy var registerButton = UIButton(type: .system).then {
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = UIColor(hex: "#F2F2F7")
         $0.setTitle("Зарегистроваться", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)

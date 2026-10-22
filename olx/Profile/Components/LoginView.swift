@@ -52,7 +52,7 @@ final class LoginView: UIView {
     private lazy var loginButton = UIButton(type: .system).then {
         $0.backgroundColor = UIColor(named: "dark_main_manager_color")
         $0.setTitle("Войти", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(UIColor(hex: "#FFFFFF"), for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.layer.cornerRadius = 5
     }
