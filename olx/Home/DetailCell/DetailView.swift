@@ -139,7 +139,10 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
         categories.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueCell(
             RecommendedCell.self,
@@ -159,7 +162,10 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         onCategorySelected?(categories[indexPath.item])
     }
 }
