@@ -45,7 +45,7 @@ final class HomeView: UIView {
         collectionViewLayout: collectionViewLayout
     ).then {
         $0.showsVerticalScrollIndicator = false
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = UIColor(hex: "#F2F2F7")
         
         $0.register(cellType: CategoryContainerCell.self)
         $0.register(cellType: RecommendedCell.self)
@@ -177,7 +177,7 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
 private extension HomeView {
     
     func setupView() {
-        backgroundColor = .systemGray6
+        backgroundColor = UIColor(hex: "#F2F2F7")
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
     }
@@ -189,7 +189,7 @@ private extension HomeView {
     
     func setupSearchBar() {
         let icon = UIImageView(image: UIImage(systemName: "magnifyingglass")).then {
-            $0.tintColor = .systemGray
+            $0.tintColor = UIColor(hex: "#8E8E93")
             $0.frame = CGRect(x: 12, y: 8, width: 23, height: 20)
         }
         
