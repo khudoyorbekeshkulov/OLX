@@ -15,7 +15,7 @@ class MessageView: UIView {
     private var messages = [ChatMessage]() {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()                
+                self.tableView.reloadData()
             }
         }
     }
@@ -104,13 +104,26 @@ private extension MessageView {
 }
 
 extension MessageView: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         messages.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MessageCell.reuseID, for: indexPath) as? MessageCell else { return UITableViewCell() }
-        cell.configure(with: messages[indexPath.row])
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: MessageCell.reuseID,
+            for: indexPath
+        ) as? MessageCell else {
+            return UITableViewCell()
+        }
+        cell.configure(
+            with: messages[indexPath.row]
+        )
         return cell
     }
 }

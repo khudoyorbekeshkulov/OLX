@@ -132,13 +132,21 @@ extension DetailView {
 }
 
 extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueCell(RecommendedCell.self, for: indexPath) as? RecommendedCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueCell(
+            RecommendedCell.self,
+            for: indexPath
+        ) as? RecommendedCell else {
+            return UICollectionViewCell()
+        }
         
         let category = categories[indexPath.item]
         

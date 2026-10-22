@@ -37,7 +37,10 @@ final class ProfileViewController: UIViewController {
 private extension ProfileViewController {
     func setupView() {
         view.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(tappedToView))
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(tappedToView)
+            )
         )
     }
     

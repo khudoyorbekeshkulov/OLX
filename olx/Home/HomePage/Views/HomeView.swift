@@ -86,7 +86,10 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
         HomeSection.allCases.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         switch HomeSection(rawValue: section) {
         case .categories:
             return 1
@@ -95,7 +98,10 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         switch HomeSection(rawValue: indexPath.section) {
         case .categories:
             let cell = collectionView.dequeueCell(
@@ -141,7 +147,10 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
         return header
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         guard indexPath.section == HomeSection.products.rawValue else { return }
         onCategorySelected?(categories[indexPath.item])
     }
@@ -154,7 +163,11 @@ extension HomeView: CategoryContainerCellDelegate {
 }
 
 extension HomeView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
         
         switch HomeSection(rawValue: indexPath.section) {
         case .categories:
@@ -167,11 +180,19 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForHeaderInSection section: Int
+    ) -> CGSize {
         section == HomeSection.products.rawValue ? .init(width: collectionView.bounds.width, height: 60) : .zero
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
         switch HomeSection(rawValue: section) {
         case .categories: .init(top: 0, left: 0, bottom: 5, right: 0)
         case .products: .init(top: 0, left: GridLayout.sideInset, bottom: 0, right: GridLayout.sideInset)
@@ -179,11 +200,19 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
         section == HomeSection.categories.rawValue ? 20 : GridLayout.lineSpacing
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt section: Int
+    ) -> CGFloat {
         GridLayout.interitemSpacing
     }
 }

@@ -93,7 +93,7 @@ extension CategoryContainerCell: UICollectionViewDataSource, UICollectionViewDel
         
         let cell = collectionView.dequeueCell(HomeCategoryCell.self, for: indexPath)
         guard let category = categories[safe: indexPath.item] else { return cell }
-
+        
         return cell.then {
             $0.image.image = category.image
             $0.image.backgroundColor = category.imageBackgroundColor
