@@ -14,12 +14,12 @@ final class CategoryCell: UITableViewCell {
     
     let titleLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 14, weight: .bold)
-        $0.textColor = .darkGray
+        $0.textColor = UIColor(hex: "#555555")
     }
     
     let numberOfResults = UILabel().then {
         $0.font = .systemFont(ofSize: 11, weight: .regular)
-        $0.textColor = .darkGray
+        $0.textColor = UIColor(hex: "#555555")
     }
     
     let nextImage = UIImageView()
@@ -51,9 +51,8 @@ private extension CategoryCell {
     
     func setupUIConstraints() {
         cellView.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(
-                UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
-            )
+            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.top.bottom.equalToSuperview().inset(5)
         }
         
         image.snp.makeConstraints {
