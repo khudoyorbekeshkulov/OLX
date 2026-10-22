@@ -119,13 +119,13 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
                 for: indexPath
             )
             
-            let category = categories[indexPath.item]
+            let category = categories[safe: indexPath.item]
             
             return cell.then {
-                $0.profileImage.image = category.image
-                $0.additionalLabel.text = category.title
-                $0.saleLabel.text = category.numberOfSales
-                $0.timeLabel.text = category.locationAndTime
+                $0.profileImage.image = category?.image
+                $0.additionalLabel.text = category?.title
+                $0.saleLabel.text = category?.numberOfSales
+                $0.timeLabel.text = category?.locationAndTime
                 $0.isImpact = false
             }
             
@@ -152,7 +152,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
         didSelectItemAt indexPath: IndexPath
     ) {
         guard indexPath.section == HomeSection.products.rawValue else { return }
-        onCategorySelected?(categories[indexPath.item])
+        onCategorySelected?(categories[safe: indexPath.item]!)
     }
 }
 

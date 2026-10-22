@@ -151,13 +151,13 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let category = categories[indexPath.item]
+        let category = categories[safe: indexPath.item]
         
         return cell.then {
-            $0.profileImage.image = category.image
-            $0.additionalLabel.text = category.title
-            $0.timeLabel.text = category.locationAndTime
-            $0.saleLabel.text = category.numberOfSales
+            $0.profileImage.image = category?.image
+            $0.additionalLabel.text = category?.title
+            $0.timeLabel.text = category?.locationAndTime
+            $0.saleLabel.text = category?.numberOfSales
             $0.isImpact = true
         }
     }
