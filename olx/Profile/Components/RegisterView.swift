@@ -2,8 +2,6 @@ import UIKit
 import SnapKit
 
 final class RegisterView: UIView {
-    let mainColor = ColorResourceManager.shared.mainColor
-    
     private var isChecked = false
     private var isSecuretyEntry = true
     

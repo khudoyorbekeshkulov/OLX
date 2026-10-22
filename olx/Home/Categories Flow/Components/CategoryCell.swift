@@ -14,12 +14,12 @@ final class CategoryCell: UITableViewCell {
     
     let titleLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 14, weight: .bold)
-        $0.textColor = UIColor(hex: "#555555")
+        $0.textColor = ColorResourceManager.shared.blackText
     }
     
     let numberOfResults = UILabel().then {
         $0.font = .systemFont(ofSize: 11, weight: .regular)
-        $0.textColor = UIColor(hex: "#555555")
+        $0.textColor = ColorResourceManager.shared.blackText
     }
     
     let nextImage = UIImageView()
@@ -27,6 +27,7 @@ final class CategoryCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        setupView()
         addSubviews()
         setupUIConstraints()
     }
@@ -37,6 +38,11 @@ final class CategoryCell: UITableViewCell {
 }
 
 private extension CategoryCell {
+    
+    func setupView() {
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
+    }
     
     func addSubviews() {
         contentView.addSubview(cellView)

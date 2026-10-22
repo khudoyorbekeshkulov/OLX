@@ -3,8 +3,6 @@ import UIKit
 class DetailViewController: UIViewController {
     let rootView = DetailView()
     
-    private let mainColor = ColorResourceManager.shared.mainColor
-    
     var categories: [Category] = []
     var category: Category?
     

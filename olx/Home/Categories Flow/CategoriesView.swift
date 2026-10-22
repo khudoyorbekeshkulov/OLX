@@ -16,6 +16,7 @@ final class CategoriesView: UIView {
     private let tableView = UITableView().then {
         $0.register(cellType: CategoryCell.self)
         $0.separatorStyle = .none
+        $0.backgroundColor = .clear
     }
     
     private var categories = [Category]() {
@@ -43,25 +44,11 @@ final class CategoriesView: UIView {
     }
 }
 
-private extension CategoriesView {
-    func setupView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
-    
-    func addSubviews() {
-        addSubview(tableView)
-    }
-    
-    func setupConstraints() {
-        tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-    }
-}
-
 extension CategoriesView: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         categories.count
     }
     
@@ -96,5 +83,23 @@ extension CategoriesView: UITableViewDelegate, UITableViewDataSource {
     ) {
         guard indexPath.row != 0 else { return }
         onSectionTapped?()
+    }
+}
+
+private extension CategoriesView {
+    func setupView() {
+        backgroundColor = ColorResourceManager.shared.cardBackground
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+    
+    func addSubviews() {
+        addSubview(tableView)
+    }
+    
+    func setupConstraints() {
+        tableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 }

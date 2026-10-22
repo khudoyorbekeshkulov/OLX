@@ -2,8 +2,6 @@ import UIKit
 import SnapKit
 
 final class LoginView: UIView {
-    let mainColor = ColorResourceManager.shared.mainColor
-    
     private lazy var emailLabel = UILabel().then {
         $0.text = "Электронная почта или телефон"
         $0.textColor = UIColor(named: "main_manager_color")

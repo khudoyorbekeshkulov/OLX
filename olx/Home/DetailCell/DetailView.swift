@@ -144,20 +144,14 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueCell(
-            RecommendedCell.self,
-            for: indexPath
-        ) as? RecommendedCell else {
-            return UICollectionViewCell()
-        }
-        
-        let category = categories[safe: indexPath.item]
+        let cell = collectionView.dequeueCell(RecommendedCell.self, for: indexPath)
+        guard let category = categories[safe: indexPath.item] else { return cell }
         
         return cell.then {
-            $0.profileImage.image = category?.image
-            $0.additionalLabel.text = category?.title
-            $0.timeLabel.text = category?.locationAndTime
-            $0.saleLabel.text = category?.numberOfSales
+            $0.profileImage.image = category.image
+            $0.additionalLabel.text = category.title
+            $0.timeLabel.text = category.locationAndTime
+            $0.saleLabel.text = category.numberOfSales
             $0.isImpact = true
         }
     }
