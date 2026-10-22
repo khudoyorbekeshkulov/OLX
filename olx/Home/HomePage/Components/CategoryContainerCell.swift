@@ -10,25 +10,25 @@ final class CategoryContainerCell: UICollectionViewCell {
     weak var delegate: CategoryContainerCellDelegate?
     
     private lazy var headerView = UIView().then {
-        $0.backgroundColor = UIColor(named: "card_background_color")
+        $0.backgroundColor = ColorResourceManager.shared.cardBackground
     }
     
     private lazy var mainCategoryLabel = UILabel().then {
         $0.text = "Категории"
-        $0.textColor = UIColor(named: "primary_text_color")
+        $0.textColor = ColorResourceManager.shared.primaryText
         $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     }
     
     private lazy var showAllButton = UIButton(type: .system).then {
         $0.setTitle("Смотреть все", for: .normal)
-        $0.tintColor = UIColor(named: "secondary_text_color")
+        $0.tintColor = ColorResourceManager.shared.secondaryText
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         $0.setTitleColor(.gray, for: .normal)
         $0.addTarget(self, action: #selector(showAllTapped), for: .touchUpInside)
     }
     
     private lazy var lineView = UIView().then {
-        $0.backgroundColor = UIColor(hex: "#F2F2F7")
+        $0.backgroundColor = ColorResourceManager.shared.separator
     }
     
     let categories = CategoriesDataHomePage.categories
@@ -60,7 +60,7 @@ final class CategoryContainerCell: UICollectionViewCell {
     
     private lazy var categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: categoryLayout).then {
         $0.showsHorizontalScrollIndicator = false
-        $0.backgroundColor = UIColor(named: "card_background_color")
+        $0.backgroundColor = ColorResourceManager.shared.cardBackground
         $0.register(cellType: HomeCategoryCell.self)
         $0.dataSource = self
         $0.delegate = self

@@ -34,12 +34,12 @@ final class HomeView: UIView {
     var onCategorySelected: ((Category) -> Void)?
     
     let searchContainer = ExpandingContainerView().then {
-        $0.backgroundColor = UIColor(named: "search_background_color")
+        $0.backgroundColor = ColorResourceManager.shared.searchBackground
         $0.layer.cornerRadius = 8
     }
     
     let searchingTextField = UITextField().then {
-        $0.backgroundColor = UIColor(named: "search_background_color")
+        $0.backgroundColor = ColorResourceManager.shared.searchBackground
     }
     
     private lazy var collectionViewLayout = UICollectionViewFlowLayout().then {
@@ -228,7 +228,7 @@ private extension HomeView {
     }
     
     func setupView() {
-        backgroundColor = UIColor(named: "app_background_color")
+        backgroundColor = ColorResourceManager.shared.appBackground
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
     }
@@ -240,7 +240,7 @@ private extension HomeView {
     
     func setupSearchBar() {
         let icon = UIImageView(image: UIImage(systemName: "magnifyingglass")).then {
-            $0.tintColor = UIColor(hex: "#8E8E93")
+            $0.tintColor = ColorResourceManager.shared.magnifyingGlass
             $0.frame = CGRect(x: 12, y: 8, width: 23, height: 20)
         }
         

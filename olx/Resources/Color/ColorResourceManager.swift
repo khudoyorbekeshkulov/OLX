@@ -24,6 +24,7 @@ final class ColorResourceManager {
     var mainManager: UIColor { color(.mainManager) }
     var darkMainManager: UIColor { color(.darkMainManager) }
     var heart: UIColor { color(.heart) }
+    var magnifyingGlass: UIColor { color(.magnifyingGlass) }
 
     // MARK: - Controls
     var segmentedControl: UIColor { color(.segmentedControl) }
@@ -41,6 +42,7 @@ private extension ColorResourceManager {
         case currentUserMessage = "current_user_message_color"   // verify full name in assets
         case darkMainManager    = "dark_main_manager_color"      // verify full name in assets
         case heart              = "heart_color"
+        case magnifyingGlass    = "magnifying_glass_color"
         case mainManager        = "main_manager_color"
         case primaryText        = "primary_text_color"
         case textBlack          = "primary_text_black_color"
