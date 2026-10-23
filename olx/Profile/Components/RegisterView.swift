@@ -9,7 +9,7 @@ final class RegisterView: UIView {
         var config = UIButton.Configuration.plain()
         config.title = "Продолжить с Apple"
         config.image = UIImage(systemName: "applelogo")
-        config.imagePadding = 50
+        config.imagePadding = 25
         config.baseForegroundColor = ColorResourceManager.shared.primaryText
         config.background.cornerRadius = 5
         config.attributedTitle = AttributedString("Продолжить с Apple", attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 18, weight: .bold)]))
