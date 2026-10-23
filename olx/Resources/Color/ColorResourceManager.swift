@@ -57,8 +57,8 @@ private extension ColorResourceManager {
         case white              = "white_color"
         case black              = "black_color"
         case lineProfile        = "line_profile_color"
-        case searchBackground   = "search_background_color"      // verify full name in assets
-        case secondUserMessage  = "second_user_message_color"    // verify full name in assets
+        case searchBackground   = "search_background_color"
+        case secondUserMessage  = "second_user_message_color"
         case secondaryText      = "secondary_text_color"
         case segmentedControl   = "segmented_control_color"
         case separator          = "separator_color"

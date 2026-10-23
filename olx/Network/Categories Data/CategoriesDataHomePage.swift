@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoriesDataHomePage {
+final class CategoriesDataHomePage {
     static let shared = CategoriesDataHomePage()
     private init() {}
     
