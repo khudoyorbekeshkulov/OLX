@@ -14,17 +14,20 @@ class MessageView: UIView {
     
     private var messages = [ChatMessage]() {
         didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                
+                tableView.reloadData()
+                scrollToBottom(rowCount: messages.count)
             }
         }
     }
     
     var tableView = UITableView().then {
         $0.backgroundColor = ColorResourceManager.shared.chatBackground
-        $0.separatorStyle = .none
+        $0.register(cellType: MessageCell.self)
         $0.keyboardDismissMode = .interactive
-        $0.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseID)
+        $0.separatorStyle = .none
     }
     
     let inputBar = UIView()
@@ -61,6 +64,11 @@ class MessageView: UIView {
     }
     
     func setupMessages(messages: [ChatMessage]) {
+        self.messages = messages
+    }
+    
+    func onMessageSend(messages: [ChatMessage]) {
+        textField.text = ""
         self.messages = messages
     }
 }
@@ -115,16 +123,9 @@ extension MessageView: UITableViewDataSource, UITableViewDelegate {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: MessageCell.reuseID,
-            for: indexPath
-        ) as? MessageCell else {
-            return UITableViewCell()
+        tableView.dequeueCell(MessageCell.self, for: indexPath).then {
+            $0.configure(with: messages[indexPath.row])
         }
-        cell.configure(
-            with: messages[indexPath.row]
-        )
-        return cell
     }
 }
 
@@ -134,9 +135,12 @@ extension MessageView {
     }
     
     func scrollToBottom(rowCount: Int) {
-        guard rowCount > 0 else {return}
-        
-        let lastRow = IndexPath(row: rowCount - 1, section: 0)
-        tableView.scrollToRow(at: lastRow, at: .bottom, animated: true)
+        guard rowCount > 0 else { return }
+      
+        tableView.scrollToRow(
+            at: IndexPath(row: rowCount - 1, section: 0),
+            at: .bottom,
+            animated: true
+        )
     }
 }

@@ -63,10 +63,7 @@ private extension MessageViewController {
             return }
         
         messages.append(ChatMessage(text: text, isFromCurrentUser: true))
-        rootView.textField.text = ""
-        
-        rootView.tableView.reloadData()
-        rootView.scrollToBottom(rowCount: messages.count)
+        rootView.onMessageSend(messages: messages)
     }
     
     @objc func phoneTapped() {

@@ -2,8 +2,6 @@ import UIKit
 import SnapKit
 
 class MessageCell: UITableViewCell {
-    static let reuseID = "MessageCell"
-    
     private var leadingConstraint: Constraint!
     private var trailingConstraint: Constraint!
     
