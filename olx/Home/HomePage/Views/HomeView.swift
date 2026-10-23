@@ -119,13 +119,13 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
                 for: indexPath
             )
             
-            let category = categories[safe: indexPath.item]
+            guard let category = categories[safe: indexPath.item] else { return cell }
             
             return cell.then {
-                $0.profileImage.image = category?.image
-                $0.additionalLabel.text = category?.title
-                $0.saleLabel.text = category?.numberOfSales
-                $0.timeLabel.text = category?.locationAndTime
+                $0.profileImage.image = category.image
+                $0.additionalLabel.text = category.title
+                $0.saleLabel.text = category.numberOfSales
+                $0.timeLabel.text = category.locationAndTime
                 $0.isImpact = false
             }
             
