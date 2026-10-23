@@ -30,7 +30,9 @@ class MessageView: UIView {
         $0.separatorStyle = .none
     }
     
-    let inputBar = UIView()
+    let inputBar = UIView().then {
+        $0.backgroundColor = .clear
+    }
     
     private lazy var sendButton = UIButton(type: .system).then {
         let config = UIImage.SymbolConfiguration(pointSize: 23, weight: .semibold)
@@ -75,6 +77,8 @@ class MessageView: UIView {
 
 private extension MessageView {
     func setupView() {
+        backgroundColor = ColorResourceManager.shared.chatBackground
+        
         tableView.dataSource = self
         tableView.delegate = self
     }
