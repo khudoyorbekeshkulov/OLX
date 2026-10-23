@@ -24,9 +24,10 @@ class MessageView: UIView {
     }
     
     var tableView = UITableView().then {
-        $0.backgroundColor = ColorResourceManager.shared.chatBackground
+        $0.backgroundColor = .clear
         $0.register(cellType: MessageCell.self)
         $0.keyboardDismissMode = .interactive
+        $0.showsVerticalScrollIndicator = false
         $0.separatorStyle = .none
     }
     
