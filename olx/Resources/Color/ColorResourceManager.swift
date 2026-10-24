@@ -30,6 +30,7 @@ final class ColorResourceManager {
     var white: UIColor { color(.white) }
     var black: UIColor { color(.black) }
     var lineProfile: UIColor { color(.lineProfile) }
+    var addImgBackground: UIColor { color(.addImgBackground) }
 
     // MARK: - Controls
     var segmentedControl: UIColor { color(.segmentedControl) }
@@ -62,6 +63,7 @@ private extension ColorResourceManager {
         case secondaryText      = "secondary_text_color"
         case segmentedControl   = "segmented_control_color"
         case separator          = "separator_color"
+        case addImgBackground   = "add_img_background_color"
     }
 
     func color(_ name: Name) -> UIColor {
