@@ -13,7 +13,7 @@ final class FavoritesService {
     
     private(set) var items = [Category]()
     
-    func constains(_ category: Category) -> Bool {
+    func contains(_ category: Category) -> Bool {
         items.contains { $0.id == category.id }
     }
     
