@@ -136,21 +136,19 @@ private extension LoginView {
         
         emailTextField.snp.makeConstraints {
             $0.top.equalTo(emailLabel.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-15)
+            $0.leading.trailing.equalToSuperview().inset(15)
             $0.height.equalTo(45)
         }
         
         passwordLabel.snp.makeConstraints {
             $0.top.equalTo(emailTextField.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().offset(15)
+            $0.leading.equalToSuperview().inset(15)
             $0.size.equalTo(CGSize(width: 70, height: 14))
         }
         
         passwordTextField.snp.makeConstraints {
             $0.top.equalTo(passwordLabel.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-15)
+            $0.leading.trailing.equalToSuperview().inset(15)
             $0.height.equalTo(45)
         }
         
@@ -165,13 +163,12 @@ private extension LoginView {
         
         forgetPassword.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(25)
-            $0.leading.equalToSuperview().offset(15)
+            $0.leading.equalToSuperview().inset(15)
         }
         
         loginButton.snp.makeConstraints {
             $0.top.equalTo(forgetPassword.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-15)
+            $0.leading.trailing.equalToSuperview().inset(15)
             $0.height.equalTo(45)
         }
         
@@ -196,8 +193,7 @@ private extension LoginView {
         
         appleButton.snp.makeConstraints {
             $0.top.equalTo(textBetweenLines.snp.bottom).offset(30)
-            $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-15)
+            $0.leading.trailing.equalToSuperview().inset(15)
             $0.height.equalTo(45)
         }
         
