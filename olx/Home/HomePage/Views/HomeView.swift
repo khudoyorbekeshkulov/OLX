@@ -13,13 +13,6 @@ private enum HomeSection: Int, CaseIterable {
     case products
 }
 
-private enum GridLayout {
-    static let sideInset: CGFloat = 13
-    static let interitemSpacing: CGFloat = 10
-    static let lineSpacing: CGFloat = 15
-    static let minItemWidth: CGFloat = 160
-}
-
 final class HomeView: UIView {
     
     private var categories = [Category]() {
@@ -79,6 +72,10 @@ final class HomeView: UIView {
     func setupCategories(categories: [Category]) {
         self.categories = categories
     }
+    
+    func reloadProducts() {
+        mainCollectionView.reloadSections(IndexSet(integer: HomeSection.products.rawValue))
+    }
 }
 
 extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -127,6 +124,12 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
                 $0.saleLabel.text = category.numberOfSales
                 $0.timeLabel.text = category.locationAndTime
                 $0.isImpact = false
+                
+                $0.setFavorite(FavoritesService.shared.contains(category))
+                $0.onHeartTapped = { [weak cell] in
+                    FavoritesService.shared.toggle(category)
+                    cell?.setFavorite(FavoritesService.shared.contains(category))
+                }
             }
             
         default:
@@ -176,7 +179,7 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
                 height: CategoryContainerCell.height(for: collectionView.bounds.width)
             )
         default:
-            return productItemSize(for: collectionView.bounds.width)
+            return ProductGrid.itemSize(for: collectionView.bounds.width)
         }
     }
     
@@ -195,7 +198,7 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
     ) -> UIEdgeInsets {
         switch HomeSection(rawValue: section) {
         case .categories: .init(top: 0, left: 0, bottom: 5, right: 0)
-        case .products: .init(top: 0, left: GridLayout.sideInset, bottom: 0, right: GridLayout.sideInset)
+        case .products: .init(top: 0, left: ProductGrid.sideInset, bottom: 0, right: ProductGrid.sideInset)
         default: .zero
         }
     }
@@ -205,7 +208,7 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        section == HomeSection.categories.rawValue ? 20 : GridLayout.lineSpacing
+        section == HomeSection.categories.rawValue ? 20 : ProductGrid.lineSpacing
     }
     
     func collectionView(
@@ -213,19 +216,11 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
-        GridLayout.interitemSpacing
+        ProductGrid.interitemSpacing
     }
 }
 
 private extension HomeView {
-    
-    func productItemSize(for width: CGFloat) -> CGSize {
-        let available = width - GridLayout.sideInset * 2
-        let spacing = GridLayout.interitemSpacing
-        let columns = max(2, Int((available + spacing) / (GridLayout.minItemWidth + spacing)))
-        let itemWidth = floor((available - spacing * CGFloat(columns - 1)) / CGFloat(columns))
-        return CGSize(width: itemWidth, height: RecommendedCell.height(forWidth: itemWidth))
-    }
     
     func setupView() {
         backgroundColor = ColorResourceManager.shared.appBackground

@@ -23,6 +23,11 @@ class HomeViewController: UIViewController {
         setupNetworkCalls()
         setupViewBinders()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rootView.reloadProducts()
+    }
 }
 
 private extension HomeViewController {

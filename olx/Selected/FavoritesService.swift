@@ -5,7 +5,7 @@
 //  Created by Eshqulov Xudoyorbek  on 21/10/26.
 //
 
-import Foundation
+import UIKit
 
 final class FavoritesService {
     static let shared = FavoritesService()

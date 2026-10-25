@@ -13,7 +13,7 @@ enum Segment {
     case register
 }
 
-class ProfileView: UIView {
+final class ProfileView: UIView {
     
     private let loginView = LoginView()
     

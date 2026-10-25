@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MessageView: UIView {
+final class MessageView: UIView {
     var onSendTapped: (() -> Void)?
     var inputBarBottomConstraint: Constraint!
     

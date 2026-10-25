@@ -9,12 +9,12 @@ class RecommendedCell: UICollectionViewCell {
     static func height(forWidth width: CGFloat) -> CGFloat {
         ceil(width * imageAspectRatio) + textBlockHeight
     }
-    
-    private var isTapped = false
-    
+        
     var isImpact = false {
         didSet{updateCellSize()}
     }
+    
+    var onHeartTapped: (() -> Void)?
     
     let cellView = UIView().then {
         $0.backgroundColor = ColorResourceManager.shared.cardBackground
@@ -55,6 +55,17 @@ class RecommendedCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension RecommendedCell {
+    func setFavorite(_ isFavorite: Bool) {
+        let name = isFavorite ? "heart.fill" : "heart"
+        heartButton.setImage(UIImage(systemName: name), for: .normal)
+    }
+    
+    @objc func heartTapped() {
+        onHeartTapped?()
     }
 }
 
@@ -110,11 +121,5 @@ private extension RecommendedCell {
             $0.top.equalTo(timeLabel.snp.bottom).offset(5)
             $0.leading.trailing.equalToSuperview().inset(10)
         }
-    }
-    
-    @objc func heartTapped() {
-        isTapped.toggle()
-        let heartChange = isTapped ?  "heart.fill" :  "heart"
-        heartButton.setImage(UIImage(systemName: heartChange), for: .normal)
     }
 }
