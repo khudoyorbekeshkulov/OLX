@@ -69,17 +69,16 @@ final class DetailView: UIView {
     }
     
     private lazy var adsLabelFrame = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        $0.text = "Все объявления автора"
-        $0.textColor = ColorResourceManager.shared.mainManager
+        $0.attributedText = NSAttributedString(
+            string: "Все объявления автора",
+            attributes: [
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+                .font: UIFont.systemFont(ofSize: 13, weight: .medium),
+                .foregroundColor: ColorResourceManager.shared.mainManager
+            ]
+        )
     }
-    
-    private lazy var adsLabel = UILabel()
-    
-    private lazy var lineView = UIView().then {
-        $0.backgroundColor = ColorResourceManager.shared.mainManager
-    }
-    
+        
     private lazy var headerLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         $0.text = "Похожие объявления"
@@ -188,11 +187,6 @@ private extension DetailView {
             feedbackButton,
             adsLabelFrame
         ])
-        
-        adsLabelFrame.addSubviews([
-            adsLabel,
-            lineView
-        ])
     }
     
     func setupConstraints() {
@@ -258,18 +252,6 @@ private extension DetailView {
         headerLabel.snp.makeConstraints {
             $0.top.equalTo(infoFrame.snp.bottom).offset(20)
             $0.leading.equalTo(infoFrame.snp.leading).offset(15)
-        }
-        
-        adsLabel.snp.makeConstraints {
-            $0.centerY.equalTo(adsLabelFrame.snp.centerY)
-            $0.centerX.equalTo(adsLabelFrame.snp.centerX)
-        }
-        
-        lineView.snp.makeConstraints {
-            $0.top.equalTo(adsLabel.snp.bottom).offset(8)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(8)
-            $0.height.equalTo(1)
         }
         
         detailCollectionView.snp.makeConstraints {
