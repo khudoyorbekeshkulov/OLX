@@ -20,7 +20,6 @@ private enum Constants {
 final class AddView: UIView {
     
     var onAddPhotoTapped: (() -> Void)?
-    var onPublishTapped: (() -> Void)?
         
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
@@ -255,7 +254,6 @@ private extension AddView {
         backgroundColor = ColorResourceManager.shared.appBackground
         
         photoBanner.addTarget(self, action: #selector(photoTapped), for: .touchUpInside)
-        publishButton.addTarget(self, action: #selector(publishTapped), for: .touchUpInside)
         titleField.addTarget(self, action: #selector(titleChanged), for: .editingChanged)
         descriptionView.delegate = self
     }
@@ -349,11 +347,7 @@ private extension AddView {
     @objc func photoTapped() {
         onAddPhotoTapped?()
     }
-    
-    @objc func publishTapped() {
-        onPublishTapped?()
-    }
-    
+
     @objc func titleChanged() {
         let count = titleField.text?.count ?? 0
         titleCounter.text = "\(count)/\(Constants.titleMaxLength)"
