@@ -35,6 +35,7 @@ final class ColorResourceManager {
     // MARK: - Controls
     var segmentedControl: UIColor { color(.segmentedControl) }
     var separator: UIColor { color(.separator) }
+    var secondaryLabel: UIColor { color(.secondaryLabel) }
 }
 
 // MARK: - Asset names
@@ -64,6 +65,7 @@ private extension ColorResourceManager {
         case segmentedControl   = "segmented_control_color"
         case separator          = "separator_color"
         case addImgBackground   = "add_img_background_color"
+        case secondaryLabel     = "secondary_label_color"
     }
 
     func color(_ name: Name) -> UIColor {

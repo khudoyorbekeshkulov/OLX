@@ -22,6 +22,8 @@ final class LoginView: UIView {
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
+    private let container = UIView()
+    
     private lazy var passwordTextField = UITextField().then {
         $0.backgroundColor = ColorResourceManager.shared.separator
         $0.placeholder = "Введите свой пароль..."
@@ -32,8 +34,6 @@ final class LoginView: UIView {
         $0.leftViewMode = .always
         $0.setLeftPadding(12)
     }
-    
-    private let container = UIView()
     
     private lazy var showButton = UIButton(type: .system).then {
         $0.setTitle("Показать", for: .normal)
