@@ -159,7 +159,7 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        onCategorySelected?(categories[indexPath.item])
+        onCategorySelected?(categories[safe: indexPath.item]!)
     }
 }
 

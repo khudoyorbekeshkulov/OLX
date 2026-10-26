@@ -205,7 +205,8 @@ private extension RegisterView {
         }
         
         text2.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.leading.equalTo(checkBox.snp.trailing).offset(15)
+            $0.trailing.equalToSuperview().inset(15)
             $0.top.equalTo(text.snp.bottom).offset(20)
         }
         

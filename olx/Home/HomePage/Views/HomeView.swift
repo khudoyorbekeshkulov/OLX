@@ -17,8 +17,10 @@ final class HomeView: UIView {
     
     private var categories = [Category]() {
         didSet {
-            DispatchQueue.main.async {
-                self.mainCollectionView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                
+                mainCollectionView.reloadData()
             }
         }
     }

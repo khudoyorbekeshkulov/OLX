@@ -28,4 +28,3 @@ private extension ProfileViewController {
         view.endEditing(true)
     }
 }
-
