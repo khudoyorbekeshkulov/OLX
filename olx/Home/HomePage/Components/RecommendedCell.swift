@@ -1,20 +1,27 @@
 import UIKit
 import SnapKit
 
-class RecommendedCell: UICollectionViewCell {
-    
+protocol RecommendedCellProtocol: AnyObject {
+    func onHeartTapped(category: Category)
+}
+
+private enum Constants {
     static let imageAspectRatio: CGFloat = 0.57
-    private static let textBlockHeight: CGFloat = 90
+    static let textBlockHeight: CGFloat = 90
+}
+
+class RecommendedCell: UICollectionViewCell {
+    weak var delegate: RecommendedCellProtocol?
     
     static func height(forWidth width: CGFloat) -> CGFloat {
-        ceil(width * imageAspectRatio) + textBlockHeight
+        ceil(width * Constants.imageAspectRatio) + Constants.textBlockHeight
     }
         
     var isImpact = false {
-        didSet{updateCellSize()}
+        didSet { updateCellSize() }
     }
     
-    var onHeartTapped: (() -> Void)?
+    var category: Category?
     
     let cellView = UIView().then {
         $0.backgroundColor = ColorResourceManager.shared.cardBackground
@@ -56,6 +63,14 @@ class RecommendedCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setCategory(category: Category) {
+        self.category = category
+        profileImage.image = category.image
+        additionalLabel.text = category.title
+        saleLabel.text = category.numberOfSales
+        timeLabel.text = category.locationAndTime
+    }
 }
 
 extension RecommendedCell {
@@ -65,7 +80,8 @@ extension RecommendedCell {
     }
     
     @objc func heartTapped() {
-        onHeartTapped?()
+        guard let category else { return }
+        delegate?.onHeartTapped(category: category)
     }
 }
 
@@ -96,7 +112,9 @@ private extension RecommendedCell {
         
         profileImage.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(profileImage.snp.width).multipliedBy(RecommendedCell.imageAspectRatio)
+            $0.height.equalTo(profileImage.snp.width).multipliedBy(
+                Constants.imageAspectRatio
+            )
         }
         
         heartButton.snp.makeConstraints {

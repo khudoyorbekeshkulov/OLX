@@ -121,17 +121,14 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
             guard let category = categories[safe: indexPath.item] else { return cell }
             
             return cell.then {
-                $0.profileImage.image = category.image
-                $0.additionalLabel.text = category.title
-                $0.saleLabel.text = category.numberOfSales
-                $0.timeLabel.text = category.locationAndTime
+                $0.setCategory(category: category)
                 $0.isImpact = false
                 
                 $0.setFavorite(FavoritesService.shared.contains(category))
-                $0.onHeartTapped = { [weak cell] in
-                    FavoritesService.shared.toggle(category)
-                    cell?.setFavorite(FavoritesService.shared.contains(category))
-                }
+//                $0.onHeartTapped = { [weak cell] in
+//                    FavoritesService.shared.toggle(category)
+//                    cell?.setFavorite(FavoritesService.shared.contains(category))
+//                }
             }
             
         default:
@@ -157,7 +154,8 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
         didSelectItemAt indexPath: IndexPath
     ) {
         guard indexPath.section == HomeSection.products.rawValue else { return }
-        onCategorySelected?(categories[safe: indexPath.item]!)
+        guard let category = categories[safe: indexPath.item] else { return }
+        onCategorySelected?(category)
     }
 }
 
