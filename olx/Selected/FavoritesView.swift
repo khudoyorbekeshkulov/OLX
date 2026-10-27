@@ -127,6 +127,6 @@ extension FavoritesView: UICollectionViewDataSource, UICollectionViewDelegateFlo
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        onItemSelected?(items[indexPath.item])
+        onItemSelected?(items[safe: indexPath.item]!)
     }
 }
