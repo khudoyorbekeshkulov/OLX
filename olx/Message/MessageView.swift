@@ -129,7 +129,8 @@ extension MessageView: UITableViewDataSource, UITableViewDelegate {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         tableView.dequeueCell(MessageCell.self, for: indexPath).then {
-            $0.configure(with: messages[safe: indexPath.row]!)
+            guard let message = messages[safe: indexPath.row] else { return }
+            $0.configure(with: message)
         }
     }
 }

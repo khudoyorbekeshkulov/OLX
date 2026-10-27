@@ -27,7 +27,6 @@ class MessageViewController: UIViewController {
         setupView()
         setupNetworkCalls()
         setupViewBinders()
-        setupKeyboardObservers()
     }
 }
 
