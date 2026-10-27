@@ -18,19 +18,21 @@ final class FavoritesView: UIView {
         }
     }
     
+    private lazy var collectionLayout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .vertical
+        $0.minimumLineSpacing = ProductGrid.lineSpacing
+        $0.minimumInteritemSpacing = ProductGrid.interitemSpacing
+        $0.sectionInset = .init(
+            top: 10,
+            left: ProductGrid.sideInset,
+            bottom: 0,
+            right: ProductGrid.sideInset
+        )
+    }
+    
     private lazy var collectionView = UICollectionView(
         frame: .zero,
-        collectionViewLayout: UICollectionViewFlowLayout().then {
-            $0.scrollDirection = .vertical
-            $0.minimumLineSpacing = ProductGrid.lineSpacing
-            $0.minimumInteritemSpacing = ProductGrid.interitemSpacing
-            $0.sectionInset = .init(
-                top: 10,
-                left: ProductGrid.sideInset,
-                bottom: 0,
-                right: ProductGrid.sideInset
-            )
-        }
+        collectionViewLayout: collectionLayout
     ).then {
         $0.backgroundColor = .clear
         $0.showsVerticalScrollIndicator = false
@@ -98,20 +100,14 @@ extension FavoritesView: UICollectionViewDataSource, UICollectionViewDelegateFlo
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell = collectionView.dequeueCell(RecommendedCell.self, for: indexPath)
-        let category = items[indexPath.item]
+        guard let category = items[safe: indexPath.item] else { return cell }
         
         return cell.then {
-            $0.profileImage.image = category.image
-            $0.additionalLabel.text = category.title
-            $0.saleLabel.text = category.numberOfSales
-            $0.timeLabel.text = category.locationAndTime
+            $0.setCategory(category: category)
             $0.isImpact = false
             
             $0.setFavorite(true)
-            $0.onHeartTapped = { [weak self] in
-                FavoritesService.shared.toggle(category)
-                self?.items = FavoritesService.shared.items
-            }
+            $0.delegate = self
         }
     }
     
@@ -127,6 +123,14 @@ extension FavoritesView: UICollectionViewDataSource, UICollectionViewDelegateFlo
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        onItemSelected?(items[safe: indexPath.item]!)
+        guard let category = items[safe: indexPath.item] else { return }
+        onItemSelected?(category)
+    }
+}
+
+extension FavoritesView: RecommendedCellProtocol {
+    func onHeartTapped(category: Category) {
+        FavoritesService.shared.toggle(category)
+        items = FavoritesService.shared.items
     }
 }
