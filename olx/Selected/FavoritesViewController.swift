@@ -22,7 +22,7 @@ class FavoritesViewController: UIViewController {
 
 private extension FavoritesViewController {
     func setupUI() {
-        view.backgroundColor = UIColor(named: "app_background_color")
+        view.backgroundColor = ColorResourceManager.shared.appBackground
         
         navigationItem.title = "Избранное"
     }

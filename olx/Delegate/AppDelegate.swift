@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         let tabBar = UITabBarController().then {
-            $0.tabBar.tintColor = UIColor(named: "main_manager_color")
+            $0.tabBar.tintColor = ColorResourceManager.shared.mainManager
             $0.viewControllers = [homeNav,favouritesNav, addNav, messageNav, profileNav]
         }
         
