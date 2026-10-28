@@ -20,6 +20,7 @@ private enum Constants {
 final class AddView: UIView {
     
     var onAddPhotoTapped: (() -> Void)?
+    var onPublishTapped: ((AddForm) -> Void)?
         
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false

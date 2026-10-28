@@ -26,9 +26,7 @@ private extension FavoritesViewController {
         
         navigationItem.title = "Избранное"
     }
-}
-
-private extension FavoritesViewController {
+    
     func setupViewBinders() {
         rootView.onItemSelected = { [weak self] category in
             guard let self else { return }
