@@ -21,7 +21,7 @@ final class AddView: UIView {
     
     var onAddPhotoTapped: (() -> Void)?
     var onPublishTapped: ((AddForm) -> Void)?
-        
+    
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
         $0.keyboardDismissMode = .interactive
@@ -32,7 +32,7 @@ final class AddView: UIView {
     private let formStack = UIStackView().then {
         $0.axis = .vertical
     }
-        
+    
     private let aboutLabel = UILabel().then {
         $0.text = "Расскажите нам о вашей рекламе"
         $0.font = .systemFont(ofSize: 18, weight: .bold)
@@ -79,7 +79,7 @@ final class AddView: UIView {
         $0.spacing = 12
         $0.isUserInteractionEnabled = false
     }
-        
+    
     private let titleLabel = UILabel().then {
         $0.text = "Заголовок*"
         $0.font = .systemFont(ofSize: 14, weight: .medium)
@@ -115,7 +115,7 @@ final class AddView: UIView {
     private lazy var titleHintRow = UIStackView(arrangedSubviews: [titleHintLabel, titleCounter]).then {
         $0.axis = .horizontal
     }
-        
+    
     private let descriptionLabel = UILabel().then {
         $0.text = "Описание*"
         $0.font = .systemFont(ofSize: 14, weight: .medium)
@@ -157,7 +157,7 @@ final class AddView: UIView {
     private lazy var descriptionHintRow = UIStackView(arrangedSubviews: [descriptionHintLabel, descriptionCounter]).then {
         $0.axis = .horizontal
     }
-        
+    
     private let contactsLabel = UILabel().then {
         $0.text = "Контактные данные"
         $0.font = .systemFont(ofSize: 18, weight: .bold)
@@ -230,7 +230,7 @@ final class AddView: UIView {
         $0.backgroundColor = ColorResourceManager.shared.mainManager
         $0.layer.cornerRadius = Constants.cornerRadius
     }
-        
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -348,7 +348,7 @@ private extension AddView {
     @objc func photoTapped() {
         onAddPhotoTapped?()
     }
-
+    
     @objc func titleChanged() {
         let count = titleField.text?.count ?? 0
         titleCounter.text = "\(count)/\(Constants.titleMaxLength)"
