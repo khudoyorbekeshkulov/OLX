@@ -7,7 +7,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "All listings"
+            "value" : "All listings by this user"
           }
         },
         "ru" : {
@@ -20,6 +20,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Barça e’lonlar"
+          }
+        }
+      }
+    },
+    "allListingsByUser" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все объявления автора"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muallifning barça e'lonlari"
           }
         }
       }
@@ -156,6 +173,29 @@
         }
       }
     },
+    "description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Описание"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tavsif"
+          }
+        }
+      }
+    },
     "electronics" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -225,6 +265,29 @@
         }
       }
     },
+    "leaveFeedback" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leave feedback"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оставить отзыв"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fikr qoldiring"
+          }
+        }
+      }
+    },
     "message" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -244,6 +307,75 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Xabar"
+          }
+        }
+      }
+    },
+    "onlineTime" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Online in "
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Онлайн в"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onlayn"
+          }
+        }
+      }
+    },
+    "postedTimeToday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сегодня"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bugun"
+          }
+        }
+      }
+    },
+    "postedTimeYesterday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yesterday"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вчера"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keça"
           }
         }
       }
@@ -382,6 +514,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hammasini köriş"
+          }
+        }
+      }
+    },
+    "similarAdvertisements" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Similar advertisements"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Похожие объявления"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öxșaș reklamalar"
           }
         }
       }

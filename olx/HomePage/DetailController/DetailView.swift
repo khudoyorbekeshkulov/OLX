@@ -40,7 +40,7 @@ final class DetailView: UIView {
     
     private lazy var infoLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        $0.text = "Описание"
+        $0.text = L10n.Detail.description
     }
     
     private lazy var infoProduct = UILabel().then {
@@ -61,7 +61,7 @@ final class DetailView: UIView {
     }
     
     private lazy var feedbackButton = UIButton(type: .system).then {
-        $0.setTitle("Оставить отзыв", for: .normal)
+        $0.setTitle(L10n.Detail.leaveFeedback, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 13, weight: .medium)
         $0.setTitleColor(ColorResourceManager.shared.mainManager, for: .normal)
         $0.layer.borderWidth = 1
@@ -70,7 +70,7 @@ final class DetailView: UIView {
     
     private lazy var adsLabelFrame = UILabel().then {
         $0.attributedText = NSAttributedString(
-            string: "Все объявления автора",
+            string: L10n.Detail.allListingsByUser,
             attributes: [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
                 .font: UIFont.systemFont(ofSize: 13, weight: .medium),
@@ -81,7 +81,7 @@ final class DetailView: UIView {
         
     private lazy var headerLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        $0.text = "Похожие объявления"
+        $0.text = L10n.Detail.similarAdvertisements
     }
     
     private lazy var layout = UICollectionViewFlowLayout().then {

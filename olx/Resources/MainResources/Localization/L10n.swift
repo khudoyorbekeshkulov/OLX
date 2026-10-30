@@ -43,7 +43,13 @@ enum L10n {
         static var recommendedForYouLabel: String { "recommendedForYou".localized }
     }
     
-    enum Favorites {
-        
+    enum Detail {
+        static var onlineTime: String { "onlineTime".localized }
+        static var postedTimeToday: String { "postedTimeToday".localized }
+        static var postedTimeYesterday: String { "postedTimeYesterday".localized }
+        static var description: String { "description".localized }
+        static var leaveFeedback: String { "leaveFeedback".localized }
+        static var allListingsByUser: String { "allListingsByUser".localized }
+        static var similarAdvertisements: String { "similarAdvertisements".localized }
     }
 }

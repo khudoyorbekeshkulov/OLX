@@ -4,7 +4,7 @@ import SnapKit
 final class RecommendedHeaderView: UICollectionReusableView {
     
     private lazy var titleLabel = UILabel().then {
-        $0.text = "Рекомендованное вам"
+        $0.text = L10n.Home.recommendedForYouLabel
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
     
