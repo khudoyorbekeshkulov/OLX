@@ -244,7 +244,7 @@ private extension HomeView {
         }
         
         searchingTextField.then {
-            $0.placeholder = "Поиск"
+            $0.placeholder = L10n.Overall.searchPlaceholder
             $0.leftView = leftContainer
             $0.leftViewMode = .always
         }

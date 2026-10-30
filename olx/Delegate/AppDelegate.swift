@@ -9,35 +9,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let profileNav = toTabItem(
             rootViewController: ProfileViewController(),
-            title: "Профиль",
+            title: L10n.NavBar.profile,
             image: "person",
             selectedImage: "person.crop.circle"
         )
         
         let messageNav = toTabItem(
             rootViewController: MessageViewController(navigationTitle: "Сообщения"),
-            title: "Сообщения",
+            title: L10n.NavBar.message,
             image: "ellipsis.message",
             selectedImage: "ellipsis.message.fill"
         )
         
         let addNav = toTabItem(
-            rootViewController: AddViewController(),
-            title: "Создать",
+            rootViewController: CreateViewController(),
+            title: L10n.NavBar.create,
             image: "plus.circle",
             selectedImage: "plus.circle.fill"
         )
         
         let favouritesNav = toTabItem(
             rootViewController: FavoritesViewController(),
-            title: "Избранное",
+            title: L10n.NavBar.favorites,
             image: "star",
             selectedImage: "star.fill"
         )
         
         let homeNav = toTabItem(
             rootViewController: HomeViewController(),
-            title: "Главная",
+            title: L10n.NavBar.home,
             image: "house",
             selectedImage: "house.fill"
         )
