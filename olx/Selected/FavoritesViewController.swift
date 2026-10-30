@@ -11,6 +11,7 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        setupViewBinders()
     }
     
     override func viewWillAppear(_ animated: Bool) {
