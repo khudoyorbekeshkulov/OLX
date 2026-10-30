@@ -13,6 +13,8 @@ private enum Constants {
 class RecommendedCell: UICollectionViewCell {
     weak var delegate: RecommendedCellProtocol?
     
+    var heartTapped: (() -> Void)?
+    
     static func height(forWidth width: CGFloat) -> CGFloat {
         ceil(width * Constants.imageAspectRatio) + Constants.textBlockHeight
     }
@@ -41,7 +43,7 @@ class RecommendedCell: UICollectionViewCell {
     private lazy var heartButton = UIButton().then {
         $0.setImage(UIImage(systemName: "heart"), for: .normal)
         $0.tintColor = ColorResourceManager.shared.heart
-        $0.addTarget(self, action: #selector(heartTapped), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didTapHeart), for: .touchUpInside)
     }
     
     let timeLabel = UILabel().then {
@@ -79,9 +81,8 @@ extension RecommendedCell {
         heartButton.setImage(UIImage(systemName: name), for: .normal)
     }
     
-    @objc func heartTapped() {
-        guard let category else { return }
-        delegate?.onHeartTapped(category: category)
+    @objc func didTapHeart() {
+        heartTapped?()
     }
 }
 

@@ -11,9 +11,13 @@ class DetailViewController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                 
-                navigationItem.rightBarButtonItem?.image = UIImage(systemName: isCheckedHeart ? "heart.fill" : "heart")
+                navigationItem.rightBarButtonItem?.image = heartImage
             }
         }
+    }
+    
+    private var heartImage: UIImage? {
+        UIImage(systemName: isCheckedHeart ? "heart.fill" : "heart")
     }
     
     override func loadView() {
@@ -30,6 +34,10 @@ class DetailViewController: UIViewController {
 
 private extension DetailViewController {
     func setupNavBar() {
+        if let category {
+            isCheckedHeart = FavoritesService.shared.contains(category)
+        }
+        
         let appearance = UINavigationBarAppearance().then {
             $0.configureWithTransparentBackground()
         }
@@ -38,13 +46,12 @@ private extension DetailViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.isTranslucent = true
         
-        let heartButton = UIBarButtonItem(
-            image: UIImage(systemName: "heart"),
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: heartImage,
             style: .plain,
             target: self,
             action: #selector(didTapHeartButton)
         )
-        navigationItem.rightBarButtonItem = heartButton
     }
     
     func setupViewBinders() {
@@ -70,7 +77,9 @@ private extension DetailViewController {
     }
     
     @objc func didTapHeartButton() {
-        isCheckedHeart.toggle()
+        guard let category else { return }
+        FavoritesService.shared.toggle(category)
+        isCheckedHeart = FavoritesService.shared.contains(category)
     }
     
     @objc func messageOwnerTapped() {

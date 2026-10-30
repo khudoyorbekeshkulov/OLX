@@ -151,10 +151,10 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
             $0.isImpact = true
             
             $0.setFavorite(FavoritesService.shared.contains(category))
-//            $0.onHeartTapped = { [weak cell] in
-//                FavoritesService.shared.toggle(category)
-//                cell?.setFavorite(FavoritesService.shared.contains(category))
-//            }
+            $0.heartTapped = { [weak cell] in
+                FavoritesService.shared.toggle(category)
+                cell?.setFavorite(FavoritesService.shared.contains(category))
+            }
         }
     }
     

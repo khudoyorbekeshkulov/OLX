@@ -125,10 +125,10 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
                 $0.isImpact = false
                 
                 $0.setFavorite(FavoritesService.shared.contains(category))
-                //                $0.onHeartTapped = { [weak cell] in
-                //                    FavoritesService.shared.toggle(category)
-                //                    cell?.setFavorite(FavoritesService.shared.contains(category))
-                //                }
+                $0.heartTapped = { [weak cell] in
+                    FavoritesService.shared.toggle(category)
+                    cell?.setFavorite(FavoritesService.shared.contains(category))
+                }
             }
             
         default:
