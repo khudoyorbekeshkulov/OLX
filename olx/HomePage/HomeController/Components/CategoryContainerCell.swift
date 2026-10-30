@@ -14,13 +14,13 @@ final class CategoryContainerCell: UICollectionViewCell {
     }
     
     private lazy var mainCategoryLabel = UILabel().then {
-        $0.text = "Категории"
+        $0.text = L10n.Overall.categoryTitle
         $0.textColor = ColorResourceManager.shared.primaryText
         $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     }
     
     private lazy var showAllButton = UIButton(type: .system).then {
-        $0.setTitle("Смотреть все", for: .normal)
+        $0.setTitle(L10n.Overall.seeAll, for: .normal)
         $0.tintColor = ColorResourceManager.shared.secondaryText
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         $0.setTitleColor(.gray, for: .normal)

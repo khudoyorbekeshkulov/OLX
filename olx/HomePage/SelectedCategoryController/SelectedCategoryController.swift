@@ -5,6 +5,6 @@ class SelectedCategoryController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Категории"
+        navigationItem.title = L10n.Overall.categoryTitle
     }
 }

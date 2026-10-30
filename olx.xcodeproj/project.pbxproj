@@ -119,6 +119,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				"uz-UZ",
 			);
 			mainGroup = 240B22893007984C00EF9250;
 			minimizedProjectReferenceProxies = 1;

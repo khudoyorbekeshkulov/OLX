@@ -17,7 +17,7 @@ private enum Constants {
     static let descriptionMaxLength = 9000
 }
 
-final class AddView: UIView {
+final class CreateView: UIView {
     
     var onAddPhotoTapped: (() -> Void)?
     var onPublishTapped: ((AddForm) -> Void)?
@@ -250,7 +250,7 @@ final class AddView: UIView {
     }
 }
 
-private extension AddView {
+private extension CreateView {
     func setupView() {
         backgroundColor = ColorResourceManager.shared.appBackground
         
@@ -355,7 +355,7 @@ private extension AddView {
     }
 }
 
-extension AddView: UITextViewDelegate {
+extension CreateView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         descriptionPlaceholder.isHidden = !textView.text.isEmpty
         descriptionCounter.text = "\(textView.text.count)/\(Constants.descriptionMaxLength)"

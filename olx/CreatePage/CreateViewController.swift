@@ -1,8 +1,8 @@
 import UIKit
 import PhotosUI
 
-class AddViewController: UIViewController {
-    let rootView = AddView()
+class CreateViewController: UIViewController {
+    let rootView = CreateView()
     
     override func loadView() {
         view = rootView
@@ -16,7 +16,7 @@ class AddViewController: UIViewController {
     }
 }
 
-private extension AddViewController {
+private extension CreateViewController {
     func setupNav() {
         navigationItem.title = "Создать"
     }
@@ -74,7 +74,7 @@ private extension AddViewController {
     }
 }
 
-extension AddViewController: PHPickerViewControllerDelegate {
+extension CreateViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
         
