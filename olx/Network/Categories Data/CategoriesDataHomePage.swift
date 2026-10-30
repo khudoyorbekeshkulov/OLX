@@ -14,24 +14,24 @@ final class CategoriesDataHomePage {
     static let categories: [Category] = [
         Category(
             image: UIImage(named: "img_olx"),
-            title: "Все объявления"
+            title: L10n.AllGategories.allListingsLabel
         ),
         Category(
             image: UIImage(named: "img_home"),
-            title: "Недвижимость"
+            title: L10n.AllGategories.realEstateLabel
         ),
         Category(
             image: UIImage(named: "img_stroller"),
-            title: "Детский мир",
+            title: L10n.AllGategories.childrenWorldLabel,
             imageBackgroundColor: UIColor(hex: "#FFCC00")
         ),
         Category(
             image: UIImage(named: "img_dress"),
-            title: "Одежда и обувь"
+            title: L10n.AllGategories.clothesLabel
         ),
         Category(
             image: UIImage(named: "img_car_chapter"),
-            title: "Автомобили"
+            title: L10n.AllGategories.carsLabel
         )
     ]
 }

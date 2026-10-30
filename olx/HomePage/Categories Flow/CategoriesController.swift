@@ -27,7 +27,7 @@ class CategoriesViewController: UIViewController {
 
 private extension CategoriesViewController {
     func setupViewController() {
-        navigationItem.title = "Категории"
+        navigationItem.title = L10n.Overall.categoryTitle
     }
     
     func setupNetworkCalls() {

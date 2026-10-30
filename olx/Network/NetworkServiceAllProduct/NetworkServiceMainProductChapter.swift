@@ -12,50 +12,50 @@ final class NetworkServiceMainProductChapterImplementation: NetworkServiceProvid
         [
             CategoryMainProductsChapter (
                 image: "img_olx",
-                title: "Все обявления",
-                result: "634123 результатов",
+                title: L10n.AllGategories.allListingsLabel,
+                result: "634123 \(L10n.Overall.resultsLabel)",
                 backgroundColor: "#FFFFFF",
             ),
             
             CategoryMainProductsChapter (
                 image: "img_home",
-                title: "Недвижимость",
-                result: "28341 результатов",
+                title: L10n.AllGategories.realEstateLabel,
+                result: "28341 \(L10n.Overall.resultsLabel)",
                 backgroundColor: "#EBFAF0",
             ),
             
             CategoryMainProductsChapter (
                 image: "img_stroller",
-                title: "Детский мир",
-                result: "44123 результатов",
+                title: L10n.AllGategories.childrenWorldLabel,
+                result: "44123 \(L10n.Overall.resultsLabel)",
                 backgroundColor: "#FDF6DE",
             ),
             
             CategoryMainProductsChapter(
                 image: "img_dress",
-                title: "Одежда и обувь",
-                result: "18934 результатов",
+                title: L10n.AllGategories.clothesLabel,
+                result: "18934 \(L10n.Overall.resultsLabel)",
                 backgroundColor: "#F0F7F7",
             ),
             
             CategoryMainProductsChapter (
                 image: "img_car_chapter",
-                title: "Автомобили",
-                result: "7123 результатов",
+                title: L10n.AllGategories.carsLabel,
+                result: "7123 \(L10n.Overall.resultsLabel)",
                 backgroundColor: "#E1F0FF",
             ),
             
             CategoryMainProductsChapter (
                 image: "img_cat",
-                title: "Животные",
-                result: "5473 результатов",
+                title: L10n.AllGategories.animalsLabel,
+                result: "5473 \(L10n.Overall.resultsLabel)",
                 backgroundColor: "#FFF3E6",
             ),
             
             CategoryMainProductsChapter (
                 image: "img_phone",
-                title: "Электроника",
-                result: "3573 результатов",
+                title: L10n.AllGategories.electronicsLabel,
+                result: "3573 \(L10n.Overall.resultsLabel)",
                 backgroundColor: "#F3EBFF",
             ),
         ]
