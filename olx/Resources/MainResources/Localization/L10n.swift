@@ -14,15 +14,12 @@ extension String {
 }
 
 enum L10n {
-    enum NavBar {
+    enum Overall {
         static var home: String { "home".localized }
         static var favorites: String { "favorites".localized }
         static var create: String { "create".localized }
         static var message: String { "message".localized }
         static var profile: String { "profile".localized }
-    }
-    
-    enum Overall {
         static var searchPlaceholder: String { "searchPlaceholder".localized }
         static var categoryTitle: String { "categoryTitle".localized }
         static var seeAll: String { "seeAll".localized }
