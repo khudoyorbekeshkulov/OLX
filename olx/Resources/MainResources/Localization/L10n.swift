@@ -52,4 +52,9 @@ enum L10n {
         static var allListingsByUser: String { "allListingsByUser".localized }
         static var similarAdvertisements: String { "similarAdvertisements".localized }
     }
+    
+    enum Favorites {
+        static var favoritesNavigationTitle: String { "favoritesNavigationTitle".localized }
+        static var notFavoritesTitle: String { "notFavoritesTitle".localized }
+    }
 }

@@ -25,7 +25,7 @@ private extension FavoritesViewController {
     func setupUI() {
         view.backgroundColor = ColorResourceManager.shared.appBackground
         
-        navigationItem.title = "Избранное"
+        navigationItem.title = L10n.Favorites.favoritesNavigationTitle
     }
     
     func setupViewBinders() {

@@ -40,7 +40,7 @@ final class FavoritesView: UIView {
     }
     
     private let emptyLabel = UILabel().then {
-        $0.text = "Нет избранных"
+        $0.text = L10n.Favorites.notFavoritesTitle
         $0.textColor = ColorResourceManager.shared.secondaryText
     }
     

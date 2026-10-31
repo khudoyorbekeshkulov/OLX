@@ -242,6 +242,29 @@
         }
       }
     },
+    "favoritesNavigationTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorites"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Избранное"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sevimlilar"
+          }
+        }
+      }
+    },
     "home" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -307,6 +330,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Xabar"
+          }
+        }
+      }
+    },
+    "notFavoritesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are no chosen ones"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет избранных"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sevimlilar yöq"
           }
         }
       }
