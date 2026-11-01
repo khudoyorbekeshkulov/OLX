@@ -40,7 +40,7 @@ final class DetailView: UIView {
     
     private lazy var infoLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        $0.text = L10n.Detail.description
+        $0.text = L10n.Overall.description
     }
     
     private lazy var infoProduct = UILabel().then {

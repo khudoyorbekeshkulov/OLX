@@ -18,7 +18,7 @@ class CreateViewController: UIViewController {
 
 private extension CreateViewController {
     func setupNav() {
-        navigationItem.title = "Создать"
+        navigationItem.title = L10n.Overall.create
     }
     
     func setupViewBinders() {

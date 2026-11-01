@@ -34,7 +34,7 @@ final class CreateView: UIView {
     }
     
     private let aboutLabel = UILabel().then {
-        $0.text = "Расскажите нам о вашей рекламе"
+        $0.text = L10n.Create.aboutYourAdvertisementTitle
         $0.font = .systemFont(ofSize: 18, weight: .bold)
         $0.textColor = ColorResourceManager.shared.primaryText
         $0.numberOfLines = 0
@@ -64,7 +64,7 @@ final class CreateView: UIView {
     
     private let addPhotoLabel = UILabel().then {
         $0.attributedText = NSAttributedString(
-            string: "Добавить фото",
+            string: L10n.Create.addPhoto,
             attributes: [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
                 .font: UIFont.systemFont(ofSize: 16, weight: .semibold),
@@ -81,14 +81,14 @@ final class CreateView: UIView {
     }
     
     private let titleLabel = UILabel().then {
-        $0.text = "Заголовок*"
+        $0.text = L10n.Create.titleLabelInput
         $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.textColor = ColorResourceManager.shared.primaryText
     }
     
     private let titleField = UITextField().then {
         $0.attributedPlaceholder = NSAttributedString(
-            string: "Например, iPhone 11 с гарантией",
+            string: L10n.Create.inputProductNameTextField,
             attributes: [.foregroundColor: ColorResourceManager.shared.secondaryLabel]
         )
         $0.font = .systemFont(ofSize: 16)
@@ -100,7 +100,7 @@ final class CreateView: UIView {
     }
     
     private let titleHintLabel = UILabel().then {
-        $0.text = "Введите не менее 16 символов"
+        $0.text = L10n.Create.checkInputProductNameLatterNumber
         $0.font = .systemFont(ofSize: 13)
         $0.textColor = ColorResourceManager.shared.secondaryLabel
     }
@@ -117,7 +117,7 @@ final class CreateView: UIView {
     }
     
     private let descriptionLabel = UILabel().then {
-        $0.text = "Описание*"
+        $0.text = L10n.Overall.description
         $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.textColor = ColorResourceManager.shared.primaryText
     }
@@ -135,14 +135,14 @@ final class CreateView: UIView {
     }
     
     private let descriptionPlaceholder = UILabel().then {
-        $0.text = "Представьте себя на месте покупателя и опишите товар :)"
+        $0.text = L10n.Create.descriptionPlaceholderInCreateView
         $0.font = .systemFont(ofSize: 16)
         $0.textColor = ColorResourceManager.shared.secondaryLabel
         $0.numberOfLines = 0
     }
     
     private let descriptionHintLabel = UILabel().then {
-        $0.text = "Введите не менее 40 символов"
+        $0.text = L10n.Create.checkDescriptionLetterNumber
         $0.font = .systemFont(ofSize: 13)
         $0.textColor = ColorResourceManager.shared.secondaryLabel
     }
@@ -159,21 +159,21 @@ final class CreateView: UIView {
     }
     
     private let contactsLabel = UILabel().then {
-        $0.text = "Контактные данные"
+        $0.text = L10n.Overall.contactDetailsLabel
         $0.font = .systemFont(ofSize: 18, weight: .bold)
         $0.textColor = ColorResourceManager.shared.primaryText
         $0.numberOfLines = 0
     }
     
     private let contactLabel = UILabel().then {
-        $0.text = "Контактное лицо*"
+        $0.text = L10n.Overall.contactPersonLabel
         $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.textColor = ColorResourceManager.shared.primaryText
     }
     
     private let contactField = UITextField().then {
         $0.attributedPlaceholder = NSAttributedString(
-            string: "Имя",
+            string: L10n.Overall.nameLabel,
             attributes: [.foregroundColor: ColorResourceManager.shared.secondaryLabel]
         )
         $0.font = .systemFont(ofSize: 16)
@@ -185,7 +185,7 @@ final class CreateView: UIView {
     }
     
     private let emailLabel = UILabel().then {
-        $0.text = "Email"
+        $0.text = L10n.Overall.emailLabel
         $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.textColor = ColorResourceManager.shared.primaryText
     }
@@ -205,7 +205,7 @@ final class CreateView: UIView {
     }
     
     private let phoneLabel = UILabel().then {
-        $0.text = "Номер телефона"
+        $0.text = L10n.Overall.phoneNumberLabel
         $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.textColor = ColorResourceManager.shared.primaryText
     }
@@ -224,7 +224,7 @@ final class CreateView: UIView {
     }
     
     private let publishButton = UIButton(type: .system).then {
-        $0.setTitle("Опубликовать объявление", for: .normal)
+        $0.setTitle(L10n.Create.postAnAddButton, for: .normal)
         $0.setTitleColor(.systemBackground, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         $0.backgroundColor = ColorResourceManager.shared.mainManager

@@ -1,6 +1,52 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "aboutYourAdvertisementTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tell us about your advertisement"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Расскажите нам о вашей рекламе"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reklamangiz haqida bizga xabar bering"
+          }
+        }
+      }
+    },
+    "addPhoto" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add photo"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить фото"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Surat qo’shish"
+          }
+        }
+      }
+    },
     "allListings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -19,7 +65,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Barça e’lonlar"
+            "value" : "Barcha e’lonlar"
           }
         }
       }
@@ -27,6 +73,12 @@
     "allListingsByUser" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All listings by the author"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36,7 +88,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Muallifning barça e'lonlari"
+            "value" : "Muallifning barcha e'lonlari"
           }
         }
       }
@@ -110,6 +162,52 @@
         }
       }
     },
+    "checkDescriptionLetterNumber" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter at least 40 characters"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите не менее 40 символов"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iltimos, kamida 40 ta belgi kiriting"
+          }
+        }
+      }
+    },
+    "checkInputProductNameLatterNumber" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter at least 16 characters"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите не менее 16 символов"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iltimos, kamida 16 ta belgi kiriting"
+          }
+        }
+      }
+    },
     "childrenWorld" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -145,7 +243,53 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kiyim-keçak va poyablaz"
+            "value" : "Kiyim-keçchak va poyablaz"
+          }
+        }
+      }
+    },
+    "contactDetailsLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact details"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Контактные данные"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aloqa ma'lumotlari"
+          }
+        }
+      }
+    },
+    "contactPersonLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact person"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Контактное лицо"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bog'lanish uchun shaxs"
           }
         }
       }
@@ -168,7 +312,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yaratiș"
+            "value" : "Yaratish"
           }
         }
       }
@@ -192,6 +336,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tavsif"
+          }
+        }
+      }
+    },
+    "descriptionPlaceholderInCreateView" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Put yourself in the buyer's shoes and describe the product :)"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Представьте себя на месте покупателя и опишите товар :)"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O'zingizni xaridorning o'rniga qo'ying va mahsulotni tasvirlab bering :)"
           }
         }
       }
@@ -242,29 +409,6 @@
         }
       }
     },
-    "favoritesNavigationTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Favorites"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Избранное"
-          }
-        },
-        "uz-UZ" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sevimlilar"
-          }
-        }
-      }
-    },
     "home" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -284,6 +428,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Asosiy"
+          }
+        }
+      }
+    },
+    "inputProductNameTextField" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For example, an iPhone 11 with a warranty"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Например, iPhone 11 с гарантией"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masalan, kafolatli iPhone 11"
           }
         }
       }
@@ -334,6 +501,29 @@
         }
       }
     },
+    "nameLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Имя"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ism"
+          }
+        }
+      }
+    },
     "notFavoritesTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -380,6 +570,52 @@
         }
       }
     },
+    "phoneNumberLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phone number"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Номер телефона"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telifon raqam"
+          }
+        }
+      }
+    },
+    "postAnAddButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post an add"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Опубликовать объявление"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reklama joylashtirish"
+          }
+        }
+      }
+    },
     "postedTimeToday" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -421,7 +657,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Keça"
+            "value" : "Kecha"
           }
         }
       }
@@ -467,7 +703,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Köçmas mulk"
+            "value" : "Ko’chmas mulk"
           }
         }
       }
@@ -559,7 +795,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hammasini köriş"
+            "value" : "Hammasini ko’rish"
           }
         }
       }
@@ -582,7 +818,30 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öxșaș reklamalar"
+            "value" : "O’xshash reklamalar"
+          }
+        }
+      }
+    },
+    "titleLabelInput" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Title"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заголовок"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sarlavha"
           }
         }
       }

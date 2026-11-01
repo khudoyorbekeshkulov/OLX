@@ -24,6 +24,12 @@ enum L10n {
         static var categoryTitle: String { "categoryTitle".localized }
         static var seeAll: String { "seeAll".localized }
         static var resultsLabel: String { "results".localized }
+        static var description: String { "description".localized }
+        static var contactDetailsLabel: String { "contactDetailsLabel".localized }
+        static var contactPersonLabel: String { "contactPersonLabel".localized }
+        static var nameLabel: String { "nameLabel".localized }
+        static var emailLabel: String { "emailLabel".localized }
+        static var phoneNumberLabel: String { "phoneNumberLabel".localized }
     }
     
     enum AllGategories {
@@ -44,14 +50,23 @@ enum L10n {
         static var onlineTime: String { "onlineTime".localized }
         static var postedTimeToday: String { "postedTimeToday".localized }
         static var postedTimeYesterday: String { "postedTimeYesterday".localized }
-        static var description: String { "description".localized }
         static var leaveFeedback: String { "leaveFeedback".localized }
         static var allListingsByUser: String { "allListingsByUser".localized }
         static var similarAdvertisements: String { "similarAdvertisements".localized }
     }
     
     enum Favorites {
-        static var favoritesNavigationTitle: String { "favoritesNavigationTitle".localized }
         static var notFavoritesTitle: String { "notFavoritesTitle".localized }
+    }
+    
+    enum Create {
+        static var aboutYourAdvertisementTitle: String { "aboutYourAdvertisementTitle".localized }
+        static var addPhoto: String { "addPhoto".localized }
+        static var titleLabelInput: String { "titleLabelInput".localized }
+        static var inputProductNameTextField: String { "inputProductNameTextField".localized }
+        static var checkInputProductNameLatterNumber: String { "checkInputProductNameLatterNumber".localized }
+        static var descriptionPlaceholderInCreateView: String { "descriptionPlaceholderInCreateView".localized }
+        static var checkDescriptionLetterNumber: String { "checkDescriptionLetterNumber".localized }
+        static var postAnAddButton: String { "postAnAddButton".localized }
     }
 }
