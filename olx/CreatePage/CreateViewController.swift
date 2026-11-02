@@ -62,8 +62,11 @@ private extension CreateViewController {
         let category = Category(
             image: image,
             title: form.title,
-            priceNumbers: "Договорная",
-            locationAndTime: "Только что"
+            priceNumbers: form.price.isEmpty ? "Договорная" : form.price,
+            phoneNumber: form.phone,
+            locationAndTime: "Только что",
+            contactName: form.contactName,
+            descriptionProduct: form.description
         )
         
         ListingsService.shared.add(category)

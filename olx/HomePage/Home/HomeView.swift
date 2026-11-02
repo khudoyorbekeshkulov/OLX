@@ -28,6 +28,10 @@ final class HomeView: UIView {
     var onShowAllCategoriesTapped: (() -> Void)?
     var onCategorySelected: ((Category) -> Void)?
     
+    private var products: [Category] {
+        ListingsService.shared.items + categories
+    }
+    
     let searchContainer = ExpandingContainerView().then {
         $0.backgroundColor = ColorResourceManager.shared.searchBackground
         $0.layer.cornerRadius = 8
@@ -93,7 +97,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
         case .categories:
             return 1
         default:
-            return categories.count
+            return products.count
         }
     }
     
@@ -118,7 +122,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
                 for: indexPath
             )
             
-            guard let category = categories[safe: indexPath.item] else { return cell }
+            guard let category = products[safe: indexPath.item] else { return cell }
             
             return cell.then {
                 $0.setCategory(category: category)
@@ -154,7 +158,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
         didSelectItemAt indexPath: IndexPath
     ) {
         guard indexPath.section == HomeSection.products.rawValue else { return }
-        guard let category = categories[safe: indexPath.item] else { return }
+        guard let category = products[safe: indexPath.item] else { return }
         onCategorySelected?(category)
     }
 }
