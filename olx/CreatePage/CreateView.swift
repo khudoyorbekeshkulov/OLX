@@ -116,6 +116,26 @@ final class CreateView: UIView {
         $0.axis = .horizontal
     }
     
+    private let priceLabel = UILabel().then {
+        $0.text = L10n.Overall.priceLabel
+        $0.font = .systemFont(ofSize: 14, weight: .medium)
+        $0.textColor = ColorResourceManager.shared.primaryText
+    }
+    
+    private let priceTextField = UITextField().then {
+        $0.attributedPlaceholder = NSAttributedString(
+            string: L10n.Overall.inputPricePlaceholder,
+            attributes: [.foregroundColor: ColorResourceManager.shared.secondaryLabel]
+        )
+        $0.font = .systemFont(ofSize: 16)
+        $0.textColor = ColorResourceManager.shared.primaryText
+        $0.backgroundColor = ColorResourceManager.shared.separator
+        $0.layer.cornerRadius = Constants.cornerRadius
+        $0.keyboardType = .emailAddress
+        $0.autocapitalizationType = .none
+        $0.setLeftPadding(16)
+    }
+    
     private let descriptionLabel = UILabel().then {
         $0.text = L10n.Overall.description
         $0.font = .systemFont(ofSize: 14, weight: .medium)
@@ -181,26 +201,6 @@ final class CreateView: UIView {
         $0.backgroundColor = ColorResourceManager.shared.separator
         $0.layer.cornerRadius = Constants.cornerRadius
         $0.autocapitalizationType = .sentences
-        $0.setLeftPadding(16)
-    }
-    
-    private let emailLabel = UILabel().then {
-        $0.text = L10n.Overall.emailLabel
-        $0.font = .systemFont(ofSize: 14, weight: .medium)
-        $0.textColor = ColorResourceManager.shared.primaryText
-    }
-    
-    private let emailField = UITextField().then {
-        $0.attributedPlaceholder = NSAttributedString(
-            string: "example@mail.com",
-            attributes: [.foregroundColor: ColorResourceManager.shared.secondaryLabel]
-        )
-        $0.font = .systemFont(ofSize: 16)
-        $0.textColor = ColorResourceManager.shared.primaryText
-        $0.backgroundColor = ColorResourceManager.shared.separator
-        $0.layer.cornerRadius = Constants.cornerRadius
-        $0.keyboardType = .emailAddress
-        $0.autocapitalizationType = .none
         $0.setLeftPadding(16)
     }
     
@@ -274,6 +274,9 @@ private extension CreateView {
         add(titleField, after: 6)
         add(titleHintRow, after: 20)
         
+        add(priceLabel, after: 8)
+        add(priceTextField, after: 20)
+        
         add(descriptionLabel, after: 8)
         add(descriptionBox, after: 6)
         add(descriptionHintRow, after: 24)
@@ -282,9 +285,6 @@ private extension CreateView {
         
         add(contactLabel, after: 8)
         add(contactField, after: 20)
-        
-        add(emailLabel, after: 8)
-        add(emailField, after: 20)
         
         add(phoneLabel, after: 8)
         add(phoneField, after: 24)
@@ -322,7 +322,7 @@ private extension CreateView {
             $0.center.equalToSuperview()
         }
         
-        [titleField, contactField, emailField, phoneField, publishButton].forEach {
+        [titleField, contactField, priceTextField, phoneField, publishButton].forEach {
             $0.snp.makeConstraints { $0.height.equalTo(Constants.fieldHeight) }
         }
         

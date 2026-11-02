@@ -42,7 +42,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Surat qöshish"
+            "value" : "Surat qöşiş"
           }
         }
       }
@@ -455,29 +455,6 @@
         }
       }
     },
-    "emailLabel" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Электронная почта"
-          }
-        },
-        "uz-UZ" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Elektron poçta"
-          }
-        }
-      }
-    },
     "emailOrPhoneLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -589,6 +566,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Asosiy"
+          }
+        }
+      }
+    },
+    "inputPricePlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the price"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите цену"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Narxni kiriting"
           }
         }
       }
@@ -888,6 +888,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Keça"
+          }
+        }
+      }
+    },
+    "priceLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Price"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цена"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Narx"
           }
         }
       }

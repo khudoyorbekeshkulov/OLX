@@ -28,7 +28,8 @@ enum L10n {
         static var contactDetailsLabel: String { "contactDetailsLabel".localized }
         static var contactPersonLabel: String { "contactPersonLabel".localized }
         static var nameLabel: String { "nameLabel".localized }
-        static var emailLabel: String { "emailLabel".localized }
+        static var priceLabel: String { "priceLabel".localized }
+        static var inputPricePlaceholder: String { "inputPricePlaceholder".localized }
         static var phoneNumberLabel: String { "phoneNumberLabel".localized }
         static var logIn: String { "logIn".localized }
         static var register: String { "register".localized }
