@@ -25,6 +25,10 @@ private extension CreateViewController {
         rootView.onAddPhotoTapped = { [weak self] in
             self?.presentPhotoPicker()
         }
+        
+        rootView.onPublishTapped = { [weak self] form in
+            self?.publish(form)
+        }
     }
     
     func presentPhotoPicker() {
@@ -38,12 +42,12 @@ private extension CreateViewController {
     }
     
     func publish(_ form: AddForm) {
-        guard form.title.count >= 16 else {
-            showAlert("Введите не менее 16 символов в заголовке")
+        guard form.title.count >= 5 else {
+            showAlert("Введите не менее 5 символов в заголовке")
             return
         }
-        guard form.description.count >= 40 else {
-            showAlert("Введите не менее 40 символов в описании")
+        guard form.description.count >= 10 else {
+            showAlert("Введите не менее 10 символов в описании")
             return
         }
         guard !form.contactName.isEmpty else {
@@ -58,7 +62,7 @@ private extension CreateViewController {
         let category = Category(
             image: image,
             title: form.title,
-            numberOfSales: "Договорная",
+            priceNumbers: "Договорная",
             locationAndTime: "Только что"
         )
         

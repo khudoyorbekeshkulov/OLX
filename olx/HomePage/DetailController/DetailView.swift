@@ -49,6 +49,10 @@ final class DetailView: UIView {
         $0.numberOfLines = 3
     }
     
+    private lazy var phoneNumber = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+    }
+    
     private lazy var productOwner = UILabel().then {
         $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleProductOwnerTap)))
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -119,9 +123,10 @@ extension DetailView {
         image.image = category.image
         postedTime.text = category.locationAndTime
         nameProduct.text = category.title
-        saleProduct.text = category.numberOfSales
-        infoProduct.text = category.infoProduct
-        productOwner.text = category.productOwner
+        saleProduct.text = category.priceNumbers
+        infoProduct.text = category.descriptionProduct
+        phoneNumber.text = category.phoneNumber
+        productOwner.text = category.contactName
         onlineTime.text = category.online
     }
     
@@ -186,6 +191,7 @@ private extension DetailView {
             saleProduct,
             infoLabel,
             infoProduct,
+            phoneNumber,
             productOwner,
             onlineTime,
             feedbackButton,
@@ -196,14 +202,14 @@ private extension DetailView {
     func setupConstraints() {
         image.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(280)
         }
         
         infoFrame.snp.makeConstraints {
             $0.top.equalTo(image.snp.bottom)
-            $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(280)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(feedbackButton.snp.bottom).offset(10)
         }
         
         postedTime.snp.makeConstraints {
@@ -213,12 +219,12 @@ private extension DetailView {
         
         nameProduct.snp.makeConstraints {
             $0.top.equalTo(postedTime.snp.bottom).offset(15)
-            $0.horizontalEdges.equalToSuperview().offset(15)
+            $0.leading.trailing.equalToSuperview().offset(15)
         }
         
         saleProduct.snp.makeConstraints {
             $0.top.equalTo(nameProduct.snp.bottom).offset(5)
-            $0.horizontalEdges.equalToSuperview().offset(15)
+            $0.leading.trailing.equalToSuperview().offset(15)
         }
         
         infoLabel.snp.makeConstraints {
@@ -228,12 +234,17 @@ private extension DetailView {
         
         infoProduct.snp.makeConstraints {
             $0.top.equalTo(infoLabel.snp.bottom).offset(5)
-            $0.horizontalEdges.equalToSuperview().offset(15)
+            $0.leading.trailing.equalToSuperview().offset(15)
+        }
+        
+        phoneNumber.snp.makeConstraints {
+            $0.top.equalTo(infoProduct.snp.bottom).offset(15)
+            $0.leading.trailing.equalToSuperview().offset(15)
         }
         
         productOwner.snp.makeConstraints {
-            $0.top.equalTo(infoProduct.snp.bottom).offset(20)
-            $0.horizontalEdges.equalToSuperview().offset(15)
+            $0.top.equalTo(phoneNumber.snp.bottom).offset(15)
+            $0.leading.trailing.equalToSuperview().offset(15)
         }
         
         onlineTime.snp.makeConstraints {

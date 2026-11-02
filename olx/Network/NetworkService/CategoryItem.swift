@@ -4,6 +4,7 @@ struct CategoryItem {
     let image: String
     let title: String
     let numberOfSales: String
+    let phoneNumber: String
     let locationAndTime: String
     let productOwner: String
     let infoProduct: String
@@ -16,10 +17,11 @@ extension [CategoryItem] {
             Category(
                 image: UIImage(named: product.image),
                 title: product.title,
-                numberOfSales: product.numberOfSales,
+                priceNumbers: product.numberOfSales,
+                phoneNumber: product.phoneNumber,
                 locationAndTime: product.locationAndTime,
-                productOwner: product.productOwner,
-                infoProduct: product.infoProduct,
+                contactName: product.productOwner,
+                descriptionProduct: product.infoProduct,
                 online: product.online
             )
         }

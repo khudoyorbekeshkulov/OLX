@@ -6,10 +6,11 @@ struct Category {
     let result: String?
     let backgroundColor: UIColor?
     let imageBackgroundColor: UIColor?
-    let numberOfSales: String?
+    let priceNumbers: String?
+    let phoneNumber: String?
     let locationAndTime: String?
-    let productOwner: String?
-    let infoProduct: String?
+    let contactName: String?
+    let descriptionProduct: String?
     let online: String?
     let id = UUID()
     
@@ -19,10 +20,11 @@ struct Category {
         result: String? = nil,
         backgroundColor: UIColor? = nil,
         imageBackgroundColor: UIColor? = nil,
-        numberOfSales: String? = nil,
+        priceNumbers: String? = nil,
+        phoneNumber: String? = nil,
         locationAndTime: String? = nil,
-        productOwner: String? = nil,
-        infoProduct: String? = nil,
+        contactName: String? = nil,
+        descriptionProduct: String? = nil,
         online: String? = nil
     ) {
         self.image = image
@@ -30,10 +32,11 @@ struct Category {
         self.result = result
         self.backgroundColor = backgroundColor
         self.imageBackgroundColor = imageBackgroundColor
-        self.numberOfSales = numberOfSales
+        self.priceNumbers = priceNumbers
+        self.phoneNumber = phoneNumber
         self.locationAndTime = locationAndTime
-        self.productOwner = productOwner
-        self.infoProduct = infoProduct
+        self.contactName = contactName
+        self.descriptionProduct = descriptionProduct
         self.online = online
     }
 }

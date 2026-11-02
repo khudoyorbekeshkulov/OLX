@@ -256,6 +256,7 @@ private extension CreateView {
         
         photoBanner.addTarget(self, action: #selector(photoTapped), for: .touchUpInside)
         titleField.addTarget(self, action: #selector(titleChanged), for: .editingChanged)
+        publishButton.addTarget(self, action: #selector(publishTapped), for: .touchUpInside)
         descriptionView.delegate = self
     }
     
@@ -352,6 +353,23 @@ private extension CreateView {
     @objc func titleChanged() {
         let count = titleField.text?.count ?? 0
         titleCounter.text = "\(count)/\(Constants.titleMaxLength)"
+    }
+    
+    @objc func publishTapped() {
+        let form = AddForm(
+            image: selectedImageView.image,
+            title: trimmed(titleField.text),
+            price: trimmed(priceTextField.text),
+            description: trimmed(descriptionView.text),
+            contactName: trimmed(contactField.text),
+            phone: trimmed(phoneField.text)
+        )
+        
+        onPublishTapped?(form)
+    }
+    
+    func trimmed(_ text: String?) -> String {
+        (text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 

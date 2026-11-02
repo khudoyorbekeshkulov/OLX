@@ -83,7 +83,7 @@ private extension DetailViewController {
     }
     
     @objc func messageOwnerTapped() {
-        let messageVC = MessageViewController(navigationTitle: category?.productOwner ?? L10n.Overall.message)
+        let messageVC = MessageViewController(navigationTitle: category?.contactName ?? L10n.Overall.message)
         navigationController?.pushViewController(messageVC, animated: true)
     }
 }

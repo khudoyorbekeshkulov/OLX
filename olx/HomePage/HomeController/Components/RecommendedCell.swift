@@ -70,7 +70,7 @@ class RecommendedCell: UICollectionViewCell {
         self.category = category
         profileImage.image = category.image
         additionalLabel.text = category.title
-        saleLabel.text = category.numberOfSales
+        saleLabel.text = category.priceNumbers
         timeLabel.text = category.locationAndTime
     }
 }

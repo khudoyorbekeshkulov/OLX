@@ -191,19 +191,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enter at least 40 characters"
+            "value" : "Enter at least 10 characters"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Введите не менее 40 символов"
+            "value" : "Введите не менее 10 символов"
           }
         },
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Iltimos, kamida 40 ta belgi kiriting"
+            "value" : "Iltimos, kamida 10 ta belgi kiriting"
           }
         }
       }
@@ -214,19 +214,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enter at least 16 characters"
+            "value" : "Enter at least 5 characters"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Введите не менее 16 символов"
+            "value" : "Введите не менее 5 символов"
           }
         },
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Iltimos, kamida 16 ta belgi kiriting"
+            "value" : "Iltimos, kamida 5 ta belgi kiriting"
           }
         }
       }
