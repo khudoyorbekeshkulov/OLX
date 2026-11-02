@@ -42,7 +42,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Surat qo’shish"
+            "value" : "Surat qöshish"
           }
         }
       }
@@ -65,7 +65,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tizimga kirish orqali siz bizning shartlarimizga rozilik bildirasiz"
+            "value" : "Tizimga kiriş orqali siz bizning şartlarimizga rozilik bildirasiz"
           }
         }
       }
@@ -88,7 +88,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Barcha e’lonlar"
+            "value" : "Barça e’lonlar"
           }
         }
       }
@@ -111,7 +111,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Muallifning barcha e'lonlari"
+            "value" : "Muallifning barça e'lonlari"
           }
         }
       }
@@ -266,7 +266,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kiyim-keçchak va poyablaz"
+            "value" : "Kiyim-keçak va poyabzal"
           }
         }
       }
@@ -289,7 +289,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Men xizmat ko'rsatish shartlariga, shuningdek, OLX tomonidan ma'lumotlarimni uzatish va qayta ishlashga roziman. Men qonuniy voyaga yetganligimni va reklama joylashtirish uchun javobgar ekanligimni tasdiqlayman."
+            "value" : "Men xizmat körsatiş şartlariga, şuningdek, OLX tomonidan ma'lumotlarimni uzatiş va qayta ishlaşga roziman. Men qonuniy voyaga yetganligimni va reklama joylashtiriş uchun javobgar ekanligimni tasdiqlayman."
           }
         }
       }
@@ -335,7 +335,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bog'lanish uchun shaxs"
+            "value" : "Bog'laniş uçun şaxs"
           }
         }
       }
@@ -358,7 +358,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apple bilan davom etish"
+            "value" : "Apple bilan davom etiş"
           }
         }
       }
@@ -381,7 +381,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yaratish"
+            "value" : "Yaratiş"
           }
         }
       }
@@ -427,7 +427,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O'zingizni xaridorning o'rniga qo'ying va mahsulotni tasvirlab bering :)"
+            "value" : "Özingizni xaridorning örniga qöying va mahsulotni tasvirlab bering :)"
           }
         }
       }
@@ -473,7 +473,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elektron pochta"
+            "value" : "Elektron poçta"
           }
         }
       }
@@ -496,7 +496,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elektron pochta yoki telefon raqam"
+            "value" : "Elektron poçta yoki telefon raqam"
           }
         }
       }
@@ -519,7 +519,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Email pochtangizni kiriting"
+            "value" : "Email poçtangizni kiriting"
           }
         }
       }
@@ -565,7 +565,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parolingiz esdan chiqdimi"
+            "value" : "Parolingiz esdan çiqdimi"
           }
         }
       }
@@ -657,7 +657,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kirish"
+            "value" : "Kiriş"
           }
         }
       }
@@ -841,7 +841,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reklama joylashtirish"
+            "value" : "Reklama joylashtiriş"
           }
         }
       }
@@ -887,7 +887,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kecha"
+            "value" : "Keça"
           }
         }
       }
@@ -933,7 +933,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ko’chmas mulk"
+            "value" : "Koöçmas mulk"
           }
         }
       }
@@ -956,7 +956,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Siz uchun tavsiya etiladi"
+            "value" : "Siz uçun tavsiya etiladi"
           }
         }
       }
@@ -979,7 +979,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ro’yxatdan o’tish"
+            "value" : "Röyxatdan ötiş"
           }
         }
       }
@@ -1048,7 +1048,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hammasini ko’rish"
+            "value" : "Hammasini köriş"
           }
         }
       }
@@ -1071,7 +1071,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ko’rish"
+            "value" : "Köriş"
           }
         }
       }
@@ -1094,7 +1094,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O’xshash reklamalar"
+            "value" : "Öxşaş reklamalar"
           }
         }
       }
@@ -1117,7 +1117,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parolingiz kamida 6 ta belgidan iborat bo'lishi kerak. Uni juda kuchli qilish uchun katta va kichik harflar, raqamlar va maxsus belgilarni kiriting."
+            "value" : "Parolingiz kamida 6 ta belgidan iborat bölişi kerak. Uni juda kuçli qiliş uçun katta va kiçik harflar, raqamlar va maxsus belgilarni kiriting."
           }
         }
       }
@@ -1140,7 +1140,7 @@
         "uz-UZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Foydalanish shartlari"
+            "value" : "Foydalaniş şartlari"
           }
         }
       }
