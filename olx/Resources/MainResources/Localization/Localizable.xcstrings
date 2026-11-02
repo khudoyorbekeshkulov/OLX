@@ -47,6 +47,29 @@
         }
       }
     },
+    "agreeToOurByEnteringLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By entering, you agree to our"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "При входе вы соглашаетесь с нашими"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tizimga kirish orqali siz bizning shartlarimizga rozilik bildirasiz"
+          }
+        }
+      }
+    },
     "allListings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -248,6 +271,29 @@
         }
       }
     },
+    "consentToTermsOfOLXLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I agree to the service's terms of use, as well as to the transfer and processing of my data by OLX. I confirm that I am of legal age and take responsibility for posting the advertisement."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Я соглащаюсь с правилами использования сервиса, а также с передачей и обработкой моих данных в OLX. Я подверждаю свое совершеннолетие и отвественность за размещение объявления"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Men xizmat ko'rsatish shartlariga, shuningdek, OLX tomonidan ma'lumotlarimni uzatish va qayta ishlashga roziman. Men qonuniy voyaga yetganligimni va reklama joylashtirish uchun javobgar ekanligimni tasdiqlayman."
+          }
+        }
+      }
+    },
     "contactDetailsLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -290,6 +336,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bog'lanish uchun shaxs"
+          }
+        }
+      }
+    },
+    "continueWithApple" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue with Apple"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продолжить с Apple"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple bilan davom etish"
           }
         }
       }
@@ -409,6 +478,52 @@
         }
       }
     },
+    "emailOrPhoneLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email or phone number"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Электронная почта или телефон"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elektron pochta yoki telefon raqam"
+          }
+        }
+      }
+    },
+    "emailOrPhonePlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your email"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите свой электронной почты"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email pochtangizni kiriting"
+          }
+        }
+      }
+    },
     "favorites" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -428,6 +543,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sevimlilar"
+          }
+        }
+      }
+    },
+    "forgetPasswordLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forget password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Забыли пароль"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parolingiz esdan chiqdimi"
           }
         }
       }
@@ -497,6 +635,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fikr qoldiring"
+          }
+        }
+      }
+    },
+    "logIn" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log in"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Войти"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kirish"
           }
         }
       }
@@ -589,6 +750,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Onlayn"
+          }
+        }
+      }
+    },
+    "passwordLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароль"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parol"
+          }
+        }
+      }
+    },
+    "passwordPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите свой пароль"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parolingizni kiriting"
           }
         }
       }
@@ -754,6 +961,29 @@
         }
       }
     },
+    "register" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Register"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зарегистрироваться"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ro’yxatdan o’tish"
+          }
+        }
+      }
+    },
     "results" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -823,6 +1053,29 @@
         }
       }
     },
+    "showButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ko’rish"
+          }
+        }
+      }
+    },
     "similarAdvertisements" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -842,6 +1095,75 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "O’xshash reklamalar"
+          }
+        }
+      }
+    },
+    "termsOfPasswordLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The password must contain at least 6 characters. To make your password super secure, add uppercase and lowercase letters, numbers and special characters"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароль дольжен содержать минимум 6 симболов. Чтобы пароль получился супернадежными, добавьте заглавные и строчные буквы, цыфры и специальные символы"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parolingiz kamida 6 ta belgidan iborat bo'lishi kerak. Uni juda kuchli qilish uchun katta va kichik harflar, raqamlar va maxsus belgilarni kiriting."
+          }
+        }
+      }
+    },
+    "termsOfUseLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms of Use"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Условиями использования"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foydalanish shartlari"
+          }
+        }
+      }
+    },
+    "textBetweenLinesLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "or"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "или"
+          }
+        },
+        "uz-UZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "yoki"
           }
         }
       }

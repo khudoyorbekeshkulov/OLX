@@ -30,6 +30,8 @@ enum L10n {
         static var nameLabel: String { "nameLabel".localized }
         static var emailLabel: String { "emailLabel".localized }
         static var phoneNumberLabel: String { "phoneNumberLabel".localized }
+        static var logIn: String { "logIn".localized }
+        static var register: String { "register".localized }
     }
     
     enum AllGategories {
@@ -68,5 +70,20 @@ enum L10n {
         static var descriptionPlaceholderInCreateView: String { "descriptionPlaceholderInCreateView".localized }
         static var checkDescriptionLetterNumber: String { "checkDescriptionLetterNumber".localized }
         static var postAnAddButton: String { "postAnAddButton".localized }
+    }
+    
+    enum Profile {
+        static var emailOrPhoneLabel: String { "emailOrPhoneLabel".localized }
+        static var emailOrPhonePlaceholder: String { "emailOrPhonePlaceholder".localized }
+        static var passwordLabel: String { "passwordLabel".localized }
+        static var passwordPlaceholder: String { "passwordPlaceholder".localized }
+        static var showButton: String { "showButton".localized }
+        static var forgetPasswordLabel: String { "forgetPasswordLabel".localized }
+        static var textBetweenLinesLabel: String { "textBetweenLinesLabel".localized }
+        static var continueWithApple: String { "continueWithApple".localized }
+        static var agreeToOurByEnteringLabel: String { "agreeToOurByEnteringLabel".localized }
+        static var termsOfUseLabel: String { "termsOfUseLabel".localized }
+        static var termsOfPasswordLabel: String { "termsOfPasswordLabel".localized }
+        static var consentToTermsOfOLXLabel: String { "consentToTermsOfOLXLabel".localized }
     }
 }

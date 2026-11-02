@@ -22,7 +22,7 @@ final class ProfileView: UIView {
     }
     
     private let titleLabel = UILabel().then {
-        $0.text = "Создать"
+        $0.text = L10n.Overall.create
         $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = .systemFont(ofSize: 28, weight: .bold)
     }
@@ -40,12 +40,12 @@ final class ProfileView: UIView {
     }
     
     private lazy var loginButton =  makeSegmentButton(
-        title: "Войти",
+        title: L10n.Overall.logIn,
         action: #selector(loginTapped)
     )
     
     private lazy var registerButton =  makeSegmentButton(
-        title: "Зарегистрироваться",
+        title: L10n.Overall.register,
         action: #selector(registerTapped)
     )
     

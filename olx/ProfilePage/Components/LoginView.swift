@@ -3,13 +3,13 @@ import SnapKit
 
 final class LoginView: UIView {
     private lazy var emailLabel = UILabel().then {
-        $0.text = "Электронная почта или телефон"
+        $0.text = L10n.Profile.emailOrPhoneLabel
         $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     private lazy var emailTextField = UITextField().then {
-        $0.placeholder = "Введите свой электронной почты..."
+        $0.placeholder = "\(L10n.Profile.emailOrPhonePlaceholder)..."
         $0.backgroundColor = ColorResourceManager.shared.separator
         $0.layer.cornerRadius = 5
         $0.leftViewMode = .always
@@ -17,7 +17,7 @@ final class LoginView: UIView {
     }
     
     private lazy var passwordLabel = UILabel().then {
-        $0.text = "Пароль"
+        $0.text = L10n.Profile.passwordLabel
         $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 12)
     }
@@ -26,7 +26,7 @@ final class LoginView: UIView {
     
     private lazy var passwordTextField = UITextField().then {
         $0.backgroundColor = ColorResourceManager.shared.separator
-        $0.placeholder = "Введите свой пароль..."
+        $0.placeholder = "\(L10n.Profile.passwordPlaceholder)..."
         $0.layer.cornerRadius = 5
         $0.isSecureTextEntry = true
         $0.rightView = container
@@ -36,20 +36,20 @@ final class LoginView: UIView {
     }
     
     private lazy var showButton = UIButton(type: .system).then {
-        $0.setTitle("Показать", for: .normal)
+        $0.setTitle(L10n.Profile.showButton, for: .normal)
         $0.setTitleColor(ColorResourceManager.shared.mainManager, for: .normal)
         $0.addTarget(self, action: #selector(showTapped), for: .touchUpInside)
     }
     
     private lazy var forgetPassword = UILabel().then {
-        $0.text = "Забыли пароль"
+        $0.text = L10n.Profile.forgetPasswordLabel
         $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 12, weight: .bold)
     }
     
     private lazy var loginButton = UIButton(type: .system).then {
         $0.backgroundColor = ColorResourceManager.shared.darkMainManager
-        $0.setTitle("Войти", for: .normal)
+        $0.setTitle(L10n.Overall.logIn, for: .normal)
         $0.setTitleColor(ColorResourceManager.shared.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.layer.cornerRadius = 5
@@ -60,7 +60,7 @@ final class LoginView: UIView {
     }
     
     private lazy var textBetweenLines = UILabel().then {
-        $0.text = "или"
+        $0.text = L10n.Profile.textBetweenLinesLabel
         $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
@@ -71,12 +71,11 @@ final class LoginView: UIView {
     
     private lazy var appleButton = UIButton().then {
         var config = UIButton.Configuration.plain()
-        config.title = "Продолжить с Apple"
         config.image = UIImage(systemName: "applelogo")
         config.imagePadding = 25
         config.baseForegroundColor = ColorResourceManager.shared.primaryText
         config.background.cornerRadius = 5
-        config.attributedTitle = AttributedString("Продолжить с Apple", attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 18, weight: .bold)]))
+        config.attributedTitle = AttributedString(L10n.Profile.continueWithApple, attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 18, weight: .bold)]))
         $0.configuration = config
         $0.backgroundColor = ColorResourceManager.shared.searchBackground
         $0.layer.borderWidth = 1
@@ -84,12 +83,12 @@ final class LoginView: UIView {
     }
     
     private lazy var text = UILabel().then {
-        $0.text = "При входе вы соглашаетесь с нашими"
+        $0.text = L10n.Profile.agreeToOurByEnteringLabel
         $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
     }
     
     private lazy var text2 = UILabel().then {
-        $0.text = "Условиями использования"
+        $0.text = L10n.Profile.termsOfUseLabel
         $0.font = UIFont.systemFont(ofSize: 12, weight: .bold)
     }
     

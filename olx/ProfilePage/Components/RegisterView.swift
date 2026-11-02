@@ -7,12 +7,11 @@ final class RegisterView: UIView {
     
     private lazy var appleButton = UIButton().then {
         var config = UIButton.Configuration.plain()
-        config.title = "Продолжить с Apple"
         config.image = UIImage(systemName: "applelogo")
         config.imagePadding = 25
         config.baseForegroundColor = ColorResourceManager.shared.primaryText
         config.background.cornerRadius = 5
-        config.attributedTitle = AttributedString("Продолжить с Apple", attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 18, weight: .bold)]))
+        config.attributedTitle = AttributedString(L10n.Profile.continueWithApple, attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 18, weight: .bold)]))
         $0.configuration = config
         $0.backgroundColor = ColorResourceManager.shared.searchBackground
         $0.layer.borderWidth = 1
@@ -23,8 +22,8 @@ final class RegisterView: UIView {
         $0.backgroundColor = ColorResourceManager.shared.lineProfile
     }
     
-    private lazy var or = UILabel().then {
-        $0.text = "или"
+    private lazy var textBetweenLines = UILabel().then {
+        $0.text = L10n.Profile.textBetweenLinesLabel
         $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
@@ -34,13 +33,13 @@ final class RegisterView: UIView {
     }
     
     private lazy var emailLabel = UILabel().then {
-        $0.text = "Электронная почта или телефон"
+        $0.text = L10n.Profile.emailOrPhoneLabel
         $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     private lazy var emailTextField = UITextField().then {
-        $0.placeholder = "Введите свой электронной почты..."
+        $0.placeholder = "\(L10n.Profile.emailOrPhonePlaceholder).."
         $0.backgroundColor = ColorResourceManager.shared.separator
         $0.layer.cornerRadius = 5
         $0.leftViewMode = .always
@@ -48,13 +47,13 @@ final class RegisterView: UIView {
     }
     
     private lazy var passwordLabel = UILabel().then {
-        $0.text = "Пароль"
+        $0.text = L10n.Profile.passwordLabel
         $0.textColor = ColorResourceManager.shared.mainManager
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     private lazy var passwordTextField = UITextField().then {
-        $0.placeholder = "Введите свой пароль..."
+        $0.placeholder = "\(L10n.Profile.passwordPlaceholder)..."
         $0.backgroundColor = ColorResourceManager.shared.separator
         $0.layer.cornerRadius = 5
         $0.rightView = container
@@ -66,20 +65,20 @@ final class RegisterView: UIView {
     private lazy var container = UIView()
     
     private lazy var showButton = UIButton(type: .system).then {
-        $0.setTitle("Показать", for: .normal)
+        $0.setTitle(L10n.Profile.showButton, for: .normal)
         $0.setTitleColor(ColorResourceManager.shared.mainManager, for: .normal)
         $0.addTarget(self, action: #selector(showTapped), for: .touchUpInside)
     }
     
     private lazy var text = UILabel().then {
-        $0.text = "Пароль дольжен содержать минимум 6 симболов. Чтобы пароль получился супернадежными, добавьте заглавные и строчные буквы, цыфры и специальные символы"
+        $0.text = L10n.Profile.termsOfPasswordLabel
         $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
     }
     
     private lazy var text2 = UILabel().then {
-        $0.text = "Я соглащаюсь с правилами использования сервиса, а также с передачей и обработкой моих данных в OLX. Я подверждаю свое совершеннолетие и отвественность за размещение объявления "
+        $0.text = L10n.Profile.consentToTermsOfOLXLabel
         $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
@@ -94,7 +93,7 @@ final class RegisterView: UIView {
     
     private lazy var registerButton = UIButton(type: .system).then {
         $0.backgroundColor = ColorResourceManager.shared.darkMainManager
-        $0.setTitle("Зарегистроваться", for: .normal)
+        $0.setTitle(L10n.Overall.register, for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.layer.cornerRadius = 5
@@ -119,7 +118,7 @@ private extension RegisterView {
         addSubviews([
             appleButton,
             line1,
-            or,
+            textBetweenLines,
             line2,
             emailLabel,
             emailTextField,
@@ -141,19 +140,21 @@ private extension RegisterView {
             $0.height.equalTo(45)
         }
         
-        or.snp.makeConstraints {
+        textBetweenLines.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(appleButton.snp.bottom).offset(25)
         }
         
         line1.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.leading.equalToSuperview().offset(15)
+            $0.trailing.equalTo(textBetweenLines.snp.leading).offset(-15)
             $0.top.equalTo(appleButton.snp.bottom).offset(35)
             $0.height.equalTo(1)
         }
         
         line2.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.leading.equalTo(textBetweenLines.snp.trailing).offset(15)
+            $0.trailing.equalToSuperview().offset(-15)
             $0.top.equalTo(appleButton.snp.bottom).offset(35)
             $0.height.equalTo(1)
         }
