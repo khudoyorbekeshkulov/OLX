@@ -45,7 +45,7 @@ final class MessageView: UIView {
     }
     
     lazy var textField = UITextField().then {
-        $0.placeholder = "Сообщения..."
+        $0.placeholder = "\(L10n.Overall.message)..." 
         $0.backgroundColor = ColorResourceManager.shared.keyboardAreaColor
         $0.borderStyle = .roundedRect
         $0.layer.cornerRadius = 15

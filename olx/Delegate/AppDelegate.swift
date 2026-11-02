@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         let messageNav = toTabItem(
-            rootViewController: MessageViewController(navigationTitle: "Сообщения"),
+            rootViewController: MessageViewController(navigationTitle: L10n.Overall.message),
             title: L10n.Overall.message,
             image: "ellipsis.message",
             selectedImage: "ellipsis.message.fill"
