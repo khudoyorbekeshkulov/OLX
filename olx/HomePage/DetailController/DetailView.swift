@@ -15,6 +15,10 @@ final class DetailView: UIView {
     var onProductOwnerTapped: (() -> Void)?
     var onCategorySelected: ((Category) -> Void)?
     
+    private var products: [Category] {
+        ListingsService.shared.items + categories
+    }
+    
     private lazy var image = UIImageView().then {
         $0.clipsToBounds = true
     }
@@ -149,7 +153,7 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
     ) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueCell(RecommendedCell.self, for: indexPath)
-        guard let category = categories[safe: indexPath.item] else { return cell }
+        guard let category = products[safe: indexPath.item] else { return cell }
         
         return cell.then {
             $0.setCategory(category: category)
@@ -167,7 +171,7 @@ extension DetailView: UICollectionViewDelegate, UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        guard let category = categories[safe: indexPath.item] else { return }
+        guard let category = products[safe: indexPath.item] else { return }
         onCategorySelected?(category)
     }
 }
