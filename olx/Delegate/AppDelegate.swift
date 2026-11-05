@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             selectedImage: "ellipsis.message.fill"
         )
         
-        let addNav = toTabItem(
-            rootViewController: CreateViewController(),
+        let createNav = toTabItem(
+            rootViewController: CreateController.instantiate(),
             title: L10n.Overall.create,
             image: "plus.circle",
             selectedImage: "plus.circle.fill"
@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let tabBar = UITabBarController().then {
             $0.tabBar.tintColor = ColorResourceManager.shared.mainManager
-            $0.viewControllers = [homeNav,favouritesNav, addNav, messageNav, profileNav]
+            $0.viewControllers = [homeNav,favouritesNav, createNav, messageNav, profileNav]
         }
         
         guard let windowScene = UIApplication.shared.connectedScenes
