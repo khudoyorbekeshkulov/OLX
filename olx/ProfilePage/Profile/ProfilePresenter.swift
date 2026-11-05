@@ -19,7 +19,6 @@ protocol ProfilePresenter {
 }
 
 class ProfilePresenterImpl: ProfilePresenter {
-    
     private weak var view: ProfileViewMVP?
     private let router: ProfileRouter
     
@@ -42,6 +41,6 @@ class ProfilePresenterImpl: ProfilePresenter {
     
     func didTapRegister(email: String, password: String, isAgreed: Bool) {
         guard !email.isEmpty, !password.isEmpty else { return }
-        guard !isAgreed else { return}
+        guard !isAgreed else { return }
     }
 }

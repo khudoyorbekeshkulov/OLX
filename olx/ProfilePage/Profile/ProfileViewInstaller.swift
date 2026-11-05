@@ -72,7 +72,7 @@ extension ProfileViewInstaller {
     
     func addSubViewConstraints() {
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(mainView.safeAreaLayoutGuide).offset(0)
+            $0.top.equalTo(mainView.safeAreaLayoutGuide)
             $0.leading.equalToSuperview().offset(16)
         }
         
@@ -98,48 +98,14 @@ extension ProfileViewInstaller {
             $0.edges.equalToSuperview().inset(2)
         }
     }
-    
-    func setSegment(login: Bool = true, animated: Bool) {
-        let isLogin = login
-        
-        let updateButtons = {
-            self.loginButton.backgroundColor = isLogin ? ColorResourceManager.shared.white : .clear
-            self.loginButton.setTitleColor(
-                isLogin ? ColorResourceManager.shared.black : ColorResourceManager.shared.secondaryText,
-                for: .normal
-            )
-            
-            self.registerButton.backgroundColor = isLogin ? .clear : ColorResourceManager.shared.white
-            self.registerButton.setTitleColor(
-                isLogin ? ColorResourceManager.shared.secondaryText : ColorResourceManager.shared.black,
-                for: .normal
-            )
-            
-        }
-        
-        UIView.animate(withDuration: animated ? 0.2 : 0, animations: updateButtons)
-        
-        loginView.isHidden = !isLogin
-        registerView.isHidden = isLogin
-    }
-    
-    private func makeSegmentButton(title: String) -> UIButton {
+}
+
+private extension ProfileViewInstaller {
+    func makeSegmentButton(title: String) -> UIButton {
         UIButton(type: .system).then {
             $0.setTitle(title, for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
             $0.layer.cornerRadius = 5
         }
-    }
-    
-    func willLayout() {
-        
-    }
-    
-    func didLayout() {
-        
-    }
-    
-    func localizeTexts() {
-        
     }
 }

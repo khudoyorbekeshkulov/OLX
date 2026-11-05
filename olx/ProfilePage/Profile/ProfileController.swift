@@ -28,7 +28,6 @@ class ProfileController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 // MARK: UIViewController Lifecycle
@@ -39,19 +38,33 @@ extension ProfileController: ProfileViewInstaller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter.viewDidLoad()
         installSubviews()
+        presenter.viewDidLoad()
         bindActions()
-        
-        view.addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: self,
-                action: #selector(tappedToView)
-            )
-        )
     }
-    
-    private func bindActions() {
+}
+
+// MARK: View Protocol Conformation
+extension ProfileController:  ProfileViewMVP {
+    func updateSegment(isLogin: Bool, animated: Bool) {
+        DispatchQueue.main.async {
+            self.setSegment(login: isLogin, animated: animated)
+        }
+    }
+}
+
+// MARK: Static Initializer
+extension ProfileController {
+    static func instantiate() -> ProfileController {
+        let configurator = ProfileConfiguratorImpl()
+        let vc = ProfileController(with: configurator)
+        return vc
+    }
+}
+
+
+private extension ProfileController {
+    func bindActions() {
         loginButton.addAction(UIAction { [weak self] _ in
             self?.presenter.didTapSegment(isLogin: true)
         }, for: .touchUpInside)
@@ -67,29 +80,32 @@ extension ProfileController: ProfileViewInstaller {
         registerView.onRegisterTapped = { [weak self] email, password, isAgreed in
             self?.presenter.didTapRegister(email: email, password: password, isAgreed: isAgreed)
         }
+        
+        view.addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(tappedToView)
+            )
+        )
     }
     
     @objc func tappedToView() {
         view.endEditing(true)
     }
-}
-
-// MARK: View Protocol Conformation
-extension ProfileController:  ProfileViewMVP {
     
-    func updateSegment(isLogin: Bool, animated: Bool) {
-        DispatchQueue.main.async {
-            self.setSegment(login: isLogin, animated: animated)
+    func setSegment(login isLogin: Bool, animated: Bool) {
+        UIView.animate(withDuration: animated ? 0.2 : 0) {
+            self.styleSegmentButton(self.loginButton, isSelected: isLogin)
+            self.styleSegmentButton(self.registerButton, isSelected: !isLogin)
         }
-    }
-}
 
-// MARK: Static Initializer
-extension ProfileController {
-    
-    static func instantiate() -> ProfileController {
-        let configurator = ProfileConfiguratorImpl()
-        let vc = ProfileController(with: configurator)
-        return vc
+        loginView.isHidden = !isLogin
+        registerView.isHidden = isLogin
+    }
+
+    func styleSegmentButton(_ button: UIButton, isSelected: Bool) {
+        let colors = ColorResourceManager.shared
+        button.backgroundColor = isSelected ? colors.white : .clear
+        button.setTitleColor(isSelected ? colors.black : colors.secondaryText, for: .normal)
     }
 }
