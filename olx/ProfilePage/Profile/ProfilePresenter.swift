@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ProfileViewMVP: AnyObject {
+protocol ProfileView: AnyObject {
     func updateSegment(isLogin: Bool, animated: Bool)
 }
 
@@ -19,10 +19,10 @@ protocol ProfilePresenter {
 }
 
 class ProfilePresenterImpl: ProfilePresenter {
-    private weak var view: ProfileViewMVP?
+    private weak var view: ProfileView?
     private let router: ProfileRouter
     
-    init(view: ProfileViewMVP, router: ProfileRouter) {
+    init(view: ProfileView, router: ProfileRouter) {
         self.view = view
         self.router = router
     }

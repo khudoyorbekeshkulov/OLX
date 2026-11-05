@@ -44,7 +44,7 @@ extension ProfileController: ProfileViewInstaller {
 }
 
 // MARK: View Protocol Conformation
-extension ProfileController:  ProfileViewMVP {
+extension ProfileController:  ProfileView {
     func updateSegment(isLogin: Bool, animated: Bool) {
         DispatchQueue.main.async {
             self.setSegment(login: isLogin, animated: animated)
