@@ -234,7 +234,6 @@ private extension RegisterView {
     }
     
     @objc func registerTapped() {
-        print("register tapped")
         onRegisterTapped?(emailTextField.text ?? "", passwordTextField.text ?? "", isChecked)
     }
     

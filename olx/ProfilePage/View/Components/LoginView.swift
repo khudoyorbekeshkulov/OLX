@@ -221,7 +221,6 @@ private extension LoginView {
     }
     
     @objc func loginTapped() {
-        print("login tapped")
         onLoginTapped?(emailTextField.text ?? "", passwordTextField.text ?? "")
     }
 }
