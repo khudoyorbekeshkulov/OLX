@@ -23,24 +23,24 @@ extension ProfileViewInstaller {
     func initSubViews() {
         mainView.backgroundColor = ColorResourceManager.shared.appBackground
         
-        titleLabel = UILabel().then {
+        titleLabel = .init().then {
             $0.text = L10n.Overall.create
             $0.textColor = ColorResourceManager.shared.mainManager
             $0.font = .systemFont(ofSize: 28, weight: .bold)
         }
         
-        loginView = LoginView()
+        loginView = .init()
         registerView = RegisterView().then {
             $0.isHidden = true
         }
         
-        segmentedControl = UIView().then {
+        segmentedControl = .init().then {
             $0.backgroundColor = ColorResourceManager.shared.separator
             $0.layer.cornerRadius = 5
             $0.clipsToBounds = true
         }
         
-        authStackView = UIStackView().then {
+        authStackView = .init().then {
             $0.axis = .horizontal
             $0.distribution = .fillEqually
             $0.alignment = .fill

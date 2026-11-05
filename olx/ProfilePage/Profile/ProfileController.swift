@@ -71,12 +71,19 @@ private extension ProfileController {
             self?.presenter.didTapSegment(isLogin: false)
         }, for: .touchUpInside)
         
-        loginView.onLoginTapped = { [weak self] email, password in
-            self?.presenter.didTapLogin(email: email, password: password)
+        loginView.onLoginTapped = {[weak self] email,password in
+            self?.presenter.didTapLogin(
+                email: email,
+                password: password
+            )
         }
         
-        registerView.onRegisterTapped = { [weak self] email, password, isAgreed in
-            self?.presenter.didTapRegister(email: email, password: password, isAgreed: isAgreed)
+        registerView.onRegisterTapped = {[weak self] email, password, isAgreed in
+            self?.presenter.didTapRegister(
+                email: email,
+                password: password,
+                isAgreed: isAgreed
+            )
         }
         
         view.addGestureRecognizer(
