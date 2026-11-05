@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class ProfileController: UIViewController {
     // swiftlint:disable implicitly_unwrapped_optional
     var presenter: ProfilePresenter!
@@ -61,7 +60,6 @@ extension ProfileController {
         return vc
     }
 }
-
 
 private extension ProfileController {
     func bindActions() {
