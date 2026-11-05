@@ -2,6 +2,8 @@ import UIKit
 import SnapKit
 
 final class LoginView: UIView {
+    var onLoginTapped: ((_ email: String, _ passwrod: String) -> Void)?
+    
     private lazy var emailLabel = UILabel().then {
         $0.text = L10n.Profile.emailOrPhoneLabel
         $0.textColor = ColorResourceManager.shared.mainManager
@@ -39,6 +41,7 @@ final class LoginView: UIView {
         $0.setTitle(L10n.Profile.showButton, for: .normal)
         $0.setTitleColor(ColorResourceManager.shared.mainManager, for: .normal)
         $0.addTarget(self, action: #selector(showTapped), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
     }
     
     private lazy var forgetPassword = UILabel().then {
@@ -214,5 +217,11 @@ private extension LoginView {
     
     func setupAction() {
         showButton.addTarget(self, action: #selector(showTapped), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
+    }
+    
+    @objc func loginTapped() {
+        print("login tapped")
+        onLoginTapped?(emailTextField.text ?? "", passwordTextField.text ?? "")
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-enum Segment {
+enum Segment1 {
     case login
     case register
 }
@@ -64,7 +64,7 @@ final class ProfileView: UIView {
 }
 
 extension ProfileView {
-    func setSegment(_ segment: Segment, animated: Bool = true) {
+    func setSegment(_ segment: Segment1, animated: Bool = true) {
         let isLogin = segment == .login
         
         let updateButtons = {

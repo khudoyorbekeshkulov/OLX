@@ -2,6 +2,8 @@ import UIKit
 import SnapKit
 
 final class RegisterView: UIView {
+    var onRegisterTapped: ((_ email: String, _ password: String, _ isAgreed: Bool) -> Void)?
+    
     private var isChecked = false
     private var isSecuretyEntry = true
     
@@ -53,6 +55,7 @@ final class RegisterView: UIView {
     }
     
     private lazy var passwordTextField = UITextField().then {
+        $0.isSecureTextEntry = true
         $0.placeholder = "\(L10n.Profile.passwordPlaceholder)..."
         $0.backgroundColor = ColorResourceManager.shared.separator
         $0.layer.cornerRadius = 5
@@ -230,8 +233,14 @@ private extension RegisterView {
         checkBox.setImage(UIImage(systemName: imageName), for: .normal)
     }
     
+    @objc func registerTapped() {
+        print("register tapped")
+        onRegisterTapped?(emailTextField.text ?? "", passwordTextField.text ?? "", isChecked)
+    }
+    
     func setupAction() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(checkBoxTapped))
         text2.addGestureRecognizer(tap)
+        registerButton.addTarget(self, action: #selector(registerTapped), for: .touchUpInside)
     }
 }

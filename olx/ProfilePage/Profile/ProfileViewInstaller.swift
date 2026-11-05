@@ -1,0 +1,145 @@
+//  
+//  ProfileViewInstaller.swift
+//  olx
+//
+//  Created by Eshqulov Xudoyorbek  on 04/11/26.
+//
+
+import UIKit
+import SnapKit
+
+protocol ProfileViewInstaller: ViewInstaller {
+    var titleLabel: UILabel! { get set }
+    var segmentedControl: UIView! { get set }
+    var authStackView: UIStackView! { get set }
+    var loginButton: UIButton! { get set }
+    var registerButton: UIButton! { get set }
+    var loginView: LoginView! { get set }
+    var registerView: RegisterView! { get set }
+}
+
+extension ProfileViewInstaller {
+    
+    func initSubViews() {
+        mainView.backgroundColor = ColorResourceManager.shared.appBackground
+        
+        titleLabel = UILabel().then {
+            $0.text = L10n.Overall.create
+            $0.textColor = ColorResourceManager.shared.mainManager
+            $0.font = .systemFont(ofSize: 28, weight: .bold)
+        }
+        
+        loginView = LoginView()
+        registerView = RegisterView().then {
+            $0.isHidden = true
+        }
+        
+        segmentedControl = UIView().then {
+            $0.backgroundColor = ColorResourceManager.shared.separator
+            $0.layer.cornerRadius = 5
+            $0.clipsToBounds = true
+        }
+        
+        authStackView = UIStackView().then {
+            $0.axis = .horizontal
+            $0.distribution = .fillEqually
+            $0.alignment = .fill
+        }
+        
+        loginButton =  makeSegmentButton(
+            title: L10n.Overall.logIn,
+        )
+        
+        registerButton =  makeSegmentButton(
+            title: L10n.Overall.register,
+        )
+    }
+    
+    func addSubViews() {
+        mainView.addSubviews([
+            titleLabel,
+            segmentedControl,
+            loginView,
+            registerView
+        ])
+        
+        segmentedControl.addSubview(authStackView)
+        authStackView.addArrangedSubviews([
+            loginButton,
+            registerButton
+        ])
+    }
+    
+    func addSubViewConstraints() {
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(mainView.safeAreaLayoutGuide).offset(0)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        
+        segmentedControl.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(28)
+            $0.height.equalTo(32)
+        }
+        
+        loginView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(segmentedControl.snp.bottom).offset(20)
+            $0.bottom.equalToSuperview()
+        }
+        
+        registerView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(segmentedControl.snp.bottom).offset(20)
+            $0.bottom.equalToSuperview()
+        }
+        
+        authStackView.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(2)
+        }
+    }
+    
+    func setSegment(login: Bool = true, animated: Bool) {
+        let isLogin = login
+        
+        let updateButtons = {
+            self.loginButton.backgroundColor = isLogin ? ColorResourceManager.shared.white : .clear
+            self.loginButton.setTitleColor(
+                isLogin ? ColorResourceManager.shared.black : ColorResourceManager.shared.secondaryText,
+                for: .normal
+            )
+            
+            self.registerButton.backgroundColor = isLogin ? .clear : ColorResourceManager.shared.white
+            self.registerButton.setTitleColor(
+                isLogin ? ColorResourceManager.shared.secondaryText : ColorResourceManager.shared.black,
+                for: .normal
+            )
+            
+        }
+        
+        UIView.animate(withDuration: animated ? 0.2 : 0, animations: updateButtons)
+        
+        loginView.isHidden = !isLogin
+        registerView.isHidden = isLogin
+    }
+    
+    private func makeSegmentButton(title: String) -> UIButton {
+        UIButton(type: .system).then {
+            $0.setTitle(title, for: .normal)
+            $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
+            $0.layer.cornerRadius = 5
+        }
+    }
+    
+    func willLayout() {
+        
+    }
+    
+    func didLayout() {
+        
+    }
+    
+    func localizeTexts() {
+        
+    }
+}
