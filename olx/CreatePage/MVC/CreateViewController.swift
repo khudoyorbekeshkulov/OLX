@@ -63,7 +63,7 @@ private extension CreateViewController {
             image: image,
             title: form.title,
             priceNumbers: form.price.isEmpty ? "Договорная" : form.price,
-            phoneNumber: form.phone,
+            phoneNumber: form.phoneNumber,
             locationAndTime: "Только что",
             contactName: form.contactName,
             descriptionProduct: form.description

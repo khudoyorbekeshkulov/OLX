@@ -74,7 +74,7 @@ extension CreateController: CreateViewInstaller {
 }
 
 // MARK: View Protocol Conformation
-extension CreateController:  CreateViewMVP {
+extension CreateController: CreateViewMVP {
     func navBar() {
         navigationItem.title = L10n.Overall.create
     }

@@ -13,7 +13,7 @@ struct AddForm {
     let price: String
     let description: String
     let contactName: String
-    let phone: String
+    let phoneNumber: String
     let id = UUID()
 }
 
@@ -23,7 +23,7 @@ struct NetworkServiceAddUserInfo: Encodable {
     let price: String
     let description: String
     let contactName: String
-    let phone: String
+    let phoneNumber: String
 }
 
 extension AddForm {
@@ -34,7 +34,7 @@ extension AddForm {
             price: price,
             description: description,
             contactName: contactName,
-            phone: phone
+            phoneNumber: phoneNumber
         )
     }
 }

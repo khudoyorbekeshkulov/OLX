@@ -58,8 +58,6 @@ protocol CreateViewInstaller: ViewInstaller {
 
 extension CreateViewInstaller {
     func initSubViews() {
-        var onAddPhotoTapped: (() -> Void)?
-        var onPublishTapped: ((AddForm) -> Void)?
         
         scrollView = .init().then {
             $0.showsVerticalScrollIndicator = false

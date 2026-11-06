@@ -362,7 +362,7 @@ private extension CreateView {
             price: trimmed(priceTextField.text),
             description: trimmed(descriptionView.text),
             contactName: trimmed(contactField.text),
-            phone: trimmed(phoneField.text)
+            phoneNumber: trimmed(phoneField.text)
         )
         
         onPublishTapped?(form)
