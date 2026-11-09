@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         let homeNav = toTabItem(
-            rootViewController: HomePageController.instantiate(),
+            rootViewController: HomeViewController(),// HomePageController.instantiate(),
             title: L10n.Overall.home,
             image: "house",
             selectedImage: "house.fill"

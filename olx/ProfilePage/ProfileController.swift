@@ -52,15 +52,6 @@ extension ProfileController:  ProfileView {
     }
 }
 
-// MARK: Static Initializer
-extension ProfileController {
-    static func instantiate() -> ProfileController {
-        let configurator = ProfileConfiguratorImpl()
-        let vc = ProfileController(with: configurator)
-        return vc
-    }
-}
-
 private extension ProfileController {
     func bindActions() {
         loginButton.addAction(UIAction { [weak self] _ in
@@ -112,5 +103,14 @@ private extension ProfileController {
         let colors = ColorResourceManager.shared
         button.backgroundColor = isSelected ? colors.white : .clear
         button.setTitleColor(isSelected ? colors.black : colors.secondaryText, for: .normal)
+    }
+}
+
+// MARK: Static Initializer
+extension ProfileController {
+    static func instantiate() -> ProfileController {
+        let configurator = ProfileConfiguratorImpl()
+        let vc = ProfileController(with: configurator)
+        return vc
     }
 }

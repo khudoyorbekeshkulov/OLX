@@ -201,8 +201,18 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
         insetForSectionAt section: Int
     ) -> UIEdgeInsets {
         switch HomeSection(rawValue: section) {
-        case .categories: .init(top: 0, left: 0, bottom: 5, right: 0)
-        case .products: .init(top: 0, left: ProductGrid.sideInset, bottom: 0, right: ProductGrid.sideInset)
+        case .categories: .init(
+            top: 0,
+            left: 0,
+            bottom: 5,
+            right: 0
+        )
+        case .products: .init(
+            top: 0,
+            left: ProductGrid.sideInset,
+            bottom: 0,
+            right: ProductGrid.sideInset
+        )
         default: .zero
         }
     }

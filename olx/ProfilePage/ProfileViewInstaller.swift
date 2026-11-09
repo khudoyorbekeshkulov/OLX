@@ -19,7 +19,6 @@ protocol ProfileViewInstaller: ViewInstaller {
 }
 
 extension ProfileViewInstaller {
-    
     func initSubViews() {
         mainView.backgroundColor = ColorResourceManager.shared.appBackground
         

@@ -15,6 +15,16 @@ struct AddForm {
     let contactName: String
     let phoneNumber: String
     let id = UUID()
+    
+    static func mock() -> AddForm {
+        return AddForm(
+            image: nil,
+            title: "test",
+            price: "3000",
+            description: "t4est",
+            contactName: "Xudodyor",
+            phoneNumber: "998 99 99 999 99")
+    }
 }
 
 struct NetworkServiceAddUserInfo: Encodable {
