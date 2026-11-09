@@ -8,11 +8,6 @@
 import UIKit
 import PhotosUI
 
-private enum Constants {
-    static let titleMaxLength = 70
-    static let descriptionMaxLength = 9000
-}
-
 class CreateController: UIViewController {
     // swiftlint:disable implicitly_unwrapped_optional
     var presenter: CreatePresenter!
@@ -75,7 +70,35 @@ extension CreateController: CreateViewInstaller {
 
 // MARK: View Protocol Conformation
 extension CreateController: CreateView {
-   
+    func setupLabelDetails(
+        fromTitleCounter: Int,
+        toTitleCounter: Int,
+        fromDescriptionCounter: Int,
+        toDescriptionCounter: Int
+    ) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+           
+            titleCounter.text = "\(fromTitleCounter)/\(toTitleCounter)"
+            descriptionCounter.text = "\(fromDescriptionCounter)/\(toDescriptionCounter)"
+        }
+    }
+    
+    func setupTitleCounter(fromTitleCounter: Int, toTitleCounter: Int) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+           
+            titleCounter.text = "\(fromTitleCounter)/\(toTitleCounter)"
+        }
+    }
+    
+    func setupDescriptionCounter(fromDescriptionCounter: Int, toDescriptionCounter: Int) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+           
+            descriptionCounter.text = "\(fromDescriptionCounter)/\(toDescriptionCounter)"
+        }
+    }
 }
 
 // MARK: Static Initializer
@@ -108,44 +131,36 @@ private extension CreateController {
     }
     
     @objc func titleChanged() {
-        let count = titleField.text?.count ?? 0
-        titleCounter.text = "\(count)/\(Constants.titleMaxLength)"
+        presenter.updateTitleCounter(counter: titleField.text?.count ?? 0)
     }
     
     @objc func publishTapped() {
-        let form = AddForm(
-            image: selectedImageView.image,
-            title: trimmed(titleField.text),
-            price: trimmed(priceTextField.text),
-            description: trimmed(descriptionView.text),
-            contactName: trimmed(contactField.text),
-            phoneNumber: trimmed(phoneField.text)
+        publish(
+            AddForm(
+                image: selectedImageView.image,
+                title: titleField.text.trimmed,
+                price: priceTextField.text.trimmed,
+                description: descriptionView.text.trimmed,
+                contactName: contactField.text.trimmed,
+                phoneNumber: phoneField.text.trimmed
+            )
         )
-        
-        publish(form)
-    }
-    
-    func trimmed(_ text: String?) -> String {
-        (text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     func publish(_ form: AddForm) {
-        guard form.title.count >= 5 else {
-            showAlert("Введите не менее 5 символов в заголовке")
+        let validations: [(isValid: Bool, message: String)] = [
+            (form.title.count >= 5, "Введите не менее 5 символов в заголовке"),
+            (form.description.count >= 10, "Введите не менее 10 символов в описании"),
+            (!form.contactName.isEmpty, "Укажите контактное лицо"),
+            (form.image != nil, "Добавьте фото")
+        ]
+
+        if let error = validations.first(where: { !$0.isValid }) {
+            showAlert(error.message)
             return
         }
-        guard form.description.count >= 10 else {
-            showAlert("Введите не менее 10 символов в описании")
-            return
-        }
-        guard !form.contactName.isEmpty else {
-            showAlert("Укажите контактное лицо")
-            return
-        }
-        guard let image = form.image else {
-            showAlert("Добавьте фото")
-            return
-        }
+
+        guard let image = form.image else { return }
         
         let category = Category(
             image: image,
@@ -166,12 +181,6 @@ private extension CreateController {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
-    }
-    
-    func setPhoto(_ image: UIImage) {
-        selectedImageView.image = image
-        selectedImageView.isHidden = false
-        photoStack.isHidden = true
     }
 }
 
@@ -200,6 +209,6 @@ extension CreateController: PHPickerViewControllerDelegate {
 extension CreateController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         descriptionPlaceholder.isHidden = !textView.text.isEmpty
-        descriptionCounter.text = "\(textView.text.count)/\(Constants.descriptionMaxLength)"
+        presenter.updateDescriptionCounter(counter: textView.text.count)
     }
 }

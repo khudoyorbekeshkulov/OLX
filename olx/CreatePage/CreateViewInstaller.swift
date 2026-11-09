@@ -13,8 +13,6 @@ private enum Constants {
     static let textAreaHeight: CGFloat = 150
     static let cornerRadius: CGFloat = 8
     static let sideInset: CGFloat = 15
-    static let titleMaxLength = 70
-    static let descriptionMaxLength = 9000
 }
 
 protocol CreateViewInstaller: ViewInstaller {
@@ -138,7 +136,6 @@ extension CreateViewInstaller {
         }
         
         titleCounter = UILabel().then {
-            $0.text = "0/\(Constants.titleMaxLength)"
             $0.font = .systemFont(ofSize: 13)
             $0.textColor = ColorResourceManager.shared.secondaryLabel
             $0.setContentHuggingPriority(.required, for: .horizontal)
@@ -200,7 +197,6 @@ extension CreateViewInstaller {
         }
         
         descriptionCounter = UILabel().then {
-            $0.text = "0/\(Constants.descriptionMaxLength)"
             $0.font = .systemFont(ofSize: 13)
             $0.textColor = ColorResourceManager.shared.secondaryLabel
             $0.setContentHuggingPriority(.required, for: .horizontal)

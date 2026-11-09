@@ -13,11 +13,28 @@ private enum Constants {
 }
 
 protocol CreateView: AnyObject {
-
+    func setupLabelDetails(
+        fromTitleCounter: Int,
+        toTitleCounter: Int,
+        fromDescriptionCounter: Int,
+        toDescriptionCounter: Int
+    )
+    
+    func setupTitleCounter(
+        fromTitleCounter: Int,
+        toTitleCounter: Int
+    )
+    
+    func setupDescriptionCounter(
+        fromDescriptionCounter: Int,
+        toDescriptionCounter: Int
+    )
 }
 
 protocol CreatePresenter {
     func viewDidLoad()
+    func updateTitleCounter(counter: Int)
+    func updateDescriptionCounter(counter: Int)
 }
 
 class CreatePresenterImpl: CreatePresenter {
@@ -31,6 +48,25 @@ class CreatePresenterImpl: CreatePresenter {
     }
     
     func viewDidLoad() {
-
+        view?.setupLabelDetails(
+            fromTitleCounter: 0,
+            toTitleCounter: Constants.titleMaxLength,
+            fromDescriptionCounter: 0,
+            toDescriptionCounter: Constants.descriptionMaxLength
+        )
+    }
+    
+    func updateTitleCounter(counter: Int) {
+        view?.setupTitleCounter(
+            fromTitleCounter: counter,
+            toTitleCounter: Constants.titleMaxLength
+        )
+    }
+    
+    func updateDescriptionCounter(counter: Int) {
+        view?.setupDescriptionCounter(
+            fromDescriptionCounter: counter,
+            toDescriptionCounter: Constants.descriptionMaxLength
+        )
     }
 }
