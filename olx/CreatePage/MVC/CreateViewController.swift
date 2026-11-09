@@ -2,7 +2,7 @@ import UIKit
 import PhotosUI
 
 class CreateViewController: UIViewController {
-    let rootView = CreateView()
+    let rootView = CreateViewMVP()
     
     override func loadView() {
         view = rootView
