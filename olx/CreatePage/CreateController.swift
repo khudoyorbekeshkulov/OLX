@@ -12,22 +12,20 @@ class CreateController: UIViewController {
     // swiftlint:disable implicitly_unwrapped_optional
     var presenter: CreatePresenter!
     
+    var titleSection: FormFieldView!
+    var priceSection: FormFieldView!
+    var contactSection: FormFieldView!
+    var phoneSection: FormFieldView!
+    var aboutLabel: UILabel!
+    var addPhotoLabel: UILabel!
+    var contactsLabel: UILabel!
     var scrollView: UIScrollView!
     var contentView: UIView!
     var formStack: UIStackView!
-    var aboutLabel: UILabel!
     var photoBanner: UIControl!
     var selectedImageView: UIImageView!
     var uploadImageView: UIImageView!
-    var addPhotoLabel: UILabel!
     var photoStack: UIStackView!
-    var titleLabel: UILabel!
-    var titleField: UITextField!
-    var titleHintLabel: UILabel!
-    var titleCounter: UILabel!
-    var titleHintRow: UIStackView!
-    var priceLabel: UILabel!
-    var priceTextField: UITextField!
     var descriptionLabel: UILabel!
     var descriptionBox: UIView!
     var descriptionView: UITextView!
@@ -35,11 +33,6 @@ class CreateController: UIViewController {
     var descriptionHintLabel: UILabel!
     var descriptionCounter: UILabel!
     var descriptionHintRow: UIStackView!
-    var contactsLabel: UILabel!
-    var contactLabel: UILabel!
-    var contactField: UITextField!
-    var phoneLabel: UILabel!
-    var phoneField: UITextField!
     var publishButton: UIButton!
 
     // swiftlint:enable implicitly_unwrapped_optional
@@ -63,24 +56,24 @@ extension CreateController: CreateViewInstaller {
         super.viewDidLoad()
      
         installSubviews()
-        presenter.viewDidLoad()
         setupViewController()
+        presenter.viewDidLoad()
     }
 }
 
 // MARK: View Protocol Conformation
 extension CreateController: CreateView {
     func setupLabelDetails(
-        fromTitleCounter: Int,
-        toTitleCounter: Int,
-        fromDescriptionCounter: Int,
-        toDescriptionCounter: Int
+        fromTitleCounter fromTitle: Int,
+        toTitleCounter toTitle: Int,
+        fromDescriptionCounter fromDescription: Int,
+        toDescriptionCounter toDescription: Int
     ) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
            
-            titleCounter.text = "\(fromTitleCounter)/\(toTitleCounter)"
-            descriptionCounter.text = "\(fromDescriptionCounter)/\(toDescriptionCounter)"
+            titleSection.setCounter("\(fromTitle)/\(toTitle)")
+            descriptionCounter.text = "\(fromDescription)/\(toDescription)"
         }
     }
     
@@ -88,7 +81,7 @@ extension CreateController: CreateView {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
            
-            titleCounter.text = "\(fromTitleCounter)/\(toTitleCounter)"
+            titleSection.setCounter("\(fromTitleCounter)/\(toTitleCounter)")
         }
     }
     
@@ -115,7 +108,7 @@ private extension CreateController {
         navigationItem.title = L10n.Overall.create
         
         photoBanner.addTarget(self, action: #selector(photoTapped), for: .touchUpInside)
-        titleField.addTarget(self, action: #selector(titleChanged), for: .editingChanged)
+        titleSection.textField.addTarget(self, action: #selector(titleChanged), for: .editingChanged)
         publishButton.addTarget(self, action: #selector(publishTapped), for: .touchUpInside)
         descriptionView.delegate = self
     }
@@ -131,18 +124,18 @@ private extension CreateController {
     }
     
     @objc func titleChanged() {
-        presenter.updateTitleCounter(counter: titleField.text?.count ?? 0)
+        presenter.updateTitleCounter(counter: titleSection.textField.text?.count ?? 0)
     }
     
     @objc func publishTapped() {
         publish(
             AddForm(
                 image: selectedImageView.image,
-                title: titleField.text.trimmed,
-                price: priceTextField.text.trimmed,
+                title: titleSection.textField.text.trimmed,
+                price: priceSection.textField.text.trimmed,
                 description: descriptionView.text.trimmed,
-                contactName: contactField.text.trimmed,
-                phoneNumber: phoneField.text.trimmed
+                contactName: contactSection.textField.text.trimmed,
+                phoneNumber: phoneSection.textField.text.trimmed
             )
         )
     }

@@ -16,22 +16,20 @@ private enum Constants {
 }
 
 protocol CreateViewInstaller: ViewInstaller {
+    var titleSection: FormFieldView! { get set }
+    var priceSection: FormFieldView! { get set }
+    var contactSection: FormFieldView! { get set }
+    var phoneSection: FormFieldView! { get set }
+    var aboutLabel: UILabel! { get set }
+    var addPhotoLabel: UILabel! { get set }
+    var contactsLabel: UILabel! { get set }
     var scrollView: UIScrollView! { get set }
     var contentView: UIView! { get set }
     var formStack: UIStackView! { get set }
-    var aboutLabel: UILabel! { get set }
     var photoBanner: UIControl! { get set }
     var selectedImageView: UIImageView! { get set }
     var uploadImageView: UIImageView! { get set }
-    var addPhotoLabel: UILabel! { get set }
     var photoStack: UIStackView! { get set }
-    var titleLabel: UILabel! { get set }
-    var titleField: UITextField! { get set }
-    var titleHintLabel: UILabel! { get set }
-    var titleCounter: UILabel! { get set }
-    var titleHintRow: UIStackView! { get set }
-    var priceLabel: UILabel! { get set }
-    var priceTextField: UITextField! { get set }
     var descriptionLabel: UILabel! { get set }
     var descriptionBox: UIView! { get set }
     var descriptionView: UITextView! { get set }
@@ -39,11 +37,6 @@ protocol CreateViewInstaller: ViewInstaller {
     var descriptionHintLabel: UILabel! { get set }
     var descriptionCounter: UILabel! { get set }
     var descriptionHintRow: UIStackView! { get set }
-    var contactsLabel: UILabel! { get set }
-    var contactLabel: UILabel! { get set }
-    var contactField: UITextField! { get set }
-    var phoneLabel: UILabel! { get set }
-    var phoneField: UITextField! { get set }
     var publishButton: UIButton! { get set }
 }
 
@@ -63,13 +56,6 @@ extension CreateViewInstaller {
             $0.axis = .vertical
         }
         
-        aboutLabel = UILabel().then {
-            $0.text = L10n.Create.aboutYourAdvertisementTitle
-            $0.font = .systemFont(ofSize: 18, weight: .bold)
-            $0.textColor = ColorResourceManager.shared.primaryText
-            $0.numberOfLines = 0
-        }
-        
         photoBanner = UIControl().then {
             $0.backgroundColor = ColorResourceManager.shared.addImgBackground
             $0.layer.cornerRadius = Constants.cornerRadius
@@ -82,16 +68,13 @@ extension CreateViewInstaller {
             $0.isHidden = true
         }
         
-        uploadImageView = UIImageView(
-            image: UIImage(
-                systemName: "photo.badge.plus.fill",
-                withConfiguration: UIImage.SymbolConfiguration(pointSize: 50)
-            )
-        ).then {
-            $0.tintColor = ColorResourceManager.shared.white
-            $0.contentMode = .scaleAspectFit
+        aboutLabel = UILabel().then {
+            $0.text = L10n.Create.aboutYourAdvertisementTitle
+            $0.font = .systemFont(ofSize: 18, weight: .bold)
+            $0.textColor = ColorResourceManager.shared.primaryText
+            $0.numberOfLines = 0
         }
-        
+
         addPhotoLabel = UILabel().then {
             $0.attributedText = NSAttributedString(
                 string: L10n.Create.addPhoto,
@@ -103,72 +86,57 @@ extension CreateViewInstaller {
             )
         }
         
+        uploadImageView = UIImageView(
+            image: UIImage(
+                systemName: "photo.badge.plus.fill",
+                withConfiguration: UIImage.SymbolConfiguration(pointSize: 50)
+            )
+        ).then {
+            $0.tintColor = ColorResourceManager.shared.white
+            $0.contentMode = .scaleAspectFit
+        }
+
         photoStack = UIStackView(arrangedSubviews: [uploadImageView, addPhotoLabel]).then {
             $0.axis = .vertical
             $0.alignment = .center
             $0.spacing = 12
             $0.isUserInteractionEnabled = false
         }
-        
-        titleLabel = UILabel().then {
-            $0.text = L10n.Create.titleLabelInput
-            $0.font = .systemFont(ofSize: 14, weight: .medium)
+
+        contactsLabel = UILabel().then {
+            $0.text = L10n.Overall.contactDetailsLabel
+            $0.font = .systemFont(ofSize: 18, weight: .bold)
             $0.textColor = ColorResourceManager.shared.primaryText
+            $0.numberOfLines = 0
         }
         
-        titleField = UITextField().then {
-            $0.attributedPlaceholder = NSAttributedString(
-                string: L10n.Create.inputProductNameTextField,
-                attributes: [.foregroundColor: ColorResourceManager.shared.secondaryLabel]
-            )
-            $0.font = .systemFont(ofSize: 16)
-            $0.textColor = ColorResourceManager.shared.primaryText
-            $0.backgroundColor = ColorResourceManager.shared.separator
-            $0.layer.cornerRadius = Constants.cornerRadius
-            $0.autocapitalizationType = .sentences
-            $0.setLeftPadding(16)
+        titleSection = FormFieldView(
+            title: L10n.Create.titleLabelInput,
+            placeholder: L10n.Create.inputProductNameTextField,
+            hint: L10n.Create.checkInputProductNameLatterNumber
+        ).then {
+            $0.textField.autocapitalizationType = .sentences
         }
         
-        titleHintLabel = UILabel().then {
-            $0.text = L10n.Create.checkInputProductNameLatterNumber
-            $0.font = .systemFont(ofSize: 13)
-            $0.textColor = ColorResourceManager.shared.secondaryLabel
+        priceSection = FormFieldView(
+            title: L10n.Overall.inputPricePlaceholder,
+            placeholder: L10n.Overall.inputPricePlaceholder
+        ).then {
+            $0.textField.keyboardType = .numberPad
         }
         
-        titleCounter = UILabel().then {
-            $0.font = .systemFont(ofSize: 13)
-            $0.textColor = ColorResourceManager.shared.secondaryLabel
-            $0.setContentHuggingPriority(.required, for: .horizontal)
+        contactSection = FormFieldView(
+            title: L10n.Overall.contactPersonLabel,
+            placeholder: L10n.Overall.nameLabel
+        ).then {
+            $0.textField.autocapitalizationType = .sentences
         }
         
-        titleHintRow = UIStackView(arrangedSubviews: [titleHintLabel, titleCounter]).then {
-            $0.axis = .horizontal
-        }
-        
-        priceLabel = UILabel().then {
-            $0.text = L10n.Overall.priceLabel
-            $0.font = .systemFont(ofSize: 14, weight: .medium)
-            $0.textColor = ColorResourceManager.shared.primaryText
-        }
-        
-        priceTextField = UITextField().then {
-            $0.attributedPlaceholder = NSAttributedString(
-                string: L10n.Overall.inputPricePlaceholder,
-                attributes: [.foregroundColor: ColorResourceManager.shared.secondaryLabel]
-            )
-            $0.font = .systemFont(ofSize: 16)
-            $0.textColor = ColorResourceManager.shared.primaryText
-            $0.backgroundColor = ColorResourceManager.shared.separator
-            $0.layer.cornerRadius = Constants.cornerRadius
-            $0.keyboardType = .emailAddress
-            $0.autocapitalizationType = .none
-            $0.setLeftPadding(16)
-        }
-        
-        descriptionLabel = UILabel().then {
-            $0.text = L10n.Overall.description
-            $0.font = .systemFont(ofSize: 14, weight: .medium)
-            $0.textColor = ColorResourceManager.shared.primaryText
+        phoneSection = FormFieldView(
+            title: L10n.Overall.phoneNumberLabel,
+            placeholder: "90 123 45 67"
+        ).then {
+            $0.textField.keyboardType = .phonePad
         }
         
         descriptionBox = UIView().then {
@@ -206,49 +174,10 @@ extension CreateViewInstaller {
             $0.axis = .horizontal
         }
         
-        contactsLabel = UILabel().then {
-            $0.text = L10n.Overall.contactDetailsLabel
-            $0.font = .systemFont(ofSize: 18, weight: .bold)
-            $0.textColor = ColorResourceManager.shared.primaryText
-            $0.numberOfLines = 0
-        }
-        
-        contactLabel = UILabel().then {
-            $0.text = L10n.Overall.contactPersonLabel
+        descriptionLabel = UILabel().then {
+            $0.text = L10n.Overall.description
             $0.font = .systemFont(ofSize: 14, weight: .medium)
             $0.textColor = ColorResourceManager.shared.primaryText
-        }
-        
-        contactField = UITextField().then {
-            $0.attributedPlaceholder = NSAttributedString(
-                string: L10n.Overall.nameLabel,
-                attributes: [.foregroundColor: ColorResourceManager.shared.secondaryLabel]
-            )
-            $0.font = .systemFont(ofSize: 16)
-            $0.textColor = ColorResourceManager.shared.primaryText
-            $0.backgroundColor = ColorResourceManager.shared.separator
-            $0.layer.cornerRadius = Constants.cornerRadius
-            $0.autocapitalizationType = .sentences
-            $0.setLeftPadding(16)
-        }
-        
-        phoneLabel = UILabel().then {
-            $0.text = L10n.Overall.phoneNumberLabel
-            $0.font = .systemFont(ofSize: 14, weight: .medium)
-            $0.textColor = ColorResourceManager.shared.primaryText
-        }
-        
-        phoneField = UITextField().then {
-            $0.attributedPlaceholder = NSAttributedString(
-                string: "90 123 45 67",
-                attributes: [.foregroundColor: ColorResourceManager.shared.secondaryLabel]
-            )
-            $0.font = .systemFont(ofSize: 16)
-            $0.textColor = ColorResourceManager.shared.primaryText
-            $0.backgroundColor = ColorResourceManager.shared.separator
-            $0.layer.cornerRadius = Constants.cornerRadius
-            $0.keyboardType = .phonePad
-            $0.setLeftPadding(16)
         }
         
         publishButton = UIButton(type: .system).then {
@@ -271,24 +200,16 @@ extension CreateViewInstaller {
         add(aboutLabel, after: 12)
         add(photoBanner, after: 20)
         
-        add(titleLabel, after: 8)
-        add(titleField, after: 6)
-        add(titleHintRow, after: 20)
-        
-        add(priceLabel, after: 8)
-        add(priceTextField, after: 20)
+        add(titleSection, after: 20)
+        add(priceSection, after: 20)
         
         add(descriptionLabel, after: 8)
         add(descriptionBox, after: 6)
         add(descriptionHintRow, after: 24)
         
         add(contactsLabel, after: 12)
-        
-        add(contactLabel, after: 8)
-        add(contactField, after: 20)
-        
-        add(phoneLabel, after: 8)
-        add(phoneField, after: 24)
+        add(contactSection, after: 20)
+        add(phoneSection, after: 24)
         
         add(publishButton, after: 0)
     }
@@ -323,8 +244,8 @@ extension CreateViewInstaller {
             $0.center.equalToSuperview()
         }
         
-        [titleField, contactField, priceTextField, phoneField, publishButton].forEach {
-            $0.snp.makeConstraints { $0.height.equalTo(Constants.fieldHeight) }
+        publishButton.snp.makeConstraints {
+            $0.height.equalTo(Constants.fieldHeight)
         }
         
         descriptionBox.snp.makeConstraints {
