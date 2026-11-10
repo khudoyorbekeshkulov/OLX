@@ -1,4 +1,4 @@
-//  
+//
 //  CreatePresenter.swift
 //  olx
 //
@@ -8,8 +8,12 @@
 import Foundation
 
 private enum Constants {
+    static let titleMinLength = 5
     static let titleMaxLength = 70
+    static let descriptionMinLength = 10
     static let descriptionMaxLength = 9000
+    static let negotiablePrice = "Договорная"
+    static let justNowLabel = "Только что"
 }
 
 protocol CreateView: AnyObject {
@@ -35,6 +39,7 @@ protocol CreatePresenter: CreateControllerProtocols {
     func viewDidLoad()
     func updateTitleCounter(counter: Int)
     func updateDescriptionCounter(counter: Int)
+    func publish(form: AddForm)
 }
 
 class CreatePresenterImpl: CreatePresenter {
@@ -68,6 +73,32 @@ class CreatePresenterImpl: CreatePresenter {
             fromDescriptionCounter: counter,
             toDescriptionCounter: Constants.descriptionMaxLength
         )
+    }
+    
+    func publish(form: AddForm) {
+        guard form.title.count >= Constants.titleMinLength else { return fail(.titleTooShort(Constants.titleMinLength)) }
+        guard form.description.count >= Constants.descriptionMinLength else { return fail(.descriptionTooShort(Constants.descriptionMinLength)) }
+        guard !form.contactName.isEmpty else { return fail(.contactNameMissing) }
+        guard let image = form.image else { return fail(.photoMissing) }
+        
+        let listing = Category(
+            image: image,
+            title: form.title,
+            priceNumbers: form.price.isEmpty ? Constants.negotiablePrice : form.price,
+            phoneNumber: form.phoneNumber,
+            locationAndTime: Constants.justNowLabel,
+            contactName: form.contactName,
+            descriptionProduct: form.description
+        )
+        
+        ListingsService.shared.add(listing)
+        router.showHome()
+    }
+}
+
+private extension CreatePresenterImpl {
+    func fail(_ error: ValidationError) {
+        router.showAlert(message: error.message)
     }
 }
 

@@ -100,42 +100,6 @@ private extension CreateController {
         titleSection.delegate = presenter
         descriptionSection.delegate = presenter
     }
-    
-    func publish(_ form: AddForm) {
-        let validations: [(isValid: Bool, message: String)] = [
-            (form.title.count >= 5, "Введите не менее 5 символов в заголовке"),
-            (form.description.count >= 10, "Введите не менее 10 символов в описании"),
-            (!form.contactName.isEmpty, "Укажите контактное лицо"),
-            (form.image != nil, "Добавьте фото")
-        ]
-
-        if let error = validations.first(where: { !$0.isValid }) {
-            showAlert(error.message)
-            return
-        }
-
-        guard let image = form.image else { return }
-        
-        let category = Category(
-            image: image,
-            title: form.title,
-            priceNumbers: form.price.isEmpty ? "Договорная" : form.price,
-            phoneNumber: form.phoneNumber,
-            locationAndTime: "Только что",
-            contactName: form.contactName,
-            descriptionProduct: form.description
-        )
-        
-        ListingsService.shared.add(category)
-        
-        tabBarController?.selectedIndex = 0
-    }
-    
-    func showAlert(_ message: String) {
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
 }
 
 // MARK: Form Blocks Delegates
@@ -153,8 +117,8 @@ extension CreateController: PhotoBannerViewDelegate {
 
 extension CreateController: PrimaryButtonDelegate {
     func primaryButtonDidTap() {
-        publish(
-            AddForm(
+        presenter.publish(
+            form: AddForm(
                 image: photoBanner.image,
                 title: titleSection.trimmedText,
                 price: priceSection.textField.text.trimmed,
