@@ -7,25 +7,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let profileNav = toTabItem(
-            rootViewController: ProfileController.instantiate(),
-            title: L10n.Overall.profile,
-            image: "person",
-            selectedImage: "person.crop.circle"
-        )
-        
-        let messageNav = toTabItem(
-            rootViewController: MessageViewController(navigationTitle: L10n.Overall.message),
-            title: L10n.Overall.message,
-            image: "ellipsis.message",
-            selectedImage: "ellipsis.message.fill"
-        )
-        
-        let createNav = toTabItem(
-            rootViewController: CreateController.instantiate(),
-            title: L10n.Overall.create,
-            image: "plus.circle",
-            selectedImage: "plus.circle.fill"
+        let homeNav = toTabItem(
+            rootViewController: HomePageController.instantiate(),
+            title: L10n.Overall.home,
+            image: "house",
+            selectedImage: "house.fill"
         )
         
         let favouritesNav = toTabItem(
@@ -35,11 +21,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             selectedImage: "star.fill"
         )
         
-        let homeNav = toTabItem(
-            rootViewController: HomeViewController(),// HomePageController.instantiate(),
-            title: L10n.Overall.home,
-            image: "house",
-            selectedImage: "house.fill"
+        let createNav = toTabItem(
+            rootViewController: CreateController.instantiate(),
+            title: L10n.Overall.create,
+            image: "plus.circle",
+            selectedImage: "plus.circle.fill"
+        )
+        
+        let messageNav = toTabItem(
+            rootViewController: MessageViewController(navigationTitle: L10n.Overall.message),
+            title: L10n.Overall.message,
+            image: "ellipsis.message",
+            selectedImage: "ellipsis.message.fill"
+        )
+        
+        let profileNav = toTabItem(
+            rootViewController: ProfileController.instantiate(),
+            title: L10n.Overall.profile,
+            image: "person",
+            selectedImage: "person.crop.circle"
         )
         
         let tabBar = UITabBarController().then {
