@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol TitleFieldViewDelegate: AnyObject {
-    func titleFieldView(_ view: TitleFieldView, didChangeText text: String)
+    func titleFieldView(didChangeText text: String)
 }
 
 /// Title input with a hint and character counter.
@@ -53,6 +53,6 @@ private extension TitleFieldView {
     }
 
     @objc func textChanged() {
-        delegate?.titleFieldView(self, didChangeText: field.textField.text ?? "")
+        delegate?.titleFieldView(didChangeText: field.textField.text ?? "")
     }
 }

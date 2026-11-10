@@ -31,7 +31,7 @@ protocol CreateView: AnyObject {
     )
 }
 
-protocol CreatePresenter {
+protocol CreatePresenter: CreateControllerProtocols {
     func viewDidLoad()
     func updateTitleCounter(counter: Int)
     func updateDescriptionCounter(counter: Int)
@@ -68,5 +68,15 @@ class CreatePresenterImpl: CreatePresenter {
             fromDescriptionCounter: counter,
             toDescriptionCounter: Constants.descriptionMaxLength
         )
+    }
+}
+
+extension CreatePresenterImpl {
+    func titleFieldView(didChangeText text: String) {
+        updateTitleCounter(counter: text.count)
+    }
+    
+    func descriptionFieldView(didChangeText text: String) {
+        updateDescriptionCounter(counter: text.count)
     }
 }

@@ -8,6 +8,8 @@
 import UIKit
 import PhotosUI
 
+typealias CreateControllerProtocols = TitleFieldViewDelegate & DescriptionFieldViewDelegate
+
 class CreateController: UIViewController {
     // swiftlint:disable implicitly_unwrapped_optional
     var presenter: CreatePresenter!
@@ -93,10 +95,10 @@ private extension CreateController {
         navigationItem.title = L10n.Overall.create
         
         photoBanner.delegate = self
-     
-        titleSection.delegate = self
-        descriptionSection.delegate = self
         publishButton.delegate = self
+     
+        titleSection.delegate = presenter
+        descriptionSection.delegate = presenter
     }
     
     func publish(_ form: AddForm) {
@@ -149,20 +151,8 @@ extension CreateController: PhotoBannerViewDelegate {
     }
 }
 
-extension CreateController: TitleFieldViewDelegate {
-    func titleFieldView(_ view: TitleFieldView, didChangeText text: String) {
-        presenter.updateTitleCounter(counter: text.count)
-    }
-}
-
-extension CreateController: DescriptionFieldViewDelegate {
-    func descriptionFieldView(_ view: DescriptionFieldView, didChangeText text: String) {
-        presenter.updateDescriptionCounter(counter: text.count)
-    }
-}
-
 extension CreateController: PrimaryButtonDelegate {
-    func primaryButtonDidTap(_ button: PrimaryButton) {
+    func primaryButtonDidTap() {
         publish(
             AddForm(
                 image: photoBanner.image,

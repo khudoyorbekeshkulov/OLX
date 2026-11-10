@@ -7,7 +7,7 @@ import UIKit
 import SnapKit
 
 protocol DescriptionFieldViewDelegate: AnyObject {
-    func descriptionFieldView(_ view: DescriptionFieldView, didChangeText text: String)
+    func descriptionFieldView(didChangeText text: String)
 }
 
 /// Multi-line description field: title, text area with placeholder, hint and a character counter.
@@ -55,7 +55,7 @@ final class DescriptionFieldView: UIView {
 extension DescriptionFieldView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
-        delegate?.descriptionFieldView(self, didChangeText: textView.text)
+        delegate?.descriptionFieldView(didChangeText: textView.text)
     }
 }
 

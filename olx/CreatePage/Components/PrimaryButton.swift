@@ -7,7 +7,7 @@ import UIKit
 import SnapKit
 
 protocol PrimaryButtonDelegate: AnyObject {
-    func primaryButtonDidTap(_ button: PrimaryButton)
+    func primaryButtonDidTap()
 }
 
 /// Main call-to-action button: filled background, rounded corners, fixed height.
@@ -50,6 +50,6 @@ final class PrimaryButton: UIButton {
 
 private extension PrimaryButton {
     @objc func handleTap() {
-        delegate?.primaryButtonDidTap(self)
+        delegate?.primaryButtonDidTap()
     }
 }
