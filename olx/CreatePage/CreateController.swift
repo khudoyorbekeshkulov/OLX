@@ -1,4 +1,4 @@
-//  
+//
 //  CreateController.swift
 //  olx
 //
@@ -12,28 +12,13 @@ class CreateController: UIViewController {
     // swiftlint:disable implicitly_unwrapped_optional
     var presenter: CreatePresenter!
     
-    var titleSection: FormFieldView!
+    var formView: ScrollableFormView!
+    var photoBanner: PhotoBannerView!
+    var titleSection: TitleFieldView!
     var priceSection: FormFieldView!
-    var contactSection: FormFieldView!
-    var phoneSection: FormFieldView!
-    var aboutLabel: UILabel!
-    var addPhotoLabel: UILabel!
-    var contactsLabel: UILabel!
-    var scrollView: UIScrollView!
-    var contentView: UIView!
-    var formStack: UIStackView!
-    var photoBanner: UIControl!
-    var selectedImageView: UIImageView!
-    var uploadImageView: UIImageView!
-    var photoStack: UIStackView!
-    var descriptionLabel: UILabel!
-    var descriptionBox: UIView!
-    var descriptionView: UITextView!
-    var descriptionPlaceholder: UILabel!
-    var descriptionHintLabel: UILabel!
-    var descriptionCounter: UILabel!
-    var descriptionHintRow: UIStackView!
-    var publishButton: UIButton!
+    var descriptionSection: DescriptionFieldView!
+    var contactSection: ContactSectionView!
+    var publishButton: PrimaryButton!
 
     // swiftlint:enable implicitly_unwrapped_optional
     private init(with configurator: CreateConfigurator) {
@@ -73,7 +58,7 @@ extension CreateController: CreateView {
             guard let self else { return }
            
             titleSection.setCounter("\(fromTitle)/\(toTitle)")
-            descriptionCounter.text = "\(fromDescription)/\(toDescription)"
+            descriptionSection.setCounter("\(fromDescription)/\(toDescription)")
         }
     }
     
@@ -89,7 +74,7 @@ extension CreateController: CreateView {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
            
-            descriptionCounter.text = "\(fromDescriptionCounter)/\(toDescriptionCounter)"
+            descriptionSection.setCounter("\(fromDescriptionCounter)/\(toDescriptionCounter)")
         }
     }
 }
@@ -107,37 +92,11 @@ private extension CreateController {
     func setupViewController() {
         navigationItem.title = L10n.Overall.create
         
-        photoBanner.addTarget(self, action: #selector(photoTapped), for: .touchUpInside)
-        titleSection.textField.addTarget(self, action: #selector(titleChanged), for: .editingChanged)
-        publishButton.addTarget(self, action: #selector(publishTapped), for: .touchUpInside)
-        descriptionView.delegate = self
-    }
-    
-    @objc func photoTapped() {
-        var configuration = PHPickerConfiguration()
-        configuration.filter = .images
-        configuration.selectionLimit = 1
-        
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = self
-        present(picker, animated: true)
-    }
-    
-    @objc func titleChanged() {
-        presenter.updateTitleCounter(counter: titleSection.textField.text?.count ?? 0)
-    }
-    
-    @objc func publishTapped() {
-        publish(
-            AddForm(
-                image: selectedImageView.image,
-                title: titleSection.textField.text.trimmed,
-                price: priceSection.textField.text.trimmed,
-                description: descriptionView.text.trimmed,
-                contactName: contactSection.textField.text.trimmed,
-                phoneNumber: phoneSection.textField.text.trimmed
-            )
-        )
+        photoBanner.delegate = self
+     
+        titleSection.delegate = self
+        descriptionSection.delegate = self
+        publishButton.delegate = self
     }
     
     func publish(_ form: AddForm) {
@@ -177,6 +136,46 @@ private extension CreateController {
     }
 }
 
+// MARK: Form Blocks Delegates
+extension CreateController: PhotoBannerViewDelegate {
+    func photoBannerViewDidTap(_ banner: PhotoBannerView) {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+}
+
+extension CreateController: TitleFieldViewDelegate {
+    func titleFieldView(_ view: TitleFieldView, didChangeText text: String) {
+        presenter.updateTitleCounter(counter: text.count)
+    }
+}
+
+extension CreateController: DescriptionFieldViewDelegate {
+    func descriptionFieldView(_ view: DescriptionFieldView, didChangeText text: String) {
+        presenter.updateDescriptionCounter(counter: text.count)
+    }
+}
+
+extension CreateController: PrimaryButtonDelegate {
+    func primaryButtonDidTap(_ button: PrimaryButton) {
+        publish(
+            AddForm(
+                image: photoBanner.image,
+                title: titleSection.trimmedText,
+                price: priceSection.textField.text.trimmed,
+                description: descriptionSection.trimmedText,
+                contactName: contactSection.trimmedName,
+                phoneNumber: contactSection.trimmedPhone
+            )
+        )
+    }
+}
+
 extension CreateController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
@@ -190,18 +189,8 @@ extension CreateController: PHPickerViewControllerDelegate {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                
-                selectedImageView.image = image
-                selectedImageView.isHidden = false
-                photoStack.isHidden = true
+                photoBanner.setImage(image)
             }
         }
-    }
-}
-
-
-extension CreateController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        descriptionPlaceholder.isHidden = !textView.text.isEmpty
-        presenter.updateDescriptionCounter(counter: textView.text.count)
     }
 }
