@@ -21,7 +21,7 @@ protocol HomePagePresenter {
     var numberOfProducts: Int { get }
     func product(at index: Int) -> Category?
     func isFavorite(_ category: Category) -> Bool
-    func favorite(_ category: Category)
+    func toggleFavorite(_ category: Category)
     func openAllCategories()
     func openDetails(category: Category)
 }
@@ -57,7 +57,7 @@ class HomePagePresenterImpl: HomePagePresenter {
         FavoritesService.shared.contains(category)
     }
     
-    func favorite(_ category: Category) {
+    func toggleFavorite(_ category: Category) {
         FavoritesService.shared.toggle(category)
     }
     

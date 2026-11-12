@@ -122,12 +122,11 @@ extension HomePageController: UICollectionViewDelegate, UICollectionViewDataSour
                 $0.setCategory(category: category)
                 $0.isImpact = false
                 
-                $0.setFavorite(FavoritesService.shared.contains(category))
-                $0.heartTapped = { [weak self] in
-                    guard self != nil else { return }
-                 
-                    FavoritesService.shared.toggle(category)
-                    cell.setFavorite(FavoritesService.shared.contains(category))
+                $0.setFavorite(presenter.isFavorite(category))
+                $0.heartTapped = { [weak self, weak cell] in
+                    guard let self, let cell else { return }
+                    self.presenter.toggleFavorite(category)
+                    cell.setFavorite(self.presenter.isFavorite(category))
                 }
             }
             
