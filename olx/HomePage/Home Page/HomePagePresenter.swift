@@ -8,21 +8,25 @@
 import Foundation
 
 protocol HomePageView: AnyObject {
-    func updateSquareBackground()
+    func setupCategories(categories: [Category])
+}
+
+protocol HomePageRouter: AnyObject {
+    func openAllCategories()
+    func openDetails(category: Category, categories: [Category])
 }
 
 protocol HomePagePresenter {
     func viewDidLoad()
-}
-
-private enum Constants {
-    static let squareBackgroundChangeTimeout: DispatchTime = .now() + 2.0
+    func openAllCategories()
+    func openDetails(category: Category)
 }
 
 class HomePagePresenterImpl: HomePagePresenter {
     
     private weak var view: HomePageView?
     private let router: HomePageRouter
+    private var categories = [Category]()
     
     init(view: HomePageView, router: HomePageRouter) {
         self.view = view
@@ -30,14 +34,16 @@ class HomePagePresenterImpl: HomePagePresenter {
     }
     
     func viewDidLoad() {
-        updateSqaureBackground()
+        categories = NetworkServiceImplementation.shared.getCategories().toCategories
+        
+        view?.setupCategories(categories: categories)
     }
-}
-
-private extension HomePagePresenterImpl {
-    func updateSqaureBackground() {
-        DispatchQueue.main.asyncAfter(deadline: Constants.squareBackgroundChangeTimeout) {
-            self.view?.updateSquareBackground()
-        }
+    
+    func openAllCategories() {
+        router.openAllCategories()
+    }
+    
+    func openDetails(category: Category) {
+        router.openDetails(category: category, categories: categories)
     }
 }

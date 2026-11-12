@@ -15,15 +15,7 @@ private enum HomeSection: Int, CaseIterable {
 
 final class HomeView: UIView {
     
-    private var categories = [Category]() {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                
-                mainCollectionView.reloadData()
-            }
-        }
-    }
+    private var categories = [Category]() 
     
     var onShowAllCategoriesTapped: (() -> Void)?
     var onCategorySelected: ((Category) -> Void)?
@@ -77,6 +69,7 @@ final class HomeView: UIView {
     
     func setupCategories(categories: [Category]) {
         self.categories = categories
+        mainCollectionView.reloadData()
     }
     
     func reloadProducts() {
@@ -280,11 +273,5 @@ private extension HomeView {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
-    }
-}
-
-final class ExpandingContainerView: UIView {
-    override var intrinsicContentSize: CGSize {
-        UIView.layoutFittingExpandedSize
     }
 }

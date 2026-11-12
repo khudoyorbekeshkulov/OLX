@@ -11,8 +11,11 @@ import SnapKit
 protocol HomePageViewInstaller: ViewInstaller {
     var searchContainer: ExpandingContainerView! { get set }
     var searchingTextField: UITextField! { get set }
-    var collectionViewLayout: UICollectionViewFlowLayout! { get set }
     var mainCollectionView: UICollectionView! { get set }
+}
+
+private enum Constants {
+    static let fieldLeftsideIcon = UIImage(systemName: "magnifyingglass")
 }
 
 extension HomePageViewInstaller {
@@ -29,14 +32,9 @@ extension HomePageViewInstaller {
             $0.backgroundColor = ColorResourceManager.shared.searchBackground
         }
         
-        collectionViewLayout = .init().then {
-            $0.scrollDirection = .vertical
-            $0.minimumLineSpacing = 0
-        }
-        
         mainCollectionView = .init(
             frame: .zero,
-            collectionViewLayout: collectionViewLayout
+            collectionViewLayout: collectionLayout()
         ).then {
             $0.showsVerticalScrollIndicator = false
             $0.backgroundColor = .clear
@@ -49,9 +47,12 @@ extension HomePageViewInstaller {
                 ofKind: UICollectionView.elementKindSectionHeader
             )
         }
+        
+        setupSearchBar()
     }
     
     func addSubViews() {
+        mainView.addSubview(searchContainer)
         searchContainer.addSubview(searchingTextField)
         mainView.addSubview(mainCollectionView)
     }
@@ -73,16 +74,34 @@ extension HomePageViewInstaller {
             $0.bottom.equalToSuperview()
         }
     }
-    
-    func willLayout() {
-        
+}
+
+private extension HomePageViewInstaller {
+    func setupView() {
+        mainView.backgroundColor = ColorResourceManager.shared.appBackground
     }
     
-    func didLayout() {
+    func setupSearchBar() {
+        let icon = UIImageView(image: Constants.fieldLeftsideIcon).then {
+            $0.tintColor = ColorResourceManager.shared.magnifyingGlass
+            $0.frame = CGRect(x: 12, y: 8, width: 24, height: 20)
+        }
         
+        let leftContainer = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 36)).then {
+            $0.addSubview(icon)
+        }
+        
+        searchingTextField.then {
+            $0.placeholder = L10n.Overall.searchPlaceholder
+            $0.leftView = leftContainer
+            $0.leftViewMode = .always
+        }
     }
     
-    func localizeTexts() {
-        
+    func collectionLayout() -> UICollectionViewLayout {
+        UICollectionViewFlowLayout().then {
+            $0.scrollDirection = .vertical
+            $0.minimumLineSpacing = 0
+        }
     }
 }
