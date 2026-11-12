@@ -20,28 +20,6 @@ class HomePageController: UIViewController {
     var searchingTextField: UITextField!
     var mainCollectionView: UICollectionView!
     
-    private var categories = [Category]() {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                
-                setupCategories(categories: categories)
-            }
-        }
-    }
-    
-    var onShowAllCategoriesTapped: (() -> Void)?
-    var onCategorySelected: ((Category) -> Void)?
-    
-    private var products: [Category] {
-        ListingsService.shared.items + categories
-    }
-    
-    func setupCategories(categories: [Category]) {
-        self.categories = categories
-        mainCollectionView.reloadData()
-    }
-    
     func reloadProducts() {
         mainCollectionView.reloadSections(IndexSet(integer: HomeSection.products.rawValue))
     }
@@ -74,7 +52,12 @@ extension HomePageController: HomePageViewInstaller {
 
 // MARK: View Protocol Conformation
 extension HomePageController: HomePageView {
-   
+    func setupCategories(categories: [Category]) {
+        DispatchQueue.main.async { [weak self] in
+        guard let self else { return }
+        mainCollectionView.reloadData()
+        }
+    }
 }
 
 // MARK: Static Initializer
@@ -108,7 +91,7 @@ extension HomePageController: UICollectionViewDelegate, UICollectionViewDataSour
         case .categories:
             return 1
         default:
-            return products.count
+            return presenter.numberOfProducts
         }
     }
     
@@ -133,7 +116,7 @@ extension HomePageController: UICollectionViewDelegate, UICollectionViewDataSour
                 for: indexPath
             )
             
-            guard let category = products[safe: indexPath.item] else { return cell }
+            guard let category = presenter.product(at: indexPath.item) else { return cell }
             
             return cell.then {
                 $0.setCategory(category: category)
@@ -171,14 +154,14 @@ extension HomePageController: UICollectionViewDelegate, UICollectionViewDataSour
         didSelectItemAt indexPath: IndexPath
     ) {
         guard indexPath.section == HomeSection.products.rawValue else { return }
-        guard let category = products[safe: indexPath.item] else { return }
-        onCategorySelected?(category)
+        guard let category = presenter.product(at: indexPath.item) else { return }
+        presenter.openDetails(category: category)
     }
 }
 
 extension HomePageController: CategoryContainerCellDelegate {
     func didTapShowAllCategories() {
-        onShowAllCategoriesTapped?()
+        presenter.openAllCategories()
     }
 }
 

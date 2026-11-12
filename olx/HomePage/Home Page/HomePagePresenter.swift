@@ -18,6 +18,10 @@ protocol HomePageRouter: AnyObject {
 
 protocol HomePagePresenter {
     func viewDidLoad()
+    var numberOfProducts: Int { get }
+    func product(at index: Int) -> Category?
+    func isFavorite(_ category: Category) -> Bool
+    func favorite(_ category: Category)
     func openAllCategories()
     func openDetails(category: Category)
 }
@@ -28,6 +32,12 @@ class HomePagePresenterImpl: HomePagePresenter {
     private let router: HomePageRouter
     private var categories = [Category]()
     
+    private var products: [Category] {
+        ListingsService.shared.items + categories
+    }
+    
+    var numberOfProducts: Int{ products.count }
+    
     init(view: HomePageView, router: HomePageRouter) {
         self.view = view
         self.router = router
@@ -37,6 +47,18 @@ class HomePagePresenterImpl: HomePagePresenter {
         categories = NetworkServiceImplementation.shared.getCategories().toCategories
         
         view?.setupCategories(categories: categories)
+    }
+    
+    func product(at index: Int) -> Category? {
+        products[safe: index]
+    }
+    
+    func isFavorite(_ category: Category) -> Bool {
+        FavoritesService.shared.contains(category)
+    }
+    
+    func favorite(_ category: Category) {
+        FavoritesService.shared.toggle(category)
     }
     
     func openAllCategories() {
