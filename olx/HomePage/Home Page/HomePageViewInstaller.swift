@@ -31,6 +31,7 @@ extension HomePageViewInstaller {
         searchingTextField = .init().then {
             $0.backgroundColor = ColorResourceManager.shared.searchBackground
             $0.returnKeyType = .search
+            $0.clearButtonMode = .whileEditing
         }
         
         mainCollectionView = .init(

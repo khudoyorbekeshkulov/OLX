@@ -12,4 +12,9 @@ extension HomePageController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        presenter.search(text: "")
+        return true
+    }
 }

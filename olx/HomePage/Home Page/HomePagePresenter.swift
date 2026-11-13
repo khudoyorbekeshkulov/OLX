@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol HomePageView: AnyObject {
     func setupCategories(categories: [Category])
@@ -41,16 +42,33 @@ class HomePagePresenterImpl: HomePagePresenter {
         return all.filter{ $0.title.localizedCaseInsensitiveContains(searchText)}
     }
     
-    func search(text: String) {
-        searchText = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        view?.reloadProducts()
-    }
+    private let searchSubject = PassthroughSubject<String, Never>()
+    private var cancelLabels = Set<AnyCancellable>()
     
     var numberOfProducts: Int{ products.count }
     
     init(view: HomePageView, router: HomePageRouter) {
         self.view = view
         self.router = router
+        
+        bindSearch()
+    }
+    
+    func bindSearch() {
+        searchSubject
+            .map{ $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .debounce(for: .milliseconds(400), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .sink { [weak self] text in
+                guard let self else { return }
+                searchText = text
+                view?.reloadProducts()
+            }
+            .store(in: &cancelLabels)
+    }
+    
+    func search(text: String) {
+        searchSubject.send(text)
     }
     
     func viewDidLoad() {

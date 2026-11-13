@@ -1,4 +1,4 @@
-//  
+//
 //  HomePageController.swift
 //  olx
 //
@@ -39,7 +39,7 @@ extension HomePageController: HomePageViewInstaller {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         installSubviews()
         setupViewController()
         presenter.viewDidLoad()
@@ -50,8 +50,8 @@ extension HomePageController: HomePageViewInstaller {
 extension HomePageController: HomePageView {
     func setupCategories(categories: [Category]) {
         DispatchQueue.main.async { [weak self] in
-        guard let self else { return }
-        mainCollectionView.reloadData()
+            guard let self else { return }
+            mainCollectionView.reloadData()
         }
     }
     
