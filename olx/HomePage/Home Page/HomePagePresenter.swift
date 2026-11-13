@@ -9,6 +9,7 @@ import Foundation
 
 protocol HomePageView: AnyObject {
     func setupCategories(categories: [Category])
+    func reloadProducts()
 }
 
 protocol HomePageRouter: AnyObject {
@@ -22,6 +23,7 @@ protocol HomePagePresenter {
     func product(at index: Int) -> Category?
     func isFavorite(_ category: Category) -> Bool
     func toggleFavorite(_ category: Category)
+    func search(text: String)
     func openAllCategories()
     func openDetails(category: Category)
 }
@@ -31,9 +33,17 @@ class HomePagePresenterImpl: HomePagePresenter {
     private weak var view: HomePageView?
     private let router: HomePageRouter
     private var categories = [Category]()
+    private var searchText = ""
     
     private var products: [Category] {
-        ListingsService.shared.items + categories
+        let all = ListingsService.shared.items + categories
+        guard !searchText.isEmpty else { return all }
+        return all.filter{ $0.title.localizedCaseInsensitiveContains(searchText)}
+    }
+    
+    func search(text: String) {
+        searchText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        view?.reloadProducts()
     }
     
     var numberOfProducts: Int{ products.count }

@@ -20,9 +20,6 @@ class HomePageController: UIViewController {
     var searchingTextField: UITextField!
     var mainCollectionView: UICollectionView!
     
-    func reloadProducts() {
-        mainCollectionView.reloadSections(IndexSet(integer: HomeSection.products.rawValue))
-    }
     // swiftlint:enable implicitly_unwrapped_optional
     private init(with configurator: HomePageConfigurator) {
         super.init(nibName: nil, bundle: nil)
@@ -47,7 +44,6 @@ extension HomePageController: HomePageViewInstaller {
         setupViewController()
         presenter.viewDidLoad()
     }
-    
 }
 
 // MARK: View Protocol Conformation
@@ -57,6 +53,10 @@ extension HomePageController: HomePageView {
         guard let self else { return }
         mainCollectionView.reloadData()
         }
+    }
+    
+    func reloadProducts() {
+        mainCollectionView.reloadSections(IndexSet(integer: HomeSection.products.rawValue))
     }
 }
 
@@ -73,8 +73,15 @@ private extension HomePageController {
     func setupViewController() {
         navigationItem.titleView = searchContainer
         
+        searchingTextField.delegate = self
+        searchingTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
+        
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
+    }
+    
+    @objc func searchTextChanged() {
+        presenter.search(text: searchingTextField.text ?? "")
     }
 }
 

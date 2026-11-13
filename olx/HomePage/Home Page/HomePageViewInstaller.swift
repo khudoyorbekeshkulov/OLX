@@ -30,6 +30,7 @@ extension HomePageViewInstaller {
         
         searchingTextField = .init().then {
             $0.backgroundColor = ColorResourceManager.shared.searchBackground
+            $0.returnKeyType = .search
         }
         
         mainCollectionView = .init(
@@ -38,6 +39,7 @@ extension HomePageViewInstaller {
         ).then {
             $0.showsVerticalScrollIndicator = false
             $0.backgroundColor = .clear
+            $0.keyboardDismissMode = .onDrag
             
             $0.register(cellType: CategoryContainerCell.self)
             $0.register(cellType: RecommendedCell.self)
