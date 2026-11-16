@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Core
+import SnapKit
 
 protocol CategoriesViewInstaller: ViewInstaller {
     

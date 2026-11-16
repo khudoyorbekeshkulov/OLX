@@ -1,50 +1,55 @@
-import UIKit
+//  
+//  CategoriesController.swift
+//  olx
+//
+//  Created by Eshqulov Xudoyorbek  on 16/11/26.
+//
 
-class CategoriesViewController: UIViewController {
-    let rootView = CategoriesView()
-    
-    private lazy var categories = [Category]() {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                rootView.setupCategories(categories: categories)
-            }
-        }
+import UIKit
+import Core
+
+
+class CategoriesController: UIViewController {
+    // swiftlint:disable implicitly_unwrapped_optional
+    var presenter: CategoriesPresenter!
+    // swiftlint:enable implicitly_unwrapped_optional
+    private init(with configurator: CategoriesConfigurator) {
+        super.init(nibName: nil, bundle: nil)
+        configurator.configure(self)
     }
     
-    override func loadView() {
-        view = rootView
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
+    
+}
+
+// MARK: UIViewController Lifecycle
+extension CategoriesController: CategoriesViewInstaller {
+    
+    var mainView: UIView { view }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupViewController()
-        setupNetworkCalls()
-        setupViewBinders()
+        presenter.viewDidLoad()
+        installSubviews()
     }
+    
 }
 
-private extension CategoriesViewController {
-    func setupViewController() {
-        navigationItem.title = L10n.Overall.categoryTitle
+// MARK: View Protocol Conformation
+extension CategoriesController:  CategoriesView {
+    
+}
+
+// MARK: Static Initializer
+extension CategoriesController {
+    
+    static func instantiate() -> CategoriesController {
+        let configurator = CategoriesConfiguratorImpl()
+        let vc = CategoriesController(with: configurator)
+        return vc
     }
     
-    func setupNetworkCalls() {
-        categories = NetworkServiceMainProductChapterImplementation
-            .shared
-            .getCategoriesAllInfo()
-            .toCategoryMainProductsChapter
-    }
-    
-    func setupViewBinders() {
-        rootView.onSectionTapped = { [weak self] in
-            guard let self else { return }
-            
-            navigationController?.pushViewController(
-                SelectedCategoryController(),
-                animated: true
-            )
-        }
-    }
 }
