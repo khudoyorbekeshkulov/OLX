@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2442A5B730AB1A4600C02E5A /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2442A5B630AB1A4600C02E5A /* FactoryKit */; };
 		24C163B9307E4B7800B49003 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 24C163B8307E4B7800B49003 /* SnapKit */; };
 		24EA9CD83091ABA80091A2C1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 24EA9CD73091ABA80091A2C1 /* FirebaseAuth */; };
 		24EA9CDA3091ABA80091A2C1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 24EA9CD93091ABA80091A2C1 /* FirebaseFirestore */; };
@@ -45,6 +46,7 @@
 			files = (
 				24C163B9307E4B7800B49003 /* SnapKit in Frameworks */,
 				24EA9CDC3091ABA80091A2C1 /* FirebaseStorage in Frameworks */,
+				2442A5B730AB1A4600C02E5A /* FactoryKit in Frameworks */,
 				24EA9CD83091ABA80091A2C1 /* FirebaseAuth in Frameworks */,
 				24EA9CDA3091ABA80091A2C1 /* FirebaseFirestore in Frameworks */,
 			);
@@ -93,6 +95,7 @@
 				24EA9CD73091ABA80091A2C1 /* FirebaseAuth */,
 				24EA9CD93091ABA80091A2C1 /* FirebaseFirestore */,
 				24EA9CDB3091ABA80091A2C1 /* FirebaseStorage */,
+				2442A5B630AB1A4600C02E5A /* FactoryKit */,
 			);
 			productName = olx;
 			productReference = 240B22923007984C00EF9250 /* olx.app */;
@@ -127,6 +130,7 @@
 			packageReferences = (
 				24C163B7307E4B7800B49003 /* XCRemoteSwiftPackageReference "snapkit" */,
 				24EA9CD63091ABA80091A2C1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2442A5B530AB1A4600C02E5A /* XCRemoteSwiftPackageReference "Factory" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 240B22933007984C00EF9250 /* Products */;
@@ -370,6 +374,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2442A5B530AB1A4600C02E5A /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.5.3;
+			};
+		};
 		24C163B7307E4B7800B49003 /* XCRemoteSwiftPackageReference "snapkit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/snapkit/snapkit";
@@ -389,6 +401,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2442A5B630AB1A4600C02E5A /* FactoryKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2442A5B530AB1A4600C02E5A /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = FactoryKit;
+		};
 		24C163B8307E4B7800B49003 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 24C163B7307E4B7800B49003 /* XCRemoteSwiftPackageReference "snapkit" */;

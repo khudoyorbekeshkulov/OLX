@@ -80,7 +80,7 @@ extension CategoriesController: UITableViewDelegate, UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         let cell = tableView.dequeueCell(CategoryCell.self, for: indexPath)
-        let category = categories[indexPath.row]
+        guard let category = categories[safe: indexPath.row] else { return cell }
         
         return cell.then {
             $0.cellView.backgroundColor = category.backgroundColor
@@ -113,7 +113,9 @@ private extension CategoriesController {
     func setupViewController() {
         navigationItem.title = L10n.Overall.categoryTitle
         
-        tableView.dataSource = self
-        tableView.delegate = self
+        tableView.then {
+            $0.dataSource = self
+            $0.delegate = self
+        }
     }
 }
