@@ -1,14 +1,14 @@
-//  
+//
 //  CategoriesRouter.swift
 //  olx
 //
 //  Created by Eshqulov Xudoyorbek  on 16/11/26.
 //
 
-import Foundation
+import UIKit
 
 protocol CategoriesRouter {
-    
+    func openSelectedCategory()
 }
 
 class CategoriesRouterImpl: CategoriesRouter {
@@ -19,4 +19,10 @@ class CategoriesRouterImpl: CategoriesRouter {
         self.controller = controller
     }
     
+    func openSelectedCategory() {
+        controller?.navigationController?.pushViewController(
+            SelectedCategoryController(),
+            animated: true
+        )
+    }
 }

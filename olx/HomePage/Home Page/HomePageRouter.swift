@@ -17,7 +17,7 @@ class HomePageRouterImpl: HomePageRouter {
     
     func openAllCategories() {
         controller?.navigationController?.pushViewController(
-            CategoriesViewController(),
+            CategoriesController.instantiate(),
             animated: true
         )
     }
