@@ -23,30 +23,30 @@ extension CreateViewInstaller {
     func initSubViews() {
         mainView.backgroundColor = ColorResourceManager.shared.appBackground
         
-        formView = ScrollableFormView()
+        formView = .init()
         
-        photoBanner = PhotoBannerView(title: L10n.Create.addPhoto)
+        photoBanner = .init(title: L10n.Create.addPhoto)
         
-        titleSection = TitleFieldView(
+        titleSection = .init(
             title: L10n.Create.titleLabelInput,
             placeholder: L10n.Create.inputProductNameTextField,
             hint: L10n.Create.checkInputProductNameLatterNumber
         )
         
-        priceSection = FormFieldView(
+        priceSection = .init(
             title: L10n.Overall.inputPricePlaceholder,
             placeholder: L10n.Overall.inputPricePlaceholder
         ).then {
             $0.textField.keyboardType = .numberPad
         }
         
-        descriptionSection = DescriptionFieldView(
+        descriptionSection = .init(
             title: L10n.Overall.description,
             placeholder: L10n.Create.descriptionPlaceholderInCreateView,
             hint: L10n.Create.checkDescriptionLetterNumber
         )
         
-        contactSection = ContactSectionView(
+        contactSection = .init(
             header: L10n.Overall.contactDetailsLabel,
             nameTitle: L10n.Overall.contactPersonLabel,
             namePlaceholder: L10n.Overall.nameLabel,
@@ -54,7 +54,7 @@ extension CreateViewInstaller {
             phonePlaceholder: "90 123 45 67"
         )
         
-        publishButton = PrimaryButton(title: L10n.Create.postAnAddButton)
+        publishButton = .init(title: L10n.Create.postAnAddButton)
     }
     
     func addSubViews() {
