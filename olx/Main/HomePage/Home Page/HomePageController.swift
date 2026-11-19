@@ -60,15 +60,6 @@ extension HomePageController: HomePageView {
     }
 }
 
-// MARK: Static Initializer
-extension HomePageController {
-    static func instantiate() -> HomePageController {
-        let configurator = HomePageConfiguratorImpl()
-        let vc = HomePageController(with: configurator)
-        return vc
-    }
-}
-
 private extension HomePageController {
     func setupViewController() {
         navigationItem.titleView = searchContainer
@@ -233,5 +224,14 @@ extension HomePageController: UICollectionViewDelegateFlowLayout {
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
         ProductGrid.interitemSpacing
+    }
+}
+
+// MARK: Static Initializer
+extension HomePageController {
+    static func instantiate() -> HomePageController {
+        let configurator = HomePageConfiguratorImpl()
+        let vc = HomePageController(with: configurator)
+        return vc
     }
 }

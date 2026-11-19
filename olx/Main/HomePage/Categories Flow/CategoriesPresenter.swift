@@ -7,7 +7,7 @@
 
 import FactoryKit
 
-protocol CategoriesViewMVP: AnyObject {
+protocol CategoriesView: AnyObject {
     func setupCategories(categories: [Category])
 }
 
@@ -17,13 +17,13 @@ protocol CategoriesPresenter {
 }
 
 class CategoriesPresenterImpl: CategoriesPresenter {
-    private weak var view: CategoriesViewMVP?
+    private weak var view: CategoriesView?
     private let router: CategoriesRouter
     
     @Injected(\.categoriesUsecase)
     private var categoriesUsecase: CategoriesUsecase
     
-    init(view: CategoriesViewMVP, router: CategoriesRouter) {
+    init(view: CategoriesView, router: CategoriesRouter) {
         self.view = view
         self.router = router
     }
