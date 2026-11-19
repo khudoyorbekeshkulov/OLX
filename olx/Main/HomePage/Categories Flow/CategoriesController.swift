@@ -47,7 +47,7 @@ extension CategoriesController: CategoriesViewInstaller {
 }
 
 // MARK: View Protocol Conformation
-extension CategoriesController:  CategoriesViewMVP {
+extension CategoriesController:  CategoriesView {
     
     func setupCategories(categories: [Category]) {
         DispatchQueue.main.async { [weak self] in
