@@ -7,6 +7,7 @@
 
 import FactoryKit
 
+@MainActor
 extension Container {
     var categoriesGateway: Factory<CategoriesGateway> {
          self { CategoriesGatewayImpl() }
