@@ -18,7 +18,7 @@ class CategoriesConfiguratorImpl: CategoriesConfigurator {
         
         let presenter: CategoriesPresenter = CategoriesPresenterImpl(
             view: controller,
-            router: router
+            router: router,
         )
         
         controller.presenter = presenter

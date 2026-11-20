@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FactoryKit
 import Combine
 
 protocol HomePageView: AnyObject {
@@ -47,6 +48,9 @@ class HomePagePresenterImpl: HomePagePresenter {
     
     var numberOfProducts: Int{ products.count }
     
+    @Injected(\.categoriesUsecase)
+    private var categoriesUsecase: CategoriesUsecase
+    
     init(view: HomePageView, router: HomePageRouter) {
         self.view = view
         self.router = router
@@ -72,9 +76,7 @@ class HomePagePresenterImpl: HomePagePresenter {
     }
     
     func viewDidLoad() {
-        categories = NetworkServiceImplementation.shared.getCategories().toCategories
-        
-        view?.setupCategories(categories: categories)
+        fetchCategories()
     }
     
     func product(at index: Int) -> Category? {
@@ -95,5 +97,23 @@ class HomePagePresenterImpl: HomePagePresenter {
     
     func openDetails(category: Category) {
         router.openDetails(category: category, categories: categories)
+    }
+}
+
+private extension HomePagePresenterImpl {
+    func fetchCategories() {
+        Task { [weak self] in
+            guard let self else { return }
+            do {
+                let result = try await categoriesUsecase.getRecommendedProducts()
+                
+                await MainActor.run {
+                    self.categories = result
+                    self.view?.reloadProducts()
+                }
+            } catch {
+                // TODO: show user alert or toast
+            }
+        }
     }
 }
