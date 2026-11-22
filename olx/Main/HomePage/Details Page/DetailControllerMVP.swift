@@ -16,11 +16,9 @@ class DetailControllerMVP: UIViewController {
     var infoFrame: UIView!
     var productDetails: ProductDetails!
     var userDetails: UserDetails!
-    var feedbackButton: UIButton!
-    var allAdsByUserLabel: UILabel!
-    var similarAdsHeaderLabel: UILabel!
+    var authorActions: AuthorActions!
     var layout: UICollectionViewFlowLayout!
-    var detailCollectionView: UICollectionView!
+    var similarAdsCollection: SimilarAdsCollection!
     // swiftlint:enable implicitly_unwrapped_optional
     private init(with configurator: DetailConfigurator) {
         super.init(nibName: nil, bundle: nil)
