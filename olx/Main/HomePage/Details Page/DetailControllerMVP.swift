@@ -8,11 +8,21 @@
 import UIKit
 
 
-class Details_PageController: UIViewController {
+class DetailControllerMVP: UIViewController {
     // swiftlint:disable implicitly_unwrapped_optional
-    var presenter: Details_PagePresenter!
+    var presenter: DetailPresenter!
+    
+    var image: ProductImageView!
+    var infoFrame: UIView!
+    var productDetails: ProductDetails!
+    var userDetails: UserDetails!
+    var feedbackButton: UIButton!
+    var allAdsByUserLabel: UILabel!
+    var similarAdsHeaderLabel: UILabel!
+    var layout: UICollectionViewFlowLayout!
+    var detailCollectionView: UICollectionView!
     // swiftlint:enable implicitly_unwrapped_optional
-    private init(with configurator: Details_PageConfigurator) {
+    private init(with configurator: DetailConfigurator) {
         super.init(nibName: nil, bundle: nil)
         configurator.configure(self)
     }
@@ -25,7 +35,7 @@ class Details_PageController: UIViewController {
 }
 
 // MARK: UIViewController Lifecycle
-extension Details_PageController: Details_PageViewInstaller {
+extension DetailControllerMVP: DetailViewInstaller {
     
     var mainView: UIView { view }
     
@@ -38,16 +48,16 @@ extension Details_PageController: Details_PageViewInstaller {
 }
 
 // MARK: View Protocol Conformation
-extension Details_PageController:  Details_PageView {
+extension DetailControllerMVP:  DetailViewMVP {
     
 }
 
 // MARK: Static Initializer
-extension Details_PageController {
+extension DetailControllerMVP {
     
-    static func instantiate() -> Details_PageController {
+    static func instantiate() -> DetailControllerMVP {
         let configurator = Details_PageConfiguratorImpl()
-        let vc = Details_PageController(with: configurator)
+        let vc = DetailControllerMVP(with: configurator)
         return vc
     }
     

@@ -81,15 +81,6 @@ extension CreateController: CreateView {
     }
 }
 
-// MARK: Static Initializer
-extension CreateController {
-    static func instantiate() -> CreateController {
-        let configurator = CreateConfiguratorImpl()
-        let vc = CreateController(with: configurator)
-        return vc
-    }
-}
-
 private extension CreateController {
     func setupViewController() {
         navigationItem.title = L10n.Overall.create
@@ -146,5 +137,14 @@ extension CreateController: PHPickerViewControllerDelegate {
                 photoBanner.setImage(image)
             }
         }
+    }
+}
+
+// MARK: Static Initializer
+extension CreateController {
+    static func instantiate() -> CreateController {
+        let configurator = CreateConfiguratorImpl()
+        let vc = CreateController(with: configurator)
+        return vc
     }
 }
