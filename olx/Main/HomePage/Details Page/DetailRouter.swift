@@ -5,10 +5,11 @@
 //  Created by Eshqulov Xudoyorbek  on 20/11/26.
 //
 
-import Foundation
+import UIKit
 
 protocol DetailRouter {
-    
+    func openMessage(ownerName: String)
+    func openDetails(category: Category, categories: [Category])
 }
 
 class Details_PageRouterImpl: DetailRouter {
@@ -19,4 +20,13 @@ class Details_PageRouterImpl: DetailRouter {
         self.controller = controller
     }
     
+    func openMessage(ownerName: String) {
+        let messageVC = MessageViewController(navigationTitle: ownerName)
+        controller?.navigationController?.pushViewController(messageVC, animated: true)
+    }
+    
+    func openDetails(category: Category, categories: [Category]) {
+        let detailVC = DetailControllerMVP.instantiate(category: category, categories: categories)
+        controller?.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }

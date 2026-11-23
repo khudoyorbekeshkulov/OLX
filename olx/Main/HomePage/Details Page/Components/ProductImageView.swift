@@ -18,6 +18,7 @@ final class ProductImageView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        addSubviews()
         setupConstraints()
     }
     
@@ -34,9 +35,18 @@ extension ProductImageView {
 }
 
 private extension ProductImageView {
+    
+    func addSubviews() {
+        addSubview(image)
+    }
+    
     func setupConstraints() {
         snp.makeConstraints {
             $0.height.equalTo(280)
+        }
+        
+        image.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
 }

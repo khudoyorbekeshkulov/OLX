@@ -1,4 +1,4 @@
-//  
+//
 //  Details PageViewInstaller.swift
 //  olx
 //
@@ -14,8 +14,9 @@ protocol DetailViewInstaller: ViewInstaller {
     var productDetails: ProductDetails! { get set }
     var userDetails: UserDetails! { get set }
     var authorActions: AuthorActions! { get set }
+    var headerLabel: UILabel! { get set }
     var layout: UICollectionViewFlowLayout! { get set }
-    var similarAdsCollection: SimilarAdsCollection! { get set }
+    var detailCollectionView: UICollectionView! { get set }
 }
 
 extension DetailViewInstaller {
@@ -34,6 +35,11 @@ extension DetailViewInstaller {
         userDetails = .init()
         
         authorActions = .init()
+    
+        headerLabel = .init().then {
+            $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+            $0.text = L10n.Detail.similarAdvertisements
+        }
         
         layout = .init().then {
             $0.scrollDirection = .horizontal
@@ -42,14 +48,20 @@ extension DetailViewInstaller {
             $0.sectionInset = .init(top: 0, left: 15, bottom: 0, right: 0)
         }
         
-        similarAdsCollection = .init()
+        detailCollectionView = .init(
+            frame: .zero,
+            collectionViewLayout: layout
+        ).then {
+            $0.backgroundColor = .clear
+        }
     }
     
     func addSubViews() {
         mainView.addSubviews([
             image,
             infoFrame,
-            similarAdsCollection
+            headerLabel,
+            detailCollectionView
         ])
         
         infoFrame.addSubviews([
@@ -84,9 +96,15 @@ extension DetailViewInstaller {
             $0.leading.trailing.equalToSuperview()
         }
         
-        similarAdsCollection.snp.makeConstraints {
-            $0.top.equalTo(infoFrame.snp.bottom)
-            $0.leading.equalTo(infoFrame.snp.leading)
+        headerLabel.snp.makeConstraints {
+            $0.top.equalTo(infoFrame.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(15)
+        }
+        
+        detailCollectionView.snp.makeConstraints {
+            $0.top.equalTo(headerLabel.snp.bottom).offset(15)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(175)
         }
     }
 }

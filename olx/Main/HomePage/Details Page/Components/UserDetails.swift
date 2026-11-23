@@ -10,12 +10,15 @@ import SnapKit
 
 final class UserDetails: UIView {
     
+    var onOwnerTapped: (() -> Void)?
+    
     private let phoneNumber = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 13, weight: .bold)
     }
     private let userName = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.isUserInteractionEnabled = true
+        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleOwnerTap)))
     }
     private let onlineTime = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 10)
@@ -65,9 +68,13 @@ private extension UserDetails {
         }
         
         onlineTime.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(5)
+            $0.top.equalTo(userName.snp.bottom).offset(5)
             $0.leading.equalToSuperview().offset(15)
             $0.bottom.equalToSuperview()
         }
+    }
+    
+    @objc func handleOwnerTap() {
+        onOwnerTapped?()
     }
 }

@@ -55,12 +55,14 @@ private extension AuthorActions {
             $0.top.equalToSuperview().offset(15)
             $0.leading.equalToSuperview().offset(15)
             $0.size.equalTo(CGSize(width: 160, height: 40))
+            $0.bottom.equalToSuperview()
         }
         
         allAdsByUserLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(15)
             $0.leading.equalTo(feedbackButton.snp.trailing).offset(10)
             $0.size.equalTo(CGSize(width: 160, height: 40))
+            $0.bottom.equalToSuperview()
         }
     }
 }
