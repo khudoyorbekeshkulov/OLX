@@ -15,6 +15,7 @@ protocol DetailViewMVP: AnyObject {
 
 protocol DetailPresenter {
     func viewDidLoad()
+    func viewWillAppear()
     var numberOfSimilarAds: Int { get }
     func similarAd(at index: Int) -> Category?
     func isFavorite(_ category: Category) -> Bool
@@ -46,6 +47,11 @@ class Details_PagePresenterImpl: DetailPresenter {
         view?.setupDetails(category: category)
         view?.reloadSimilarAds()
         view?.setFavorite(FavoritesService.shared.contains(category))
+    }
+    
+    func viewWillAppear() {
+        view?.setFavorite(isFavorite(category))
+        view?.reloadSimilarAds()
     }
     
     var numberOfSimilarAds: Int {

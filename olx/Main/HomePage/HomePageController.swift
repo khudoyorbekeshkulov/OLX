@@ -44,6 +44,11 @@ extension HomePageController: HomePageViewInstaller {
         setupViewController()
         presenter.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.viewWillAppear()
+    }
 }
 
 // MARK: View Protocol Conformation
@@ -123,8 +128,8 @@ extension HomePageController: UICollectionViewDelegate, UICollectionViewDataSour
                 $0.setFavorite(presenter.isFavorite(category))
                 $0.heartTapped = { [weak self, weak cell] in
                     guard let self, let cell else { return }
-                    self.presenter.toggleFavorite(category)
-                    cell.setFavorite(self.presenter.isFavorite(category))
+                    presenter.toggleFavorite(category)
+                    cell.setFavorite(presenter.isFavorite(category))
                 }
             }
             

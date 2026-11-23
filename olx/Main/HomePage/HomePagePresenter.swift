@@ -21,6 +21,7 @@ protocol HomePageRouter: AnyObject {
 
 protocol HomePagePresenter {
     func viewDidLoad()
+    func viewWillAppear()
     var numberOfProducts: Int { get }
     func product(at index: Int) -> Category?
     func isFavorite(_ category: Category) -> Bool
@@ -77,6 +78,10 @@ class HomePagePresenterImpl: HomePagePresenter {
     
     func viewDidLoad() {
         fetchCategories()
+    }
+    
+    func viewWillAppear() {
+        view?.reloadProducts()
     }
     
     func product(at index: Int) -> Category? {
