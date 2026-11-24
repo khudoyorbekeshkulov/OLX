@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailConfigurator {
-    func configure(_ controller: DetailControllerMVP)
+    func configure(_ controller: DetailController)
 }
 
 class Details_PageConfiguratorImpl: DetailConfigurator {
@@ -21,7 +21,7 @@ class Details_PageConfiguratorImpl: DetailConfigurator {
         self.categories = categories
     }
     
-    func configure(_ controller: DetailControllerMVP) {
+    func configure(_ controller: DetailController) {
         let router: DetailRouter = Details_PageRouterImpl(controller)
         
         controller.presenter = Details_PagePresenterImpl(

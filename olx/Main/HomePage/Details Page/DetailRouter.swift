@@ -14,9 +14,9 @@ protocol DetailRouter {
 
 class Details_PageRouterImpl: DetailRouter {
     
-    private weak var controller: DetailControllerMVP?
+    private weak var controller: DetailController?
     
-    init(_ controller: DetailControllerMVP?) {
+    init(_ controller: DetailController?) {
         self.controller = controller
     }
     
@@ -26,7 +26,7 @@ class Details_PageRouterImpl: DetailRouter {
     }
     
     func openDetails(category: Category, categories: [Category]) {
-        let detailVC = DetailControllerMVP.instantiate(category: category, categories: categories)
+        let detailVC = DetailController.instantiate(category: category, categories: categories)
         controller?.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

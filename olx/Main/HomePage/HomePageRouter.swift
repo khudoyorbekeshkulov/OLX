@@ -23,7 +23,7 @@ class HomePageRouterImpl: HomePageRouter {
     }
         
     func openDetails(category: Category, categories: [Category]) {
-        let detailVC = DetailControllerMVP.instantiate(category: category, categories: categories)
+        let detailVC = DetailController.instantiate(category: category, categories: categories)
         controller?.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
