@@ -32,11 +32,8 @@ private extension FavoritesViewController {
         rootView.onItemSelected = { [weak self] category in
             guard let self else { return }
             
-            let detailViewController = DetailViewController().then {
-                $0.category = category
-                $0.categories = FavoritesService.shared.items
-            }
-            navigationController?.pushViewController(detailViewController, animated: true)
+            let detailVC = DetailController.instantiate(category: category, categories: FavoritesService.shared.items)
+            navigationController?.pushViewController(detailVC, animated: true)
         }
     }
 }
