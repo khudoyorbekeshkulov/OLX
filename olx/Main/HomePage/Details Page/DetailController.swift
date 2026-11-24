@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailControllerMVP: UIViewController {
+class DetailController: UIViewController {
     // swiftlint:disable implicitly_unwrapped_optional
     var presenter: DetailPresenter!
     
@@ -33,7 +33,7 @@ class DetailControllerMVP: UIViewController {
 }
 
 // MARK: UIViewController Lifecycle
-extension DetailControllerMVP: DetailViewInstaller {
+extension DetailController: DetailViewInstaller {
     
     var mainView: UIView { view }
     
@@ -55,7 +55,7 @@ extension DetailControllerMVP: DetailViewInstaller {
 }
 
 // MARK: View Protocol Conformation
-extension DetailControllerMVP:  DetailViewMVP {
+extension DetailController:  DetailViewMVP {
 
     func setupDetails(category: Category) {
         image.configure(category: category)
@@ -72,7 +72,7 @@ extension DetailControllerMVP:  DetailViewMVP {
     }
 }
 
-private extension DetailControllerMVP {
+private extension DetailController {
     
     func setupNavBar() {
         let appearance = UINavigationBarAppearance().then {
@@ -109,7 +109,7 @@ private extension DetailControllerMVP {
     }
 }
 
-extension DetailControllerMVP: UICollectionViewDelegate, UICollectionViewDataSource {
+extension DetailController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
@@ -147,11 +147,11 @@ extension DetailControllerMVP: UICollectionViewDelegate, UICollectionViewDataSou
 }
 
 // MARK: Static Initializer
-extension DetailControllerMVP {
+extension DetailController {
     
-    static func instantiate(category: Category, categories: [Category]) -> DetailControllerMVP {
+    static func instantiate(category: Category, categories: [Category]) -> DetailController {
         let configurator = Details_PageConfiguratorImpl(category: category, categories: categories)
-        let vc = DetailControllerMVP(with: configurator)
+        let vc = DetailController(with: configurator)
         return vc
     }
 }
