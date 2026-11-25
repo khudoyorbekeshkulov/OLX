@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 private enum HomeSection: Int, CaseIterable {
     case categories
