@@ -23,4 +23,5 @@ nonisolated struct Product: Decodable, Sendable {
     let rating: Double
     let brand: String?
     let thumbnail: String
+    let images: [String]
 }

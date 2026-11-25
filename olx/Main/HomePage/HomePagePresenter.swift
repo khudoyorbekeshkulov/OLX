@@ -31,14 +31,16 @@ protocol HomePagePresenter {
     func openDetails(category: Category)
     
     var loadedProductsCount: Int { get }
-    func loadedProduct(at index: Int) -> Product?
 }
 
 class HomePagePresenterImpl: HomePagePresenter {
     
     private let networkService = NetworkService()
-    private var loadedProducts: [Product] = []
-    private var apiProducts: [Category] = []
+    private var apiProducts: [Category] = [] {
+        didSet {
+            view?.reloadProducts()
+        }
+    }
     
     private weak var view: HomePageView?
     private let router: HomePageRouter
@@ -54,7 +56,7 @@ class HomePagePresenterImpl: HomePagePresenter {
     private let searchSubject = PassthroughSubject<String, Never>()
     private var cancelLabels = Set<AnyCancellable>()
     
-    var numberOfProducts: Int{ products.count }
+    var numberOfProducts: Int { products.count }
     
     @Injected(\.categoriesUsecase)
     private var categoriesUsecase: CategoriesUsecase
@@ -85,16 +87,16 @@ class HomePagePresenterImpl: HomePagePresenter {
     
     func viewDidLoad() {
         fetchCategories()
-        
+
         networkService.fetchProducts { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let fetched):
-                loadedProducts = fetched
-                    apiProducts = fetched.map { $0.toCategory() }
-                view?.reloadProducts()
-            case .failure(let error):
-                print("Request failed:", error)
+            DispatchQueue.main.async {
+                guard let self else { return }
+                switch result {
+                case let .success(products):
+                    self.apiProducts = products
+                case let .failure(error):
+                    debugPrint("Request failed:", error)
+                }
             }
         }
     }
@@ -124,11 +126,7 @@ class HomePagePresenterImpl: HomePagePresenter {
     }
     
     var loadedProductsCount: Int {
-        loadedProducts.count
-    }
-    
-    func loadedProduct(at index: Int) -> Product? {
-        loadedProducts[safe: index]
+        apiProducts.count
     }
 }
 
