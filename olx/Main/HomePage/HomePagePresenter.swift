@@ -29,9 +29,16 @@ protocol HomePagePresenter {
     func search(text: String)
     func openAllCategories()
     func openDetails(category: Category)
+    
+    var loadedProductsCount: Int { get }
+    func loadedProduct(at index: Int) -> Product?
 }
 
 class HomePagePresenterImpl: HomePagePresenter {
+    
+    private let networkService = NetworkService()
+    private var loadedProducts: [Product] = []
+    private var apiProducts: [Category] = []
     
     private weak var view: HomePageView?
     private let router: HomePageRouter
@@ -39,7 +46,7 @@ class HomePagePresenterImpl: HomePagePresenter {
     private var searchText = ""
     
     private var products: [Category] {
-        let all = ListingsService.shared.items + categories
+        let all = ListingsService.shared.items + categories + apiProducts
         guard !searchText.isEmpty else { return all }
         return all.filter{ $0.title.localizedCaseInsensitiveContains(searchText)}
     }
@@ -78,6 +85,18 @@ class HomePagePresenterImpl: HomePagePresenter {
     
     func viewDidLoad() {
         fetchCategories()
+        
+        networkService.fetchProducts { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let fetched):
+                loadedProducts = fetched
+                    apiProducts = fetched.map { $0.toCategory() }
+                view?.reloadProducts()
+            case .failure(let error):
+                print("Request failed:", error)
+            }
+        }
     }
     
     func viewWillAppear() {
@@ -102,6 +121,14 @@ class HomePagePresenterImpl: HomePagePresenter {
     
     func openDetails(category: Category) {
         router.openDetails(category: category, categories: categories)
+    }
+    
+    var loadedProductsCount: Int {
+        loadedProducts.count
+    }
+    
+    func loadedProduct(at index: Int) -> Product? {
+        loadedProducts[safe: index]
     }
 }
 

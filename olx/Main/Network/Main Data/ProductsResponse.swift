@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct ProductsResponse: Decodable {
+nonisolated struct ProductsResponse: Decodable, Sendable {
     let products: [Product]
     let total: Int
     let skip: Int
     let limit: Int
 }
 
-struct Product: Decodable {
+nonisolated struct Product: Decodable, Sendable {
     let id: Int
     let title: String
     let description: String
