@@ -38,8 +38,8 @@ extension ProfileController: ProfileViewInstaller {
         super.viewDidLoad()
         
         installSubviews()
-        presenter.viewDidLoad()
         bindActions()
+        presenter.viewDidLoad()
     }
 }
 
